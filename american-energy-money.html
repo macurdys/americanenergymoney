@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>American Energy Money</title>
+  <meta name="description" content="The Intersection of Value and Science">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gray: #999;
+      --dark: #111;
+      --white: #fff;
+      --border: rgba(0,0,0,0.07);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-item {
+      position: relative;
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+      color: #444; text-decoration: none; cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .nav-item:hover { background: #f5f5f5; }
+    .nav-item svg { opacity: 0.4; transition: transform 0.2s; }
+    .nav-item:hover svg { transform: rotate(180deg); }
+
+    /* ─── HERO 1 — LIGHT ─── */
+    .hero-light {
+      background: #fff;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 80px 48px 0;
+      overflow: hidden;
+    }
+    .hero-light h1 {
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      text-align: center;
+    }
+    .hero-light h1 span { color: var(--gray); }
+    .hero-flag-wrap {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 900px;
+      border-radius: 16px;
+      overflow: hidden;
+      display: block;
+    }
+    .hero-flag-wrap img { width: 100%; height: auto; display: block; }
+
+    /* ─── HERO 2 — DARK ─── */
+    .hero-dark {
+      background: #0d0d0d;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 100px 48px 80px;
+      text-align: center;
+    }
+    .hero-dark h1 {
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 48px;
+    }
+    .hero-dark h1 .dim {
+      background: radial-gradient(50% 50% at 50% 50%, #999 0%, rgba(153,153,153,0) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .wolfram-img-wrap {
+      width: 100%; max-width: 800px;
+      border-radius: 16px; overflow: hidden;
+      margin-bottom: 56px;
+    }
+    .wolfram-img-wrap a { display: block; }
+    .wolfram-img-wrap img { width: 100%; height: auto; display: block; }
+    .equation {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+      color: #fff;
+    }
+    .equation a {
+      font-size: clamp(34px, 4.2vw, 54px);
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* ─── SECTION 3 — SCIENTIFIC MONEY ─── */
+    .sci-money {
+      background: #fff;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 100px 48px 80px;
+      text-align: center;
+    }
+    .sci-money h1 {
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .sci-money h1 .gray-word { color: var(--gray); }
+    .entropy-img-wrap {
+      width: 100%; max-width: 860px;
+      border-radius: 16px; overflow: hidden;
+      margin: 48px 0;
+    }
+    .entropy-img-wrap a { display: block; }
+    .entropy-img-wrap img { width: 100%; height: auto; display: block; }
+    .entropy-headline {
+      font-size: clamp(24px, 3.5vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      max-width: 700px;
+      margin-bottom: 32px;
+    }
+    .entropy-footnote {
+      font-size: 17px; font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #ababab;
+      max-width: 640px;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .entropy-footnote span.black { color: #000; }
+    .entropy-footnote a { color: #aaa; }
+
+    /* ─── THEORETICAL BRIEF ─── */
+    .theoretical {
+      background: #000;
+      padding: 80px 0 100px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .theoretical h2 {
+      font-size: clamp(32px, 4vw, 50px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 48px;
+    }
+    .carousel-outer {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+      cursor: grab;
+      user-select: none;
+    }
+    .carousel-track:active { cursor: grabbing; }
+    .carousel-slide {
+      flex-shrink: 0;
+      width: 100%;
+      padding: 0 40px;
+      display: flex; justify-content: center;
+    }
+    .carousel-slide img {
+      max-width: 900px;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .carousel-controls {
+      display: flex; justify-content: space-between; align-items: center;
+      position: absolute; inset: 20px;
+      pointer-events: none;
+    }
+    .carousel-btn {
+      pointer-events: auto;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.35);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .carousel-btn:hover { background: rgba(0,0,0,0.65); }
+    .carousel-btn svg { color: #fff; }
+    .carousel-dots {
+      display: flex; gap: 8px;
+      justify-content: center;
+      margin-top: 28px;
+    }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0.4;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      border: none;
+    }
+    .dot.active { opacity: 1; }
+
+    /* ─── TEAM ─── */
+    .team-section {
+      background: #fff;
+      padding: 100px 48px;
+      text-align: center;
+    }
+    .team-section h2 {
+      font-size: clamp(32px, 4vw, 50px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 64px;
+    }
+    .team-grid {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .team-card {
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      width: 200px;
+    }
+    .team-avatar {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      overflow: hidden;
+    }
+    .team-name { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+    .team-role { font-size: 14px; color: #999; letter-spacing: -0.01em; }
+
+    /* ─── JOIN / CTA ─── */
+    .join-section {
+      background: #000;
+      padding: 100px 48px;
+      text-align: center;
+    }
+    .join-section h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #fff;
+      margin-bottom: 40px;
+    }
+    .join-section p {
+      font-size: 18px; color: #888;
+      max-width: 520px; margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+    .join-btn {
+      display: inline-block;
+      padding: 16px 36px;
+      background: #fff; color: #000;
+      font-size: 16px; font-weight: 700;
+      letter-spacing: -0.01em;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .join-btn:hover { background: #ddd; transform: scale(1.03); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 14px; color: #999;
+      flex-wrap: wrap; gap: 16px;
+    }
+    footer a { color: #999; text-decoration: none; }
+    footer a:hover { color: #444; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero-light, .hero-dark, .sci-money, .team-section, .join-section { padding-left: 20px; padding-right: 20px; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://www.americanenergymoney.com/">
+    <img src="https://framerusercontent.com/images/jXSqM6MC0vZXrPTkzgipMl1zI.png" alt="American Energy Money logo">
+  </a>
+  <div class="nav-links">
+    <a class="nav-item" href="#">Compute
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M 3 5.5 L 7 9.5 L 11 5.5" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="nav-item" href="#">Product
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M 3 5.5 L 7 9.5 L 11 5.5" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO 1 — LIGHT -->
+<section class="hero-light">
+  <h1>American</h1>
+  <h1><span>Energy Money</span></h1>
+  <a class="hero-flag-wrap" href="https://www.whitehouse.gov/presidential-actions/2025/01/unleashing-american-energy/" target="_blank" rel="noopener">
+    <img src="https://framerusercontent.com/images/EmbGUinjvaxxYTdkjUoVsD4XgY.png" alt="American Flag" loading="lazy">
+  </a>
+</section>
+
+<!-- HERO 2 — DARK -->
+<section class="hero-dark">
+  <h1>
+    <span class="dim">American</span><br>
+    Energy Money
+  </h1>
+  <a class="wolfram-img-wrap" href="https://www.wolframphysics.org/" target="_blank" rel="noopener">
+    <img src="https://framerusercontent.com/images/9fszIKnrcwJpBS9u2I4dG3z6y0.png" alt="Wolfram Physics" loading="lazy">
+  </a>
+  <p class="equation">
+    &nbsp;&nbsp;&nbsp;Wolfram Physics&nbsp;&nbsp;<br>
+    + Proof of Work&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+    + Active Inference&nbsp;<br>
+    =<br>
+    <a href="https://thermoeconomics.info/" target="_blank" rel="noopener">Thermoeconomics</a>
+  </p>
+</section>
+
+<!-- SECTION 3 — SCIENTIFIC MONEY -->
+<section class="sci-money">
+  <h1>American <span class="gray-word">Scientific</span> Money</h1>
+  <a class="entropy-img-wrap" href="https://arxiv.org/pdf/2303.04305" target="_blank" rel="noopener">
+    <img src="https://framerusercontent.com/images/RGImjmKYYU3YlWm30DUTZ3tSEg.png" alt="Entropy Minima" loading="lazy">
+  </a>
+  <p class="entropy-headline">Entropy is provably minimized* and delivered in algorithmic payloads.</p>
+  <p class="entropy-footnote">
+    <span class="black">*</span>Where Shannon entropy is minimized; and where statistical mechanics = statistical inference
+    under the Maximum Entropy Principle. See Shannon (<a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" target="_blank" rel="noopener">1948</a>) &amp; Jaynes (<a href="https://bayes.wustl.edu/etj/articles/theory.1.pdf" target="_blank" rel="noopener">1957</a>)
+  </p>
+</section>
+
+<!-- THEORETICAL BRIEF -->
+<section class="theoretical">
+  <h2>Theoretical Brief</h2>
+  <div class="carousel-outer">
+    <div class="carousel-track" id="carousel">
+      <div class="carousel-slide"><img src="https://framerusercontent.com/images/Is4jYNvqfeMF2OzcwhYbqHJMpjw.png" alt="Theoretical Brief 1" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://framerusercontent.com/images/YaelYhWMkGHcpbTwyF9glKiZzI.png" alt="Theoretical Brief 2" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://framerusercontent.com/images/473wc0c5mGunWIF8weQ1VDuIq1Y.png" alt="Theoretical Brief 3" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://framerusercontent.com/images/p5PsfndeKUMkeuxupWmwx0PJA8.png" alt="Theoretical Brief 4" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://framerusercontent.com/images/W98B8MjgqrcaEfxKCVzeryrTQ.png" alt="Theoretical Brief 5" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://framerusercontent.com/images/V4zyGPQS1EaslKJ57gpiHfUumA.png" alt="Theoretical Brief 6" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://framerusercontent.com/images/8g5yJ2a20ufI5maSmTgrEVKSEY.png" alt="Theoretical Brief 7" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://framerusercontent.com/images/GpmjT2rKdSj72ZS6dqIIaFhvsyY.png" alt="Theoretical Brief 8" loading="lazy"></div>
+      <div class="carousel-slide"><img src="https://framerusercontent.com/images/4y79Or5CfHwIELw2Gxt57NBiXc.png" alt="Theoretical Brief 9" loading="lazy"></div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prev" aria-label="Previous">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="carousel-btn" id="next" aria-label="Next">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </div>
+  <div class="carousel-dots" id="dots"></div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <h2>Team</h2>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">🔬</div>
+      <div class="team-name">Stephanie Kent</div>
+      <div class="team-role">Researcher, Wolfram Research</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">⚡</div>
+      <div class="team-name">Energy Physicist</div>
+      <div class="team-role">Thermoeconomics</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">🧮</div>
+      <div class="team-name">Computational Economist</div>
+      <div class="team-role">Proof of Work</div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join-section">
+  <h2>Join the Movement</h2>
+  <p>American Energy Money sits at the intersection of physics, computation, and sound monetary theory.</p>
+  <a class="join-btn" href="https://thermoeconomics.info/" target="_blank" rel="noopener">Explore Thermoeconomics</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 American Energy Money</span>
+  <div style="display:flex;gap:24px;">
+    <a href="https://www.americanenergymoney.com/">americanenergymoney.com</a>
+    <a href="https://thermoeconomics.info/">thermoeconomics.info</a>
+    <a href="https://www.wolframphysics.org/">Wolfram Physics</a>
+  </div>
+</footer>
+
+<script>
+  const track = document.getElementById('carousel');
+  const dotsContainer = document.getElementById('dots');
+  const slides = track.querySelectorAll('.carousel-slide');
+  const total = slides.length;
+  let current = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'dot' + (i === 0 ? ' active' : '');
+    btn.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(btn);
+  });
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+  // Drag support
+  let startX = 0, isDragging = false;
+  track.addEventListener('pointerdown', e => { isDragging = true; startX = e.clientX; track.setPointerCapture(e.pointerId); });
+  track.addEventListener('pointermove', e => { if (!isDragging) return; });
+  track.addEventListener('pointerup', e => {
+    if (!isDragging) return; isDragging = false;
+    const dx = e.clientX - startX;
+    if (dx < -40) goTo(current + 1);
+    else if (dx > 40) goTo(current - 1);
+  });
+
+  // Auto-advance
+  setInterval(() => goTo(current + 1), 5000);
+</script>
+
+</body>
+</html>
