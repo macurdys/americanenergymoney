@@ -242,6 +242,15 @@
     footer a { color: #bbb; text-decoration: none; transition: color 0.15s; }
     footer a:hover { color: #444; }
     .footer-links { display: flex; gap: 24px; }
+    .partner-logos {
+      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+    }
+    .partner-logos a {
+      display: flex; align-items: center;
+      opacity: 0.45; transition: opacity 0.2s;
+    }
+    .partner-logos a:hover { opacity: 1; }
+    .partner-logos img { height: 22px; width: auto; }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
@@ -360,6 +369,13 @@
 <!-- ── FOOTER ── -->
 <footer>
   <span>© 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://alphamine.io" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
 </footer>
 
 <script>
