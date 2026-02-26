@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research — American Energy Money</title>
+  <meta name="description" content="Quai Clock — Total Entropy Tracker. Research Reports — Institutional-grade analysis sold as digital objects.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gray: #999;
+      --dark: #111;
+      --white: #fff;
+      --border: rgba(0,0,0,0.07);
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-item {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+      color: #444; text-decoration: none; cursor: pointer;
+      border-radius: 8px; transition: background 0.15s;
+    }
+    .nav-item:hover { background: #f5f5f5; }
+    .nav-item.active { color: #111; font-weight: 600; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: #0d0d0d;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 120px 48px 60px; text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(52px, 7vw, 84px);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+      color: #fff;
+    }
+    .hero h1 .dim { color: #555; }
+    .hero .subtitle {
+      font-size: clamp(18px, 2vw, 22px); font-weight: 500;
+      color: #666; margin-top: 28px; max-width: 580px;
+      line-height: 1.6; letter-spacing: -0.01em;
+    }
+
+    /* ─── QUAI CLOCK SECTION ─── */
+    .clock-section {
+      background: #0d0d0d; padding: 40px 48px 120px; text-align: center;
+    }
+    .clock-label {
+      font-family: var(--mono); font-size: 13px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #555; margin-bottom: 48px;
+    }
+
+    /* Clock Display */
+    .clock-housing {
+      max-width: 680px; margin: 0 auto;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 48px 40px 40px;
+      position: relative;
+    }
+    .clock-housing::before {
+      content: '';
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      border-radius: 0 0 4px 4px;
+    }
+
+    /* Main entropy display */
+    .entropy-display {
+      margin-bottom: 40px;
+    }
+    .entropy-value {
+      font-family: var(--mono);
+      font-size: clamp(44px, 6vw, 72px);
+      font-weight: 700; letter-spacing: -0.02em;
+      color: #fff; line-height: 1;
+    }
+    .entropy-value .decimal { color: #444; }
+    .entropy-unit {
+      font-family: var(--mono); font-size: 14px; font-weight: 500;
+      color: #555; margin-top: 10px; letter-spacing: 0.06em;
+    }
+
+    /* Gauge row */
+    .gauge-row {
+      display: flex; gap: 1px; justify-content: center;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px; overflow: hidden;
+    }
+    .gauge {
+      flex: 1; padding: 24px 20px;
+      background: rgba(255,255,255,0.02);
+      text-align: center;
+    }
+    .gauge:first-child { border-radius: 12px 0 0 12px; }
+    .gauge:last-child { border-radius: 0 12px 12px 0; }
+    .gauge-val {
+      font-family: var(--mono); font-size: 22px; font-weight: 600;
+      color: #fff; letter-spacing: -0.01em;
+    }
+    .gauge-label {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      color: #555; margin-top: 6px; letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Pulse indicator */
+    .pulse-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-top: 28px;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+      50% { opacity: 0.6; box-shadow: 0 0 0 8px rgba(74,222,128,0); }
+    }
+    .pulse-label {
+      font-family: var(--mono); font-size: 12px; font-weight: 500;
+      color: #444; letter-spacing: 0.04em;
+    }
+
+    /* Clock explainer */
+    .clock-explain {
+      max-width: 640px; margin: 56px auto 0;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .clock-explain p {
+      font-size: 16px; color: #777; line-height: 1.7; text-align: left;
+    }
+    .clock-explain strong { color: #ccc; font-weight: 600; }
+
+    /* ─── DIVIDER ─── */
+    .section-divider {
+      background: #fff; padding: 0;
+      height: 1px;
+    }
+
+    /* ─── REPORTS SECTION ─── */
+    .reports-section {
+      background: #fff; padding: 120px 48px 100px; text-align: center;
+    }
+    .reports-section h2 {
+      font-size: clamp(36px, 5vw, 56px); font-weight: 800;
+      letter-spacing: -0.04em; margin-bottom: 16px;
+    }
+    .reports-section h2 .gray { color: var(--gray); }
+    .reports-lead {
+      font-size: 18px; color: #777; max-width: 560px;
+      margin: 0 auto 72px; line-height: 1.6;
+    }
+
+    /* Report cards */
+    .reports-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px; max-width: 960px; margin: 0 auto;
+    }
+    .report-card {
+      background: #fafafa;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 16px;
+      overflow: hidden; text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .report-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    .report-cover {
+      width: 100%; aspect-ratio: 4/3;
+      background: #0d0d0d;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .report-cover-label {
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #444;
+    }
+    /* Decorative grid pattern on covers */
+    .report-cover::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .report-body {
+      padding: 28px 24px 24px;
+    }
+    .report-tag {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #bbb; margin-bottom: 10px;
+    }
+    .report-title {
+      font-size: 19px; font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.3; margin-bottom: 10px;
+    }
+    .report-desc {
+      font-size: 14px; color: #888; line-height: 1.6; margin-bottom: 24px;
+    }
+    .report-footer {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .report-price {
+      font-family: var(--mono); font-size: 18px; font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .report-btn {
+      display: inline-block; padding: 10px 24px;
+      background: #111; color: #fff;
+      font-size: 13px; font-weight: 700; letter-spacing: -0.01em;
+      border-radius: 100px; text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .report-btn:hover { background: #333; transform: scale(1.03); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #fff; border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px;
+    }
+    footer a { color: #bbb; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: #444; }
+    .partner-logos {
+      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+    }
+    .partner-logos a {
+      display: flex; align-items: center;
+      transition: opacity 0.2s;
+    }
+    .partner-logos a:hover { opacity: 0.7; }
+    .partner-logos img { height: 22px; width: auto; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero, .clock-section, .reports-section { padding-left: 20px; padding-right: 20px; }
+      .clock-housing { padding: 36px 20px 28px; }
+      .gauge-row { flex-direction: column; gap: 0; }
+      .gauge { border-radius: 0; }
+      .gauge:first-child { border-radius: 12px 12px 0 0; }
+      .gauge:last-child { border-radius: 0 0 12px 12px; }
+      .reports-grid { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="images/logo.png" alt="American Energy Money">
+  </a>
+  <div class="nav-links">
+    <a class="nav-item" href="compute.html">Compute</a>
+    <a class="nav-item active" href="research.html">Research</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1>Research</h1>
+  <p class="subtitle">Instruments and intelligence for energy-based monetary systems.</p>
+</section>
+
+<!-- ── QUAI CLOCK ── -->
+<section class="clock-section">
+  <p class="clock-label">Quai Clock — Total Entropy Tracker</p>
+
+  <div class="clock-housing">
+    <div class="entropy-display">
+      <div class="entropy-value">2,847,391<span class="decimal">.74</span></div>
+      <div class="entropy-unit">Total Entropy (bits)</div>
+    </div>
+
+    <div class="gauge-row">
+      <div class="gauge">
+        <div class="gauge-val">1,204,887</div>
+        <div class="gauge-label">Block Height</div>
+      </div>
+      <div class="gauge">
+        <div class="gauge-val">2.364</div>
+        <div class="gauge-label">Entropy / Block</div>
+      </div>
+      <div class="gauge">
+        <div class="gauge-val">14.2</div>
+        <div class="gauge-label">Bits / Sec</div>
+      </div>
+    </div>
+
+    <div class="pulse-row">
+      <div class="pulse-dot"></div>
+      <span class="pulse-label">Tracking live entropy</span>
+    </div>
+  </div>
+
+  <div class="clock-explain">
+    <p><strong>Bitcoin's Block Clock counts blocks.</strong> The Quai Clock counts what blocks actually represent — total thermodynamic work performed by the network, measured as cumulative entropy.</p>
+    <p><strong>Entropy is the fundamental unit.</strong> Under Proof of Entropy Minima, each block's difficulty reflects provable entropy minimization. The clock aggregates this across the entire chain history — a running tally of physical computation that can never be faked or reversed.</p>
+    <p><strong>This is the energy ledger.</strong> Every increment on the clock corresponds to real joules expended, real heat dissipated, real irreversible computation performed. It is the thermodynamic receipt for American energy converted into money.</p>
+  </div>
+</section>
+
+<!-- ── RESEARCH REPORTS ── -->
+<section class="reports-section">
+  <h2>Research <span class="gray">Reports</span></h2>
+  <p class="reports-lead">Institutional-grade analysis on thermoeconomics, mining economics, and energy-money systems. Sold as digital objects.</p>
+
+  <div class="reports-grid">
+
+    <div class="report-card">
+      <div class="report-cover">
+        <span class="report-cover-label">AEM Report №1</span>
+      </div>
+      <div class="report-body">
+        <div class="report-tag">Thermoeconomics</div>
+        <div class="report-title">The Thermoeconomic Operator: Energy, Entropy &amp; Value</div>
+        <div class="report-desc">A formal treatment of the thermoeconomic cost function — how energy expenditure and entropy production ground monetary value in physical law.</div>
+        <div class="report-footer">
+          <span class="report-price">$24</span>
+          <a class="report-btn" href="#">Purchase</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-cover">
+        <span class="report-cover-label">AEM Report №2</span>
+      </div>
+      <div class="report-body">
+        <div class="report-tag">Mining Economics</div>
+        <div class="report-title">SHA-256 Mining: Bitcoin vs. Quai Profitability Analysis</div>
+        <div class="report-desc">A comparative analysis of mining economics across Bitcoin and Quai Network, with real-world hardware data and energy cost modeling.</div>
+        <div class="report-footer">
+          <span class="report-price">$18</span>
+          <a class="report-btn" href="#">Purchase</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-cover">
+        <span class="report-cover-label">AEM Report №3</span>
+      </div>
+      <div class="report-body">
+        <div class="report-tag">Consensus Mechanisms</div>
+        <div class="report-title">Proof of Entropy Minima: Formal Verification &amp; Analysis</div>
+        <div class="report-desc">Formal verification of PoEM consensus using Z3 SMT solvers, with mathematical proofs of entropy minimization guarantees.</div>
+        <div class="report-footer">
+          <span class="report-price">$32</span>
+          <a class="report-btn" href="#">Purchase</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-cover">
+        <span class="report-cover-label">AEM Report №4</span>
+      </div>
+      <div class="report-body">
+        <div class="report-tag">Physics of Computation</div>
+        <div class="report-title">Computational Irreducibility &amp; Causal Invariance in PoW</div>
+        <div class="report-desc">How Wolfram Physics concepts — computational irreducibility and causal invariance — provide the theoretical substrate for proof-of-work consensus.</div>
+        <div class="report-footer">
+          <span class="report-price">$28</span>
+          <a class="report-btn" href="#">Purchase</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>© 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+</body>
+</html>
