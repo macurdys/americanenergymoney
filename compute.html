@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compute — American Energy Money</title>
+  <meta name="description" content="Inference Futures — priced by energy, settled by entropy.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gray: #999;
+      --dark: #111;
+      --white: #fff;
+      --border: rgba(0,0,0,0.07);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
+    .nav-logo span {
+      font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #111;
+    }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-item {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+      color: #444; text-decoration: none; cursor: pointer;
+      border-radius: 8px; transition: background 0.15s;
+    }
+    .nav-item:hover { background: #f5f5f5; }
+    .nav-item.active { color: #111; font-weight: 600; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: #0d0d0d;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 120px 48px 100px; text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(52px, 7vw, 84px);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+      color: #fff;
+    }
+    .hero h1 .dim { color: #555; }
+    .hero .subtitle {
+      font-size: clamp(18px, 2vw, 22px); font-weight: 500;
+      color: #666; margin-top: 28px; max-width: 560px;
+      line-height: 1.6; letter-spacing: -0.01em;
+    }
+
+    /* ─── WHAT ─── */
+    .what-section {
+      background: #fff;
+      padding: 100px 48px; text-align: center;
+    }
+    .what-section h2 {
+      font-size: clamp(32px, 4vw, 50px); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 24px;
+    }
+    .what-section h2 .gray { color: var(--gray); }
+    .what-section .lead {
+      font-size: 18px; color: #666; max-width: 640px;
+      margin: 0 auto 64px; line-height: 1.7;
+    }
+
+    /* ─── STEPS ─── */
+    .steps {
+      display: flex; gap: 48px; justify-content: center;
+      flex-wrap: wrap; max-width: 960px; margin: 0 auto;
+    }
+    .step {
+      flex: 1; min-width: 240px; max-width: 280px; text-align: left;
+    }
+    .step-num {
+      font-size: 48px; font-weight: 800; letter-spacing: -0.04em;
+      color: #e0e0e0; margin-bottom: 16px;
+    }
+    .step h3 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .step p {
+      font-size: 15px; color: #777; line-height: 1.65;
+    }
+
+    /* ─── MECHANISM ─── */
+    .mechanism {
+      background: #0d0d0d; padding: 100px 48px; text-align: center;
+    }
+    .mechanism h2 {
+      font-size: clamp(32px, 4vw, 50px); font-weight: 700;
+      letter-spacing: -0.03em; color: #fff; margin-bottom: 24px;
+    }
+    .mechanism .lead {
+      font-size: 18px; color: #666; max-width: 640px;
+      margin: 0 auto 64px; line-height: 1.7;
+    }
+    .mech-grid {
+      display: flex; gap: 32px; justify-content: center;
+      flex-wrap: wrap; max-width: 900px; margin: 0 auto;
+    }
+    .mech-card {
+      flex: 1; min-width: 240px; max-width: 400px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 40px 32px; text-align: left;
+    }
+    .mech-card h3 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 12px;
+    }
+    .mech-card p {
+      font-size: 15px; color: #888; line-height: 1.65;
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: #fff; padding: 100px 48px; text-align: center;
+    }
+    .cta-section h2 {
+      font-size: clamp(36px, 5vw, 64px); font-weight: 800;
+      letter-spacing: -0.04em; margin-bottom: 24px;
+    }
+    .cta-section p {
+      font-size: 18px; color: #777; max-width: 480px;
+      margin: 0 auto 48px; line-height: 1.6;
+    }
+    .cta-btn {
+      display: inline-block; padding: 16px 40px;
+      background: #111; color: #fff;
+      font-size: 16px; font-weight: 700; letter-spacing: -0.01em;
+      border-radius: 100px; text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .cta-btn:hover { background: #333; transform: scale(1.03); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #fff; border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px;
+    }
+    footer a { color: #bbb; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: #444; }
+    .partner-logos {
+      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+    }
+    .partner-logos a {
+      display: flex; align-items: center;
+      transition: opacity 0.2s;
+    }
+    .partner-logos a:hover { opacity: 0.7; }
+    .partner-logos img { height: 22px; width: auto; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero, .what-section, .mechanism,
+      .cta-section { padding-left: 20px; padding-right: 20px; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="images/logo.png" alt="American Energy Money">
+  </a>
+  <div class="nav-links">
+    <a class="nav-item active" href="compute.html">Compute</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1>Compute <span class="dim">Futures</span></h1>
+  <p class="subtitle">A futures contract for inference — priced by energy expenditure, grounded in entropy, settled on-chain.</p>
+</section>
+
+<!-- ── WHAT IS IT ── -->
+<section class="what-section">
+  <h2><span class="gray">What</span> is it</h2>
+  <p class="lead">A financial instrument that lets agents and enterprises acquire inference compute at a known cost — derived from the thermodynamic work required to produce it, not speculative market pricing.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Energy-Priced</h3>
+      <p>Contract pricing reflects the real energy cost of inference — joules in, tokens out. No abstraction layers between compute and value.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Entropy-Settled</h3>
+      <p>Settlement is anchored to provable entropy minimization on-chain, giving both counterparties a physical basis for contract fulfillment.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Agent-Ready</h3>
+      <p>Designed for autonomous agents that need to acquire, budget, and allocate inference resources programmatically at scale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MECHANISM ── -->
+<section class="mechanism">
+  <h2>How it works</h2>
+  <p class="lead">The contract lifecycle connects thermodynamic reality to financial settlement.</p>
+  <div class="mech-grid">
+    <div class="mech-card">
+      <h3>Pricing</h3>
+      <p>Contracts are priced using the thermoeconomic cost function — mapping energy input and entropy output to a fair market rate for inference compute per unit of work.</p>
+    </div>
+    <div class="mech-card">
+      <h3>Acquisition</h3>
+      <p>Agents acquire futures positions denominated in Qi, locking in inference capacity at a known energy-equivalent cost for a defined time horizon.</p>
+    </div>
+    <div class="mech-card">
+      <h3>Settlement</h3>
+      <p>At expiry, contracts settle against on-chain entropy metrics — the provable thermodynamic work delivered by the network during the contract period.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2>Early Access</h2>
+  <p>Compute Futures is in prototype. Request access to the first energy-priced inference market.</p>
+  <a class="cta-btn" href="#">Request Access</a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>© 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+</body>
+</html>
