@@ -1,541 +1,430 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Controller — Qi / Quai Simulator</title>
-  <meta name="description" content="Interactive simulator of the Quai Network dual-token controller — how kQuai adjusts to balance miner demand between Qi and Quai.">
   <link rel="icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --border: rgba(255,255,255,0.06); --bg-card: rgba(255,255,255,0.025); }
-    html { font-size: 16px; scroll-behavior: smooth; }
+    :root {
+      --bg: #0a0a0a;
+      --card: #111113;
+      --border: rgba(255,255,255,0.06);
+      --border-hi: rgba(255,255,255,0.12);
+      --qi: #e07040;
+      --quai: #4488cc;
+      --green: #50a860;
+      --dim: #444;
+      --mono: 'JetBrains Mono', 'Courier New', monospace;
+    }
+    html { font-size: 16px; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background: #0d0d0d; color: #ccc; overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      background: var(--bg); color: #999;
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
     }
 
-    /* ─── NAV ─── */
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: #0d0d0d;
+      position: sticky; top: 0; z-index: 100; background: var(--bg);
       border-bottom: 1px solid var(--border);
-      height: 60px;
-      display: flex; align-items: center;
-      padding: 0 48px; gap: 32px;
+      height: 56px; display: flex; align-items: center;
+      padding: 0 32px; gap: 24px;
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      text-decoration: none; flex-shrink: 0;
-    }
-    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
-    .nav-logo span { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #fff; }
-    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .nav-logo img { width: 24px; height: 24px; border-radius: 4px; }
+    .nav-logo span { font-size: 14px; font-weight: 600; color: #fff; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2px; margin-left: auto; }
     .nav-item {
-      display: flex; align-items: center; gap: 4px;
-      padding: 8px 14px; font-size: 15px; font-weight: 500;
-      letter-spacing: -0.01em; color: #666;
-      text-decoration: none; cursor: pointer;
-      border-radius: 8px; transition: background 0.15s, color 0.15s;
+      padding: 6px 12px; font-size: 13px; font-weight: 500; color: #555;
+      text-decoration: none; border-radius: 6px; transition: all 0.15s;
     }
-    .nav-item:hover { background: rgba(255,255,255,0.04); color: #aaa; }
-    .nav-item.active { color: #fff; font-weight: 600; }
+    .nav-item:hover { background: rgba(255,255,255,0.04); color: #888; }
 
-    /* ─── HEADER ─── */
-    .page-header {
-      padding: 48px 48px 0;
-      max-width: 1080px; margin: 0 auto;
+    .header {
+      padding: 32px 32px 8px; max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
     }
-    .page-header .kicker {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-      color: #444; text-transform: uppercase; margin-bottom: 8px;
-    }
-    .page-header h1 {
-      font-size: clamp(28px, 4vw, 36px); font-weight: 800;
-      letter-spacing: -0.04em; color: #fff; margin: 0;
-    }
-    .page-header .desc {
-      font-size: 14px; color: #555; margin-top: 10px;
-      line-height: 1.65; max-width: 620px;
+    .header h1 { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.03em; }
+    .header .tag {
+      font-size: 11px; font-weight: 600; color: #444;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 100px; padding: 3px 10px;
     }
 
-    /* ─── LAYOUT ─── */
-    .sim-container {
-      max-width: 1080px; margin: 0 auto;
-      padding: 32px 48px 80px;
-      display: flex; gap: 28px; flex-wrap: wrap;
+    .grid {
+      max-width: 1200px; margin: 0 auto; padding: 24px 32px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 12px;
     }
 
-    /* ─── CONTROLS ─── */
-    .controls {
-      flex: 0 0 272px; min-width: 250px;
+    .mod {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; position: relative;
+      transition: border-color 0.2s;
     }
-    .ctrl-panel {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 24px;
+    .mod:hover { border-color: var(--border-hi); }
+    .mod-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #444; margin-bottom: 14px;
     }
-    .ctrl-panel .panel-title {
-      font-size: 11px; font-weight: 700; color: #555;
-      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px;
+    .mod-title {
+      font-size: 16px; font-weight: 800; color: #ddd; letter-spacing: -0.03em; margin-bottom: 4px;
     }
-    .param { margin-bottom: 20px; }
-    .param-head {
-      display: flex; justify-content: space-between; align-items: baseline;
-      margin-bottom: 6px;
-    }
-    .param-label { font-size: 13px; font-weight: 600; color: #999; letter-spacing: -0.01em; }
-    .param-value {
-      font-size: 13px; font-weight: 700; color: #fff;
-      font-family: 'Courier New', monospace;
-    }
-    .param input[type="range"] {
-      width: 100%; accent-color: #555; cursor: pointer;
-    }
-    .param-desc {
-      font-size: 11px; color: #444; margin-top: 4px; line-height: 1.5;
-    }
-    .param-divider {
-      border-top: 1px solid var(--border);
-      margin: 4px 0 16px;
-    }
+    .mod-desc { font-size: 12px; color: #444; line-height: 1.55; }
 
-    /* Formula box */
-    .formula-panel {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 20px; margin-top: 16px;
-      font-size: 12px; color: #555; line-height: 1.75;
-    }
-    .formula-panel .panel-title {
-      font-size: 11px; font-weight: 700; color: #555;
-      letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px;
-    }
-    .formula-panel .f { color: #777; }
-    .formula-panel .note { color: #3a3a3a; font-size: 11px; margin-top: 8px; }
+    .gauge-wrap { display: flex; align-items: center; justify-content: center; margin: 16px 0 8px; }
+    .gauge-svg { overflow: visible; }
+    .gauge-value { font-family: var(--mono); font-size: 18px; font-weight: 700; fill: #fff; }
+    .gauge-unit { font-family: var(--mono); font-size: 10px; font-weight: 500; fill: #555; }
 
-    /* ─── CHARTS COLUMN ─── */
-    .charts { flex: 1; min-width: 320px; }
+    .meter { margin: 16px 0 8px; }
+    .meter-bar-bg { width: 100%; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.04); overflow: hidden; }
+    .meter-bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease, background 0.3s ease; }
+    .meter-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 10px; color: #444; font-family: var(--mono); }
+    .meter-center { text-align: center; margin-top: 8px; font-family: var(--mono); font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
 
-    /* Metric cards */
-    .metrics { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
-    .metric {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 16px 18px; flex: 1; min-width: 140px;
-    }
-    .metric-label {
-      font-size: 10px; font-weight: 700; color: #555;
-      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px;
-    }
-    .metric-value {
-      font-size: 20px; font-weight: 800; color: #fff;
-      letter-spacing: -0.03em; font-family: 'Courier New', monospace;
-    }
-    .metric-sub { font-size: 11px; color: #444; margin-top: 4px; }
+    .mod-slider { margin-top: 12px; }
+    .mod-slider input[type="range"] { width: 100%; accent-color: #555; cursor: pointer; height: 4px; }
+    .mod-slider-head { display: flex; justify-content: space-between; margin-bottom: 4px; }
+    .mod-slider-label { font-size: 11px; color: #555; font-weight: 500; }
+    .mod-slider-val { font-size: 11px; color: #888; font-weight: 600; font-family: var(--mono); }
 
-    /* Chart cards */
-    .chart-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 20px 20px 12px; margin-bottom: 16px;
+    .flow-row {
+      grid-column: 1 / -1;
+      display: flex; align-items: center; justify-content: center;
+      gap: 24px; padding: 4px 0;
     }
-    .chart-title { font-size: 14px; font-weight: 700; color: #bbb; letter-spacing: -0.02em; }
-    .chart-sub { font-size: 11px; color: #444; margin-top: 2px; margin-bottom: 14px; }
-    .chart-card canvas { width: 100% !important; }
+    .flow-arrow {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 11px; color: #333; font-weight: 600; letter-spacing: 0.02em;
+    }
+    .flow-arrow svg { flex-shrink: 0; }
+    .flow-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 768px) {
-      nav, .page-header, .sim-container { padding-left: 20px; padding-right: 20px; }
-      .controls { flex: 1 1 100%; }
+    .mod-wide { grid-column: span 2; }
+
+    .dual-meter { display: flex; gap: 24px; margin-top: 16px; }
+    .dual-meter-item { flex: 1; }
+    .dual-meter-label { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+    .dual-meter-value { font-family: var(--mono); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .dual-meter-sub { font-size: 11px; color: #444; font-family: var(--mono); }
+
+    .status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr 1fr; padding: 16px; }
+      .mod-wide { grid-column: span 2; }
+      nav, .header { padding-left: 16px; padding-right: 16px; }
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      .mod-wide { grid-column: span 1; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/">
-    <img src="images/logo.png" alt="American Energy Money">
-  </a>
+  <a class="nav-logo" href="/"><img src="images/logo.png" alt="AEM"></a>
   <div class="nav-links">
-    <a class="nav-item" href="compute.html">← Compute</a>
+    <a class="nav-item" href="compute.html">← Compute Futures</a>
     <a class="nav-item" href="research.html">Research</a>
   </div>
 </nav>
 
-<!-- HEADER -->
-<div class="page-header">
-  <div class="kicker">Compute Futures</div>
+<div class="header">
   <h1>Qi / Quai Controller</h1>
-  <p class="desc">
-    The dual-token controller balances miner demand between Qi (energy-denominated) and Quai (market-priced). When miners prefer Qi, the controller increases k<sub>Quai</sub> to make Quai rewards more attractive — and vice versa. This is the mechanism that keeps Compute Futures anchored to physical reality.
-  </p>
+  <span class="tag">Interactive</span>
 </div>
 
-<!-- SIMULATOR -->
-<div class="sim-container">
+<div class="grid">
 
-  <!-- CONTROLS -->
-  <div class="controls">
-    <div class="ctrl-panel">
-      <div class="panel-title">Parameters</div>
-
-      <div class="param">
-        <div class="param-head">
-          <span class="param-label">Blocks</span>
-          <span class="param-value" id="val-blocks">500</span>
-        </div>
-        <input type="range" id="sl-blocks" min="50" max="2000" step="50" value="500">
-        <div class="param-desc">Number of blocks to simulate</div>
+  <!-- ROW 1: INPUTS -->
+  <div class="mod" id="mod-miners">
+    <div class="mod-label">Input</div>
+    <div class="mod-title">Miner Voting</div>
+    <div class="meter">
+      <div class="meter-bar-bg">
+        <div class="meter-bar-fill" id="pref-bar" style="width:65%; background: linear-gradient(90deg, var(--qi), var(--quai));"></div>
       </div>
-
-      <div class="param">
-        <div class="param-head">
-          <span class="param-label">Qi Preference</span>
-          <span class="param-value" id="val-qipref">65%</span>
-        </div>
-        <input type="range" id="sl-qipref" min="5" max="95" step="1" value="65">
-        <div class="param-desc">% of miners choosing Qi over Quai rewards</div>
-      </div>
-
-      <div class="param">
-        <div class="param-head">
-          <span class="param-label">Conversion Penalty</span>
-          <span class="param-value" id="val-penalty">5%</span>
-        </div>
-        <input type="range" id="sl-penalty" min="0" max="30" step="0.5" value="5">
-        <div class="param-desc">Discount imposed on token conversions — scales adjustment magnitude</div>
-      </div>
-
-      <div class="param">
-        <div class="param-head">
-          <span class="param-label">Difficulty Growth</span>
-          <span class="param-value" id="val-diffgrowth">10%</span>
-        </div>
-        <input type="range" id="sl-diffgrowth" min="0" max="50" step="1" value="10">
-        <div class="param-desc">Total difficulty increase over the simulation period</div>
-      </div>
-
-      <div class="param">
-        <div class="param-head">
-          <span class="param-label">k<sub>Qi</sub> Growth</span>
-          <span class="param-value" id="val-kqigrowth">20%</span>
-        </div>
-        <input type="range" id="sl-kqigrowth" min="0" max="100" step="5" value="20">
-        <div class="param-desc">Predetermined k<sub>Qi</sub> schedule growth (Moore's law proxy)</div>
-      </div>
-
-      <div class="param-divider"></div>
-
-      <div class="param">
-        <div class="param-head">
-          <span class="param-label">Init k<sub>Quai</sub></span>
-          <span class="param-value" id="val-initkquai">2.21e17</span>
-        </div>
-        <input type="range" id="sl-initkquai" min="1" max="100" step="1" value="22">
-        <div class="param-desc">Starting k<sub>Quai</sub> value in 1e16 wei</div>
+      <div class="meter-labels">
+        <span style="color:var(--qi);">Qi <span id="pref-qi-pct">65%</span></span>
+        <span style="color:var(--quai);">Quai <span id="pref-quai-pct">35%</span></span>
       </div>
     </div>
+    <div class="mod-slider">
+      <input type="range" id="sl-qipref" min="5" max="95" step="1" value="65">
+    </div>
+    <div class="mod-desc" style="margin-top:10px;">Miners vote by choosing reward token. Preference drives the controller direction.</div>
+  </div>
 
-    <!-- Formula reference -->
-    <div class="formula-panel">
-      <div class="panel-title">Mechanism</div>
-      <p class="f">reward<sub>Qi</sub> = k<sub>Qi</sub> × difficulty</p>
-      <p class="f">reward<sub>Quai</sub> = k<sub>Quai</sub> × log₂(difficulty)</p>
-      <p class="f" style="margin-top:8px;">k<sub>Quai</sub>(i) = k<sub>Quai</sub>(i−1) × [1 + dir × α × S × P]</p>
-      <p class="note">α = 1/1000 · S = 3 when Qi popular, 1 otherwise · P = conversion penalty</p>
+  <div class="mod" id="mod-difficulty">
+    <div class="mod-label">Network</div>
+    <div class="mod-title">Block Difficulty</div>
+    <div class="gauge-wrap">
+      <svg class="gauge-svg" width="140" height="80" viewBox="0 0 140 80">
+        <path d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="6" stroke-linecap="round"/>
+        <path id="diff-arc" d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="#555" stroke-width="6" stroke-linecap="round" stroke-dasharray="173" stroke-dashoffset="43"/>
+        <text x="70" y="58" text-anchor="middle" class="gauge-value" id="diff-val">2⁴⁰</text>
+        <text x="70" y="74" text-anchor="middle" class="gauge-unit">hashes</text>
+      </svg>
+    </div>
+    <div class="mod-slider">
+      <div class="mod-slider-head">
+        <span class="mod-slider-label">Growth rate</span>
+        <span class="mod-slider-val" id="val-diffgrowth">10%</span>
+      </div>
+      <input type="range" id="sl-diffgrowth" min="0" max="50" step="1" value="10">
     </div>
   </div>
 
-  <!-- CHARTS -->
-  <div class="charts">
-    <!-- Metrics row -->
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-label">k<sub>Quai</sub></div>
-        <div class="metric-value" id="m-kquai">—</div>
-        <div class="metric-sub" id="m-kquai-sub"></div>
+  <div class="mod" id="mod-sim">
+    <div class="mod-label">Simulation</div>
+    <div class="mod-title">Parameters</div>
+    <div class="mod-slider" style="margin-top:16px;">
+      <div class="mod-slider-head">
+        <span class="mod-slider-label">Blocks</span>
+        <span class="mod-slider-val" id="val-blocks">500</span>
       </div>
-      <div class="metric">
-        <div class="metric-label">Qi / Quai</div>
-        <div class="metric-value" id="m-rate">—</div>
-        <div class="metric-sub" id="m-rate-sub"></div>
+      <input type="range" id="sl-blocks" min="50" max="2000" step="50" value="500">
+    </div>
+    <div class="mod-slider">
+      <div class="mod-slider-head">
+        <span class="mod-slider-label">Conversion penalty</span>
+        <span class="mod-slider-val" id="val-penalty">5%</span>
       </div>
-      <div class="metric">
-        <div class="metric-label">Direction</div>
-        <div class="metric-value" id="m-dir">—</div>
-        <div class="metric-sub" id="m-dir-sub"></div>
+      <input type="range" id="sl-penalty" min="0" max="30" step="0.5" value="5">
+    </div>
+    <div class="mod-slider">
+      <div class="mod-slider-head">
+        <span class="mod-slider-label">k<sub>Qi</sub> growth</span>
+        <span class="mod-slider-val" id="val-kqigrowth">20%</span>
       </div>
-    </div>
-
-    <!-- Chart 1: kQuai -->
-    <div class="chart-card">
-      <div class="chart-title">k<sub>Quai</sub> Over Time</div>
-      <div class="chart-sub">Controller adjusts to balance miner preferences</div>
-      <canvas id="chart-kquai" height="160"></canvas>
-    </div>
-
-    <!-- Chart 2: Rewards -->
-    <div class="chart-card">
-      <div class="chart-title">Block Rewards</div>
-      <div class="chart-sub">Qi reward (energy-proportional) vs Quai reward (log-difficulty)</div>
-      <canvas id="chart-rewards" height="160"></canvas>
-    </div>
-
-    <!-- Chart 3: Implied rate -->
-    <div class="chart-card">
-      <div class="chart-title">Implied Qi per Quai</div>
-      <div class="chart-sub">Exchange rate implied by mining reward equivalence</div>
-      <canvas id="chart-rate" height="160"></canvas>
+      <input type="range" id="sl-kqigrowth" min="0" max="100" step="5" value="20">
     </div>
   </div>
+
+  <div class="flow-row">
+    <div class="flow-line"></div>
+    <div class="flow-arrow">
+      <svg width="16" height="12" viewBox="0 0 16 12"><path d="M0 6h12M10 2l4 4-4 4" fill="none" stroke="#333" stroke-width="1.5"/></svg>
+      miners choose
+    </div>
+    <div class="flow-line"></div>
+    <div class="flow-arrow">
+      <svg width="16" height="12" viewBox="0 0 16 12"><path d="M0 6h12M10 2l4 4-4 4" fill="none" stroke="#333" stroke-width="1.5"/></svg>
+      controller adjusts
+    </div>
+    <div class="flow-line"></div>
+  </div>
+
+  <!-- ROW 2: REWARDS + CONTROLLER -->
+  <div class="mod" style="border-left: 2px solid var(--qi);">
+    <div class="mod-label" style="color:var(--qi);">Qi Reward</div>
+    <div class="mod-title" style="font-size:14px;">k<sub style="font-size:10px;">Qi</sub> × difficulty</div>
+    <div class="meter-center" id="reward-qi" style="color:var(--qi);">—</div>
+    <div style="text-align:center; margin-top:4px;">
+      <span style="font-size:11px; color:#444; font-family:var(--mono);">k<sub>Qi</sub> = <span id="kqi-val">1.25e-10</span></span>
+    </div>
+    <div class="mod-desc" style="margin-top:12px;">Linear in difficulty. Energy-proportional — more hashes, more Qi. Predetermined schedule.</div>
+  </div>
+
+  <div class="mod" style="border: 1px solid var(--border-hi); background: #131315;">
+    <div class="mod-label" style="color:#666;">Controller</div>
+    <div class="mod-title">k<sub>Quai</sub></div>
+    <div class="gauge-wrap">
+      <svg class="gauge-svg" width="160" height="90" viewBox="0 0 160 90">
+        <path d="M 15 85 A 65 65 0 0 1 145 85" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="8" stroke-linecap="round"/>
+        <path id="kquai-arc" d="M 15 85 A 65 65 0 0 1 145 85" fill="none" stroke="var(--quai)" stroke-width="8" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="102"/>
+        <text x="80" y="65" text-anchor="middle" class="gauge-value" id="kquai-val">—</text>
+        <text x="80" y="82" text-anchor="middle" class="gauge-unit" id="kquai-delta">—</text>
+      </svg>
+    </div>
+    <div style="text-align:center;">
+      <span class="status-dot" id="dir-dot" style="background:var(--quai);"></span>
+      <span style="font-size:12px; font-weight:600; color:#888;" id="dir-label">—</span>
+    </div>
+    <div class="mod-desc" style="margin-top:10px; text-align:center;">
+      k<sub>Quai</sub>(i) = k<sub>Quai</sub>(i−1) × [1 + dir × α × S × P]<br>
+      <span style="color:#333;">α=1/1000 · S=3 if Qi popular</span>
+    </div>
+  </div>
+
+  <div class="mod" style="border-right: 2px solid var(--quai);">
+    <div class="mod-label" style="color:var(--quai);">Quai Reward</div>
+    <div class="mod-title" style="font-size:14px;">k<sub style="font-size:10px;">Quai</sub> × log₂(diff)</div>
+    <div class="meter-center" id="reward-quai" style="color:var(--quai);">—</div>
+    <div style="text-align:center; margin-top:4px;">
+      <span style="font-size:11px; color:#444; font-family:var(--mono);">log₂(diff) ≈ <span id="log2diff-val">40</span></span>
+    </div>
+    <div class="mod-desc" style="margin-top:12px;">Logarithmic in difficulty. Market-priced — grows slowly with hashrate. Adjusted by controller.</div>
+  </div>
+
+  <div class="flow-row">
+    <div class="flow-line"></div>
+    <div class="flow-arrow">
+      <svg width="12" height="16" viewBox="0 0 12 16"><path d="M6 0v12M2 10l4 4 4-4" fill="none" stroke="#333" stroke-width="1.5"/></svg>
+      rewards set exchange rate
+    </div>
+    <div class="flow-line"></div>
+  </div>
+
+  <!-- ROW 3: OUTPUTS -->
+  <div class="mod mod-wide" style="border-bottom: 2px solid var(--green);">
+    <div class="mod-label" style="color:var(--green);">Output</div>
+    <div class="mod-title">Implied Exchange Rate</div>
+    <div class="dual-meter">
+      <div class="dual-meter-item">
+        <div class="dual-meter-label" style="color:var(--green);">Qi per Quai</div>
+        <div class="dual-meter-value" style="color:#fff;" id="rate-val">—</div>
+        <div class="dual-meter-sub" id="rate-delta">—</div>
+      </div>
+      <div class="dual-meter-item">
+        <div class="dual-meter-label" style="color:#555;">Rate Change</div>
+        <div class="dual-meter-value" id="rate-pct" style="color:#888;">—</div>
+        <div class="dual-meter-sub">over simulation period</div>
+      </div>
+    </div>
+    <div class="meter" style="margin-top:16px;">
+      <div class="meter-bar-bg" style="height:4px;">
+        <div class="meter-bar-fill" id="rate-bar" style="width:50%; background: var(--green); transition: width 0.4s;"></div>
+      </div>
+      <div class="meter-labels"><span>Qi cheaper</span><span>Quai cheaper</span></div>
+    </div>
+  </div>
+
+  <div class="mod">
+    <div class="mod-label">Equilibrium</div>
+    <div class="mod-title" id="eq-title">—</div>
+    <div class="mod-desc" style="margin-top:10px;" id="eq-desc">—</div>
+    <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border);">
+      <div style="font-size:10px; font-weight:700; color:#333; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Feedback Loop</div>
+      <div style="font-size:12px; color:#555; line-height:1.6;" id="eq-loop">—</div>
+    </div>
+  </div>
+
 </div>
 
 <script>
-// ── Constants ──
 const BASE_KQI = 1 / (8e9);
 const ALPHA = 1 / 1000;
-const S_QI = 3;
-const S_QUAI = 1;
 
-// ── Simulation ──
-function simulate(params) {
-  const { blocks, initKQuai, initDifficulty, qiPref, penalty, diffGrowth, kQiGrowth } = params;
-  const data = { block: [], kQuai: [], rewardQi: [], rewardQuai: [], qiPerQuai: [] };
-
-  let kQuai = initKQuai;
-  let diff = initDifficulty;
-  let kQi = BASE_KQI;
-
-  for (let i = 0; i <= blocks; i++) {
+function simulate(p) {
+  let kQuai = p.initKQuai, diff = p.initDiff, kQi = BASE_KQI;
+  let first = null, last = null;
+  for (let i = 0; i <= p.blocks; i++) {
     const log2d = Math.log2(diff);
     const rQi = kQi * diff;
     const rQuai = kQuai * log2d;
     const rate = rQi / rQuai;
-
-    data.block.push(i);
-    data.kQuai.push(kQuai);
-    data.rewardQi.push(rQi);
-    data.rewardQuai.push(rQuai);
-    data.qiPerQuai.push(rate);
-
-    // Update controller
-    const qiPopular = qiPref > 50;
-    const dir = qiPopular ? 1 : -1;
-    const S = qiPopular ? S_QI : S_QUAI;
-    const P = penalty / 100;
-    kQuai *= (1 + dir * ALPHA * S * P);
-
-    diff *= (1 + diffGrowth / 100 / blocks);
-    kQi *= (1 + kQiGrowth / 100 / blocks);
+    const snap = { kQuai, kQi, rQi, rQuai, rate, diff, log2d };
+    if (i === 0) first = snap;
+    if (i === p.blocks) last = snap;
+    const qiPop = p.qiPref > 50;
+    const dir = qiPop ? 1 : -1;
+    const S = qiPop ? 3 : 1;
+    kQuai *= (1 + dir * ALPHA * S * (p.penalty / 100));
+    diff *= (1 + p.diffGrowth / 100 / p.blocks);
+    kQi *= (1 + p.kQiGrowth / 100 / p.blocks);
   }
-  return data;
+  return { first, last };
 }
 
-// ── Formatters ──
 function fmtSci(v) {
   if (v === 0) return "0";
   const e = Math.floor(Math.log10(Math.abs(v)));
-  return (v / Math.pow(10, e)).toFixed(2) + "e" + e;
+  return (v / 10**e).toFixed(2) + "e" + e;
 }
 function fmtNum(v) {
+  if (Math.abs(v) >= 1e12) return (v/1e12).toFixed(2) + "T";
   if (Math.abs(v) >= 1e9) return (v/1e9).toFixed(2) + "B";
   if (Math.abs(v) >= 1e6) return (v/1e6).toFixed(2) + "M";
   if (Math.abs(v) >= 1e3) return (v/1e3).toFixed(1) + "K";
-  if (Math.abs(v) < 0.001) return fmtSci(v);
-  return v.toFixed(4);
-}
-
-// ── Chart setup ──
-const chartDefaults = {
-  responsive: true,
-  maintainAspectRatio: false,
-  animation: { duration: 250 },
-  plugins: {
-    legend: { display: false },
-    tooltip: {
-      backgroundColor: '#1a1a1a',
-      borderColor: 'rgba(255,255,255,0.1)',
-      borderWidth: 1,
-      titleColor: '#666',
-      bodyColor: '#ccc',
-      bodyFont: { family: "'Courier New', monospace", size: 12 },
-      padding: 10,
-      cornerRadius: 8,
-      callbacks: {
-        label: ctx => ctx.dataset.label + ': ' + fmtNum(ctx.parsed.y),
-      }
-    },
-  },
-  scales: {
-    x: {
-      grid: { color: 'rgba(255,255,255,0.03)' },
-      ticks: { color: '#333', font: { size: 10 }, maxTicksLimit: 8 },
-      border: { color: '#222' },
-    },
-    y: {
-      grid: { color: 'rgba(255,255,255,0.03)' },
-      ticks: { color: '#444', font: { size: 10 }, maxTicksLimit: 5, callback: v => fmtNum(v) },
-      border: { display: false },
-    },
-  },
-  elements: {
-    point: { radius: 0 },
-    line: { tension: 0.3, borderWidth: 1.5 },
-  },
-};
-
-function makeGradient(ctx, canvas, color, opacity) {
-  const g = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  g.addColorStop(0, color.replace(')', ',' + opacity + ')').replace('rgb', 'rgba'));
-  g.addColorStop(1, color.replace(')', ',0)').replace('rgb', 'rgba'));
-  return g;
-}
-
-// Create charts
-const ctxK = document.getElementById('chart-kquai').getContext('2d');
-const ctxR = document.getElementById('chart-rewards').getContext('2d');
-const ctxRate = document.getElementById('chart-rate').getContext('2d');
-
-const chartK = new Chart(ctxK, {
-  type: 'line',
-  data: { labels: [], datasets: [{
-    label: 'kQuai', data: [],
-    borderColor: '#888',
-    backgroundColor: function(context) {
-      const c = context.chart;
-      const g = c.ctx.createLinearGradient(0, 0, 0, c.chartArea?.bottom || 160);
-      g.addColorStop(0, 'rgba(255,255,255,0.06)');
-      g.addColorStop(1, 'rgba(255,255,255,0)');
-      return g;
-    },
-    fill: true,
-  }]},
-  options: { ...chartDefaults },
-});
-
-const chartR = new Chart(ctxR, {
-  type: 'line',
-  data: { labels: [], datasets: [
-    { label: 'Qi Reward', data: [], borderColor: '#d07050', backgroundColor: 'transparent', fill: false },
-    { label: 'Quai Reward', data: [], borderColor: '#5588cc', backgroundColor: 'transparent', fill: false },
-  ]},
-  options: {
-    ...chartDefaults,
-    plugins: {
-      ...chartDefaults.plugins,
-      legend: {
-        display: true, position: 'top', align: 'end',
-        labels: { color: '#555', font: { size: 11 }, boxWidth: 12, padding: 16 },
-      },
-    },
-  },
-});
-
-const chartRate = new Chart(ctxRate, {
-  type: 'line',
-  data: { labels: [], datasets: [{
-    label: 'Qi / Quai', data: [],
-    borderColor: '#70b070',
-    backgroundColor: function(context) {
-      const c = context.chart;
-      const g = c.ctx.createLinearGradient(0, 0, 0, c.chartArea?.bottom || 160);
-      g.addColorStop(0, 'rgba(112,176,112,0.08)');
-      g.addColorStop(1, 'rgba(112,176,112,0)');
-      return g;
-    },
-    fill: true,
-  }]},
-  options: { ...chartDefaults },
-});
-
-// ── Read params & update ──
-function getParams() {
-  const blocks = +document.getElementById('sl-blocks').value;
-  const qiPref = +document.getElementById('sl-qipref').value;
-  const penalty = +document.getElementById('sl-penalty').value;
-  const diffGrowth = +document.getElementById('sl-diffgrowth').value;
-  const kQiGrowth = +document.getElementById('sl-kqigrowth').value;
-  const initKQuaiMult = +document.getElementById('sl-initkquai').value;
-  const initKQuai = initKQuaiMult * 1e16;
-  const initDifficulty = Math.pow(2, 40);
-  return { blocks, initKQuai, initDifficulty, qiPref, penalty, diffGrowth, kQiGrowth };
-}
-
-function downsample(arr, maxPts) {
-  if (arr.length <= maxPts) return arr;
-  const step = Math.floor(arr.length / maxPts);
-  const out = [];
-  for (let i = 0; i < arr.length; i += step) out.push(arr[i]);
-  if (out[out.length - 1] !== arr[arr.length - 1]) out.push(arr[arr.length - 1]);
-  return out;
+  if (Math.abs(v) < 0.001 && v !== 0) return fmtSci(v);
+  return v.toFixed(2);
 }
 
 function update() {
-  const p = getParams();
+  const qiPref = +document.getElementById('sl-qipref').value;
+  const blocks = +document.getElementById('sl-blocks').value;
+  const penalty = +document.getElementById('sl-penalty').value;
+  const diffGrowth = +document.getElementById('sl-diffgrowth').value;
+  const kQiGrowth = +document.getElementById('sl-kqigrowth').value;
 
-  // Update value displays
-  document.getElementById('val-blocks').textContent = p.blocks;
-  document.getElementById('val-qipref').textContent = p.qiPref + '%';
-  document.getElementById('val-penalty').textContent = p.penalty + '%';
-  document.getElementById('val-diffgrowth').textContent = p.diffGrowth + '%';
-  document.getElementById('val-kqigrowth').textContent = p.kQiGrowth + '%';
-  document.getElementById('val-initkquai').textContent = fmtSci(p.initKQuai);
+  document.getElementById('val-blocks').textContent = blocks;
+  document.getElementById('val-penalty').textContent = penalty + '%';
+  document.getElementById('val-diffgrowth').textContent = diffGrowth + '%';
+  document.getElementById('val-kqigrowth').textContent = kQiGrowth + '%';
 
-  // Run sim
-  const d = simulate(p);
-  const n = d.block.length;
+  document.getElementById('pref-bar').style.width = qiPref + '%';
+  document.getElementById('pref-qi-pct').textContent = qiPref + '%';
+  document.getElementById('pref-quai-pct').textContent = (100 - qiPref) + '%';
 
-  // Downsample
-  const maxPts = 200;
-  const labels = downsample(d.block, maxPts);
-  const kQ = downsample(d.kQuai, maxPts);
-  const rQi = downsample(d.rewardQi, maxPts);
-  const rQuai = downsample(d.rewardQuai, maxPts);
-  const rate = downsample(d.qiPerQuai, maxPts);
+  const { first, last } = simulate({
+    blocks, initKQuai: 2.21e17, initDiff: Math.pow(2, 40),
+    qiPref, penalty, diffGrowth, kQiGrowth
+  });
 
-  // Update charts
-  chartK.data.labels = labels;
-  chartK.data.datasets[0].data = kQ;
-  chartK.update();
+  const finalLog2 = last.log2d;
+  const diffNorm = Math.min(1, Math.max(0, (finalLog2 - 30) / 30));
+  document.getElementById('diff-arc').setAttribute('stroke-dashoffset', 173 * (1 - diffNorm));
+  document.getElementById('diff-val').textContent = '2^' + finalLog2.toFixed(1);
 
-  chartR.data.labels = labels;
-  chartR.data.datasets[0].data = rQi;
-  chartR.data.datasets[1].data = rQuai;
-  chartR.update();
+  document.getElementById('reward-qi').textContent = fmtNum(last.rQi);
+  document.getElementById('kqi-val').textContent = fmtSci(last.kQi);
+  document.getElementById('reward-quai').textContent = fmtNum(last.rQuai);
+  document.getElementById('log2diff-val').textContent = finalLog2.toFixed(1);
 
-  chartRate.data.labels = labels;
-  chartRate.data.datasets[0].data = rate;
-  chartRate.update();
+  const kQuaiChange = (last.kQuai - first.kQuai) / first.kQuai;
+  const kQuaiNorm = Math.min(1, Math.max(0, 0.5 + kQuaiChange * 5));
+  document.getElementById('kquai-arc').setAttribute('stroke-dashoffset', 204 * (1 - kQuaiNorm));
+  document.getElementById('kquai-val').textContent = fmtSci(last.kQuai);
+  document.getElementById('kquai-delta').textContent = (kQuaiChange >= 0 ? '+' : '') + (kQuaiChange * 100).toFixed(2) + '%';
 
-  // Update metrics
-  const first = { kQuai: d.kQuai[0], rate: d.qiPerQuai[0] };
-  const last = { kQuai: d.kQuai[n-1], rate: d.qiPerQuai[n-1] };
-  const kChange = ((last.kQuai - first.kQuai) / first.kQuai * 100).toFixed(2);
-  const rChange = ((last.rate - first.rate) / first.rate * 100).toFixed(2);
+  const qiPop = qiPref > 50;
+  const dot = document.getElementById('dir-dot');
+  const dirLabel = document.getElementById('dir-label');
+  if (qiPref === 50) { dot.style.background = '#555'; dirLabel.textContent = 'Balanced'; }
+  else if (qiPop) { dot.style.background = 'var(--qi)'; dirLabel.textContent = '↑ Increasing kQuai (×3 boost)'; }
+  else { dot.style.background = 'var(--quai)'; dirLabel.textContent = '↓ Decreasing kQuai'; }
+  document.getElementById('kquai-arc').setAttribute('stroke', qiPop ? 'var(--qi)' : 'var(--quai)');
 
-  document.getElementById('m-kquai').textContent = fmtSci(last.kQuai);
-  document.getElementById('m-kquai-sub').textContent = (kChange > 0 ? '+' : '') + kChange + '% over ' + p.blocks + ' blocks';
-  document.getElementById('m-rate').textContent = fmtNum(last.rate);
-  document.getElementById('m-rate-sub').textContent = (rChange > 0 ? '+' : '') + rChange + '% change';
+  const rateChange = (last.rate - first.rate) / first.rate;
+  document.getElementById('rate-val').textContent = fmtNum(last.rate);
+  document.getElementById('rate-delta').textContent = 'from ' + fmtNum(first.rate);
+  document.getElementById('rate-pct').textContent = (rateChange >= 0 ? '+' : '') + (rateChange * 100).toFixed(2) + '%';
+  document.getElementById('rate-pct').style.color = rateChange >= 0 ? 'var(--qi)' : 'var(--quai)';
+  document.getElementById('rate-bar').style.width = Math.min(95, Math.max(5, 50 + rateChange * 200)) + '%';
 
-  const qiPop = p.qiPref > 50;
-  document.getElementById('m-dir').textContent = qiPop ? '↑ kQuai' : '↓ kQuai';
-  document.getElementById('m-dir-sub').textContent = qiPop
-    ? 'Qi popular → making Quai attractive'
-    : 'Quai popular → making Qi attractive';
+  const eqTitle = document.getElementById('eq-title');
+  const eqDesc = document.getElementById('eq-desc');
+  const eqLoop = document.getElementById('eq-loop');
+  if (Math.abs(qiPref - 50) < 3) {
+    eqTitle.textContent = 'Near Equilibrium'; eqTitle.style.color = 'var(--green)';
+    eqDesc.textContent = 'Miner preference is roughly balanced. The controller makes minimal adjustments. Rewards in Qi and Quai are approximately equal in value.';
+    eqLoop.textContent = 'No strong feedback pressure. The system is stable at current kQuai.';
+  } else if (qiPop) {
+    eqTitle.textContent = 'Qi Dominant'; eqTitle.style.color = 'var(--qi)';
+    eqDesc.textContent = 'Miners prefer Qi — the energy-proportional reward. The controller responds by increasing kQuai to make Quai rewards more generous, pulling miners back.';
+    eqLoop.textContent = 'Qi popular → kQuai rises (3× boost) → Quai reward grows → miners switch to Quai → preference rebalances → kQuai stabilizes.';
+  } else {
+    eqTitle.textContent = 'Quai Dominant'; eqTitle.style.color = 'var(--quai)';
+    eqDesc.textContent = 'Miners prefer Quai — the market-priced reward. The controller responds by decreasing kQuai, reducing Quai rewards to push miners toward Qi.';
+    eqLoop.textContent = 'Quai popular → kQuai falls (1× rate) → Quai reward shrinks → miners switch to Qi → preference rebalances → kQuai stabilizes.';
+  }
 }
 
-// ── Wire up sliders ──
-document.querySelectorAll('input[type="range"]').forEach(el => {
-  el.addEventListener('input', update);
-});
-
-// Initial render
+document.querySelectorAll('input[type="range"]').forEach(el => el.addEventListener('input', update));
 update();
 </script>
-
 </body>
 </html>
