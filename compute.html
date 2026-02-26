@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compute — American Energy Money</title>
-  <meta name="description" content="Inference Futures — priced by energy, settled by entropy.">
+  <title>Compute Futures — American Energy Money</title>
+  <meta name="description" content="A perpetual futures contract for inference compute — priced in QUAI, settled in Qi.">
   <link rel="icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,7 @@
       --dark: #111;
       --white: #fff;
       --border: rgba(0,0,0,0.07);
+      --border-light: rgba(255,255,255,0.08);
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
@@ -66,23 +67,98 @@
     .hero h1 .dim { color: #555; }
     .hero .subtitle {
       font-size: clamp(18px, 2vw, 22px); font-weight: 500;
-      color: #666; margin-top: 28px; max-width: 560px;
+      color: #666; margin-top: 28px; max-width: 580px;
       line-height: 1.6; letter-spacing: -0.01em;
     }
 
-    /* ─── WHAT ─── */
-    .what-section {
+    /* ─── SECTION ─── */
+    .section-light {
       background: #fff;
       padding: 100px 48px; text-align: center;
     }
-    .what-section h2 {
+    .section-dark {
+      background: #0d0d0d;
+      padding: 100px 48px; text-align: center;
+    }
+    .section-light h2, .section-dark h2 {
       font-size: clamp(32px, 4vw, 50px); font-weight: 700;
       letter-spacing: -0.03em; margin-bottom: 24px;
     }
-    .what-section h2 .gray { color: var(--gray); }
-    .what-section .lead {
+    .section-dark h2 { color: #fff; }
+    .section-light h2 .gray,
+    .section-dark h2 .gray { color: var(--gray); }
+    .lead {
       font-size: 18px; color: #666; max-width: 640px;
       margin: 0 auto 64px; line-height: 1.7;
+    }
+
+    /* ─── TOKEN PAIR ─── */
+    .token-grid {
+      display: flex; gap: 32px; justify-content: center;
+      flex-wrap: wrap; max-width: 880px; margin: 0 auto;
+    }
+    .token-card {
+      flex: 1; min-width: 280px; max-width: 420px;
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 48px 36px; text-align: left;
+    }
+    .token-card.dark-card {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--border-light);
+    }
+    .token-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .token-label.quai-label { color: #888; }
+    .token-label.qi-label { color: #888; }
+    .section-dark .token-label { color: #666; }
+    .token-card h3 {
+      font-size: 26px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .section-dark .token-card h3 { color: #fff; }
+    .token-card p {
+      font-size: 15px; color: #777; line-height: 1.7;
+    }
+    .section-dark .token-card p { color: #888; }
+
+    /* ─── FORMULA ─── */
+    .formula-block {
+      max-width: 720px; margin: 0 auto;
+      text-align: left;
+    }
+    .formula-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 18px;
+      color: #ccc;
+      letter-spacing: 0.01em;
+      line-height: 1.8;
+      text-align: center;
+    }
+    .formula-note {
+      font-size: 15px; color: #666; line-height: 1.7;
+    }
+    .formula-note span {
+      color: #999; font-weight: 600;
+    }
+    .var-list {
+      margin-top: 28px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .var-item {
+      display: flex; gap: 16px; align-items: baseline;
+      font-size: 15px; color: #666; line-height: 1.6;
+    }
+    .var-item code {
+      font-family: 'Courier New', Courier, monospace;
+      color: #aaa; font-size: 15px;
+      min-width: 48px; flex-shrink: 0;
     }
 
     /* ─── STEPS ─── */
@@ -105,34 +181,21 @@
       font-size: 15px; color: #777; line-height: 1.65;
     }
 
-    /* ─── MECHANISM ─── */
-    .mechanism {
-      background: #0d0d0d; padding: 100px 48px; text-align: center;
-    }
-    .mechanism h2 {
-      font-size: clamp(32px, 4vw, 50px); font-weight: 700;
-      letter-spacing: -0.03em; color: #fff; margin-bottom: 24px;
-    }
-    .mechanism .lead {
-      font-size: 18px; color: #666; max-width: 640px;
-      margin: 0 auto 64px; line-height: 1.7;
-    }
-    .mech-grid {
+    /* ─── WHY SECTION ─── */
+    .why-grid {
       display: flex; gap: 32px; justify-content: center;
-      flex-wrap: wrap; max-width: 900px; margin: 0 auto;
+      flex-wrap: wrap; max-width: 960px; margin: 0 auto;
     }
-    .mech-card {
-      flex: 1; min-width: 240px; max-width: 400px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 40px 32px; text-align: left;
+    .why-card {
+      flex: 1; min-width: 260px; max-width: 300px;
+      text-align: left;
     }
-    .mech-card h3 {
-      font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
-      color: #fff; margin-bottom: 12px;
+    .why-card h3 {
+      font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 12px;
     }
-    .mech-card p {
-      font-size: 15px; color: #888; line-height: 1.65;
+    .why-card p {
+      font-size: 15px; color: #777; line-height: 1.65;
     }
 
     /* ─── CTA ─── */
@@ -178,9 +241,10 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .hero, .what-section, .mechanism,
+      .hero, .section-light, .section-dark,
       .cta-section { padding-left: 20px; padding-right: 20px; }
       footer { padding: 24px 20px; }
+      .formula-box { padding: 24px 20px; font-size: 15px; }
     }
   </style>
 </head>
@@ -200,48 +264,108 @@
 <!-- ── HERO ── -->
 <section class="hero">
   <h1>Compute <span class="dim">Futures</span></h1>
-  <p class="subtitle">A futures contract for inference — priced by energy expenditure, grounded in entropy, settled on-chain.</p>
+  <p class="subtitle">A perpetual futures contract for inference compute — priced in QUAI, settled in Qi.</p>
 </section>
 
-<!-- ── WHAT IS IT ── -->
-<section class="what-section">
-  <h2><span class="gray">What</span> is it</h2>
-  <p class="lead">A financial instrument that lets agents and enterprises acquire inference compute at a known cost — derived from the thermodynamic work required to produce it, not speculative market pricing.</p>
+<!-- ── THE INSTRUMENT ── -->
+<section class="section-light">
+  <h2><span class="gray">The</span> instrument</h2>
+  <p class="lead">A perpetual contract that lets agents acquire inference compute at a known energy cost. The market discovers the price. The physics determines the settlement.</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">01</div>
-      <h3>Energy-Priced</h3>
-      <p>Contract pricing reflects the real energy cost of inference — joules in, tokens out. No abstraction layers between compute and value.</p>
+      <h3>Perpetual</h3>
+      <p>No expiration date. A single contract that can be adopted as a standard through time, concentrating liquidity instead of fragmenting it across maturities.</p>
     </div>
     <div class="step">
       <div class="step-num">02</div>
-      <h3>Entropy-Settled</h3>
-      <p>Settlement is anchored to provable entropy minimization on-chain, giving both counterparties a physical basis for contract fulfillment.</p>
+      <h3>QUAI-priced</h3>
+      <p>The futures price is denominated in QUAI — the market-discovered value of compute. Price discovery happens here, where traders reveal what inference is worth.</p>
     </div>
     <div class="step">
       <div class="step-num">03</div>
-      <h3>Agent-Ready</h3>
-      <p>Designed for autonomous agents that need to acquire, budget, and allocate inference resources programmatically at scale.</p>
+      <h3>Qi-settled</h3>
+      <p>Settlement is anchored to Qi — the energy-denominated token. Qi measures the thermodynamic work actually performed, giving both sides a physical basis for contract fulfillment.</p>
     </div>
   </div>
 </section>
 
-<!-- ── MECHANISM ── -->
-<section class="mechanism">
-  <h2>How it works</h2>
-  <p class="lead">The contract lifecycle connects thermodynamic reality to financial settlement.</p>
-  <div class="mech-grid">
-    <div class="mech-card">
-      <h3>Pricing</h3>
-      <p>Contracts are priced using the thermoeconomic cost function — mapping energy input and entropy output to a fair market rate for inference compute per unit of work.</p>
+<!-- ── TWO TOKENS ── -->
+<section class="section-dark">
+  <h2>Two tokens, <span class="gray">one contract</span></h2>
+  <p class="lead">Quai Network's dual-token architecture maps directly onto the structure of perpetual futures. Each token plays a distinct role.</p>
+  <div class="token-grid">
+    <div class="token-card dark-card">
+      <div class="token-label">Price discovery</div>
+      <h3>QUAI</h3>
+      <p>The futures price f<sub>t</sub>. QUAI is scarce and market-priced — its value is discovered through trading. When an agent buys a Compute Future, the QUAI price reflects the market's consensus on what a unit of inference compute is worth over time.</p>
     </div>
-    <div class="mech-card">
-      <h3>Acquisition</h3>
-      <p>Agents acquire futures positions denominated in Qi, locking in inference capacity at a known energy-equivalent cost for a defined time horizon.</p>
+    <div class="token-card dark-card">
+      <div class="token-label">Settlement</div>
+      <h3>Qi</h3>
+      <p>The dividend index d<sub>t</sub>. Qi is energy-denominated — pegged to the real cost of performing work on the network. Each settlement period, the Qi paid out measures the actual thermodynamic cost of inference delivered, anchoring the contract to physical reality.</p>
     </div>
-    <div class="mech-card">
-      <h3>Settlement</h3>
-      <p>At expiry, contracts settle against on-chain entropy metrics — the provable thermodynamic work delivered by the network during the contract period.</p>
+  </div>
+</section>
+
+<!-- ── SETTLEMENT ── -->
+<section class="section-light">
+  <h2><span class="gray">How</span> settlement works</h2>
+  <p class="lead">The daily resettlement combines the change in futures price with the difference between the energy dividend and the cost of capital — following the perpetual futures structure proposed by Shiller (1993).</p>
+  <div class="formula-block">
+    <div class="formula-box" style="background: #fafafa; border-color: var(--border); color: #333;">
+      s<sub>t+1</sub>&nbsp; = &nbsp;(f<sub>t+1</sub> − f<sub>t</sub>)&nbsp; + &nbsp;(d<sub>t+1</sub> − r<sub>t</sub> · f<sub>t</sub>)
+    </div>
+    <div class="formula-note">
+      <div class="var-list">
+        <div class="var-item"><code>f<sub>t</sub></code> The perpetual futures price in QUAI at time t — what the market says compute is worth.</div>
+        <div class="var-item"><code>d<sub>t+1</sub></code> The Qi settlement index — the energy cost of inference actually delivered to the network in that period.</div>
+        <div class="var-item"><code>r<sub>t</sub></code> The return on an alternative asset between t and t+1 — the cost of capital for holding the position.</div>
+        <div class="var-item"><code>s<sub>t+1</sub></code> The net daily resettlement paid from short to long. Combines both price movement and the energy dividend.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY PERPETUAL ── -->
+<section class="section-dark">
+  <h2>Why <span class="gray">perpetual</span></h2>
+  <p class="lead">Perpetual contracts solve specific problems that conventional futures cannot — particularly for assets where cash prices are difficult to observe directly.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <h3 style="color:#fff;">Liquidity concentration</h3>
+      <p style="color:#888;">A single perpetual contract absorbs all trading interest instead of splitting it across quarterly maturities. Every participant trades the same instrument, deepening the order book.</p>
+    </div>
+    <div class="why-card">
+      <h3 style="color:#fff;">Cash-flow settlement</h3>
+      <p style="color:#888;">When the true price of compute is hard to observe, settle on what you can measure — the energy cost of work performed. Qi provides this observable cash-flow anchor.</p>
+    </div>
+    <div class="why-card">
+      <h3 style="color:#fff;">Price discovery</h3>
+      <p style="color:#888;">The funding mechanism creates periodic information aggregation. Traders reveal their beliefs about compute value every settlement cycle, driving the futures price toward fair value.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── DESIGNED FOR AGENTS ── -->
+<section class="section-light">
+  <h2><span class="gray">Designed for</span> agents</h2>
+  <p class="lead">Autonomous agents need to acquire, budget, and allocate inference compute programmatically. Compute Futures give them a standard instrument to do it.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">→</div>
+      <h3>Lock in cost</h3>
+      <p>An agent that needs inference over the next month can go long on a Compute Future and lock in the energy-equivalent cost of that compute today.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">→</div>
+      <h3>Hedge supply</h3>
+      <p>A compute provider can go short — guaranteeing revenue for capacity it plans to deliver, hedging against falling demand or price declines.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">→</div>
+      <h3>Trade the basis</h3>
+      <p>Arbitrageurs can trade the spread between the QUAI futures price and the Qi settlement index, keeping prices aligned and providing liquidity to both sides.</p>
     </div>
   </div>
 </section>
@@ -249,7 +373,7 @@
 <!-- ── CTA ── -->
 <section class="cta-section">
   <h2>Early Access</h2>
-  <p>Compute Futures is in prototype. Request access to the first energy-priced inference market.</p>
+  <p>Compute Futures is in prototype. Request access to the first energy-settled inference market.</p>
   <a class="cta-btn" href="#">Request Access</a>
 </section>
 
