@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controller — Qi / Quai Simulator</title>
+  <meta name="description" content="Interactive simulator of the Quai Network dual-token controller — how kQuai adjusts to balance miner demand between Qi and Quai.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --border: rgba(255,255,255,0.06); --bg-card: rgba(255,255,255,0.025); }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0d0d0d; color: #ccc; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #0d0d0d;
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 48px; gap: 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
+    .nav-logo span { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #fff; }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-item {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px; font-size: 15px; font-weight: 500;
+      letter-spacing: -0.01em; color: #666;
+      text-decoration: none; cursor: pointer;
+      border-radius: 8px; transition: background 0.15s, color 0.15s;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.04); color: #aaa; }
+    .nav-item.active { color: #fff; font-weight: 600; }
+
+    /* ─── HEADER ─── */
+    .page-header {
+      padding: 48px 48px 0;
+      max-width: 1080px; margin: 0 auto;
+    }
+    .page-header .kicker {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      color: #444; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .page-header h1 {
+      font-size: clamp(28px, 4vw, 36px); font-weight: 800;
+      letter-spacing: -0.04em; color: #fff; margin: 0;
+    }
+    .page-header .desc {
+      font-size: 14px; color: #555; margin-top: 10px;
+      line-height: 1.65; max-width: 620px;
+    }
+
+    /* ─── LAYOUT ─── */
+    .sim-container {
+      max-width: 1080px; margin: 0 auto;
+      padding: 32px 48px 80px;
+      display: flex; gap: 28px; flex-wrap: wrap;
+    }
+
+    /* ─── CONTROLS ─── */
+    .controls {
+      flex: 0 0 272px; min-width: 250px;
+    }
+    .ctrl-panel {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .ctrl-panel .panel-title {
+      font-size: 11px; font-weight: 700; color: #555;
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px;
+    }
+    .param { margin-bottom: 20px; }
+    .param-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .param-label { font-size: 13px; font-weight: 600; color: #999; letter-spacing: -0.01em; }
+    .param-value {
+      font-size: 13px; font-weight: 700; color: #fff;
+      font-family: 'Courier New', monospace;
+    }
+    .param input[type="range"] {
+      width: 100%; accent-color: #555; cursor: pointer;
+    }
+    .param-desc {
+      font-size: 11px; color: #444; margin-top: 4px; line-height: 1.5;
+    }
+    .param-divider {
+      border-top: 1px solid var(--border);
+      margin: 4px 0 16px;
+    }
+
+    /* Formula box */
+    .formula-panel {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; margin-top: 16px;
+      font-size: 12px; color: #555; line-height: 1.75;
+    }
+    .formula-panel .panel-title {
+      font-size: 11px; font-weight: 700; color: #555;
+      letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .formula-panel .f { color: #777; }
+    .formula-panel .note { color: #3a3a3a; font-size: 11px; margin-top: 8px; }
+
+    /* ─── CHARTS COLUMN ─── */
+    .charts { flex: 1; min-width: 320px; }
+
+    /* Metric cards */
+    .metrics { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .metric {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 18px; flex: 1; min-width: 140px;
+    }
+    .metric-label {
+      font-size: 10px; font-weight: 700; color: #555;
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .metric-value {
+      font-size: 20px; font-weight: 800; color: #fff;
+      letter-spacing: -0.03em; font-family: 'Courier New', monospace;
+    }
+    .metric-sub { font-size: 11px; color: #444; margin-top: 4px; }
+
+    /* Chart cards */
+    .chart-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 20px 12px; margin-bottom: 16px;
+    }
+    .chart-title { font-size: 14px; font-weight: 700; color: #bbb; letter-spacing: -0.02em; }
+    .chart-sub { font-size: 11px; color: #444; margin-top: 2px; margin-bottom: 14px; }
+    .chart-card canvas { width: 100% !important; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav, .page-header, .sim-container { padding-left: 20px; padding-right: 20px; }
+      .controls { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="images/logo.png" alt="American Energy Money">
+  </a>
+  <div class="nav-links">
+    <a class="nav-item" href="compute.html">← Compute</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="kicker">Compute Futures</div>
+  <h1>Qi / Quai Controller</h1>
+  <p class="desc">
+    The dual-token controller balances miner demand between Qi (energy-denominated) and Quai (market-priced). When miners prefer Qi, the controller increases k<sub>Quai</sub> to make Quai rewards more attractive — and vice versa. This is the mechanism that keeps Compute Futures anchored to physical reality.
+  </p>
+</div>
+
+<!-- SIMULATOR -->
+<div class="sim-container">
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="ctrl-panel">
+      <div class="panel-title">Parameters</div>
+
+      <div class="param">
+        <div class="param-head">
+          <span class="param-label">Blocks</span>
+          <span class="param-value" id="val-blocks">500</span>
+        </div>
+        <input type="range" id="sl-blocks" min="50" max="2000" step="50" value="500">
+        <div class="param-desc">Number of blocks to simulate</div>
+      </div>
+
+      <div class="param">
+        <div class="param-head">
+          <span class="param-label">Qi Preference</span>
+          <span class="param-value" id="val-qipref">65%</span>
+        </div>
+        <input type="range" id="sl-qipref" min="5" max="95" step="1" value="65">
+        <div class="param-desc">% of miners choosing Qi over Quai rewards</div>
+      </div>
+
+      <div class="param">
+        <div class="param-head">
+          <span class="param-label">Conversion Penalty</span>
+          <span class="param-value" id="val-penalty">5%</span>
+        </div>
+        <input type="range" id="sl-penalty" min="0" max="30" step="0.5" value="5">
+        <div class="param-desc">Discount imposed on token conversions — scales adjustment magnitude</div>
+      </div>
+
+      <div class="param">
+        <div class="param-head">
+          <span class="param-label">Difficulty Growth</span>
+          <span class="param-value" id="val-diffgrowth">10%</span>
+        </div>
+        <input type="range" id="sl-diffgrowth" min="0" max="50" step="1" value="10">
+        <div class="param-desc">Total difficulty increase over the simulation period</div>
+      </div>
+
+      <div class="param">
+        <div class="param-head">
+          <span class="param-label">k<sub>Qi</sub> Growth</span>
+          <span class="param-value" id="val-kqigrowth">20%</span>
+        </div>
+        <input type="range" id="sl-kqigrowth" min="0" max="100" step="5" value="20">
+        <div class="param-desc">Predetermined k<sub>Qi</sub> schedule growth (Moore's law proxy)</div>
+      </div>
+
+      <div class="param-divider"></div>
+
+      <div class="param">
+        <div class="param-head">
+          <span class="param-label">Init k<sub>Quai</sub></span>
+          <span class="param-value" id="val-initkquai">2.21e17</span>
+        </div>
+        <input type="range" id="sl-initkquai" min="1" max="100" step="1" value="22">
+        <div class="param-desc">Starting k<sub>Quai</sub> value in 1e16 wei</div>
+      </div>
+    </div>
+
+    <!-- Formula reference -->
+    <div class="formula-panel">
+      <div class="panel-title">Mechanism</div>
+      <p class="f">reward<sub>Qi</sub> = k<sub>Qi</sub> × difficulty</p>
+      <p class="f">reward<sub>Quai</sub> = k<sub>Quai</sub> × log₂(difficulty)</p>
+      <p class="f" style="margin-top:8px;">k<sub>Quai</sub>(i) = k<sub>Quai</sub>(i−1) × [1 + dir × α × S × P]</p>
+      <p class="note">α = 1/1000 · S = 3 when Qi popular, 1 otherwise · P = conversion penalty</p>
+    </div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="charts">
+    <!-- Metrics row -->
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">k<sub>Quai</sub></div>
+        <div class="metric-value" id="m-kquai">—</div>
+        <div class="metric-sub" id="m-kquai-sub"></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Qi / Quai</div>
+        <div class="metric-value" id="m-rate">—</div>
+        <div class="metric-sub" id="m-rate-sub"></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Direction</div>
+        <div class="metric-value" id="m-dir">—</div>
+        <div class="metric-sub" id="m-dir-sub"></div>
+      </div>
+    </div>
+
+    <!-- Chart 1: kQuai -->
+    <div class="chart-card">
+      <div class="chart-title">k<sub>Quai</sub> Over Time</div>
+      <div class="chart-sub">Controller adjusts to balance miner preferences</div>
+      <canvas id="chart-kquai" height="160"></canvas>
+    </div>
+
+    <!-- Chart 2: Rewards -->
+    <div class="chart-card">
+      <div class="chart-title">Block Rewards</div>
+      <div class="chart-sub">Qi reward (energy-proportional) vs Quai reward (log-difficulty)</div>
+      <canvas id="chart-rewards" height="160"></canvas>
+    </div>
+
+    <!-- Chart 3: Implied rate -->
+    <div class="chart-card">
+      <div class="chart-title">Implied Qi per Quai</div>
+      <div class="chart-sub">Exchange rate implied by mining reward equivalence</div>
+      <canvas id="chart-rate" height="160"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Constants ──
+const BASE_KQI = 1 / (8e9);
+const ALPHA = 1 / 1000;
+const S_QI = 3;
+const S_QUAI = 1;
+
+// ── Simulation ──
+function simulate(params) {
+  const { blocks, initKQuai, initDifficulty, qiPref, penalty, diffGrowth, kQiGrowth } = params;
+  const data = { block: [], kQuai: [], rewardQi: [], rewardQuai: [], qiPerQuai: [] };
+
+  let kQuai = initKQuai;
+  let diff = initDifficulty;
+  let kQi = BASE_KQI;
+
+  for (let i = 0; i <= blocks; i++) {
+    const log2d = Math.log2(diff);
+    const rQi = kQi * diff;
+    const rQuai = kQuai * log2d;
+    const rate = rQi / rQuai;
+
+    data.block.push(i);
+    data.kQuai.push(kQuai);
+    data.rewardQi.push(rQi);
+    data.rewardQuai.push(rQuai);
+    data.qiPerQuai.push(rate);
+
+    // Update controller
+    const qiPopular = qiPref > 50;
+    const dir = qiPopular ? 1 : -1;
+    const S = qiPopular ? S_QI : S_QUAI;
+    const P = penalty / 100;
+    kQuai *= (1 + dir * ALPHA * S * P);
+
+    diff *= (1 + diffGrowth / 100 / blocks);
+    kQi *= (1 + kQiGrowth / 100 / blocks);
+  }
+  return data;
+}
+
+// ── Formatters ──
+function fmtSci(v) {
+  if (v === 0) return "0";
+  const e = Math.floor(Math.log10(Math.abs(v)));
+  return (v / Math.pow(10, e)).toFixed(2) + "e" + e;
+}
+function fmtNum(v) {
+  if (Math.abs(v) >= 1e9) return (v/1e9).toFixed(2) + "B";
+  if (Math.abs(v) >= 1e6) return (v/1e6).toFixed(2) + "M";
+  if (Math.abs(v) >= 1e3) return (v/1e3).toFixed(1) + "K";
+  if (Math.abs(v) < 0.001) return fmtSci(v);
+  return v.toFixed(4);
+}
+
+// ── Chart setup ──
+const chartDefaults = {
+  responsive: true,
+  maintainAspectRatio: false,
+  animation: { duration: 250 },
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      backgroundColor: '#1a1a1a',
+      borderColor: 'rgba(255,255,255,0.1)',
+      borderWidth: 1,
+      titleColor: '#666',
+      bodyColor: '#ccc',
+      bodyFont: { family: "'Courier New', monospace", size: 12 },
+      padding: 10,
+      cornerRadius: 8,
+      callbacks: {
+        label: ctx => ctx.dataset.label + ': ' + fmtNum(ctx.parsed.y),
+      }
+    },
+  },
+  scales: {
+    x: {
+      grid: { color: 'rgba(255,255,255,0.03)' },
+      ticks: { color: '#333', font: { size: 10 }, maxTicksLimit: 8 },
+      border: { color: '#222' },
+    },
+    y: {
+      grid: { color: 'rgba(255,255,255,0.03)' },
+      ticks: { color: '#444', font: { size: 10 }, maxTicksLimit: 5, callback: v => fmtNum(v) },
+      border: { display: false },
+    },
+  },
+  elements: {
+    point: { radius: 0 },
+    line: { tension: 0.3, borderWidth: 1.5 },
+  },
+};
+
+function makeGradient(ctx, canvas, color, opacity) {
+  const g = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  g.addColorStop(0, color.replace(')', ',' + opacity + ')').replace('rgb', 'rgba'));
+  g.addColorStop(1, color.replace(')', ',0)').replace('rgb', 'rgba'));
+  return g;
+}
+
+// Create charts
+const ctxK = document.getElementById('chart-kquai').getContext('2d');
+const ctxR = document.getElementById('chart-rewards').getContext('2d');
+const ctxRate = document.getElementById('chart-rate').getContext('2d');
+
+const chartK = new Chart(ctxK, {
+  type: 'line',
+  data: { labels: [], datasets: [{
+    label: 'kQuai', data: [],
+    borderColor: '#888',
+    backgroundColor: function(context) {
+      const c = context.chart;
+      const g = c.ctx.createLinearGradient(0, 0, 0, c.chartArea?.bottom || 160);
+      g.addColorStop(0, 'rgba(255,255,255,0.06)');
+      g.addColorStop(1, 'rgba(255,255,255,0)');
+      return g;
+    },
+    fill: true,
+  }]},
+  options: { ...chartDefaults },
+});
+
+const chartR = new Chart(ctxR, {
+  type: 'line',
+  data: { labels: [], datasets: [
+    { label: 'Qi Reward', data: [], borderColor: '#d07050', backgroundColor: 'transparent', fill: false },
+    { label: 'Quai Reward', data: [], borderColor: '#5588cc', backgroundColor: 'transparent', fill: false },
+  ]},
+  options: {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      legend: {
+        display: true, position: 'top', align: 'end',
+        labels: { color: '#555', font: { size: 11 }, boxWidth: 12, padding: 16 },
+      },
+    },
+  },
+});
+
+const chartRate = new Chart(ctxRate, {
+  type: 'line',
+  data: { labels: [], datasets: [{
+    label: 'Qi / Quai', data: [],
+    borderColor: '#70b070',
+    backgroundColor: function(context) {
+      const c = context.chart;
+      const g = c.ctx.createLinearGradient(0, 0, 0, c.chartArea?.bottom || 160);
+      g.addColorStop(0, 'rgba(112,176,112,0.08)');
+      g.addColorStop(1, 'rgba(112,176,112,0)');
+      return g;
+    },
+    fill: true,
+  }]},
+  options: { ...chartDefaults },
+});
+
+// ── Read params & update ──
+function getParams() {
+  const blocks = +document.getElementById('sl-blocks').value;
+  const qiPref = +document.getElementById('sl-qipref').value;
+  const penalty = +document.getElementById('sl-penalty').value;
+  const diffGrowth = +document.getElementById('sl-diffgrowth').value;
+  const kQiGrowth = +document.getElementById('sl-kqigrowth').value;
+  const initKQuaiMult = +document.getElementById('sl-initkquai').value;
+  const initKQuai = initKQuaiMult * 1e16;
+  const initDifficulty = Math.pow(2, 40);
+  return { blocks, initKQuai, initDifficulty, qiPref, penalty, diffGrowth, kQiGrowth };
+}
+
+function downsample(arr, maxPts) {
+  if (arr.length <= maxPts) return arr;
+  const step = Math.floor(arr.length / maxPts);
+  const out = [];
+  for (let i = 0; i < arr.length; i += step) out.push(arr[i]);
+  if (out[out.length - 1] !== arr[arr.length - 1]) out.push(arr[arr.length - 1]);
+  return out;
+}
+
+function update() {
+  const p = getParams();
+
+  // Update value displays
+  document.getElementById('val-blocks').textContent = p.blocks;
+  document.getElementById('val-qipref').textContent = p.qiPref + '%';
+  document.getElementById('val-penalty').textContent = p.penalty + '%';
+  document.getElementById('val-diffgrowth').textContent = p.diffGrowth + '%';
+  document.getElementById('val-kqigrowth').textContent = p.kQiGrowth + '%';
+  document.getElementById('val-initkquai').textContent = fmtSci(p.initKQuai);
+
+  // Run sim
+  const d = simulate(p);
+  const n = d.block.length;
+
+  // Downsample
+  const maxPts = 200;
+  const labels = downsample(d.block, maxPts);
+  const kQ = downsample(d.kQuai, maxPts);
+  const rQi = downsample(d.rewardQi, maxPts);
+  const rQuai = downsample(d.rewardQuai, maxPts);
+  const rate = downsample(d.qiPerQuai, maxPts);
+
+  // Update charts
+  chartK.data.labels = labels;
+  chartK.data.datasets[0].data = kQ;
+  chartK.update();
+
+  chartR.data.labels = labels;
+  chartR.data.datasets[0].data = rQi;
+  chartR.data.datasets[1].data = rQuai;
+  chartR.update();
+
+  chartRate.data.labels = labels;
+  chartRate.data.datasets[0].data = rate;
+  chartRate.update();
+
+  // Update metrics
+  const first = { kQuai: d.kQuai[0], rate: d.qiPerQuai[0] };
+  const last = { kQuai: d.kQuai[n-1], rate: d.qiPerQuai[n-1] };
+  const kChange = ((last.kQuai - first.kQuai) / first.kQuai * 100).toFixed(2);
+  const rChange = ((last.rate - first.rate) / first.rate * 100).toFixed(2);
+
+  document.getElementById('m-kquai').textContent = fmtSci(last.kQuai);
+  document.getElementById('m-kquai-sub').textContent = (kChange > 0 ? '+' : '') + kChange + '% over ' + p.blocks + ' blocks';
+  document.getElementById('m-rate').textContent = fmtNum(last.rate);
+  document.getElementById('m-rate-sub').textContent = (rChange > 0 ? '+' : '') + rChange + '% change';
+
+  const qiPop = p.qiPref > 50;
+  document.getElementById('m-dir').textContent = qiPop ? '↑ kQuai' : '↓ kQuai';
+  document.getElementById('m-dir-sub').textContent = qiPop
+    ? 'Qi popular → making Quai attractive'
+    : 'Quai popular → making Qi attractive';
+}
+
+// ── Wire up sliders ──
+document.querySelectorAll('input[type="range"]').forEach(el => {
+  el.addEventListener('input', update);
+});
+
+// Initial render
+update();
+</script>
+
+</body>
+</html>
