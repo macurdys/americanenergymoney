@@ -5,8 +5,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research — American Energy Money</title>
-  <meta name="description" content="Quai Clock — Total Entropy Tracker. Research Reports — Institutional-grade analysis sold as digital objects.">
+  <title>Reports — American Energy Money</title>
+  <meta name="description" content="Institutional-grade research on energy-money systems, mining economics, and proof-of-work consensus.">
   <link rel="icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,125 +68,6 @@
       color: #666; margin-top: 28px; max-width: 580px;
       line-height: 1.6; letter-spacing: -0.01em;
     }
-    .hero-img-wrap {
-      margin-top: 64px; width: 100%; max-width: 560px;
-      border-radius: 16px; overflow: hidden;
-    }
-    .hero-img-wrap img { width: 100%; height: auto; display: block; }
-
-    /* ─── BLOCK CLOCK HERO ─── */
-    .blockclock-hero {
-      background: #0d0d0d;
-      display: flex; justify-content: center;
-      padding: 80px 48px 40px;
-    }
-    .blockclock-hero .hero-img-wrap {
-      max-width: 620px; width: 100%;
-      border-radius: 16px; overflow: hidden;
-    }
-    .blockclock-hero .hero-img-wrap img { width: 100%; height: auto; display: block; }
-
-    /* ─── QUAI CLOCK SECTION ─── */
-    .clock-section {
-      background: #0d0d0d; padding: 40px 48px 120px; text-align: center;
-    }
-    .clock-label {
-      font-family: var(--mono); font-size: 13px; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: #555; margin-bottom: 48px;
-    }
-
-    /* Clock Display */
-    .clock-housing {
-      max-width: 680px; margin: 0 auto;
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 20px;
-      padding: 48px 40px 40px;
-      position: relative;
-    }
-    .clock-housing::before {
-      content: '';
-      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-      width: 120px; height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-      border-radius: 0 0 4px 4px;
-    }
-
-    /* Main entropy display */
-    .entropy-display {
-      margin-bottom: 40px;
-    }
-    .entropy-value {
-      font-family: var(--mono);
-      font-size: clamp(44px, 6vw, 72px);
-      font-weight: 700; letter-spacing: -0.02em;
-      color: #fff; line-height: 1;
-    }
-    .entropy-value .decimal { color: #444; }
-    .entropy-unit {
-      font-family: var(--mono); font-size: 14px; font-weight: 500;
-      color: #555; margin-top: 10px; letter-spacing: 0.06em;
-    }
-
-    /* Gauge row */
-    .gauge-row {
-      display: flex; gap: 1px; justify-content: center;
-      background: rgba(255,255,255,0.04);
-      border-radius: 12px; overflow: hidden;
-    }
-    .gauge {
-      flex: 1; padding: 24px 20px;
-      background: rgba(255,255,255,0.02);
-      text-align: center;
-    }
-    .gauge:first-child { border-radius: 12px 0 0 12px; }
-    .gauge:last-child { border-radius: 0 12px 12px 0; }
-    .gauge-val {
-      font-family: var(--mono); font-size: 22px; font-weight: 600;
-      color: #fff; letter-spacing: -0.01em;
-    }
-    .gauge-label {
-      font-family: var(--mono); font-size: 11px; font-weight: 500;
-      color: #555; margin-top: 6px; letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* Pulse indicator */
-    .pulse-row {
-      display: flex; align-items: center; justify-content: center;
-      gap: 10px; margin-top: 28px;
-    }
-    .pulse-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #4ade80;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
-      50% { opacity: 0.6; box-shadow: 0 0 0 8px rgba(74,222,128,0); }
-    }
-    .pulse-label {
-      font-family: var(--mono); font-size: 12px; font-weight: 500;
-      color: #444; letter-spacing: 0.04em;
-    }
-
-    /* Clock explainer */
-    .clock-explain {
-      max-width: 640px; margin: 56px auto 0;
-      display: flex; flex-direction: column; gap: 24px;
-    }
-    .clock-explain p {
-      font-size: 16px; color: #777; line-height: 1.7; text-align: left;
-    }
-    .clock-explain strong { color: #ccc; font-weight: 600; }
-
-    /* ─── DIVIDER ─── */
-    .section-divider {
-      background: #fff; padding: 0;
-      height: 1px;
-    }
-
     /* ─── REPORTS SECTION ─── */
     .reports-section {
       background: #fff; padding: 120px 48px 100px; text-align: center;
@@ -291,12 +172,7 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .hero, .clock-section, .reports-section { padding-left: 20px; padding-right: 20px; }
-      .clock-housing { padding: 36px 20px 28px; }
-      .gauge-row { flex-direction: column; gap: 0; }
-      .gauge { border-radius: 0; }
-      .gauge:first-child { border-radius: 12px 12px 0 0; }
-      .gauge:last-child { border-radius: 0 0 12px 12px; }
+      .hero, .reports-section { padding-left: 20px; padding-right: 20px; }
       .reports-grid { grid-template-columns: 1fr; }
       footer { padding: 24px 20px; }
     }
@@ -311,20 +187,20 @@
   </a>
   <div class="nav-links">
     <a class="nav-item" href="compute.html">Compute</a>
-    <a class="nav-item active" href="research.html">Research</a>
+    <a class="nav-item active" href="research.html">Research Reports</a>
   </div>
 </nav>
 
 <!-- ── HERO ── -->
 <section class="hero">
-  <h1>Research</h1>
-  <p class="subtitle">Instruments and intelligence for energy-based monetary systems.</p>
+  <h1>Reports</h1>
+  <p class="subtitle">Institutional-grade research on energy-money systems, mining economics, and proof-of-work consensus.</p>
 </section>
 
 <!-- ── RESEARCH REPORTS ── -->
 <section class="reports-section">
-  <h2>Research <span class="gray">Reports</span></h2>
-  <p class="reports-lead">Institutional-grade analysis on thermoeconomics, mining economics, and energy-money systems. Sold as digital objects.</p>
+  <h2>Research Reports</h2>
+  <p class="reports-lead">In-depth analysis on thermoeconomics, mining economics, and energy-money systems. Sold as digital objects.</p>
 
   <div class="reports-grid">
 
@@ -388,51 +264,6 @@
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ── BLOCK CLOCK IMAGE ── -->
-<section class="blockclock-hero">
-  <div class="hero-img-wrap">
-    <img src="images/blockclock.png" alt="Quai Clock — Total Entropy physical device concept">
-  </div>
-</section>
-
-<!-- ── QUAI CLOCK ── -->
-<section class="clock-section">
-  <p class="clock-label">Quai Clock — Total Entropy Tracker</p>
-
-  <div class="clock-housing">
-    <div class="entropy-display">
-      <div class="entropy-value">2,847,391<span class="decimal">.74</span></div>
-      <div class="entropy-unit">Total Entropy (bits)</div>
-    </div>
-
-    <div class="gauge-row">
-      <div class="gauge">
-        <div class="gauge-val">1,204,887</div>
-        <div class="gauge-label">Block Height</div>
-      </div>
-      <div class="gauge">
-        <div class="gauge-val">2.364</div>
-        <div class="gauge-label">Entropy / Block</div>
-      </div>
-      <div class="gauge">
-        <div class="gauge-val">14.2</div>
-        <div class="gauge-label">Bits / Sec</div>
-      </div>
-    </div>
-
-    <div class="pulse-row">
-      <div class="pulse-dot"></div>
-      <span class="pulse-label">Tracking live entropy</span>
-    </div>
-  </div>
-
-  <div class="clock-explain">
-    <p><strong>Bitcoin's Block Clock counts blocks.</strong> The Quai Clock counts what blocks actually represent — total thermodynamic work performed by the network, measured as cumulative entropy.</p>
-    <p><strong>Entropy is the fundamental unit.</strong> Under Proof of Entropy Minima, each block's difficulty reflects provable entropy minimization. The clock aggregates this across the entire chain history — a running tally of physical computation that can never be faked or reversed.</p>
-    <p><strong>This is the energy ledger.</strong> Every increment on the clock corresponds to real joules expended, real heat dissipated, real irreversible computation performed. It is the thermodynamic receipt for American energy converted into money.</p>
   </div>
 </section>
 
