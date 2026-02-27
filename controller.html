@@ -21,6 +21,16 @@
       --green: #50a860;
       --dim: #444;
       --mono: 'JetBrains Mono', 'Courier New', monospace;
+      --swap-accent: #e07040;
+      --swap-accent-dim: rgba(224,112,64,0.12);
+      --swap-accent-glow: rgba(224,112,64,0.25);
+      --swap-border: rgba(255,255,255,0.08);
+      --swap-border-focus: rgba(255,255,255,0.18);
+      --swap-input-bg: #0c0c0e;
+      --swap-text: #ccc;
+      --swap-text2: #777;
+      --swap-text3: #444;
+      --swap-red: #cc4455;
     }
     html { font-size: 16px; }
     body {
@@ -47,10 +57,10 @@
     .nav-item:hover { background: rgba(0,0,0,0.04); color: #444; }
 
     .header {
-      padding: 48px 32px 8px; max-width: 1200px; margin: 0 auto;
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      padding: 36px 32px 4px; max-width: 1600px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
-    .header h1 { font-size: clamp(36px, 5vw, 52px); font-weight: 800; color: #111; letter-spacing: -0.04em; }
+    .header h1 { font-size: clamp(32px, 4vw, 44px); font-weight: 800; color: #111; letter-spacing: -0.04em; }
     .header .tag {
       font-size: 11px; font-weight: 600; color: #888;
       letter-spacing: 0.06em; text-transform: uppercase;
@@ -58,12 +68,24 @@
       border-radius: 100px; padding: 3px 10px;
     }
 
+    /* ── MAIN LAYOUT: dashboard left, swap right ── */
+    .page-layout {
+      max-width: 1600px; margin: 0 auto; padding: 20px 32px 64px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+
+    .dashboard-col { flex: 1; min-width: 0; }
+
     .grid {
-      max-width: 1200px; margin: 0 auto; padding: 24px 32px 64px;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: auto auto auto;
       gap: 12px;
+    }
+
+    .swap-col {
+      width: 340px; flex-shrink: 0;
+      display: flex; flex-direction: column; gap: 12px;
+      position: sticky; top: 72px;
     }
 
     .mod {
@@ -122,14 +144,254 @@
 
     .status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
 
+    /* ═══════════════════════════════════════════════
+       SWAP MODULE — adapted to controller aesthetic
+       ═══════════════════════════════════════════════ */
+    .swap-card {
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .swap-header {
+      padding: 16px 18px 12px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .swap-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--swap-accent);
+    }
+    .swap-badge {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 2px 7px; border: 1px solid rgba(224,112,64,0.3);
+      color: var(--qi); border-radius: 4px; background: rgba(224,112,64,0.06);
+    }
+
+    .swap-input-box {
+      padding: 14px 18px 10px;
+      background: var(--swap-input-bg);
+      border-top: 1px solid var(--swap-border);
+      border-bottom: 1px solid var(--swap-border);
+      transition: background 0.15s;
+    }
+    .swap-input-box:focus-within { background: rgba(255,255,255,0.02); }
+    .swap-input-box.to-box { border-bottom: none; }
+    .swap-input-label {
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--swap-text3); margin-bottom: 8px;
+    }
+    .swap-input-row { display: flex; align-items: center; gap: 10px; }
+
+    .swap-token-btn {
+      display: flex; align-items: center; gap: 8px;
+      cursor: pointer; flex-shrink: 0;
+      background: none; border: 1px solid var(--swap-border);
+      padding: 6px 12px 6px 8px; border-radius: 8px;
+      transition: border-color 0.15s;
+    }
+    .swap-token-btn:hover { border-color: var(--swap-border-focus); }
+    .swap-token-dot {
+      width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      border: 2px solid; flex-shrink: 0;
+    }
+    .swap-token-sym {
+      font-family: var(--mono); font-size: 13px; font-weight: 700;
+      letter-spacing: 0.04em; color: #ccc;
+    }
+    .swap-token-arrow { font-size: 8px; color: var(--swap-text3); margin-left: 1px; }
+
+    .swap-amt-input {
+      flex: 1; text-align: right; background: none; border: none; outline: none;
+      font-family: var(--mono); font-size: 22px; font-weight: 700;
+      color: #ddd; letter-spacing: -0.02em; min-width: 0;
+    }
+    .swap-amt-input::placeholder { color: var(--swap-text3); }
+    .swap-amt-output {
+      flex: 1; text-align: right; background: none; border: none; outline: none;
+      font-family: var(--mono); font-size: 22px; font-weight: 700;
+      color: var(--swap-text3); letter-spacing: -0.02em; min-width: 0;
+    }
+    .swap-amt-output::placeholder { color: var(--swap-text3); }
+    .swap-amt-output.has-value { color: #ddd; }
+
+    .swap-bal-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 6px; font-family: var(--mono); font-size: 10px;
+      font-weight: 600; color: var(--swap-text3); letter-spacing: 0.04em;
+    }
+    .swap-pct-btns { display: flex; gap: 4px; }
+    .swap-pct-btn {
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      padding: 2px 7px; background: none; border: 1px solid var(--swap-border);
+      color: var(--swap-text3); cursor: pointer; border-radius: 4px;
+      letter-spacing: 0.04em; transition: all 0.15s;
+    }
+    .swap-pct-btn:hover { border-color: var(--qi); color: var(--qi); }
+
+    .swap-editable {
+      background: none; border: none;
+      border-bottom: 1px dashed rgba(255,255,255,0.1);
+      outline: none; font-family: var(--mono);
+      color: var(--swap-text3); padding: 0 2px;
+      transition: border-color 0.15s;
+    }
+    .swap-editable:hover { border-color: rgba(255,255,255,0.2); }
+    .swap-editable:focus { border-color: var(--qi); color: #ccc; background: rgba(255,255,255,0.02); }
+
+    .swap-flip-row {
+      display: flex; align-items: center; justify-content: center;
+      margin: -1px 0; position: relative; z-index: 2;
+    }
+    .swap-flip-line { flex: 1; height: 1px; background: var(--swap-border); }
+    .swap-flip-btn {
+      width: 32px; height: 32px;
+      background: var(--card); border: 1px solid var(--swap-border);
+      color: var(--qi); font-size: 16px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      border-radius: 8px; transition: all 0.15s;
+    }
+    .swap-flip-btn:hover { border-color: var(--qi); background: var(--swap-accent-dim); }
+
+    .swap-details {
+      padding: 10px 18px; border-top: 1px solid var(--swap-border);
+    }
+    .swap-detail-line {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 3px 0; font-family: var(--mono); font-size: 11px;
+      font-weight: 600; letter-spacing: 0.02em;
+    }
+    .swap-detail-line .lab { color: var(--swap-text3); }
+    .swap-detail-line .val { color: var(--swap-text2); }
+    .swap-detail-line .val.fee { color: var(--swap-red); }
+
+    .swap-cta {
+      width: 100%; height: 44px;
+      font-family: var(--mono); font-size: 12px; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; cursor: pointer; transition: all 0.2s;
+      border-radius: 0 0 12px 12px;
+    }
+    .swap-cta.off {
+      background: rgba(255,255,255,0.02); color: var(--swap-text3);
+      border-top: 1px solid var(--swap-border); cursor: not-allowed;
+    }
+    .swap-cta.go {
+      background: var(--qi); color: #fff;
+      box-shadow: 0 0 20px var(--swap-accent-glow);
+    }
+    .swap-cta.go:hover { box-shadow: 0 0 36px var(--swap-accent-glow); transform: translateY(-1px); }
+    .swap-cta.wait {
+      background: transparent; color: var(--qi);
+      border-top: 1px solid var(--qi);
+      animation: swap-pulse 1.5s ease-in-out infinite;
+    }
+    .swap-cta.done { background: var(--green); color: #fff; }
+    @keyframes swap-pulse {
+      0%,100% { box-shadow: 0 0 4px rgba(224,112,64,0.1); }
+      50% { box-shadow: 0 0 20px rgba(224,112,64,0.25); }
+    }
+
+    /* Pools mini table */
+    .swap-pools {
+      background: var(--card); border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .swap-pools-header {
+      padding: 12px 18px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #444;
+    }
+    .swap-pools table {
+      width: 100%; border-collapse: collapse;
+    }
+    .swap-pools th {
+      font-family: var(--mono); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.06em; color: #333; text-align: left;
+      padding: 8px 12px; border-top: 1px solid var(--swap-border);
+      background: rgba(255,255,255,0.01);
+    }
+    .swap-pools td {
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
+      color: var(--swap-text2); padding: 8px 12px;
+      border-top: 1px solid rgba(255,255,255,0.03);
+    }
+    .swap-pools tbody tr { cursor: pointer; transition: background 0.12s; }
+    .swap-pools tbody tr:hover { background: rgba(255,255,255,0.03); }
+    .swap-pools .pair-name { color: #ccc; font-weight: 700; font-size: 12px; }
+    .swap-pools .trade-tag {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 2px 6px; border: 1px solid var(--swap-border-focus);
+      color: var(--qi); border-radius: 3px;
+    }
+    .swap-pools tbody tr:hover .trade-tag { background: var(--swap-accent-dim); }
+    .swap-pools .swap-editable { font-size: 12px; font-weight: 600; width: 70px; text-align: right; }
+
+    /* Token modal */
+    .swap-modal-bg {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+      display: none; align-items: center; justify-content: center;
+    }
+    .swap-modal-bg.open { display: flex; }
+    .swap-modal {
+      width: 340px; max-width: 92vw; background: var(--card);
+      border: 1px solid var(--swap-border-focus); border-radius: 12px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+    .swap-modal-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; border-bottom: 1px solid var(--swap-border);
+    }
+    .swap-modal-title {
+      font-family: var(--mono); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--qi);
+    }
+    .swap-modal-x {
+      background: none; border: none; color: var(--swap-text3);
+      font-size: 18px; cursor: pointer; padding: 0 4px;
+    }
+    .swap-modal-x:hover { color: var(--qi); }
+    .swap-modal-list { padding: 6px; }
+    .swap-modal-item {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; padding: 10px 12px; background: none; border: none;
+      color: var(--swap-text); cursor: pointer; border-radius: 8px;
+      transition: background 0.12s; text-align: left;
+    }
+    .swap-modal-item:hover { background: rgba(255,255,255,0.04); }
+    .swap-modal-item .m-name {
+      font-family: var(--mono); font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .swap-modal-item .m-sub {
+      font-family: var(--mono); font-size: 10px; color: var(--swap-text3);
+    }
+    .swap-modal-item .m-price {
+      margin-left: auto; font-family: var(--mono);
+      font-size: 12px; font-weight: 600; color: var(--swap-text3);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1200px) {
+      .page-layout { flex-direction: column; }
+      .swap-col { width: 100%; position: static; flex-direction: row; flex-wrap: wrap; }
+      .swap-card, .swap-pools { flex: 1; min-width: 300px; }
+    }
     @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr 1fr; padding: 16px; }
+      .grid { grid-template-columns: 1fr 1fr; padding: 0; }
       .mod-wide { grid-column: span 2; }
       nav, .header { padding-left: 16px; padding-right: 16px; }
+      .page-layout { padding: 16px; }
     }
     @media (max-width: 600px) {
       .grid { grid-template-columns: 1fr; }
       .mod-wide { grid-column: span 1; }
+      .swap-col { flex-direction: column; }
+      .swap-card, .swap-pools { min-width: 0; }
     }
   </style>
 </head>
@@ -148,174 +410,267 @@
   <span class="tag">Interactive</span>
 </div>
 
-<div class="grid">
+<div class="page-layout">
 
-  <!-- ROW 1: INPUTS -->
-  <div class="mod" id="mod-miners">
-    <div class="mod-label">Input</div>
-    <div class="mod-title">Miner Voting</div>
-    <div class="meter">
-      <div class="meter-bar-bg">
-        <div class="meter-bar-fill" id="pref-bar" style="width:65%; background: linear-gradient(90deg, var(--qi), var(--quai));"></div>
+  <!-- ═══════════════ LEFT: DASHBOARD ═══════════════ -->
+  <div class="dashboard-col">
+    <div class="grid">
+
+      <!-- ROW 1: INPUTS -->
+      <div class="mod" id="mod-miners">
+        <div class="mod-label">Input</div>
+        <div class="mod-title">Miner Voting</div>
+        <div class="meter">
+          <div class="meter-bar-bg">
+            <div class="meter-bar-fill" id="pref-bar" style="width:65%; background: linear-gradient(90deg, var(--qi), var(--quai));"></div>
+          </div>
+          <div class="meter-labels">
+            <span style="color:var(--qi);">Qi <span id="pref-qi-pct">65%</span></span>
+            <span style="color:var(--quai);">Quai <span id="pref-quai-pct">35%</span></span>
+          </div>
+        </div>
+        <div class="mod-slider">
+          <input type="range" id="sl-qipref" min="5" max="95" step="1" value="65">
+        </div>
+        <div class="mod-desc" style="margin-top:10px;">Miners vote by choosing reward token. Preference drives the controller direction.</div>
       </div>
-      <div class="meter-labels">
-        <span style="color:var(--qi);">Qi <span id="pref-qi-pct">65%</span></span>
-        <span style="color:var(--quai);">Quai <span id="pref-quai-pct">35%</span></span>
+
+      <div class="mod" id="mod-difficulty">
+        <div class="mod-label">Network</div>
+        <div class="mod-title">Block Difficulty</div>
+        <div class="gauge-wrap">
+          <svg class="gauge-svg" width="140" height="80" viewBox="0 0 140 80">
+            <path d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="6" stroke-linecap="round"/>
+            <path id="diff-arc" d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="#555" stroke-width="6" stroke-linecap="round" stroke-dasharray="173" stroke-dashoffset="43"/>
+            <text x="70" y="58" text-anchor="middle" class="gauge-value" id="diff-val">2⁴⁰</text>
+            <text x="70" y="74" text-anchor="middle" class="gauge-unit">hashes</text>
+          </svg>
+        </div>
+        <div class="mod-slider">
+          <div class="mod-slider-head">
+            <span class="mod-slider-label">Growth rate</span>
+            <span class="mod-slider-val" id="val-diffgrowth">10%</span>
+          </div>
+          <input type="range" id="sl-diffgrowth" min="0" max="50" step="1" value="10">
+        </div>
       </div>
+
+      <div class="mod" id="mod-sim">
+        <div class="mod-label">Simulation</div>
+        <div class="mod-title">Parameters</div>
+        <div class="mod-slider" style="margin-top:16px;">
+          <div class="mod-slider-head">
+            <span class="mod-slider-label">Blocks</span>
+            <span class="mod-slider-val" id="val-blocks">500</span>
+          </div>
+          <input type="range" id="sl-blocks" min="50" max="2000" step="50" value="500">
+        </div>
+        <div class="mod-slider">
+          <div class="mod-slider-head">
+            <span class="mod-slider-label">Conversion penalty</span>
+            <span class="mod-slider-val" id="val-penalty">5%</span>
+          </div>
+          <input type="range" id="sl-penalty" min="0" max="30" step="0.5" value="5">
+        </div>
+        <div class="mod-slider">
+          <div class="mod-slider-head">
+            <span class="mod-slider-label">k<sub>Qi</sub> growth</span>
+            <span class="mod-slider-val" id="val-kqigrowth">20%</span>
+          </div>
+          <input type="range" id="sl-kqigrowth" min="0" max="100" step="5" value="20">
+        </div>
+      </div>
+
+      <div class="flow-row">
+        <div class="flow-line"></div>
+        <div class="flow-arrow">
+          <svg width="16" height="12" viewBox="0 0 16 12"><path d="M0 6h12M10 2l4 4-4 4" fill="none" stroke="#bbb" stroke-width="1.5"/></svg>
+          miners choose
+        </div>
+        <div class="flow-line"></div>
+        <div class="flow-arrow">
+          <svg width="16" height="12" viewBox="0 0 16 12"><path d="M0 6h12M10 2l4 4-4 4" fill="none" stroke="#bbb" stroke-width="1.5"/></svg>
+          controller adjusts
+        </div>
+        <div class="flow-line"></div>
+      </div>
+
+      <!-- ROW 2: REWARDS + CONTROLLER -->
+      <div class="mod" style="border-left: 2px solid var(--qi);">
+        <div class="mod-label" style="color:var(--qi);">Qi Reward</div>
+        <div class="mod-title" style="font-size:14px;">k<sub style="font-size:10px;">Qi</sub> × difficulty</div>
+        <div class="meter-center" id="reward-qi" style="color:var(--qi);">—</div>
+        <div style="text-align:center; margin-top:4px;">
+          <span style="font-size:11px; color:#444; font-family:var(--mono);">k<sub>Qi</sub> = <span id="kqi-val">1.25e-10</span></span>
+        </div>
+        <div class="mod-desc" style="margin-top:12px;">Linear in difficulty. Energy-proportional — more hashes, more Qi. Predetermined schedule.</div>
+      </div>
+
+      <div class="mod" style="border: 1px solid rgba(255,255,255,0.1); background: #131315;">
+        <div class="mod-label" style="color:#666;">Controller</div>
+        <div class="mod-title">k<sub>Quai</sub></div>
+        <div class="gauge-wrap">
+          <svg class="gauge-svg" width="160" height="90" viewBox="0 0 160 90">
+            <path d="M 15 85 A 65 65 0 0 1 145 85" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="8" stroke-linecap="round"/>
+            <path id="kquai-arc" d="M 15 85 A 65 65 0 0 1 145 85" fill="none" stroke="var(--quai)" stroke-width="8" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="102"/>
+            <text x="80" y="65" text-anchor="middle" class="gauge-value" id="kquai-val">—</text>
+            <text x="80" y="82" text-anchor="middle" class="gauge-unit" id="kquai-delta">—</text>
+          </svg>
+        </div>
+        <div style="text-align:center;">
+          <span class="status-dot" id="dir-dot" style="background:var(--quai);"></span>
+          <span style="font-size:12px; font-weight:600; color:#888;" id="dir-label">—</span>
+        </div>
+        <div class="mod-desc" style="margin-top:10px; text-align:center;">
+          k<sub>Quai</sub>(i) = k<sub>Quai</sub>(i−1) × [1 + dir × α × S × P]<br>
+          <span style="color:#333;">α=1/1000 · S=3 if Qi popular</span>
+        </div>
+      </div>
+
+      <div class="mod" style="border-right: 2px solid var(--quai);">
+        <div class="mod-label" style="color:var(--quai);">Quai Reward</div>
+        <div class="mod-title" style="font-size:14px;">k<sub style="font-size:10px;">Quai</sub> × log₂(diff)</div>
+        <div class="meter-center" id="reward-quai" style="color:var(--quai);">—</div>
+        <div style="text-align:center; margin-top:4px;">
+          <span style="font-size:11px; color:#444; font-family:var(--mono);">log₂(diff) ≈ <span id="log2diff-val">40</span></span>
+        </div>
+        <div class="mod-desc" style="margin-top:12px;">Logarithmic in difficulty. Market-priced — grows slowly with hashrate. Adjusted by controller.</div>
+      </div>
+
+      <div class="flow-row">
+        <div class="flow-line"></div>
+        <div class="flow-arrow">
+          <svg width="12" height="16" viewBox="0 0 12 16"><path d="M6 0v12M2 10l4 4 4-4" fill="none" stroke="#bbb" stroke-width="1.5"/></svg>
+          rewards set exchange rate
+        </div>
+        <div class="flow-line"></div>
+      </div>
+
+      <!-- ROW 3: OUTPUTS -->
+      <div class="mod mod-wide" style="border-bottom: 2px solid var(--green);">
+        <div class="mod-label" style="color:var(--green);">Output</div>
+        <div class="mod-title">Implied Exchange Rate</div>
+        <div class="dual-meter">
+          <div class="dual-meter-item">
+            <div class="dual-meter-label" style="color:var(--green);">Qi per Quai</div>
+            <div class="dual-meter-value" style="color:#fff;" id="rate-val">—</div>
+            <div class="dual-meter-sub" id="rate-delta">—</div>
+          </div>
+          <div class="dual-meter-item">
+            <div class="dual-meter-label" style="color:#555;">Rate Change</div>
+            <div class="dual-meter-value" id="rate-pct" style="color:#888;">—</div>
+            <div class="dual-meter-sub">over simulation period</div>
+          </div>
+        </div>
+        <div class="meter" style="margin-top:16px;">
+          <div class="meter-bar-bg" style="height:4px;">
+            <div class="meter-bar-fill" id="rate-bar" style="width:50%; background: var(--green); transition: width 0.4s;"></div>
+          </div>
+          <div class="meter-labels"><span>Qi cheaper</span><span>Quai cheaper</span></div>
+        </div>
+      </div>
+
+      <div class="mod">
+        <div class="mod-label">Equilibrium</div>
+        <div class="mod-title" id="eq-title">—</div>
+        <div class="mod-desc" style="margin-top:10px;" id="eq-desc">—</div>
+        <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border);">
+          <div style="font-size:10px; font-weight:700; color:#333; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Feedback Loop</div>
+          <div style="font-size:12px; color:#555; line-height:1.6;" id="eq-loop">—</div>
+        </div>
+      </div>
+
     </div>
-    <div class="mod-slider">
-      <input type="range" id="sl-qipref" min="5" max="95" step="1" value="65">
-    </div>
-    <div class="mod-desc" style="margin-top:10px;">Miners vote by choosing reward token. Preference drives the controller direction.</div>
   </div>
 
-  <div class="mod" id="mod-difficulty">
-    <div class="mod-label">Network</div>
-    <div class="mod-title">Block Difficulty</div>
-    <div class="gauge-wrap">
-      <svg class="gauge-svg" width="140" height="80" viewBox="0 0 140 80">
-        <path d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="6" stroke-linecap="round"/>
-        <path id="diff-arc" d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="#555" stroke-width="6" stroke-linecap="round" stroke-dasharray="173" stroke-dashoffset="43"/>
-        <text x="70" y="58" text-anchor="middle" class="gauge-value" id="diff-val">2⁴⁰</text>
-        <text x="70" y="74" text-anchor="middle" class="gauge-unit">hashes</text>
-      </svg>
-    </div>
-    <div class="mod-slider">
-      <div class="mod-slider-head">
-        <span class="mod-slider-label">Growth rate</span>
-        <span class="mod-slider-val" id="val-diffgrowth">10%</span>
+  <!-- ═══════════════ RIGHT: SWAP MODULE ═══════════════ -->
+  <div class="swap-col">
+    <div class="swap-card">
+      <div class="swap-header">
+        <span class="swap-title">QiSwap</span>
+        <span class="swap-badge">Prototype</span>
       </div>
-      <input type="range" id="sl-diffgrowth" min="0" max="50" step="1" value="10">
-    </div>
-  </div>
 
-  <div class="mod" id="mod-sim">
-    <div class="mod-label">Simulation</div>
-    <div class="mod-title">Parameters</div>
-    <div class="mod-slider" style="margin-top:16px;">
-      <div class="mod-slider-head">
-        <span class="mod-slider-label">Blocks</span>
-        <span class="mod-slider-val" id="val-blocks">500</span>
+      <!-- FROM -->
+      <div class="swap-input-box">
+        <div class="swap-input-label">You Pay</div>
+        <div class="swap-input-row">
+          <button class="swap-token-btn" id="swFromBtn">
+            <div class="swap-token-dot" id="swFromDot">◇</div>
+            <span class="swap-token-sym" id="swFromSym">QI</span>
+            <span class="swap-token-arrow">▼</span>
+          </button>
+          <input type="text" class="swap-amt-input" id="swFromAmt" placeholder="0.00" autocomplete="off" inputmode="decimal">
+        </div>
+        <div class="swap-bal-row">
+          <span>BAL: <input class="swap-editable" id="swFromBal" value="50,000" style="width:65px;font-size:10px;font-weight:600;color:var(--swap-text3);text-align:left;"></span>
+          <div class="swap-pct-btns">
+            <button class="swap-pct-btn" data-p="25">25%</button>
+            <button class="swap-pct-btn" data-p="50">50%</button>
+            <button class="swap-pct-btn" data-p="100">MAX</button>
+          </div>
+        </div>
       </div>
-      <input type="range" id="sl-blocks" min="50" max="2000" step="50" value="500">
-    </div>
-    <div class="mod-slider">
-      <div class="mod-slider-head">
-        <span class="mod-slider-label">Conversion penalty</span>
-        <span class="mod-slider-val" id="val-penalty">5%</span>
+
+      <!-- FLIP -->
+      <div class="swap-flip-row">
+        <div class="swap-flip-line"></div>
+        <button class="swap-flip-btn" id="swFlipBtn">↕</button>
+        <div class="swap-flip-line"></div>
       </div>
-      <input type="range" id="sl-penalty" min="0" max="30" step="0.5" value="5">
-    </div>
-    <div class="mod-slider">
-      <div class="mod-slider-head">
-        <span class="mod-slider-label">k<sub>Qi</sub> growth</span>
-        <span class="mod-slider-val" id="val-kqigrowth">20%</span>
+
+      <!-- TO -->
+      <div class="swap-input-box to-box">
+        <div class="swap-input-label">You Receive</div>
+        <div class="swap-input-row">
+          <button class="swap-token-btn" id="swToBtn">
+            <div class="swap-token-dot" id="swToDot">◆</div>
+            <span class="swap-token-sym" id="swToSym">QUAI</span>
+            <span class="swap-token-arrow">▼</span>
+          </button>
+          <input type="text" class="swap-amt-output" id="swToAmt" placeholder="0.00" autocomplete="off" inputmode="decimal">
+        </div>
+        <div class="swap-bal-row">
+          <span>BAL: <input class="swap-editable" id="swToBal" value="2,142.86" style="width:65px;font-size:10px;font-weight:600;color:var(--swap-text3);text-align:left;"></span>
+          <span id="swToUsd" style="font-size:11px;font-weight:600;"></span>
+        </div>
       </div>
-      <input type="range" id="sl-kqigrowth" min="0" max="100" step="5" value="20">
-    </div>
-  </div>
 
-  <div class="flow-row">
-    <div class="flow-line"></div>
-    <div class="flow-arrow">
-      <svg width="16" height="12" viewBox="0 0 16 12"><path d="M0 6h12M10 2l4 4-4 4" fill="none" stroke="#bbb" stroke-width="1.5"/></svg>
-      miners choose
-    </div>
-    <div class="flow-line"></div>
-    <div class="flow-arrow">
-      <svg width="16" height="12" viewBox="0 0 16 12"><path d="M0 6h12M10 2l4 4-4 4" fill="none" stroke="#bbb" stroke-width="1.5"/></svg>
-      controller adjusts
-    </div>
-    <div class="flow-line"></div>
-  </div>
-
-  <!-- ROW 2: REWARDS + CONTROLLER -->
-  <div class="mod" style="border-left: 2px solid var(--qi);">
-    <div class="mod-label" style="color:var(--qi);">Qi Reward</div>
-    <div class="mod-title" style="font-size:14px;">k<sub style="font-size:10px;">Qi</sub> × difficulty</div>
-    <div class="meter-center" id="reward-qi" style="color:var(--qi);">—</div>
-    <div style="text-align:center; margin-top:4px;">
-      <span style="font-size:11px; color:#444; font-family:var(--mono);">k<sub>Qi</sub> = <span id="kqi-val">1.25e-10</span></span>
-    </div>
-    <div class="mod-desc" style="margin-top:12px;">Linear in difficulty. Energy-proportional — more hashes, more Qi. Predetermined schedule.</div>
-  </div>
-
-  <div class="mod" style="border: 1px solid rgba(255,255,255,0.1); background: #131315;">
-    <div class="mod-label" style="color:#666;">Controller</div>
-    <div class="mod-title">k<sub>Quai</sub></div>
-    <div class="gauge-wrap">
-      <svg class="gauge-svg" width="160" height="90" viewBox="0 0 160 90">
-        <path d="M 15 85 A 65 65 0 0 1 145 85" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="8" stroke-linecap="round"/>
-        <path id="kquai-arc" d="M 15 85 A 65 65 0 0 1 145 85" fill="none" stroke="var(--quai)" stroke-width="8" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="102"/>
-        <text x="80" y="65" text-anchor="middle" class="gauge-value" id="kquai-val">—</text>
-        <text x="80" y="82" text-anchor="middle" class="gauge-unit" id="kquai-delta">—</text>
-      </svg>
-    </div>
-    <div style="text-align:center;">
-      <span class="status-dot" id="dir-dot" style="background:var(--quai);"></span>
-      <span style="font-size:12px; font-weight:600; color:#888;" id="dir-label">—</span>
-    </div>
-    <div class="mod-desc" style="margin-top:10px; text-align:center;">
-      k<sub>Quai</sub>(i) = k<sub>Quai</sub>(i−1) × [1 + dir × α × S × P]<br>
-      <span style="color:#333;">α=1/1000 · S=3 if Qi popular</span>
-    </div>
-  </div>
-
-  <div class="mod" style="border-right: 2px solid var(--quai);">
-    <div class="mod-label" style="color:var(--quai);">Quai Reward</div>
-    <div class="mod-title" style="font-size:14px;">k<sub style="font-size:10px;">Quai</sub> × log₂(diff)</div>
-    <div class="meter-center" id="reward-quai" style="color:var(--quai);">—</div>
-    <div style="text-align:center; margin-top:4px;">
-      <span style="font-size:11px; color:#444; font-family:var(--mono);">log₂(diff) ≈ <span id="log2diff-val">40</span></span>
-    </div>
-    <div class="mod-desc" style="margin-top:12px;">Logarithmic in difficulty. Market-priced — grows slowly with hashrate. Adjusted by controller.</div>
-  </div>
-
-  <div class="flow-row">
-    <div class="flow-line"></div>
-    <div class="flow-arrow">
-      <svg width="12" height="16" viewBox="0 0 12 16"><path d="M6 0v12M2 10l4 4 4-4" fill="none" stroke="#bbb" stroke-width="1.5"/></svg>
-      rewards set exchange rate
-    </div>
-    <div class="flow-line"></div>
-  </div>
-
-  <!-- ROW 3: OUTPUTS -->
-  <div class="mod mod-wide" style="border-bottom: 2px solid var(--green);">
-    <div class="mod-label" style="color:var(--green);">Output</div>
-    <div class="mod-title">Implied Exchange Rate</div>
-    <div class="dual-meter">
-      <div class="dual-meter-item">
-        <div class="dual-meter-label" style="color:var(--green);">Qi per Quai</div>
-        <div class="dual-meter-value" style="color:#fff;" id="rate-val">—</div>
-        <div class="dual-meter-sub" id="rate-delta">—</div>
+      <!-- DETAILS -->
+      <div class="swap-details">
+        <div class="swap-detail-line"><span class="lab">RATE</span><span class="val" id="swDRate">—</span></div>
+        <div class="swap-detail-line"><span class="lab">FEE</span><span class="val fee" id="swDFee">—</span></div>
+        <div class="swap-detail-line"><span class="lab">MIN</span><span class="val" id="swDMin">—</span></div>
+        <div class="swap-detail-line"><span class="lab">ROUTE</span><span class="val" id="swDRoute">—</span></div>
       </div>
-      <div class="dual-meter-item">
-        <div class="dual-meter-label" style="color:#555;">Rate Change</div>
-        <div class="dual-meter-value" id="rate-pct" style="color:#888;">—</div>
-        <div class="dual-meter-sub">over simulation period</div>
-      </div>
-    </div>
-    <div class="meter" style="margin-top:16px;">
-      <div class="meter-bar-bg" style="height:4px;">
-        <div class="meter-bar-fill" id="rate-bar" style="width:50%; background: var(--green); transition: width 0.4s;"></div>
-      </div>
-      <div class="meter-labels"><span>Qi cheaper</span><span>Quai cheaper</span></div>
-    </div>
-  </div>
 
-  <div class="mod">
-    <div class="mod-label">Equilibrium</div>
-    <div class="mod-title" id="eq-title">—</div>
-    <div class="mod-desc" style="margin-top:10px;" id="eq-desc">—</div>
-    <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border);">
-      <div style="font-size:10px; font-weight:700; color:#333; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Feedback Loop</div>
-      <div style="font-size:12px; color:#555; line-height:1.6;" id="eq-loop">—</div>
+      <button class="swap-cta off" id="swCtaBtn" disabled>ENTER AMOUNT</button>
+    </div>
+
+    <!-- POOLS TABLE -->
+    <div class="swap-pools">
+      <div class="swap-pools-header">Liquidity Pools</div>
+      <table>
+        <thead><tr><th>PAIR</th><th>RATE</th><th>TVL</th><th>FEE</th><th></th></tr></thead>
+        <tbody id="swPoolsBody"></tbody>
+      </table>
     </div>
   </div>
 
 </div>
 
+<!-- ═══════════════ TOKEN MODAL ═══════════════ -->
+<div class="swap-modal-bg" id="swModal">
+  <div class="swap-modal">
+    <div class="swap-modal-head">
+      <span class="swap-modal-title">Select Token</span>
+      <button class="swap-modal-x" id="swModalX">✕</button>
+    </div>
+    <div class="swap-modal-list" id="swModalList"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTROLLER SIMULATION SCRIPT ═══════════════ -->
 <script>
 const BASE_KQI = 1 / (8e9);
 const ALPHA = 1 / 1000;
@@ -425,8 +780,286 @@ function update() {
   }
 }
 
-document.querySelectorAll('input[type="range"]').forEach(el => el.addEventListener('input', update));
+document.querySelectorAll('.grid input[type="range"]').forEach(el => el.addEventListener('input', update));
 update();
 </script>
+
+<!-- ═══════════════ SWAP MODULE SCRIPT ═══════════════ -->
+<script>
+(function() {
+  // Tokens & Pools
+  const SW_TOKENS = [
+    { sym: "QI",   name: "Qi",   icon: "◇", color: "#e07040", price: 0.0018 },
+    { sym: "QUAI", name: "Quai", icon: "◆", color: "#4488cc", price: 0.042  },
+    { sym: "USD",  name: "USD",  icon: "●", color: "#50a860", price: 1.00   },
+  ];
+  const SW_POOLS = {
+    "QI/QUAI":  { rate: 23.33,  tvl: 1100000, fee: 0.003 },
+    "QI/USD":   { rate: 0.0018, tvl: 560000,  fee: 0.003 },
+    "QUAI/USD": { rate: 0.042,  tvl: 2400000, fee: 0.003 },
+  };
+
+  let swFrom = "QI", swTo = "QUAI";
+  let swTxState = "idle";
+  const SW_SLIPPAGE = 0.005;
+
+  const swTok = sym => SW_TOKENS.find(t => t.sym === sym);
+
+  function swGetPool(a, b) {
+    const key = a + "/" + b;
+    const inv = b + "/" + a;
+    if (SW_POOLS[key]) return { key, ...SW_POOLS[key], inverted: false };
+    if (SW_POOLS[inv]) return { key: inv, rate: 1 / SW_POOLS[inv].rate, fee: SW_POOLS[inv].fee, tvl: SW_POOLS[inv].tvl, inverted: true };
+    return null;
+  }
+
+  function swFmt(n) {
+    if (n == null) return "—";
+    if (n < 0.0001) return n.toFixed(8);
+    if (n < 0.001) return n.toFixed(6);
+    if (n < 1) return n.toFixed(4);
+    if (n < 10) return n.toFixed(3);
+    return n.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  }
+
+  function swFmtTvl(n) {
+    if (n >= 1000000) return "$" + (n / 1000000).toFixed(1) + "M";
+    if (n >= 1000) return "$" + (n / 1000).toFixed(0) + "K";
+    return "$" + n.toFixed(0);
+  }
+
+  function swParseNum(s) {
+    return parseFloat(String(s).replace(/[^0-9.\-]/g, "")) || 0;
+  }
+
+  function swSetDot(id, t) {
+    const el = document.getElementById(id);
+    el.textContent = t.icon;
+    el.style.background = t.color + "18";
+    el.style.borderColor = t.color + "77";
+    el.style.color = t.color;
+  }
+
+  function swRender(direction) {
+    direction = direction || "forward";
+    const ft = swTok(swFrom), tt = swTok(swTo);
+    const pool = swGetPool(swFrom, swTo);
+    const rate = pool ? pool.rate : null;
+    const fee = pool ? pool.fee : 0.003;
+
+    swSetDot("swFromDot", ft);
+    swSetDot("swToDot", tt);
+    document.getElementById("swFromSym").textContent = swFrom;
+    document.getElementById("swToSym").textContent = swTo;
+
+    let inAmt, rawOut, feeAmt, netOut;
+
+    if (direction === "reverse" && rate) {
+      const desiredOut = swParseNum(document.getElementById("swToAmt").value);
+      rawOut = desiredOut / (1 - fee);
+      inAmt = rawOut / rate;
+      feeAmt = rawOut * fee;
+      netOut = desiredOut;
+      if (inAmt > 0 && isFinite(inAmt)) {
+        document.getElementById("swFromAmt").value = swFmt(inAmt);
+      } else {
+        document.getElementById("swFromAmt").value = "";
+      }
+    } else {
+      inAmt = swParseNum(document.getElementById("swFromAmt").value);
+      rawOut = rate ? inAmt * rate : 0;
+      feeAmt = rawOut * fee;
+      netOut = rawOut - feeAmt;
+      const outEl = document.getElementById("swToAmt");
+      outEl.value = (inAmt > 0 && rate) ? swFmt(netOut) : "";
+      outEl.classList.toggle("has-value", inAmt > 0 && rate != null);
+    }
+
+    const minOut = netOut * (1 - SW_SLIPPAGE);
+    document.getElementById("swToAmt").classList.toggle("has-value", netOut > 0);
+    document.getElementById("swToUsd").textContent = (netOut > 0 && rate) ? "≈ $" + (netOut * tt.price).toFixed(2) : "";
+
+    document.getElementById("swDRate").textContent = rate ? `1 ${swFrom} = ${swFmt(rate)} ${swTo}` : "NO POOL";
+    document.getElementById("swDFee").textContent = (netOut > 0) ? swFmt(feeAmt) + " " + swTo + " (" + (fee * 100).toFixed(1) + "%)" : "—";
+    document.getElementById("swDMin").textContent = (netOut > 0) ? swFmt(minOut) + " " + swTo : "—";
+    document.getElementById("swDRoute").textContent = rate ? `${swFrom} → ${swTo}` : "—";
+
+    const btn = document.getElementById("swCtaBtn");
+    if (swTxState === "approving") {
+      btn.textContent = "APPROVING..."; btn.className = "swap-cta wait"; btn.disabled = true;
+    } else if (swTxState === "swapping") {
+      btn.textContent = "SWAPPING..."; btn.className = "swap-cta wait"; btn.disabled = true;
+    } else if (swTxState === "done") {
+      btn.textContent = "✓ COMPLETE"; btn.className = "swap-cta done"; btn.disabled = true;
+    } else if (!rate) {
+      btn.textContent = "NO LIQUIDITY"; btn.className = "swap-cta off"; btn.disabled = true;
+    } else if (inAmt <= 0) {
+      btn.textContent = "ENTER AMOUNT"; btn.className = "swap-cta off"; btn.disabled = true;
+    } else {
+      btn.textContent = `SWAP ${swFrom} → ${swTo}`; btn.className = "swap-cta go"; btn.disabled = false;
+    }
+  }
+
+  // Pools table
+  function swBuildPools() {
+    const body = document.getElementById("swPoolsBody");
+    body.innerHTML = "";
+    for (const [key, p] of Object.entries(SW_POOLS)) {
+      const [a, b] = key.split("/");
+      const tr = document.createElement("tr");
+
+      const rateInput = document.createElement("input");
+      rateInput.className = "swap-editable";
+      rateInput.value = p.rate < 0.01 ? p.rate.toFixed(4) : swFmt(p.rate);
+      rateInput.addEventListener("input", () => {
+        SW_POOLS[key].rate = swParseNum(rateInput.value);
+        swSyncPrices();
+        swRender();
+      });
+      rateInput.addEventListener("click", e => e.stopPropagation());
+
+      const tvlInput = document.createElement("input");
+      tvlInput.className = "swap-editable";
+      tvlInput.value = swFmtTvl(p.tvl);
+      tvlInput.addEventListener("input", () => {
+        let v = tvlInput.value.replace(/[^0-9.MmKk]/g, "");
+        let num = parseFloat(v);
+        if (v.toLowerCase().includes("m")) num *= 1000000;
+        else if (v.toLowerCase().includes("k")) num *= 1000;
+        if (num > 0) SW_POOLS[key].tvl = num;
+      });
+      tvlInput.addEventListener("click", e => e.stopPropagation());
+
+      const feeInput = document.createElement("input");
+      feeInput.className = "swap-editable";
+      feeInput.style.width = "50px";
+      feeInput.value = (p.fee * 100).toFixed(1) + "%";
+      feeInput.addEventListener("input", () => {
+        let v = parseFloat(feeInput.value.replace(/[^0-9.]/g, ""));
+        if (v > 0 && v < 100) SW_POOLS[key].fee = v / 100;
+        swRender();
+      });
+      feeInput.addEventListener("click", e => e.stopPropagation());
+
+      const tdPair = document.createElement("td");
+      tdPair.className = "pair-name";
+      tdPair.textContent = key;
+
+      const tdRate = document.createElement("td");
+      tdRate.appendChild(rateInput);
+
+      const tdTvl = document.createElement("td");
+      tdTvl.appendChild(tvlInput);
+
+      const tdFee = document.createElement("td");
+      tdFee.appendChild(feeInput);
+
+      const tdTag = document.createElement("td");
+      tdTag.innerHTML = `<span class="trade-tag">TRADE →</span>`;
+
+      tr.appendChild(tdPair);
+      tr.appendChild(tdRate);
+      tr.appendChild(tdTvl);
+      tr.appendChild(tdFee);
+      tr.appendChild(tdTag);
+
+      tr.addEventListener("click", () => {
+        swFrom = a; swTo = b;
+        document.getElementById("swFromAmt").value = "";
+        document.getElementById("swToAmt").value = "";
+        swRender();
+      });
+      body.appendChild(tr);
+    }
+  }
+
+  function swSyncPrices() {
+    if (SW_POOLS["QUAI/USD"]) swTok("QUAI").price = SW_POOLS["QUAI/USD"].rate;
+    if (SW_POOLS["QI/USD"]) swTok("QI").price = SW_POOLS["QI/USD"].rate;
+  }
+
+  // Events
+  document.getElementById("swFromAmt").addEventListener("input", e => {
+    e.target.value = e.target.value.replace(/[^0-9.]/g, "").replace(/(\..*?)\..*/g, "$1");
+    swRender("forward");
+  });
+  document.getElementById("swToAmt").addEventListener("input", e => {
+    e.target.value = e.target.value.replace(/[^0-9.]/g, "").replace(/(\..*?)\..*/g, "$1");
+    swRender("reverse");
+  });
+
+  document.querySelectorAll(".swap-pct-btn").forEach(b => {
+    b.addEventListener("click", () => {
+      const pct = parseInt(b.dataset.p);
+      const bal = swParseNum(document.getElementById("swFromBal").value);
+      document.getElementById("swFromAmt").value = (bal * pct / 100).toString();
+      swRender("forward");
+    });
+  });
+
+  document.getElementById("swFlipBtn").addEventListener("click", () => {
+    [swFrom, swTo] = [swTo, swFrom];
+    document.getElementById("swFromAmt").value = "";
+    document.getElementById("swToAmt").value = "";
+    const fb = document.getElementById("swFromBal").value;
+    const tb = document.getElementById("swToBal").value;
+    document.getElementById("swFromBal").value = tb;
+    document.getElementById("swToBal").value = fb;
+    swRender("forward");
+  });
+
+  // Token modal
+  let swSelecting = null;
+  function swOpenModal(target) {
+    swSelecting = target;
+    const list = document.getElementById("swModalList");
+    const exclude = target === "from" ? swTo : swFrom;
+    list.innerHTML = "";
+    SW_TOKENS.filter(t => t.sym !== exclude).forEach(t => {
+      const btn = document.createElement("button");
+      btn.className = "swap-modal-item";
+      btn.innerHTML = `
+        <div class="swap-token-dot" style="width:26px;height:26px;font-size:13px;font-weight:700;background:${t.color}18;border-color:${t.color}77;color:${t.color};border:2px solid;border-radius:50%;display:flex;align-items:center;justify-content:center;">${t.icon}</div>
+        <div><div class="m-name">${t.sym}</div><div class="m-sub">${t.name}</div></div>
+        <span class="m-price">$${t.price < 0.01 ? t.price.toFixed(4) : t.price.toFixed(2)}</span>
+      `;
+      btn.addEventListener("click", () => {
+        if (swSelecting === "from") {
+          if (t.sym === swTo) swTo = swFrom;
+          swFrom = t.sym;
+        } else {
+          if (t.sym === swFrom) swFrom = swTo;
+          swTo = t.sym;
+        }
+        document.getElementById("swFromAmt").value = "";
+        document.getElementById("swToAmt").value = "";
+        swCloseModal();
+        swRender("forward");
+      });
+      list.appendChild(btn);
+    });
+    document.getElementById("swModal").classList.add("open");
+  }
+  function swCloseModal() { document.getElementById("swModal").classList.remove("open"); swSelecting = null; }
+
+  document.getElementById("swFromBtn").addEventListener("click", () => swOpenModal("from"));
+  document.getElementById("swToBtn").addEventListener("click", () => swOpenModal("to"));
+  document.getElementById("swModalX").addEventListener("click", swCloseModal);
+  document.getElementById("swModal").addEventListener("click", e => { if (e.target === e.currentTarget) swCloseModal(); });
+
+  document.getElementById("swCtaBtn").addEventListener("click", () => {
+    if (swTxState !== "idle") return;
+    swTxState = "approving"; swRender();
+    setTimeout(() => { swTxState = "swapping"; swRender(); }, 1000);
+    setTimeout(() => { swTxState = "done"; swRender(); }, 2500);
+    setTimeout(() => { swTxState = "idle"; document.getElementById("swFromAmt").value = ""; document.getElementById("swToAmt").value = ""; swRender(); }, 4200);
+  });
+
+  // Init
+  swBuildPools();
+  swRender("forward");
+})();
+</script>
+
 </body>
 </html>
