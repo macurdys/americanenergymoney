@@ -1,275 +1,403 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Research — American Energy Money</title>
-  <meta name="description" content="Institutional-grade research on energy-money systems, mining economics, and proof-of-work consensus.">
+  <meta name="description" content="Hashrate Engineering — Theoretical and applied research on energy-money systems, mining economics, and proof-of-work consensus.">
   <link rel="icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --gray: #999;
-      --dark: #111;
-      --white: #fff;
+      --gray: #999; --dark: #111; --white: #fff;
       --border: rgba(0,0,0,0.07);
       --mono: 'JetBrains Mono', monospace;
+      --blue: #60a5fa; --purple: #c084fc; --green: #4ade80; --amber: #fbbf24;
     }
-
     html { font-size: 16px; scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
 
-    /* ─── NAV ─── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      height: 60px;
-      display: flex; align-items: center;
-      padding: 0 48px;
-      gap: 32px;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      text-decoration: none; flex-shrink: 0;
-    }
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid var(--border); height: 60px; display: flex; align-items: center; padding: 0 48px; gap: 32px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
     .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
     .nav-links { display: flex; gap: 4px; margin-left: auto; }
-    .nav-item {
-      display: flex; align-items: center; gap: 4px;
-      padding: 8px 14px;
-      font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
-      color: #444; text-decoration: none; cursor: pointer;
-      border-radius: 8px; transition: background 0.15s;
-    }
+    .nav-item { display: flex; align-items: center; gap: 4px; padding: 8px 14px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; color: #444; text-decoration: none; cursor: pointer; border-radius: 8px; transition: background 0.15s; }
     .nav-item:hover { background: #f5f5f5; }
     .nav-item.active { color: #111; font-weight: 600; }
 
-    /* ─── HERO ─── */
-    .hero {
-      background: #0d0d0d;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 120px 48px 60px; text-align: center;
-    }
-    .hero h1 {
-      font-size: clamp(52px, 7vw, 84px);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
-      color: #fff;
-    }
-    .hero h1 .dim { color: #555; }
-    .hero .subtitle {
-      font-size: clamp(18px, 2vw, 22px); font-weight: 500;
-      color: #666; margin-top: 28px; max-width: 580px;
-      line-height: 1.6; letter-spacing: -0.01em;
-    }
-    /* ─── REPORTS SECTION ─── */
-    .reports-section {
-      background: #fff; padding: 120px 48px 100px; text-align: center;
-    }
-    .reports-section h2 {
-      font-size: clamp(36px, 5vw, 56px); font-weight: 800;
-      letter-spacing: -0.04em; margin-bottom: 16px;
-    }
-    .reports-section h2 .gray { color: var(--gray); }
-    .reports-lead {
-      font-size: 18px; color: #777; max-width: 560px;
-      margin: 0 auto 72px; line-height: 1.6;
-    }
+    /* HERO */
+    .hero { background: #0d0d0d; display: flex; flex-direction: column; align-items: center; padding: 100px 48px 80px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 48px 48px; }
+    .hero h1 { font-size: clamp(48px, 7vw, 80px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: #fff; position: relative; }
+    .hero h1 .dim { color: #444; }
+    .hero .subtitle { font-size: clamp(16px, 1.8vw, 19px); font-weight: 500; color: #555; margin-top: 24px; max-width: 540px; line-height: 1.65; letter-spacing: -0.01em; position: relative; }
 
-    /* Report cards */
-    .reports-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px; max-width: 960px; margin: 0 auto;
-    }
-    .report-card {
-      background: #fafafa;
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 16px;
-      overflow: hidden; text-align: left;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .report-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    }
-    .report-cover {
-      width: 100%; aspect-ratio: 4/3;
-      background: #0d0d0d;
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .report-cover-label {
-      font-family: var(--mono); font-size: 12px; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: #444;
-    }
-    /* Decorative grid pattern on covers */
-    .report-cover::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-    .report-body {
-      padding: 28px 24px 24px;
-    }
-    .report-tag {
-      font-family: var(--mono); font-size: 11px; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: #bbb; margin-bottom: 10px;
-    }
-    .report-title {
-      font-size: 19px; font-weight: 700; letter-spacing: -0.02em;
-      line-height: 1.3; margin-bottom: 10px;
-    }
-    .report-desc {
-      font-size: 14px; color: #888; line-height: 1.6; margin-bottom: 24px;
-    }
-    .report-footer {
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .report-price {
-      font-family: var(--mono); font-size: 18px; font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-    .report-btn {
-      display: inline-block; padding: 10px 24px;
-      background: #111; color: #fff;
-      font-size: 13px; font-weight: 700; letter-spacing: -0.01em;
-      border-radius: 100px; text-decoration: none;
-      transition: background 0.15s, transform 0.15s;
-    }
+    /* SECTION LABEL */
+    .section-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; margin-bottom: 20px; }
+
+    /* COMBINED INFRASTRUCTURE */
+    .infra-section { padding: 100px 48px; max-width: 1040px; margin: 0 auto; }
+    .infra-header { text-align: center; margin-bottom: 64px; }
+    .infra-header h2 { font-size: clamp(32px, 4vw, 46px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+    .infra-header h2 .gray { color: var(--gray); }
+    .infra-header p { font-size: 16px; color: #777; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+    .infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .infra-card { background: #0d0d0d; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; }
+    .infra-card-top { display: flex; align-items: flex-start; gap: 16px; }
+    .infra-card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .infra-card-icon svg { width: 22px; height: 22px; }
+    .infra-card-icon.blue { background: rgba(96,165,250,0.1); color: var(--blue); }
+    .infra-card-icon.green { background: rgba(74,222,128,0.1); color: var(--green); }
+    .infra-card-info h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #fff; margin-bottom: 6px; }
+    .infra-card-info p { font-size: 14px; color: #666; line-height: 1.6; }
+    .infra-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.04); }
+    .infra-list li { font-size: 13px; font-weight: 500; color: #555; display: flex; align-items: center; gap: 10px; }
+    .infra-list li .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+    .infra-list li .dot.blue { background: var(--blue); }
+    .infra-list li .dot.green { background: var(--green); }
+    .mini-terminal { width: 100%; background: #161616; border-radius: 10px; padding: 16px; font-family: var(--mono); font-size: 11px; color: #555; line-height: 1.9; overflow: hidden; border: 1px solid rgba(255,255,255,0.04); }
+    .mini-terminal .prompt { color: #444; }
+    .mini-terminal .ok { color: var(--green); }
+    .mini-terminal .val { color: var(--blue); }
+    .mini-terminal .warn { color: var(--amber); }
+    .mini-terminal .hi { color: var(--green); }
+
+    /* FLOW DIAGRAM */
+    .flow-section { background: #0d0d0d; padding: 100px 48px; display: flex; flex-direction: column; align-items: center; }
+    .flow-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #444; margin-bottom: 40px; }
+    .flow-container { width: 100%; max-width: 880px; background: #111; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 48px 32px 40px; position: relative; overflow: hidden; }
+    .flow-container::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 15% 50%, rgba(251,191,36,0.03) 0%, transparent 40%), radial-gradient(circle at 85% 50%, rgba(192,132,252,0.03) 0%, transparent 40%); }
+    .flow-row { display: flex; align-items: center; justify-content: center; gap: 0; position: relative; width: 100%; }
+    .flow-node { display: flex; flex-direction: column; align-items: center; gap: 10px; flex-shrink: 0; position: relative; z-index: 2; }
+    .flow-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+    .flow-icon svg { width: 28px; height: 28px; }
+    .flow-icon.solar { background: rgba(251,191,36,0.1); color: var(--amber); }
+    .flow-icon.battery { background: rgba(74,222,128,0.1); color: var(--green); }
+    .flow-icon.compute { background: rgba(96,165,250,0.1); color: var(--blue); }
+    .flow-icon.output-qi { background: rgba(96,165,250,0.1); color: var(--blue); }
+    .flow-icon.output-ai { background: rgba(192,132,252,0.1); color: var(--purple); }
+    .flow-node-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #555; white-space: nowrap; }
+    .flow-connector { flex: 1; min-width: 32px; max-width: 80px; height: 2px; position: relative; z-index: 1; margin: 0 -2px; margin-bottom: 22px; }
+    .flow-connector .line-bg { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.06); border-radius: 1px; }
+    .flow-connector .line-pulse { position: absolute; top: 0; left: 0; height: 2px; width: 24px; border-radius: 1px; animation: flowPulse 2.2s ease-in-out infinite; }
+    .flow-connector.c1 .line-pulse { background: var(--amber); animation-delay: 0s; }
+    .flow-connector.c2 .line-pulse { background: var(--green); animation-delay: 0.55s; }
+    @keyframes flowPulse { 0% { left: -24px; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100%); opacity: 0; } }
+    .fork-zone { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; position: relative; z-index: 2; }
+    .fork-branches { display: flex; gap: 20px; align-items: flex-start; }
+    .fork-branch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .fork-branch .flow-icon { width: 48px; height: 48px; border-radius: 12px; }
+    .fork-branch .flow-icon svg { width: 22px; height: 22px; }
+    .fork-branch-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #555; white-space: nowrap; }
+    .fork-svg { width: 100px; height: 48px; flex-shrink: 0; margin-bottom: 22px; }
+    .fork-svg .fork-line { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 2; }
+    .fork-svg .fork-dot { animation: forkBlink 2.8s ease-in-out infinite; }
+    .fork-svg .fork-dot.top { animation-delay: 1.3s; }
+    .fork-svg .fork-dot.bot { animation-delay: 1.7s; }
+    @keyframes forkBlink { 0%, 100% { opacity: 0; } 25%, 75% { opacity: 1; } }
+    .converge-svg { width: 80px; height: 48px; flex-shrink: 0; margin-bottom: 22px; }
+    .converge-svg .conv-line { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 2; }
+    .converge-svg .conv-dot { animation: forkBlink 2.8s ease-in-out infinite; }
+    .converge-svg .conv-dot.top { animation-delay: 2s; }
+    .converge-svg .conv-dot.bot { animation-delay: 2.3s; }
+    .pricing-output { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; position: relative; z-index: 2; }
+    .pricing-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 20px; text-align: center; min-width: 130px; }
+    .pricing-box .price-label { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #444; margin-bottom: 8px; }
+    .pricing-box .price-values { display: flex; flex-direction: column; gap: 2px; }
+    .pricing-box .price-line { font-family: var(--mono); font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .pricing-box .price-line .chain { color: #555; font-size: 10px; }
+    .pricing-box .price-line .hi { color: var(--green); }
+    .pricing-box .price-line .lo { color: #ef4444; }
+    .pricing-output-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #555; }
+    .price-tick { animation: priceTick 3s ease-in-out infinite; }
+    @keyframes priceTick { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* PROFITABILITY LAB */
+    .lab-section { padding: 100px 48px; display: flex; align-items: flex-start; gap: 64px; max-width: 1040px; margin: 0 auto; }
+    .lab-text { flex: 1; min-width: 0; }
+    .lab-text h2 { font-size: clamp(28px, 3.2vw, 38px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+    .lab-text .lab-desc { font-size: 15px; color: #777; line-height: 1.7; margin-bottom: 28px; }
+    .lab-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .lab-list li { font-size: 14px; font-weight: 500; color: #555; display: flex; align-items: center; gap: 10px; }
+    .lab-list li .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; background: var(--purple); }
+    .lab-visual { flex: 0 0 320px; background: #0d0d0d; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .lab-visual-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(192,132,252,0.1); color: var(--purple); }
+    .lab-visual-icon svg { width: 24px; height: 24px; }
+
+    /* REPORTS */
+    .reports-section { background: #0d0d0d; padding: 100px 48px; text-align: center; }
+    .reports-section .section-label { color: #444; }
+    .reports-section h2 { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px; color: #fff; }
+    .reports-lead { font-size: 16px; color: #555; max-width: 520px; margin: 0 auto 64px; line-height: 1.6; }
+    .reports-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 960px; margin: 0 auto; }
+    .report-card { background: #fff; border-radius: 16px; overflow: hidden; text-align: left; transition: transform 0.2s, box-shadow 0.2s; }
+    .report-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .report-cover { width: 100%; aspect-ratio: 5/3; background: #f5f5f5; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .report-cover-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #bbb; position: relative; z-index: 1; }
+    .report-cover::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px); background-size: 20px 20px; }
+    .report-body { padding: 22px 20px 20px; }
+    .report-tag { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #bbb; margin-bottom: 8px; }
+    .report-title { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.35; margin-bottom: 10px; color: #111; }
+    .report-desc { font-size: 13px; color: #999; line-height: 1.6; margin-bottom: 20px; }
+    .report-footer { display: flex; align-items: center; justify-content: space-between; }
+    .report-price { font-family: var(--mono); font-size: 17px; font-weight: 700; color: #111; }
+    .report-btn { display: inline-block; padding: 9px 22px; background: #111; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: -0.01em; border-radius: 100px; text-decoration: none; transition: background 0.15s, transform 0.15s; }
     .report-btn:hover { background: #333; transform: scale(1.03); }
 
-    /* ─── FOOTER ─── */
-    footer {
-      background: #fff; border-top: 1px solid var(--border);
-      padding: 28px 48px;
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px;
-    }
+    /* FOOTER */
+    footer { background: #fff; border-top: 1px solid var(--border); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px; }
     footer a { color: #bbb; text-decoration: none; transition: color 0.15s; }
     footer a:hover { color: #444; }
-    .partner-logos {
-      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
-    }
-    .partner-logos a {
-      display: flex; align-items: center;
-      transition: opacity 0.2s;
-    }
+    .partner-logos { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+    .partner-logos a { display: flex; align-items: center; transition: opacity 0.2s; }
     .partner-logos a:hover { opacity: 0.7; }
     .partner-logos img { height: 22px; width: auto; }
 
-    /* ─── RESPONSIVE ─── */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .hero, .reports-section { padding-left: 20px; padding-right: 20px; }
+      .hero { padding: 80px 20px 60px; }
+      .infra-section { padding: 60px 20px; }
+      .infra-grid { grid-template-columns: 1fr; }
+      .flow-section { padding: 80px 16px; }
+      .flow-container { padding: 32px 12px 28px; border-radius: 14px; }
+      .flow-row { flex-wrap: wrap; gap: 16px; justify-content: center; }
+      .flow-connector { display: none; }
+      .fork-svg, .converge-svg { display: none; }
+      .fork-branches { gap: 16px; }
+      .lab-section { flex-direction: column; padding: 60px 20px; gap: 32px; }
+      .lab-visual { flex: none; width: 100%; }
+      .reports-section { padding: 80px 20px; }
       .reports-grid { grid-template-columns: 1fr; }
       footer { padding: 24px 20px; }
+    }
+    @media (max-width: 480px) {
+      .flow-icon { width: 44px; height: 44px; border-radius: 10px; }
+      .flow-icon svg { width: 22px; height: 22px; }
+      .fork-branch .flow-icon { width: 40px; height: 40px; }
+      .fork-branch .flow-icon svg { width: 18px; height: 18px; }
+      .pricing-box { min-width: 110px; padding: 10px 14px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
 <nav>
-  <a class="nav-logo" href="/">
-    <img src="images/logo.png" alt="American Energy Money">
-  </a>
+  <a class="nav-logo" href="/"><img src="images/logo.png" alt="American Energy Money"></a>
   <div class="nav-links">
     <a class="nav-item" href="compute.html">Compute</a>
     <a class="nav-item active" href="research.html">Research</a>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
 <section class="hero">
-  <h1>Research</h1>
-  <p class="subtitle">Institutional-grade research on energy-money systems, mining economics, and proof-of-work consensus.</p>
+  <h1>Hashrate <span class="dim">Engineering</span></h1>
+  <p class="subtitle">Theoretical foundations and applied experiments in energy money — from entropy mechanics to operational infrastructure.</p>
 </section>
 
-<!-- ── RESEARCH REPORTS ── -->
-<section class="reports-section">
-  <h2>Reports</h2>
-  <p class="reports-lead">In-depth analysis on thermoeconomics, mining economics, and energy-money systems. Sold as digital objects.</p>
-
-  <div class="reports-grid">
-
-    <div class="report-card">
-      <div class="report-cover">
-        <span class="report-cover-label">AEM Report №1</span>
+<!-- MINING + DATA INFRASTRUCTURE -->
+<section class="infra-section">
+  <div class="infra-header">
+    <span class="section-label">Services</span>
+    <h2>Mining + Data <span class="gray">Infrastructure</span></h2>
+    <p>Physical energy operations and full-node data services powering applied research on the Quai Network.</p>
+  </div>
+  <div class="infra-grid">
+    <div class="infra-card">
+      <div class="infra-card-top">
+        <div class="infra-card-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="infra-card-info">
+          <h3>Data Infrastructure</h3>
+          <p>Full-node RPC endpoints and indexer services for efficient data access, organization, and query performance.</p>
+        </div>
       </div>
+      <ul class="infra-list">
+        <li><span class="dot blue"></span>RPC Endpoints (Full Node)</li>
+        <li><span class="dot blue"></span>Indexer Services</li>
+        <li><span class="dot blue"></span>Efficient Data Organization &amp; Query</li>
+      </ul>
+      <div class="mini-terminal">
+        <span class="prompt">$</span> quai rpc status<br>
+        <span class="ok">&#9679;</span> node <span class="val">synced</span> block 2,847,391<br>
+        <span class="ok">&#9679;</span> indexer <span class="val">healthy</span> 14ms latency<br>
+        <span class="prompt">$</span> quai index query --zone cyprus-1<br>
+        <span class="val">&rarr;</span> 1,204 txns indexed
+      </div>
+    </div>
+    <div class="infra-card">
+      <div class="infra-card-top">
+        <div class="infra-card-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </div>
+        <div class="infra-card-info">
+          <h3>Energy Operations</h3>
+          <p>Mining hardware powered by solar generation with battery storage for continuous, low-cost operation.</p>
+        </div>
+      </div>
+      <ul class="infra-list">
+        <li><span class="dot green"></span>Mining Hardware Operations</li>
+        <li><span class="dot green"></span>Solar Energy Harvesting</li>
+        <li><span class="dot green"></span>Battery Storage Systems</li>
+      </ul>
+      <div class="mini-terminal">
+        <span class="prompt">$</span> aem ops status<br>
+        <span class="ok">&#9679;</span> solar array <span class="val">4.2 kW</span> generating<br>
+        <span class="ok">&#9679;</span> battery <span class="val">87%</span> 13.2 kWh stored<br>
+        <span class="ok">&#9679;</span> hashrate <span class="val">318 TH/s</span> online<br>
+        <span class="warn">&rarr;</span> effective $0.02/kWh
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENERGY FLOW DIAGRAM -->
+<section class="flow-section">
+  <span class="flow-label">Experimental Energy Money Lab</span>
+  <div class="flow-container">
+    <div class="flow-row">
+      <div class="flow-node">
+        <div class="flow-icon solar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </div>
+        <span class="flow-node-label">Solar</span>
+      </div>
+      <div class="flow-connector c1"><div class="line-bg"></div><div class="line-pulse"></div></div>
+      <div class="flow-node">
+        <div class="flow-icon battery">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="11" y1="10" x2="11" y2="14"/></svg>
+        </div>
+        <span class="flow-node-label">Battery</span>
+      </div>
+      <div class="flow-connector c2"><div class="line-bg"></div><div class="line-pulse"></div></div>
+      <div class="flow-node">
+        <div class="flow-icon compute">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M9 2v2"/><path d="M9 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/></svg>
+        </div>
+        <span class="flow-node-label">Compute</span>
+      </div>
+      <svg class="fork-svg" viewBox="0 0 100 48">
+        <path class="fork-line" d="M0,24 L30,24 Q42,24 48,10 L65,6"/>
+        <path class="fork-line" d="M0,24 L30,24 Q42,24 48,38 L65,42"/>
+        <circle class="fork-dot top" cx="50" cy="12" r="2.5" fill="#60a5fa"/>
+        <circle class="fork-dot bot" cx="50" cy="36" r="2.5" fill="#c084fc"/>
+      </svg>
+      <div class="fork-zone">
+        <div class="fork-branches">
+          <div class="fork-branch">
+            <div class="flow-icon output-qi">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <span class="fork-branch-label">Quai / Qi</span>
+          </div>
+          <div class="fork-branch">
+            <div class="flow-icon output-ai">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 3-2 6h-4c0-3-2-4-2-6a4 4 0 0 1 4-4z"/><line x1="10" y1="16" x2="14" y2="16"/><line x1="10" y1="19" x2="14" y2="19"/></svg>
+            </div>
+            <span class="fork-branch-label">AI Inference</span>
+          </div>
+        </div>
+      </div>
+      <svg class="converge-svg" viewBox="0 0 80 48">
+        <path class="conv-line" d="M0,6 L20,6 Q32,6 38,24 L50,24 L80,24"/>
+        <path class="conv-line" d="M0,42 L20,42 Q32,42 38,24"/>
+        <circle class="conv-dot top" cx="30" cy="12" r="2.5" fill="#60a5fa"/>
+        <circle class="conv-dot bot" cx="30" cy="36" r="2.5" fill="#c084fc"/>
+      </svg>
+      <div class="pricing-output">
+        <div class="pricing-box">
+          <div class="price-label">Opportunity Cost</div>
+          <div class="price-values price-tick">
+            <div class="price-line"><span class="chain">QUAI</span> <span class="hi">+$0.047</span></div>
+            <div class="price-line"><span class="chain">BTC</span> <span class="lo">&#8722;$0.031</span></div>
+          </div>
+        </div>
+        <span class="pricing-output-label">$/kWh Delta</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFITABILITY LAB -->
+<section class="lab-section">
+  <div class="lab-text">
+    <span class="section-label">Experiments</span>
+    <h2>Profitability Lab</h2>
+    <p class="lab-desc">A testing environment comparing the economic returns of Quai mining against merge-mined blockchains — measuring real opportunity cost across SHA-256, Scrypt, and KawPow algorithms.</p>
+    <ul class="lab-list">
+      <li><span class="dot"></span>Quai vs Merge-Mined Chains</li>
+      <li><span class="dot"></span>Multi-Algorithm Benchmarks</li>
+      <li><span class="dot"></span>Opportunity Cost Analysis</li>
+    </ul>
+  </div>
+  <div class="lab-visual">
+    <div class="lab-visual-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v7.4a2 2 0 0 1-.6 1.4L3.7 16.5A2 2 0 0 0 3 18v0a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v0a2 2 0 0 0-.7-1.5l-4.7-4.7a2 2 0 0 1-.6-1.4V3"/><line x1="9" y1="3" x2="15" y2="3"/></svg>
+    </div>
+    <div class="mini-terminal">
+      <span class="prompt">$</span> aem lab compare --algo sha256<br>
+      <span class="val">BTC</span>&nbsp; 0.00000312 /TH/day<br>
+      <span class="val">QUAI</span> 0.00004871 /TH/day<br>
+      <span class="ok">&#9650;</span> quai <span class="hi">+1,461%</span> vs btc<br>
+      <span class="prompt">$</span> aem lab opp-cost<br>
+      <span class="warn">&rarr;</span> $0.047/kWh delta
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH REPORTS -->
+<section class="reports-section">
+  <span class="section-label">Research</span>
+  <h2>Reports</h2>
+  <p class="reports-lead">In-depth analysis on thermoeconomics, mining economics, and energy-money systems.</p>
+  <div class="reports-grid">
+    <div class="report-card">
+      <div class="report-cover"><span class="report-cover-label">AEM Report &#8470;1</span></div>
       <div class="report-body">
         <div class="report-tag">Thermoeconomics</div>
         <div class="report-title">The Thermoeconomic Operator: Energy, Entropy &amp; Value</div>
         <div class="report-desc">A formal treatment of the thermoeconomic cost function — how energy expenditure and entropy production ground monetary value in physical law.</div>
-        <div class="report-footer">
-          <span class="report-price">$24</span>
-          <a class="report-btn" href="https://buy.stripe.com/REPORT1_LINK" target="_blank" rel="noopener">Purchase</a>
-        </div>
+        <div class="report-footer"><span class="report-price">$24</span><a class="report-btn" href="https://buy.stripe.com/REPORT1_LINK" target="_blank" rel="noopener">Purchase</a></div>
       </div>
     </div>
-
     <div class="report-card">
-      <div class="report-cover">
-        <span class="report-cover-label">AEM Report №2</span>
-      </div>
+      <div class="report-cover"><span class="report-cover-label">AEM Report &#8470;2</span></div>
       <div class="report-body">
         <div class="report-tag">Mining Economics</div>
         <div class="report-title">SHA-256 Mining: Bitcoin vs. Quai Profitability Analysis</div>
         <div class="report-desc">A comparative analysis of mining economics across Bitcoin and Quai Network, with real-world hardware data and energy cost modeling.</div>
-        <div class="report-footer">
-          <span class="report-price">$18</span>
-          <a class="report-btn" href="https://buy.stripe.com/REPORT2_LINK" target="_blank" rel="noopener">Purchase</a>
-        </div>
+        <div class="report-footer"><span class="report-price">$18</span><a class="report-btn" href="https://buy.stripe.com/REPORT2_LINK" target="_blank" rel="noopener">Purchase</a></div>
       </div>
     </div>
-
     <div class="report-card">
-      <div class="report-cover">
-        <span class="report-cover-label">AEM Report №3</span>
-      </div>
+      <div class="report-cover"><span class="report-cover-label">AEM Report &#8470;3</span></div>
       <div class="report-body">
         <div class="report-tag">Consensus Mechanisms</div>
-        <div class="report-title">Proof of Entropy Minima: Formal Verification &amp; Analysis</div>
+        <div class="report-title">Proof Of Entropy Minima: Formal Verification &amp; Analysis</div>
         <div class="report-desc">Formal verification of PoEM consensus using Z3 SMT solvers, with mathematical proofs of entropy minimization guarantees.</div>
-        <div class="report-footer">
-          <span class="report-price">$32</span>
-          <a class="report-btn" href="https://buy.stripe.com/REPORT3_LINK" target="_blank" rel="noopener">Purchase</a>
-        </div>
+        <div class="report-footer"><span class="report-price">$32</span><a class="report-btn" href="https://buy.stripe.com/REPORT3_LINK" target="_blank" rel="noopener">Purchase</a></div>
       </div>
     </div>
-
     <div class="report-card">
-      <div class="report-cover">
-        <span class="report-cover-label">AEM Report №4</span>
-      </div>
+      <div class="report-cover"><span class="report-cover-label">AEM Report &#8470;4</span></div>
       <div class="report-body">
-        <div class="report-tag">Physics of Computation</div>
-        <div class="report-title">Computational Irreducibility &amp; Causal Invariance in PoW</div>
+        <div class="report-tag">Physics Of Computation</div>
+        <div class="report-title">Computational Irreducibility &amp; Causal Invariance In PoW</div>
         <div class="report-desc">How Wolfram Physics concepts — computational irreducibility and causal invariance — provide the theoretical substrate for proof-of-work consensus.</div>
-        <div class="report-footer">
-          <span class="report-price">$28</span>
-          <a class="report-btn" href="https://buy.stripe.com/REPORT4_LINK" target="_blank" rel="noopener">Purchase</a>
-        </div>
+        <div class="report-footer"><span class="report-price">$28</span><a class="report-btn" href="https://buy.stripe.com/REPORT4_LINK" target="_blank" rel="noopener">Purchase</a></div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
-  <span>© 2026 American Energy Money</span>
+  <span>&copy; 2026 American Energy Money</span>
   <div class="partner-logos">
     <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
     <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
