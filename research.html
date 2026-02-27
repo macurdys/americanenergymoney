@@ -40,80 +40,101 @@
     /* SECTION LABEL */
     .section-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; margin-bottom: 20px; }
 
-    /* COMBINED INFRASTRUCTURE */
-    .infra-section { padding: 100px 48px; max-width: 1040px; margin: 0 auto; }
+    /* COMBINED INFRASTRUCTURE + FLOW (all white bg) */
+    .infra-flow-wrap { background: #fff; padding: 100px 48px 80px; }
+    .infra-inner { max-width: 1040px; margin: 0 auto; }
+
     .infra-header { text-align: center; margin-bottom: 64px; }
     .infra-header h2 { font-size: clamp(32px, 4vw, 46px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
     .infra-header h2 .gray { color: var(--gray); }
     .infra-header p { font-size: 16px; color: #777; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
     .infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .infra-card { background: #0d0d0d; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; }
+    .infra-card { background: #fafafa; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; }
     .infra-card-top { display: flex; align-items: flex-start; gap: 16px; }
     .infra-card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .infra-card-icon svg { width: 22px; height: 22px; }
     .infra-card-icon.blue { background: rgba(96,165,250,0.1); color: var(--blue); }
     .infra-card-icon.green { background: rgba(74,222,128,0.1); color: var(--green); }
-    .infra-card-info h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #fff; margin-bottom: 6px; }
-    .infra-card-info p { font-size: 14px; color: #666; line-height: 1.6; }
-    .infra-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.04); }
-    .infra-list li { font-size: 13px; font-weight: 500; color: #555; display: flex; align-items: center; gap: 10px; }
+    .infra-card-info h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 6px; }
+    .infra-card-info p { font-size: 14px; color: #888; line-height: 1.6; }
+    .infra-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; border-top: 1px solid var(--border); }
+    .infra-list li { font-size: 13px; font-weight: 500; color: #777; display: flex; align-items: center; gap: 10px; }
     .infra-list li .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
     .infra-list li .dot.blue { background: var(--blue); }
     .infra-list li .dot.green { background: var(--green); }
-    .mini-terminal { width: 100%; background: #161616; border-radius: 10px; padding: 16px; font-family: var(--mono); font-size: 11px; color: #555; line-height: 1.9; overflow: hidden; border: 1px solid rgba(255,255,255,0.04); }
+    .mini-terminal { width: 100%; background: #111; border-radius: 10px; padding: 16px; font-family: var(--mono); font-size: 11px; color: #555; line-height: 1.9; overflow: hidden; }
     .mini-terminal .prompt { color: #444; }
     .mini-terminal .ok { color: var(--green); }
     .mini-terminal .val { color: var(--blue); }
     .mini-terminal .warn { color: var(--amber); }
     .mini-terminal .hi { color: var(--green); }
 
-    /* FLOW DIAGRAM */
-    .flow-section { background: #0d0d0d; padding: 100px 48px; display: flex; flex-direction: column; align-items: center; }
-    .flow-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #444; margin-bottom: 40px; }
-    .flow-container { width: 100%; max-width: 880px; background: #111; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 48px 32px 40px; position: relative; overflow: hidden; }
-    .flow-container::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 15% 50%, rgba(251,191,36,0.03) 0%, transparent 40%), radial-gradient(circle at 85% 50%, rgba(192,132,252,0.03) 0%, transparent 40%); }
+    /* FLOW DIAGRAM — white bg, tight connection to cards above */
+    .flow-area { margin-top: 48px; display: flex; flex-direction: column; align-items: center; }
+    .flow-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; margin-bottom: 32px; }
+    .flow-container {
+      width: 100%; max-width: 880px;
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 44px 32px 36px;
+      position: relative; overflow: hidden;
+    }
+
+    /* Flow row — horizontal pipeline */
     .flow-row { display: flex; align-items: center; justify-content: center; gap: 0; position: relative; width: 100%; }
     .flow-node { display: flex; flex-direction: column; align-items: center; gap: 10px; flex-shrink: 0; position: relative; z-index: 2; }
-    .flow-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
-    .flow-icon svg { width: 28px; height: 28px; }
-    .flow-icon.solar { background: rgba(251,191,36,0.1); color: var(--amber); }
-    .flow-icon.battery { background: rgba(74,222,128,0.1); color: var(--green); }
-    .flow-icon.compute { background: rgba(96,165,250,0.1); color: var(--blue); }
-    .flow-icon.output-qi { background: rgba(96,165,250,0.1); color: var(--blue); }
-    .flow-icon.output-ai { background: rgba(192,132,252,0.1); color: var(--purple); }
-    .flow-node-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #555; white-space: nowrap; }
-    .flow-connector { flex: 1; min-width: 32px; max-width: 80px; height: 2px; position: relative; z-index: 1; margin: 0 -2px; margin-bottom: 22px; }
-    .flow-connector .line-bg { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.06); border-radius: 1px; }
+    .flow-icon { width: 52px; height: 52px; border-radius: 13px; display: flex; align-items: center; justify-content: center; }
+    .flow-icon svg { width: 26px; height: 26px; }
+    .flow-icon.solar { background: rgba(251,191,36,0.12); color: var(--amber); }
+    .flow-icon.battery { background: rgba(74,222,128,0.12); color: var(--green); }
+    .flow-icon.compute { background: rgba(96,165,250,0.12); color: var(--blue); }
+    .flow-icon.output-qi { background: rgba(96,165,250,0.12); color: var(--blue); }
+    .flow-icon.output-ai { background: rgba(192,132,252,0.12); color: var(--purple); }
+    .flow-node-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #aaa; white-space: nowrap; }
+
+    .flow-connector { flex: 1; min-width: 28px; max-width: 72px; height: 2px; position: relative; z-index: 1; margin: 0 -2px; margin-bottom: 22px; }
+    .flow-connector .line-bg { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: rgba(0,0,0,0.08); border-radius: 1px; }
     .flow-connector .line-pulse { position: absolute; top: 0; left: 0; height: 2px; width: 24px; border-radius: 1px; animation: flowPulse 2.2s ease-in-out infinite; }
     .flow-connector.c1 .line-pulse { background: var(--amber); animation-delay: 0s; }
     .flow-connector.c2 .line-pulse { background: var(--green); animation-delay: 0.55s; }
     @keyframes flowPulse { 0% { left: -24px; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100%); opacity: 0; } }
-    .fork-zone { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; position: relative; z-index: 2; }
-    .fork-branches { display: flex; gap: 20px; align-items: flex-start; }
-    .fork-branch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .fork-branch .flow-icon { width: 48px; height: 48px; border-radius: 12px; }
-    .fork-branch .flow-icon svg { width: 22px; height: 22px; }
-    .fork-branch-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #555; white-space: nowrap; }
-    .fork-svg { width: 100px; height: 48px; flex-shrink: 0; margin-bottom: 22px; }
-    .fork-svg .fork-line { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 2; }
+
+    /* Fork: horizontal line splits to vertical stack */
+    .fork-svg { width: 80px; height: 72px; flex-shrink: 0; margin-bottom: 22px; }
+    .fork-svg .fork-line { fill: none; stroke: rgba(0,0,0,0.08); stroke-width: 2; }
     .fork-svg .fork-dot { animation: forkBlink 2.8s ease-in-out infinite; }
     .fork-svg .fork-dot.top { animation-delay: 1.3s; }
     .fork-svg .fork-dot.bot { animation-delay: 1.7s; }
     @keyframes forkBlink { 0%, 100% { opacity: 0; } 25%, 75% { opacity: 1; } }
-    .converge-svg { width: 80px; height: 48px; flex-shrink: 0; margin-bottom: 22px; }
-    .converge-svg .conv-line { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 2; }
+
+    /* Fork zone — vertical stack */
+    .fork-zone { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; position: relative; z-index: 2; gap: 0; }
+    .fork-stack { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .fork-branch { display: flex; align-items: center; gap: 10px; }
+    .fork-branch .flow-icon { width: 44px; height: 44px; border-radius: 11px; }
+    .fork-branch .flow-icon svg { width: 20px; height: 20px; }
+    .fork-branch-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #aaa; white-space: nowrap; }
+
+    /* Converge */
+    .converge-svg { width: 64px; height: 72px; flex-shrink: 0; margin-bottom: 22px; }
+    .converge-svg .conv-line { fill: none; stroke: rgba(0,0,0,0.08); stroke-width: 2; }
     .converge-svg .conv-dot { animation: forkBlink 2.8s ease-in-out infinite; }
     .converge-svg .conv-dot.top { animation-delay: 2s; }
     .converge-svg .conv-dot.bot { animation-delay: 2.3s; }
+
+    /* Pricing output */
     .pricing-output { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; position: relative; z-index: 2; }
-    .pricing-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 20px; text-align: center; min-width: 130px; }
-    .pricing-box .price-label { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #444; margin-bottom: 8px; }
-    .pricing-box .price-values { display: flex; flex-direction: column; gap: 2px; }
-    .pricing-box .price-line { font-family: var(--mono); font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .pricing-box .price-line .chain { color: #555; font-size: 10px; }
-    .pricing-box .price-line .hi { color: var(--green); }
+    .pricing-box { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 14px 20px; text-align: center; min-width: 140px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+    .pricing-box .price-label { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #bbb; margin-bottom: 8px; }
+    .pricing-box .price-values { display: flex; flex-direction: column; gap: 3px; }
+    .pricing-box .price-line { font-family: var(--mono); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .pricing-box .price-line .chain { color: #aaa; font-size: 10px; min-width: 42px; text-align: left; }
+    .pricing-box .price-line .hi { color: #16a34a; }
     .pricing-box .price-line .lo { color: #ef4444; }
-    .pricing-output-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #555; }
+    .pricing-box .price-line .mid { color: var(--amber); }
+    .pricing-output-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #bbb; }
     .price-tick { animation: priceTick 3s ease-in-out infinite; }
     @keyframes priceTick { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
@@ -128,6 +149,9 @@
     .lab-visual { flex: 0 0 320px; background: #0d0d0d; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .lab-visual-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(192,132,252,0.1); color: var(--purple); }
     .lab-visual-icon svg { width: 24px; height: 24px; }
+
+    /* Divider */
+    .svc-divider { width: 100%; max-width: 960px; margin: 0 auto; border: none; border-top: 1px solid var(--border); }
 
     /* REPORTS */
     .reports-section { background: #0d0d0d; padding: 100px 48px; text-align: center; }
@@ -162,14 +186,12 @@
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .hero { padding: 80px 20px 60px; }
-      .infra-section { padding: 60px 20px; }
+      .infra-flow-wrap { padding: 60px 20px; }
       .infra-grid { grid-template-columns: 1fr; }
-      .flow-section { padding: 80px 16px; }
-      .flow-container { padding: 32px 12px 28px; border-radius: 14px; }
+      .flow-container { padding: 28px 12px 24px; border-radius: 14px; }
       .flow-row { flex-wrap: wrap; gap: 16px; justify-content: center; }
       .flow-connector { display: none; }
       .fork-svg, .converge-svg { display: none; }
-      .fork-branches { gap: 16px; }
       .lab-section { flex-direction: column; padding: 60px 20px; gap: 32px; }
       .lab-visual { flex: none; width: 100%; }
       .reports-section { padding: 80px 20px; }
@@ -179,9 +201,9 @@
     @media (max-width: 480px) {
       .flow-icon { width: 44px; height: 44px; border-radius: 10px; }
       .flow-icon svg { width: 22px; height: 22px; }
-      .fork-branch .flow-icon { width: 40px; height: 40px; }
+      .fork-branch .flow-icon { width: 38px; height: 38px; }
       .fork-branch .flow-icon svg { width: 18px; height: 18px; }
-      .pricing-box { min-width: 110px; padding: 10px 14px; }
+      .pricing-box { min-width: 120px; padding: 10px 14px; }
     }
   </style>
 </head>
@@ -200,129 +222,157 @@
   <p class="subtitle">Theoretical foundations and applied experiments in energy money — from entropy mechanics to operational infrastructure.</p>
 </section>
 
-<!-- MINING + DATA INFRASTRUCTURE -->
-<section class="infra-section">
-  <div class="infra-header">
-    <span class="section-label">Services</span>
-    <h2>Mining + Data <span class="gray">Infrastructure</span></h2>
-    <p>Physical energy operations and full-node data services powering applied research on the Quai Network.</p>
-  </div>
-  <div class="infra-grid">
-    <div class="infra-card">
-      <div class="infra-card-top">
-        <div class="infra-card-icon blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
+<!-- ═══ MINING + DATA INFRASTRUCTURE + FLOW DIAGRAM (all white) ═══ -->
+<section class="infra-flow-wrap">
+  <div class="infra-inner">
+
+    <div class="infra-header">
+      <span class="section-label">Services</span>
+      <h2>Mining + Data <span class="gray">Infrastructure</span></h2>
+      <p>Physical energy operations and full-node data services powering applied research on the Quai Network.</p>
+    </div>
+
+    <div class="infra-grid">
+      <!-- Data Infrastructure -->
+      <div class="infra-card">
+        <div class="infra-card-top">
+          <div class="infra-card-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
+          </div>
+          <div class="infra-card-info">
+            <h3>Data Infrastructure</h3>
+            <p>Full-node RPC endpoints and indexer services for efficient data access, organization, and query performance.</p>
+          </div>
         </div>
-        <div class="infra-card-info">
-          <h3>Data Infrastructure</h3>
-          <p>Full-node RPC endpoints and indexer services for efficient data access, organization, and query performance.</p>
+        <ul class="infra-list">
+          <li><span class="dot blue"></span>RPC Endpoints (Full Node)</li>
+          <li><span class="dot blue"></span>Indexer Services</li>
+          <li><span class="dot blue"></span>Efficient Data Organization &amp; Query</li>
+        </ul>
+        <div class="mini-terminal">
+          <span class="prompt">$</span> quai rpc status<br>
+          <span class="ok">&#9679;</span> node <span class="val">synced</span> block 2,847,391<br>
+          <span class="ok">&#9679;</span> indexer <span class="val">healthy</span> 14ms latency<br>
+          <span class="prompt">$</span> quai index query --zone cyprus-1<br>
+          <span class="val">&rarr;</span> 1,204 txns indexed
         </div>
       </div>
-      <ul class="infra-list">
-        <li><span class="dot blue"></span>RPC Endpoints (Full Node)</li>
-        <li><span class="dot blue"></span>Indexer Services</li>
-        <li><span class="dot blue"></span>Efficient Data Organization &amp; Query</li>
-      </ul>
-      <div class="mini-terminal">
-        <span class="prompt">$</span> quai rpc status<br>
-        <span class="ok">&#9679;</span> node <span class="val">synced</span> block 2,847,391<br>
-        <span class="ok">&#9679;</span> indexer <span class="val">healthy</span> 14ms latency<br>
-        <span class="prompt">$</span> quai index query --zone cyprus-1<br>
-        <span class="val">&rarr;</span> 1,204 txns indexed
+
+      <!-- Energy Operations -->
+      <div class="infra-card">
+        <div class="infra-card-top">
+          <div class="infra-card-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          </div>
+          <div class="infra-card-info">
+            <h3>Energy Operations</h3>
+            <p>Mining hardware powered by solar generation with battery storage for continuous, low-cost operation.</p>
+          </div>
+        </div>
+        <ul class="infra-list">
+          <li><span class="dot green"></span>Mining Hardware Operations</li>
+          <li><span class="dot green"></span>Solar Energy Harvesting</li>
+          <li><span class="dot green"></span>Battery Storage Systems</li>
+        </ul>
+        <div class="mini-terminal">
+          <span class="prompt">$</span> aem ops status<br>
+          <span class="ok">&#9679;</span> solar array <span class="val">4.2 kW</span> generating<br>
+          <span class="ok">&#9679;</span> battery <span class="val">87%</span> 13.2 kWh stored<br>
+          <span class="ok">&#9679;</span> hashrate <span class="val">318 TH/s</span> online<br>
+          <span class="warn">&rarr;</span> effective $0.02/kWh
+        </div>
       </div>
     </div>
-    <div class="infra-card">
-      <div class="infra-card-top">
-        <div class="infra-card-icon green">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+
+    <!-- FLOW DIAGRAM — directly below cards, same white wrapper -->
+    <div class="flow-area">
+      <span class="flow-label">Experimental Energy Money Lab</span>
+      <div class="flow-container">
+        <div class="flow-row">
+
+          <!-- Solar -->
+          <div class="flow-node">
+            <div class="flow-icon solar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            </div>
+            <span class="flow-node-label">Solar</span>
+          </div>
+
+          <div class="flow-connector c1"><div class="line-bg"></div><div class="line-pulse"></div></div>
+
+          <!-- Battery -->
+          <div class="flow-node">
+            <div class="flow-icon battery">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="11" y1="10" x2="11" y2="14"/></svg>
+            </div>
+            <span class="flow-node-label">Battery</span>
+          </div>
+
+          <div class="flow-connector c2"><div class="line-bg"></div><div class="line-pulse"></div></div>
+
+          <!-- Compute -->
+          <div class="flow-node">
+            <div class="flow-icon compute">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M9 2v2"/><path d="M9 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/></svg>
+            </div>
+            <span class="flow-node-label">Compute</span>
+          </div>
+
+          <!-- Fork SVG — splits to vertical stack -->
+          <svg class="fork-svg" viewBox="0 0 80 72">
+            <path class="fork-line" d="M0,36 L24,36 Q36,36 40,18 L56,12"/>
+            <path class="fork-line" d="M0,36 L24,36 Q36,36 40,54 L56,60"/>
+            <circle class="fork-dot top" cx="42" cy="20" r="2.5" fill="#60a5fa"/>
+            <circle class="fork-dot bot" cx="42" cy="52" r="2.5" fill="#c084fc"/>
+          </svg>
+
+          <!-- Vertical fork: Quai/Qi on top, AI Inference below -->
+          <div class="fork-zone">
+            <div class="fork-stack">
+              <div class="fork-branch">
+                <div class="flow-icon output-qi">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <span class="fork-branch-label">Quai / Qi</span>
+              </div>
+              <div class="fork-branch">
+                <div class="flow-icon output-ai">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 3-2 6h-4c0-3-2-4-2-6a4 4 0 0 1 4-4z"/><line x1="10" y1="16" x2="14" y2="16"/><line x1="10" y1="19" x2="14" y2="19"/></svg>
+                </div>
+                <span class="fork-branch-label">AI Inference</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Converge SVG -->
+          <svg class="converge-svg" viewBox="0 0 64 72">
+            <path class="conv-line" d="M0,12 L16,12 Q28,12 32,36 L44,36 L64,36"/>
+            <path class="conv-line" d="M0,60 L16,60 Q28,60 32,36"/>
+            <circle class="conv-dot top" cx="24" cy="20" r="2.5" fill="#60a5fa"/>
+            <circle class="conv-dot bot" cx="24" cy="52" r="2.5" fill="#c084fc"/>
+          </svg>
+
+          <!-- Pricing Output — 3 lines -->
+          <div class="pricing-output">
+            <div class="pricing-box">
+              <div class="price-label">Opportunity Cost</div>
+              <div class="price-values price-tick">
+                <div class="price-line"><span class="chain">QUAI</span> <span class="hi">+$0.047</span></div>
+                <div class="price-line"><span class="chain">BTC</span> <span class="lo">&#8722;$0.031</span></div>
+                <div class="price-line"><span class="chain">AGENT</span> <span class="mid">+$0.019</span></div>
+              </div>
+            </div>
+            <span class="pricing-output-label">$/kWh Delta</span>
+          </div>
+
         </div>
-        <div class="infra-card-info">
-          <h3>Energy Operations</h3>
-          <p>Mining hardware powered by solar generation with battery storage for continuous, low-cost operation.</p>
-        </div>
-      </div>
-      <ul class="infra-list">
-        <li><span class="dot green"></span>Mining Hardware Operations</li>
-        <li><span class="dot green"></span>Solar Energy Harvesting</li>
-        <li><span class="dot green"></span>Battery Storage Systems</li>
-      </ul>
-      <div class="mini-terminal">
-        <span class="prompt">$</span> aem ops status<br>
-        <span class="ok">&#9679;</span> solar array <span class="val">4.2 kW</span> generating<br>
-        <span class="ok">&#9679;</span> battery <span class="val">87%</span> 13.2 kWh stored<br>
-        <span class="ok">&#9679;</span> hashrate <span class="val">318 TH/s</span> online<br>
-        <span class="warn">&rarr;</span> effective $0.02/kWh
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- ENERGY FLOW DIAGRAM -->
-<section class="flow-section">
-  <span class="flow-label">Experimental Energy Money Lab</span>
-  <div class="flow-container">
-    <div class="flow-row">
-      <div class="flow-node">
-        <div class="flow-icon solar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-        </div>
-        <span class="flow-node-label">Solar</span>
-      </div>
-      <div class="flow-connector c1"><div class="line-bg"></div><div class="line-pulse"></div></div>
-      <div class="flow-node">
-        <div class="flow-icon battery">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="11" y1="10" x2="11" y2="14"/></svg>
-        </div>
-        <span class="flow-node-label">Battery</span>
-      </div>
-      <div class="flow-connector c2"><div class="line-bg"></div><div class="line-pulse"></div></div>
-      <div class="flow-node">
-        <div class="flow-icon compute">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M9 2v2"/><path d="M9 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/></svg>
-        </div>
-        <span class="flow-node-label">Compute</span>
-      </div>
-      <svg class="fork-svg" viewBox="0 0 100 48">
-        <path class="fork-line" d="M0,24 L30,24 Q42,24 48,10 L65,6"/>
-        <path class="fork-line" d="M0,24 L30,24 Q42,24 48,38 L65,42"/>
-        <circle class="fork-dot top" cx="50" cy="12" r="2.5" fill="#60a5fa"/>
-        <circle class="fork-dot bot" cx="50" cy="36" r="2.5" fill="#c084fc"/>
-      </svg>
-      <div class="fork-zone">
-        <div class="fork-branches">
-          <div class="fork-branch">
-            <div class="flow-icon output-qi">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
-            <span class="fork-branch-label">Quai / Qi</span>
-          </div>
-          <div class="fork-branch">
-            <div class="flow-icon output-ai">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 3-2 6h-4c0-3-2-4-2-6a4 4 0 0 1 4-4z"/><line x1="10" y1="16" x2="14" y2="16"/><line x1="10" y1="19" x2="14" y2="19"/></svg>
-            </div>
-            <span class="fork-branch-label">AI Inference</span>
-          </div>
-        </div>
-      </div>
-      <svg class="converge-svg" viewBox="0 0 80 48">
-        <path class="conv-line" d="M0,6 L20,6 Q32,6 38,24 L50,24 L80,24"/>
-        <path class="conv-line" d="M0,42 L20,42 Q32,42 38,24"/>
-        <circle class="conv-dot top" cx="30" cy="12" r="2.5" fill="#60a5fa"/>
-        <circle class="conv-dot bot" cx="30" cy="36" r="2.5" fill="#c084fc"/>
-      </svg>
-      <div class="pricing-output">
-        <div class="pricing-box">
-          <div class="price-label">Opportunity Cost</div>
-          <div class="price-values price-tick">
-            <div class="price-line"><span class="chain">QUAI</span> <span class="hi">+$0.047</span></div>
-            <div class="price-line"><span class="chain">BTC</span> <span class="lo">&#8722;$0.031</span></div>
-          </div>
-        </div>
-        <span class="pricing-output-label">$/kWh Delta</span>
-      </div>
-    </div>
-  </div>
-</section>
+<hr class="svc-divider">
 
 <!-- PROFITABILITY LAB -->
 <section class="lab-section">
