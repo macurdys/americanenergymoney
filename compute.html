@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -270,7 +271,7 @@
 <!-- ── THE INSTRUMENT ── -->
 <section class="section-light">
   <h2><span class="gray">The</span> instrument</h2>
-  <p class="lead">A perpetual contract that lets agents acquire inference compute at a known energy cost. The market discovers the price. The physics determines the settlement.</p>
+  <p class="lead">A perpetual contract that lets agents acquire inference compute at a known energy cost — priced in Qi, the energy dollar. The market discovers the price. Settlement, contracting, and exchange all flow through QUAI.</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">01</div>
@@ -280,12 +281,12 @@
     <div class="step">
       <div class="step-num">02</div>
       <h3>Qi-priced</h3>
-      <p>The futures price is denominated in Qi — the market-discovered value of energy Price discovery happens here, where traders reveal what inference is worth.</p>
+      <p>The futures price is denominated in Qi — the energy dollar. Qi is pegged to the real cost of performing work, so every price quote carries a physical meaning. Price discovery happens here, where traders reveal what inference is worth in energy terms.</p>
     </div>
     <div class="step">
       <div class="step-num">03</div>
       <h3>QUAI-settled</h3>
-      <p>Settlement is anchored to QUAI — the deflationary, store of value token. Qi measures the thermodynamic work actually performed, giving both sides a physical basis for contract fulfillment.</p>
+      <p>All settlement, contracting, and exchange happens in QUAI — the scarce, programmable token that carries the network's full functionality. The convertible controller keeps Qi and QUAI equivalent, so energy-priced contracts resolve seamlessly into QUAI settlement flows.</p>
     </div>
   </div>
 </section>
@@ -293,17 +294,17 @@
 <!-- ── TWO TOKENS ── -->
 <section class="section-dark">
   <h2>Two tokens, <span class="gray">one contract</span></h2>
-  <p class="lead">Quai Network's dual-token architecture maps directly onto the structure of perpetual futures. Each token plays a distinct role.</p>
+  <p class="lead">Quai Network's dual-token architecture maps directly onto the structure of perpetual futures. Qi prices, QUAI settles — and the convertible controller keeps them equivalent.</p>
   <div class="token-grid">
     <div class="token-card dark-card">
       <div class="token-label">Price discovery</div>
       <h3>Qi</h3>
-      <p>The futures price f<sub>t</sub>. QUAI is scarce and market-priced — its value is discovered through trading. When an agent buys a Compute Future, the QUAI price reflects the market's consensus on what a unit of inference compute is worth over time.</p>
+      <p>The futures price f<sub>t</sub>. Qi is energy-denominated — pegged to the real cost of performing work on the network. When an agent buys a Compute Future, the Qi price expresses what a unit of inference compute is worth in physical energy terms, giving every quote a thermodynamic meaning.</p>
     </div>
     <div class="token-card dark-card">
-      <div class="token-label">Settlement</div>
+      <div class="token-label">Settlement &amp; functionality</div>
       <h3>QUAI</h3>
-      <p>The dividend index d<sub>t</sub>. Qi is energy-denominated — pegged to the real cost of performing work on the network. Each settlement period, the Qi paid out measures the actual thermodynamic cost of inference delivered, anchoring the contract to physical reality.</p>
+      <p>The settlement layer. QUAI is scarce, programmable, and market-priced — carrying all contracting, exchange, conversion, and liquidity operations. Each settlement period, the net cash flow is paid in QUAI, anchoring the contract to the network's full economic infrastructure via the convertible controller.</p>
     </div>
   </div>
 </section>
@@ -311,17 +312,17 @@
 <!-- ── SETTLEMENT ── -->
 <section class="section-light">
   <h2><span class="gray">How</span> settlement works</h2>
-  <p class="lead">The daily resettlement combines the change in futures price with the difference between the energy dividend and the cost of capital — following the perpetual futures structure proposed by Shiller (1993).</p>
+  <p class="lead">The daily resettlement combines the change in the Qi-denominated futures price with the difference between the energy dividend and the cost of capital — following the perpetual futures structure proposed by Shiller (1993). The resulting cash flow is settled in QUAI.</p>
   <div class="formula-block">
     <div class="formula-box" style="background: #fafafa; border-color: var(--border); color: #333;">
       s<sub>t+1</sub>&nbsp; = &nbsp;(f<sub>t+1</sub> − f<sub>t</sub>)&nbsp; + &nbsp;(d<sub>t+1</sub> − r<sub>t</sub> · f<sub>t</sub>)
     </div>
     <div class="formula-note">
       <div class="var-list">
-        <div class="var-item"><code>f<sub>t</sub></code> The perpetual futures price in Qi at time t — what the market says compute is worth.</div>
-        <div class="var-item"><code>d<sub>t+1</sub></code> The QUAI settlement index — the energy cost of inference actually delivered to the network in that period.</div>
+        <div class="var-item"><code>f<sub>t</sub></code> The perpetual futures price in Qi at time t — what the market says compute is worth in energy terms.</div>
+        <div class="var-item"><code>d<sub>t+1</sub></code> The energy dividend index — the Qi-denominated energy cost of inference actually delivered, converted to QUAI for settlement.</div>
         <div class="var-item"><code>r<sub>t</sub></code> The return on an alternative asset between t and t+1 — the cost of capital for holding the position.</div>
-        <div class="var-item"><code>s<sub>t+1</sub></code> The net daily resettlement paid from short to long. Combines both price movement and the energy dividend.</div>
+        <div class="var-item"><code>s<sub>t+1</sub></code> The net daily resettlement paid in QUAI from short to long. Combines both price movement and the energy dividend.</div>
       </div>
     </div>
   </div>
@@ -338,11 +339,11 @@
     </div>
     <div class="why-card">
       <h3 style="color:#fff;">Cash-flow settlement</h3>
-      <p style="color:#888;">When the true price of compute is hard to observe, settle on what you can measure — the energy cost of work performed. Qi provides this observable cash-flow anchor.</p>
+      <p style="color:#888;">When the true price of compute is hard to observe, price it in what you can measure — the energy cost of work performed, denominated in Qi. Settlement then flows through QUAI, the network's programmable and liquid token.</p>
     </div>
     <div class="why-card">
       <h3 style="color:#fff;">Price discovery</h3>
-      <p style="color:#888;">The funding mechanism creates periodic information aggregation. Traders reveal their beliefs about compute value every settlement cycle, driving the futures price toward fair value.</p>
+      <p style="color:#888;">The funding mechanism creates periodic information aggregation. Traders reveal their beliefs about compute value every settlement cycle, driving the Qi-denominated futures price toward fair value.</p>
     </div>
   </div>
 </section>
@@ -350,22 +351,22 @@
 <!-- ── DESIGNED FOR AGENTS ── -->
 <section class="section-light">
   <h2><span class="gray">Designed for</span> agents</h2>
-  <p class="lead">Autonomous agents need to acquire, budget, and allocate inference compute programmatically. Compute Futures give them a standard instrument to do it.</p>
+  <p class="lead">Autonomous agents need to acquire, budget, and allocate inference compute programmatically. Compute Futures give them a standard Qi-priced, QUAI-settled instrument to do it.</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">→</div>
       <h3>Lock in cost</h3>
-      <p>An agent that needs inference over the next month can go long on a Compute Future and lock in the energy-equivalent cost of that compute today.</p>
+      <p>An agent that needs inference over the next month can go long on a Compute Future and lock in the Qi-denominated energy cost of that compute today, with all margin and settlement handled in QUAI.</p>
     </div>
     <div class="step">
       <div class="step-num">→</div>
       <h3>Hedge supply</h3>
-      <p>A compute provider can go short — guaranteeing revenue for capacity it plans to deliver, hedging against falling demand or price declines.</p>
+      <p>A compute provider can go short — locking in QUAI revenue for capacity it plans to deliver, hedging against falling demand or price declines in the Qi-denominated market.</p>
     </div>
     <div class="step">
       <div class="step-num">→</div>
       <h3>Trade the basis</h3>
-      <p>Arbitrageurs can trade the spread between the QUAI futures price and the Qi settlement index, keeping prices aligned and providing liquidity to both sides.</p>
+      <p>Arbitrageurs can trade the spread between the Qi futures price and the QUAI settlement flow, keeping prices aligned and providing liquidity to both sides.</p>
     </div>
   </div>
 </section>
@@ -373,7 +374,7 @@
 <!-- ── CTA ── -->
 <section class="cta-section">
   <h2>Try the Controller</h2>
-  <p>See how the dual-token mechanism balances energy cost and market price — the engine behind Compute Futures settlement.</p>
+  <p>See how the convertible controller keeps Qi pricing and QUAI settlement equivalent — the engine behind Compute Futures.</p>
   <a class="cta-btn" href="controller.html">Launch Demo</a>
 </section>
 
