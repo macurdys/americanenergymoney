@@ -71,12 +71,124 @@
     .partner-logos a:hover { opacity: 0.7; }
     .partner-logos img { height: 22px; width: auto; }
 
+    /* ─── MISSION PROOF ─── */
+    .mission-section { background: #fff; padding: 100px 48px; }
+    .mission-inner { max-width: 1040px; margin: 0 auto; }
+
+    .mission-header { text-align: center; margin-bottom: 64px; }
+    .mission-header h2 { font-size: clamp(32px, 4vw, 46px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+    .mission-header h2 .gray { color: var(--gray); }
+    .mission-header p { font-size: 16px; color: #777; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+    /* Bounty banner */
+    .bounty-banner { display: flex; align-items: center; justify-content: center; gap: 32px; background: #0d0d0d; border-radius: 16px; padding: 28px 36px; margin-bottom: 48px; flex-wrap: wrap; }
+    .bounty-reward { text-align: center; }
+    .bounty-reward .reward-amount { font-family: var(--mono); font-size: clamp(28px, 3.5vw, 40px); font-weight: 800; color: #fff; letter-spacing: -0.03em; }
+    .bounty-reward .reward-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #555; margin-top: 4px; }
+    .bounty-divider { width: 1px; height: 48px; background: rgba(255,255,255,0.08); flex-shrink: 0; }
+    .bounty-meta { display: flex; flex-direction: column; gap: 6px; }
+    .bounty-meta-row { font-family: var(--mono); font-size: 12px; font-weight: 500; color: #666; display: flex; align-items: center; gap: 8px; }
+    .bounty-meta-row .meta-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .bounty-meta-row .meta-dot.green { background: var(--green); }
+    .bounty-meta-row .meta-dot.amber { background: var(--amber); }
+    .bounty-meta-row .meta-dot.blue { background: var(--blue); }
+    .bounty-meta-row span.hi { color: var(--green); }
+    .bounty-meta-row span.warn { color: var(--amber); }
+
+    /* Submission counter + pipeline row */
+    .mission-tracker { display: grid; grid-template-columns: 300px 1fr; gap: 24px; margin-bottom: 48px; }
+
+    /* Counter card */
+    .counter-card { background: #fafafa; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+    .counter-number { font-family: var(--mono); font-size: 64px; font-weight: 800; color: #111; line-height: 1; letter-spacing: -0.04em; }
+    .counter-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; }
+    .counter-submission { width: 100%; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-align: left; }
+    .counter-submission .sub-tag { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .counter-submission .sub-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    .counter-submission .sub-title { font-size: 13px; font-weight: 600; color: #333; line-height: 1.4; letter-spacing: -0.01em; }
+    .counter-submission .sub-method { font-family: var(--mono); font-size: 10px; color: #aaa; margin-top: 6px; }
+
+    /* Pipeline card */
+    .pipeline-card { background: #fafafa; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; }
+    .pipeline-card .pipeline-title { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; }
+    .pipeline-stages { display: flex; align-items: stretch; gap: 0; flex: 1; }
+    .pipeline-stage { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px 12px; position: relative; }
+    .pipeline-stage::after { content: ''; position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: var(--border); }
+    .pipeline-stage:last-child::after { display: none; }
+    .stage-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .stage-icon svg { width: 22px; height: 22px; }
+    .stage-icon.complete { background: rgba(74,222,128,0.1); color: var(--green); }
+    .stage-icon.active { background: rgba(251,191,36,0.15); color: var(--amber); animation: stagePulse 2.4s ease-in-out infinite; }
+    .stage-icon.pending { background: rgba(255,255,255,0.6); color: #ccc; }
+    @keyframes stagePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,0); } 50% { box-shadow: 0 0 0 8px rgba(251,191,36,0.08); } }
+    .stage-info { text-align: center; }
+    .stage-name { font-size: 14px; font-weight: 700; color: #111; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .stage-name.dim { color: #bbb; }
+    .stage-desc { font-size: 11px; color: #999; line-height: 1.5; }
+    .stage-status { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
+    .stage-status.done { background: rgba(74,222,128,0.1); color: var(--green); }
+    .stage-status.in-progress { background: rgba(251,191,36,0.12); color: var(--amber); }
+    .stage-status.waiting { background: rgba(0,0,0,0.03); color: #ccc; }
+
+    /* Context explainer */
+    .mission-explainer { background: #0d0d0d; border-radius: 16px; padding: 36px 32px; margin-bottom: 48px; display: flex; gap: 48px; align-items: flex-start; }
+    .explainer-text { flex: 1; min-width: 0; }
+    .explainer-text h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #fff; margin-bottom: 12px; }
+    .explainer-text p { font-size: 14px; color: #777; line-height: 1.75; }
+    .explainer-text p .white { color: #ccc; }
+    .explainer-terminal { flex: 0 0 320px; background: #161616; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; font-family: var(--mono); font-size: 11px; color: #555; line-height: 2; overflow: hidden; }
+    .explainer-terminal .prompt { color: #444; }
+    .explainer-terminal .ok { color: var(--green); }
+    .explainer-terminal .val { color: var(--blue); }
+    .explainer-terminal .warn { color: var(--amber); }
+    .explainer-terminal .hi { color: var(--green); }
+    .explainer-terminal .purple { color: var(--purple); }
+
+    /* Participate cards */
+    .participate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .participate-card { background: #fafafa; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; }
+    .participate-card .card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .participate-card .card-icon svg { width: 22px; height: 22px; }
+    .participate-card .card-icon.green { background: rgba(74,222,128,0.1); color: var(--green); }
+    .participate-card .card-icon.blue { background: rgba(96,165,250,0.1); color: var(--blue); }
+    .participate-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 8px; }
+    .participate-card p { font-size: 14px; color: #888; line-height: 1.65; margin-bottom: 20px; }
+    .participate-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .participate-list li { font-size: 13px; font-weight: 500; color: #666; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+    .participate-list li .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+    .participate-list li .dot.green { background: var(--green); }
+    .participate-list li .dot.blue { background: var(--blue); }
+    .participate-list li a { color: var(--blue); text-decoration: none; transition: color 0.15s; }
+    .participate-list li a:hover { color: #93c5fd; }
+    .submit-btn { display: inline-block; padding: 11px 28px; background: #111; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: -0.01em; border-radius: 100px; text-decoration: none; transition: background 0.15s, transform 0.15s; margin-top: 20px; }
+    .submit-btn:hover { background: #333; transform: scale(1.03); }
+
+    /* Video Grid */
+    .video-section { margin-top: 48px; }
+    .video-section-header { margin-bottom: 24px; }
+    .video-section-header h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 4px; }
+    .video-section-header p { font-size: 13px; color: #999; }
+    .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .video-card { border-radius: 12px; overflow: hidden; background: #000; aspect-ratio: 16/9; }
+    .video-card iframe { width: 100%; height: 100%; border: 0; display: block; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .hero { padding: 80px 20px 60px; }
       .reports-section { padding: 80px 20px; }
       .reports-grid { grid-template-columns: 1fr; }
+      .mission-section { padding: 60px 20px; }
+      .bounty-banner { flex-direction: column; gap: 16px; padding: 24px 20px; }
+      .bounty-divider { width: 80px; height: 1px; }
+      .mission-tracker { grid-template-columns: 1fr; }
+      .pipeline-stages { flex-wrap: wrap; }
+      .pipeline-stage { flex: none; width: 100%; }
+      .pipeline-stage::after { display: none; }
+      .mission-explainer { flex-direction: column; gap: 24px; padding: 28px 20px; }
+      .explainer-terminal { flex: none; width: 100%; }
+      .participate-grid { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
       footer { padding: 24px 20px; }
     }
   </style>
@@ -142,6 +254,162 @@
   </div>
 </section>
 
+<!-- ═══ MISSION PROOF: CAUSAL INVARIANCE ═══ -->
+<section class="mission-section">
+  <div class="mission-inner">
+
+    <div class="mission-header">
+      <span class="section-label">Open Bounty</span>
+      <h2>Mission Proof: <span class="gray">Causal Invariance</span></h2>
+      <p>Prove or disprove that Quai Network's PoEM fork-choice rule exhibits causal invariance — a foundational property from Wolfram Physics guaranteeing deterministic consensus across all execution paths.</p>
+    </div>
+
+    <!-- Bounty Banner -->
+    <div class="bounty-banner">
+      <div class="bounty-reward">
+        <div class="reward-amount">250,000 QUAI</div>
+        <div class="reward-label">Bounty Reward</div>
+      </div>
+      <div class="bounty-divider"></div>
+      <div class="bounty-meta">
+        <div class="bounty-meta-row"><span class="meta-dot green"></span>Individual <span class="hi">&amp;</span> team submissions accepted</div>
+        <div class="bounty-meta-row"><span class="meta-dot amber"></span>Wolfram Notebook + Analysis + Visualization required</div>
+        <div class="bounty-meta-row"><span class="meta-dot blue"></span>Evaluated by Stephen Wolfram &amp; Wolfram Institute</div>
+      </div>
+    </div>
+
+    <!-- Submission Counter + Pipeline -->
+    <div class="mission-tracker">
+
+      <!-- Counter -->
+      <div class="counter-card">
+        <div class="counter-number">1</div>
+        <div class="counter-label">Submission Received</div>
+        <div class="counter-submission">
+          <div class="sub-tag">Proof Submitted — July 11, 2025</div>
+          <div class="sub-title">Formal Verification of Causal Invariance in the Quai Network PoEM Fork-Choice Rule</div>
+          <div class="sub-method">Z3 SMT Solver · Proof by Contradiction · Cyprus-1 Mainnet Data</div>
+        </div>
+      </div>
+
+      <!-- Pipeline -->
+      <div class="pipeline-card">
+        <div class="pipeline-title">Verification Pipeline</div>
+        <div class="pipeline-stages">
+          <!-- Stage 1: Submission -->
+          <div class="pipeline-stage">
+            <div class="stage-icon complete">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="stage-info">
+              <div class="stage-name">Submission</div>
+              <div class="stage-desc">Proof + code + report delivered via bounty channel</div>
+            </div>
+            <span class="stage-status done">Complete</span>
+          </div>
+          <!-- Stage 2: Peer Review -->
+          <div class="pipeline-stage">
+            <div class="stage-icon active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="stage-info">
+              <div class="stage-name">Peer Review</div>
+              <div class="stage-desc">Independent reproduction &amp; validation of Z3 proof</div>
+            </div>
+            <span class="stage-status in-progress">In Progress</span>
+          </div>
+          <!-- Stage 3: Expert Verification -->
+          <div class="pipeline-stage">
+            <div class="stage-icon pending">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="stage-info">
+              <div class="stage-name dim">Expert Verification</div>
+              <div class="stage-desc">Review by Stephen Wolfram, Wolfram Institute &amp; Quai engineers</div>
+            </div>
+            <span class="stage-status waiting">Pending</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Context Explainer -->
+    <div class="mission-explainer">
+      <div class="explainer-text">
+        <h3>What is Causal Invariance?</h3>
+        <p>In Wolfram Physics, <span class="white">causal invariance</span> means that no matter the order in which a system's updates are applied, the resulting causal structure is always the same. Applied to blockchain consensus: regardless of the order nodes receive blocks over the network, all nodes must independently converge on a single, identical canonical chain.</p>
+        <p style="margin-top: 12px;">The submitted proof uses the <span class="white">Z3 Automated Theorem Prover</span> to establish this property for PoEM via proof by contradiction — asserting that two different block arrival permutations could produce different valid chains, then proving this is logically impossible (Z3 returns <span class="white">unsat</span>).</p>
+      </div>
+      <div class="explainer-terminal">
+        <span class="prompt">$</span> z3 poem_causal_invariance.smt2<br>
+        <span class="val">Loading</span> Cyprus-1 block headers...<br>
+        <span class="val">Blocks:</span> 1,000 consecutive<br>
+        <span class="val">Model:</span> PoEM strict total order<br>
+        <span class="prompt">$</span> assert ¬(chain_A = chain_B)<br>
+        <span class="warn">Solving</span> for counterexample...<br>
+        <span class="purple">Keys:</span> entropy → hash → block_id<br>
+        <span class="warn">...</span> 38.74s elapsed<br>
+        <span class="ok">Result:</span> <span class="hi">unsat</span><br>
+        <span class="ok">&#10003;</span> <span class="hi">Causal invariance proven</span>
+      </div>
+    </div>
+
+    <!-- Participate Cards -->
+    <div class="participate-grid">
+      <!-- Submit a Proof -->
+      <div class="participate-card">
+        <div class="card-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+        </div>
+        <h3>Submit a Proof</h3>
+        <p>Original work from individuals or teams. Must include a Wolfram Notebook, written analysis, and compelling visualization.</p>
+        <ul class="participate-list">
+          <li><span class="dot green"></span>Wolfram Notebook demonstrating Quai blocks interpreted through Wolfram Physics rewriting rules</li>
+          <li><span class="dot green"></span>Written narrative linking PoEM consensus to causal invariance</li>
+          <li><span class="dot green"></span>Visualizations of causal structure convergence across block orderings</li>
+          <li><span class="dot green"></span>Include a <a href="https://pelaguswallet.io/" target="_blank" rel="noopener">Pelagus Wallet</a> address for token distribution</li>
+        </ul>
+        <a class="submit-btn" href="/cdn-cgi/l/email-protection#1e6d737f7d6b6c7a675e697172786c7f73307d7173216d6b7c747b7d6a235d7f6b6d7f723b2c2e5770687f6c777f707d7b3b2c2e5c716b706a673b2c2e4d6b7c73776d6d777170">Submit via Email</a>
+      </div>
+
+      <!-- Access Materials -->
+      <div class="participate-card">
+        <div class="card-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3>Access Materials</h3>
+        <p>Resources for understanding the bounty, Wolfram Physics foundations, and the Quai Network architecture.</p>
+        <ul class="participate-list">
+          <li><span class="dot blue"></span><a href="https://stats.quai.network" target="_blank" rel="noopener">Stats.quai.network</a> — Live network statistics</li>
+          <li><span class="dot blue"></span><a href="https://www.wolframcloud.com/obj/wolframblockchainlabs/Published/QuaiIntegration.nb" target="_blank" rel="noopener">Wolfram Notebook: Quai Integration</a></li>
+          <li><span class="dot blue"></span><a href="https://www.wolframphysics.org/technical-introduction/the-updating-process-for-string-substitution-systems/causal-invariance/" target="_blank" rel="noopener">Wolfram Physics: Causal Invariance</a></li>
+          <li><span class="dot blue"></span><a href="https://arxiv.org/pdf/2303.04305" target="_blank" rel="noopener">PoEM Whitepaper (arXiv)</a></li>
+          <li><span class="dot blue"></span>Podcast: Stephen Wolfram ↔ Quai Network (<a href="#" target="_blank" rel="noopener">Part 1</a>, <a href="#" target="_blank" rel="noopener">Part 2</a>)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Video Resources -->
+    <div class="video-section">
+      <div class="video-section-header">
+        <span class="section-label">Video Resources</span>
+        <h3>Causal Invariance — Lectures &amp; Discussions</h3>
+        <p>Foundational video content on causal invariance from Wolfram Physics and related research.</p>
+      </div>
+      <div class="video-grid">
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/vB492QIxJ0g" title="Causal Invariance — Wolfram Physics" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/BV3a0PzNNqE" title="Causal Invariance Discussion" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/LYFzm_xSWXw" title="Causal Invariance Lecture" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/Kx7mdrmTEYA" title="Wolfram Physics — Causal Invariance" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/hPQy576zP6c" title="Causal Invariance &amp; Physics" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        <div class="video-card"><iframe src="https://www.youtube.com/embed/rxaCCjY7IXk" title="Causal Invariance Exploration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <footer>
   <span>&copy; 2026 American Energy Money</span>
   <div class="partner-logos">
@@ -149,9 +417,4 @@
     <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
     <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
     <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
-    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
-  </div>
-</footer>
-
-</body>
-</html>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img
