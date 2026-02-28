@@ -205,7 +205,7 @@
 </nav>
 
 <section class="hero">
-  <h1><span class="dim">Thermoeconomic</span> Research</h1>
+  <h1>Thermoeconomic <span class="dim">Research</span></h1>
   <p class="subtitle">Theory, analysis, and formal verification at the intersection of energy, entropy, and economic value.</p>
 </section>
 
@@ -213,6 +213,7 @@
 <section class="reports-section">
   <span class="section-label">Research</span>
   <h2>Reports</h2>
+  <img src="images/thermoecon.png" alt="Thermoeconomics" style="height: 36px; width: auto; margin: 16px auto 12px; display: block; opacity: 0.6;">
   <p class="reports-lead">In-depth analysis on thermoeconomics, mining economics, and energy-money systems.</p>
   <div class="reports-grid">
     <div class="report-card">
@@ -221,7 +222,7 @@
         <div class="report-tag">Thermoeconomics</div>
         <div class="report-title">The Thermoeconomic Operator: Energy, Entropy &amp; Value</div>
         <div class="report-desc">A formal treatment of the thermoeconomic cost function — how energy expenditure and entropy production ground monetary value in physical law.</div>
-        <div class="report-footer"><span class="report-price">$24</span><a class="report-btn" href="https://buy.stripe.com/REPORT1_LINK" target="_blank" rel="noopener">Purchase</a></div>
+        <div class="report-footer"><span class="report-price">$20</span><a class="report-btn" href="https://buy.stripe.com/REPORT1_LINK" target="_blank" rel="noopener">Purchase</a></div>
       </div>
     </div>
     <div class="report-card">
@@ -230,25 +231,16 @@
         <div class="report-tag">Mining Economics</div>
         <div class="report-title">SHA-256 Mining: Bitcoin vs. Quai Profitability Analysis</div>
         <div class="report-desc">A comparative analysis of mining economics across Bitcoin and Quai Network, with real-world hardware data and energy cost modeling.</div>
-        <div class="report-footer"><span class="report-price">$18</span><a class="report-btn" href="https://buy.stripe.com/REPORT2_LINK" target="_blank" rel="noopener">Purchase</a></div>
+        <div class="report-footer"><span class="report-price">$20</span><a class="report-btn" href="https://buy.stripe.com/REPORT2_LINK" target="_blank" rel="noopener">Purchase</a></div>
       </div>
     </div>
     <div class="report-card">
       <div class="report-cover"><span class="report-cover-label">AEM Report &#8470;3</span></div>
       <div class="report-body">
-        <div class="report-tag">Consensus Mechanisms</div>
-        <div class="report-title">Proof Of Entropy Minima: Formal Verification &amp; Analysis</div>
-        <div class="report-desc">Formal verification of PoEM consensus using Z3 SMT solvers, with mathematical proofs of entropy minimization guarantees.</div>
-        <div class="report-footer"><span class="report-price">$32</span><a class="report-btn" href="https://buy.stripe.com/REPORT3_LINK" target="_blank" rel="noopener">Purchase</a></div>
-      </div>
-    </div>
-    <div class="report-card">
-      <div class="report-cover"><span class="report-cover-label">AEM Report &#8470;4</span></div>
-      <div class="report-body">
         <div class="report-tag">Physics Of Computation</div>
         <div class="report-title">Computational Irreducibility &amp; Causal Invariance In PoW</div>
         <div class="report-desc">How Wolfram Physics concepts — computational irreducibility and causal invariance — provide the theoretical substrate for proof-of-work consensus.</div>
-        <div class="report-footer"><span class="report-price">$28</span><a class="report-btn" href="https://buy.stripe.com/REPORT4_LINK" target="_blank" rel="noopener">Purchase</a></div>
+        <div class="report-footer"><span class="report-price">$20</span><a class="report-btn" href="https://buy.stripe.com/REPORT4_LINK" target="_blank" rel="noopener">Purchase</a></div>
       </div>
     </div>
   </div>
@@ -269,12 +261,14 @@
       <div class="bounty-reward">
         <div class="reward-amount">250,000 QUAI</div>
         <div class="reward-label">Bounty Reward</div>
+        <div style="font-family: var(--mono); font-size: 11px; color: var(--green); margin-top: 8px; font-weight: 600;">50,000 QUAI paid out</div>
       </div>
       <div class="bounty-divider"></div>
       <div class="bounty-meta">
         <div class="bounty-meta-row"><span class="meta-dot green"></span>Individual <span class="hi">&amp;</span> team submissions accepted</div>
         <div class="bounty-meta-row"><span class="meta-dot amber"></span>Wolfram Notebook + Analysis + Visualization required</div>
         <div class="bounty-meta-row"><span class="meta-dot blue"></span>Evaluated by Stephen Wolfram &amp; Wolfram Institute</div>
+        <div class="bounty-meta-row"><span class="meta-dot green"></span>Proof review team: <a href="https://quaivault.org" target="_blank" rel="noopener" style="color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(74,222,128,0.3);">QuaiVault.org</a></div>
       </div>
     </div>
 
@@ -336,22 +330,9 @@
 
     <!-- Context Explainer -->
     <div class="mission-explainer">
-      <div class="explainer-text">
+      <div class="explainer-text" style="flex: 1;">
         <h3>What is Causal Invariance?</h3>
         <p>In Wolfram Physics, <span class="white">causal invariance</span> means that no matter the order in which a system's updates are applied, the resulting causal structure is always the same. Applied to blockchain consensus: regardless of the order nodes receive blocks over the network, all nodes must independently converge on a single, identical canonical chain.</p>
-        <p style="margin-top: 12px;">The submitted proof uses the <span class="white">Z3 Automated Theorem Prover</span> to establish this property for PoEM via proof by contradiction — asserting that two different block arrival permutations could produce different valid chains, then proving this is logically impossible (Z3 returns <span class="white">unsat</span>).</p>
-      </div>
-      <div class="explainer-terminal">
-        <span class="prompt">$</span> z3 poem_causal_invariance.smt2<br>
-        <span class="val">Loading</span> Cyprus-1 block headers...<br>
-        <span class="val">Blocks:</span> 1,000 consecutive<br>
-        <span class="val">Model:</span> PoEM strict total order<br>
-        <span class="prompt">$</span> assert ¬(chain_A = chain_B)<br>
-        <span class="warn">Solving</span> for counterexample...<br>
-        <span class="purple">Keys:</span> entropy → hash → block_id<br>
-        <span class="warn">...</span> 38.74s elapsed<br>
-        <span class="ok">Result:</span> <span class="hi">unsat</span><br>
-        <span class="ok">&#10003;</span> <span class="hi">Causal invariance proven</span>
       </div>
     </div>
 
@@ -366,7 +347,6 @@
         <p>Original work from individuals or teams. Must include a Wolfram Notebook, written analysis, and compelling visualization.</p>
         <ul class="participate-list">
           <li><span class="dot green"></span>Wolfram Notebook demonstrating Quai blocks interpreted through Wolfram Physics rewriting rules</li>
-          <li><span class="dot green"></span>Written narrative linking PoEM consensus to causal invariance</li>
           <li><span class="dot green"></span>Visualizations of causal structure convergence across block orderings</li>
           <li><span class="dot green"></span>Include a <a href="https://pelaguswallet.io/" target="_blank" rel="noopener">Pelagus Wallet</a> address for token distribution</li>
         </ul>
@@ -385,8 +365,8 @@
           <li><span class="dot blue"></span><a href="https://www.wolframcloud.com/obj/wolframblockchainlabs/Published/QuaiIntegration.nb" target="_blank" rel="noopener">Wolfram Notebook: Quai Integration</a></li>
           <li><span class="dot blue"></span><a href="https://www.wolframphysics.org/technical-introduction/the-updating-process-for-string-substitution-systems/causal-invariance/" target="_blank" rel="noopener">Wolfram Physics: Causal Invariance</a></li>
           <li><span class="dot blue"></span><a href="https://arxiv.org/pdf/2303.04305" target="_blank" rel="noopener">PoEM Whitepaper (arXiv)</a></li>
-          <li><span class="dot blue"></span>Podcast: Stephen Wolfram ↔ Quai Network (<a href="#" target="_blank" rel="noopener">Part 1</a>, <a href="#" target="_blank" rel="noopener">Part 2</a>)</li>
         </ul>
+        <a class="submit-btn" href="https://drive.google.com" target="_blank" rel="noopener" style="background: var(--blue);">Open Google Drive</a>
       </div>
     </div>
 
