@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,23 +20,25 @@
       --qi: #e07040;
       --quai: #4488cc;
       --green: #50a860;
-      --dim: #444;
+      --dim: #bbb;
       --mono: 'JetBrains Mono', 'Courier New', monospace;
-      --swap-accent: #e07040;
-      --swap-accent-dim: rgba(224,112,64,0.12);
-      --swap-accent-glow: rgba(224,112,64,0.25);
-      --swap-border: rgba(255,255,255,0.08);
-      --swap-border-focus: rgba(255,255,255,0.18);
+      --swap-accent: #00ff88;
+      --swap-accent-dim: rgba(0,255,136,0.12);
+      --swap-accent-glow: rgba(0,255,136,0.30);
+      --swap-border: rgba(255,255,255,0.12);
+      --swap-border-focus: rgba(255,255,255,0.25);
       --swap-input-bg: #0c0c0e;
-      --swap-text: #ccc;
-      --swap-text2: #777;
-      --swap-text3: #444;
-      --swap-red: #cc4455;
+      --swap-text: #fff;
+      --swap-text2: #ccc;
+      --swap-text3: #999;
+      --swap-red: #ff4466;
+      --neon-green: #00ff88;
+      --neon-blue: #00ccff;
     }
     html { font-size: 16px; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg); color: #666;
+      background: var(--bg); color: #ddd;
       overflow-x: hidden; -webkit-font-smoothing: antialiased;
       min-height: 100vh;
     }
@@ -51,7 +54,7 @@
     .nav-logo span { font-size: 14px; font-weight: 600; color: #111; letter-spacing: -0.02em; }
     .nav-links { display: flex; gap: 2px; margin-left: auto; }
     .nav-item {
-      padding: 6px 12px; font-size: 13px; font-weight: 500; color: #888;
+      padding: 6px 12px; font-size: 13px; font-weight: 700; color: #333;
       text-decoration: none; border-radius: 6px; transition: all 0.15s;
     }
     .nav-item:hover { background: rgba(0,0,0,0.04); color: #444; }
@@ -62,7 +65,7 @@
     }
     .header h1 { font-size: clamp(32px, 4vw, 44px); font-weight: 800; color: #111; letter-spacing: -0.04em; }
     .header .tag {
-      font-size: 11px; font-weight: 600; color: #888;
+      font-size: 11px; font-weight: 700; color: #555;
       letter-spacing: 0.06em; text-transform: uppercase;
       background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.08);
       border-radius: 100px; padding: 3px 10px;
@@ -97,29 +100,29 @@
     .mod:hover { border-color: rgba(0,0,0,0.25); }
     .mod-label {
       font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #444; margin-bottom: 14px;
+      text-transform: uppercase; color: #aaa; margin-bottom: 14px;
     }
     .mod-title {
-      font-size: 16px; font-weight: 800; color: #ddd; letter-spacing: -0.03em; margin-bottom: 4px;
+      font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-bottom: 4px;
     }
-    .mod-desc { font-size: 12px; color: #444; line-height: 1.55; }
+    .mod-desc { font-size: 12px; color: #bbb; line-height: 1.55; }
 
     .gauge-wrap { display: flex; align-items: center; justify-content: center; margin: 16px 0 8px; }
     .gauge-svg { overflow: visible; }
     .gauge-value { font-family: var(--mono); font-size: 18px; font-weight: 700; fill: #fff; }
-    .gauge-unit { font-family: var(--mono); font-size: 10px; font-weight: 500; fill: #555; }
+    .gauge-unit { font-family: var(--mono); font-size: 10px; font-weight: 600; fill: #aaa; }
 
     .meter { margin: 16px 0 8px; }
     .meter-bar-bg { width: 100%; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.04); overflow: hidden; }
     .meter-bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease, background 0.3s ease; }
-    .meter-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 10px; color: #444; font-family: var(--mono); }
+    .meter-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 10px; color: #bbb; font-family: var(--mono); font-weight: 600; }
     .meter-center { text-align: center; margin-top: 8px; font-family: var(--mono); font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
 
     .mod-slider { margin-top: 12px; }
-    .mod-slider input[type="range"] { width: 100%; accent-color: #555; cursor: pointer; height: 4px; }
+    .mod-slider input[type="range"] { width: 100%; accent-color: #aaa; cursor: pointer; height: 4px; }
     .mod-slider-head { display: flex; justify-content: space-between; margin-bottom: 4px; }
-    .mod-slider-label { font-size: 11px; color: #555; font-weight: 500; }
-    .mod-slider-val { font-size: 11px; color: #888; font-weight: 600; font-family: var(--mono); }
+    .mod-slider-label { font-size: 11px; color: #ccc; font-weight: 600; }
+    .mod-slider-val { font-size: 11px; color: #fff; font-weight: 700; font-family: var(--mono); }
 
     .flow-row {
       grid-column: 1 / -1;
@@ -128,10 +131,10 @@
     }
     .flow-arrow {
       display: flex; align-items: center; gap: 8px;
-      font-size: 11px; color: #aaa; font-weight: 600; letter-spacing: 0.02em;
+      font-size: 11px; color: #fff; font-weight: 700; letter-spacing: 0.02em;
     }
     .flow-arrow svg { flex-shrink: 0; }
-    .flow-arrow svg path { stroke: #bbb; }
+    .flow-arrow svg path { stroke: #fff; }
     .flow-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent); }
 
     .mod-wide { grid-column: span 2; }
@@ -140,7 +143,7 @@
     .dual-meter-item { flex: 1; }
     .dual-meter-label { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
     .dual-meter-value { font-family: var(--mono); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
-    .dual-meter-sub { font-size: 11px; color: #444; font-family: var(--mono); }
+    .dual-meter-sub { font-size: 11px; color: #bbb; font-family: var(--mono); }
 
     .status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
 
@@ -160,12 +163,12 @@
     }
     .swap-title {
       font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--swap-accent);
+      text-transform: uppercase; color: var(--neon-green);
     }
     .swap-badge {
       font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
-      padding: 2px 7px; border: 1px solid rgba(224,112,64,0.3);
-      color: var(--qi); border-radius: 4px; background: rgba(224,112,64,0.06);
+      padding: 2px 7px; border: 1px solid rgba(0,255,136,0.4);
+      color: var(--neon-green); border-radius: 4px; background: rgba(0,255,136,0.08);
     }
 
     .swap-input-box {
@@ -200,23 +203,23 @@
     }
     .swap-token-sym {
       font-family: var(--mono); font-size: 13px; font-weight: 700;
-      letter-spacing: 0.04em; color: #ccc;
+      letter-spacing: 0.04em; color: #fff;
     }
-    .swap-token-arrow { font-size: 8px; color: var(--swap-text3); margin-left: 1px; }
+    .swap-token-arrow { font-size: 8px; color: #aaa; margin-left: 1px; }
 
     .swap-amt-input {
       flex: 1; text-align: right; background: none; border: none; outline: none;
       font-family: var(--mono); font-size: 22px; font-weight: 700;
-      color: #ddd; letter-spacing: -0.02em; min-width: 0;
+      color: #fff; letter-spacing: -0.02em; min-width: 0;
     }
-    .swap-amt-input::placeholder { color: var(--swap-text3); }
+    .swap-amt-input::placeholder { color: #666; }
     .swap-amt-output {
       flex: 1; text-align: right; background: none; border: none; outline: none;
       font-family: var(--mono); font-size: 22px; font-weight: 700;
       color: var(--swap-text3); letter-spacing: -0.02em; min-width: 0;
     }
     .swap-amt-output::placeholder { color: var(--swap-text3); }
-    .swap-amt-output.has-value { color: #ddd; }
+    .swap-amt-output.has-value { color: #fff; }
 
     .swap-bal-row {
       display: flex; justify-content: space-between; align-items: center;
@@ -230,17 +233,17 @@
       color: var(--swap-text3); cursor: pointer; border-radius: 4px;
       letter-spacing: 0.04em; transition: all 0.15s;
     }
-    .swap-pct-btn:hover { border-color: var(--qi); color: var(--qi); }
+    .swap-pct-btn:hover { border-color: var(--neon-green); color: var(--neon-green); }
 
     .swap-editable {
       background: none; border: none;
       border-bottom: 1px dashed rgba(255,255,255,0.1);
       outline: none; font-family: var(--mono);
-      color: var(--swap-text3); padding: 0 2px;
+      color: #bbb; padding: 0 2px;
       transition: border-color 0.15s;
     }
     .swap-editable:hover { border-color: rgba(255,255,255,0.2); }
-    .swap-editable:focus { border-color: var(--qi); color: #ccc; background: rgba(255,255,255,0.02); }
+    .swap-editable:focus { border-color: var(--neon-blue); color: #fff; background: rgba(255,255,255,0.03); }
 
     .swap-flip-row {
       display: flex; align-items: center; justify-content: center;
@@ -250,11 +253,11 @@
     .swap-flip-btn {
       width: 32px; height: 32px;
       background: var(--card); border: 1px solid var(--swap-border);
-      color: var(--qi); font-size: 16px; font-weight: 700;
+      color: var(--neon-green); font-size: 16px; font-weight: 700;
       cursor: pointer; display: flex; align-items: center; justify-content: center;
       border-radius: 8px; transition: all 0.15s;
     }
-    .swap-flip-btn:hover { border-color: var(--qi); background: var(--swap-accent-dim); }
+    .swap-flip-btn:hover { border-color: var(--neon-green); background: var(--swap-accent-dim); }
 
     .swap-details {
       padding: 10px 18px; border-top: 1px solid var(--swap-border);
@@ -280,19 +283,19 @@
       border-top: 1px solid var(--swap-border); cursor: not-allowed;
     }
     .swap-cta.go {
-      background: var(--qi); color: #fff;
+      background: var(--neon-green); color: #000; font-weight: 900;
       box-shadow: 0 0 20px var(--swap-accent-glow);
     }
     .swap-cta.go:hover { box-shadow: 0 0 36px var(--swap-accent-glow); transform: translateY(-1px); }
     .swap-cta.wait {
-      background: transparent; color: var(--qi);
-      border-top: 1px solid var(--qi);
+      background: transparent; color: var(--neon-green);
+      border-top: 1px solid var(--neon-green);
       animation: swap-pulse 1.5s ease-in-out infinite;
     }
-    .swap-cta.done { background: var(--green); color: #fff; }
+    .swap-cta.done { background: var(--neon-blue); color: #000; font-weight: 900; }
     @keyframes swap-pulse {
-      0%,100% { box-shadow: 0 0 4px rgba(224,112,64,0.1); }
-      50% { box-shadow: 0 0 20px rgba(224,112,64,0.25); }
+      0%,100% { box-shadow: 0 0 4px rgba(0,255,136,0.15); }
+      50% { box-shadow: 0 0 20px rgba(0,255,136,0.35); }
     }
 
     /* Pools mini table */
@@ -304,14 +307,14 @@
     .swap-pools-header {
       padding: 12px 18px;
       font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #444;
+      text-transform: uppercase; color: #bbb;
     }
     .swap-pools table {
       width: 100%; border-collapse: collapse;
     }
     .swap-pools th {
       font-family: var(--mono); font-size: 9px; font-weight: 700;
-      letter-spacing: 0.06em; color: #333; text-align: left;
+      letter-spacing: 0.06em; color: #999; text-align: left;
       padding: 8px 12px; border-top: 1px solid var(--swap-border);
       background: rgba(255,255,255,0.01);
     }
@@ -322,11 +325,11 @@
     }
     .swap-pools tbody tr { cursor: pointer; transition: background 0.12s; }
     .swap-pools tbody tr:hover { background: rgba(255,255,255,0.03); }
-    .swap-pools .pair-name { color: #ccc; font-weight: 700; font-size: 12px; }
+    .swap-pools .pair-name { color: #fff; font-weight: 700; font-size: 12px; }
     .swap-pools .trade-tag {
       font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
       padding: 2px 6px; border: 1px solid var(--swap-border-focus);
-      color: var(--qi); border-radius: 3px;
+      color: var(--neon-green); border-radius: 3px;
     }
     .swap-pools tbody tr:hover .trade-tag { background: var(--swap-accent-dim); }
     .swap-pools .swap-editable { font-size: 12px; font-weight: 600; width: 70px; text-align: right; }
@@ -349,13 +352,13 @@
     }
     .swap-modal-title {
       font-family: var(--mono); font-size: 11px; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase; color: var(--qi);
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--neon-blue);
     }
     .swap-modal-x {
-      background: none; border: none; color: var(--swap-text3);
+      background: none; border: none; color: #aaa;
       font-size: 18px; cursor: pointer; padding: 0 4px;
     }
-    .swap-modal-x:hover { color: var(--qi); }
+    .swap-modal-x:hover { color: var(--neon-green); }
     .swap-modal-list { padding: 6px; }
     .swap-modal-item {
       display: flex; align-items: center; gap: 10px;
@@ -441,7 +444,7 @@
         <div class="gauge-wrap">
           <svg class="gauge-svg" width="140" height="80" viewBox="0 0 140 80">
             <path d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="6" stroke-linecap="round"/>
-            <path id="diff-arc" d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="#555" stroke-width="6" stroke-linecap="round" stroke-dasharray="173" stroke-dashoffset="43"/>
+            <path id="diff-arc" d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="#aaa" stroke-width="6" stroke-linecap="round" stroke-dasharray="173" stroke-dashoffset="43"/>
             <text x="70" y="58" text-anchor="middle" class="gauge-value" id="diff-val">2⁴⁰</text>
             <text x="70" y="74" text-anchor="middle" class="gauge-unit">hashes</text>
           </svg>
@@ -501,13 +504,13 @@
         <div class="mod-title" style="font-size:14px;">k<sub style="font-size:10px;">Qi</sub> × difficulty</div>
         <div class="meter-center" id="reward-qi" style="color:var(--qi);">—</div>
         <div style="text-align:center; margin-top:4px;">
-          <span style="font-size:11px; color:#444; font-family:var(--mono);">k<sub>Qi</sub> = <span id="kqi-val">1.25e-10</span></span>
+          <span style="font-size:11px; color:#ccc; font-family:var(--mono);">k<sub>Qi</sub> = <span id="kqi-val">1.25e-10</span></span>
         </div>
         <div class="mod-desc" style="margin-top:12px;">Linear in difficulty. Energy-proportional — more hashes, more Qi. Predetermined schedule.</div>
       </div>
 
       <div class="mod" style="border: 1px solid rgba(255,255,255,0.1); background: #131315;">
-        <div class="mod-label" style="color:#666;">Controller</div>
+        <div class="mod-label" style="color:#bbb;">Controller</div>
         <div class="mod-title">k<sub>Quai</sub></div>
         <div class="gauge-wrap">
           <svg class="gauge-svg" width="160" height="90" viewBox="0 0 160 90">
@@ -519,11 +522,11 @@
         </div>
         <div style="text-align:center;">
           <span class="status-dot" id="dir-dot" style="background:var(--quai);"></span>
-          <span style="font-size:12px; font-weight:600; color:#888;" id="dir-label">—</span>
+          <span style="font-size:12px; font-weight:700; color:#fff;" id="dir-label">—</span>
         </div>
         <div class="mod-desc" style="margin-top:10px; text-align:center;">
           k<sub>Quai</sub>(i) = k<sub>Quai</sub>(i−1) × [1 + dir × α × S × P]<br>
-          <span style="color:#333;">α=1/1000 · S=3 if Qi popular</span>
+          <span style="color:#999;">α=1/1000 · S=3 if Qi popular</span>
         </div>
       </div>
 
@@ -532,7 +535,7 @@
         <div class="mod-title" style="font-size:14px;">k<sub style="font-size:10px;">Quai</sub> × log₂(diff)</div>
         <div class="meter-center" id="reward-quai" style="color:var(--quai);">—</div>
         <div style="text-align:center; margin-top:4px;">
-          <span style="font-size:11px; color:#444; font-family:var(--mono);">log₂(diff) ≈ <span id="log2diff-val">40</span></span>
+          <span style="font-size:11px; color:#ccc; font-family:var(--mono);">log₂(diff) ≈ <span id="log2diff-val">40</span></span>
         </div>
         <div class="mod-desc" style="margin-top:12px;">Logarithmic in difficulty. Market-priced — grows slowly with hashrate. Adjusted by controller.</div>
       </div>
@@ -557,8 +560,8 @@
             <div class="dual-meter-sub" id="rate-delta">—</div>
           </div>
           <div class="dual-meter-item">
-            <div class="dual-meter-label" style="color:#555;">Rate Change</div>
-            <div class="dual-meter-value" id="rate-pct" style="color:#888;">—</div>
+            <div class="dual-meter-label" style="color:#bbb;">Rate Change</div>
+            <div class="dual-meter-value" id="rate-pct" style="color:#fff;">—</div>
             <div class="dual-meter-sub">over simulation period</div>
           </div>
         </div>
@@ -575,8 +578,8 @@
         <div class="mod-title" id="eq-title">—</div>
         <div class="mod-desc" style="margin-top:10px;" id="eq-desc">—</div>
         <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border);">
-          <div style="font-size:10px; font-weight:700; color:#333; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Feedback Loop</div>
-          <div style="font-size:12px; color:#555; line-height:1.6;" id="eq-loop">—</div>
+          <div style="font-size:10px; font-weight:700; color:#aaa; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Feedback Loop</div>
+          <div style="font-size:12px; color:#ccc; line-height:1.6;" id="eq-loop">—</div>
         </div>
       </div>
 
