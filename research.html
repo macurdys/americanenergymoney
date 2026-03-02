@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +38,7 @@
     .hero .subtitle { font-size: clamp(16px, 1.8vw, 19px); font-weight: 500; color: #555; margin-top: 24px; max-width: 540px; line-height: 1.65; letter-spacing: -0.01em; position: relative; }
 
     /* SECTION LABEL */
-    .section-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; margin-bottom: 20px; }
+    .section-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; margin-bottom: 20px; display: block; }
 
     /* REPORTS */
     .reports-section { background: #0d0d0d; padding: 48px 48px 100px; text-align: center; }
@@ -62,6 +60,33 @@
     .report-btn { display: inline-block; padding: 9px 22px; background: #111; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: -0.01em; border-radius: 100px; text-decoration: none; transition: background 0.15s, transform 0.15s; }
     .report-btn:hover { background: #333; transform: scale(1.03); }
 
+    /* DATA & LAB SECTIONS */
+    .data-tools-wrap { background: #fff; padding: 60px 0; }
+    .svc-divider { width: 100%; max-width: 960px; margin: 0 auto; border: none; border-top: 1px solid var(--border); }
+    
+    .lab-section { padding: 80px 48px; display: flex; align-items: center; gap: 64px; max-width: 1040px; margin: 0 auto; }
+    .lab-section.reverse { flex-direction: row-reverse; }
+    .lab-text { flex: 1; min-width: 0; }
+    .lab-text h2 { font-size: clamp(28px, 3.2vw, 38px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+    .lab-text .lab-desc { font-size: 15px; color: #777; line-height: 1.7; margin-bottom: 28px; }
+    .lab-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .lab-list li { font-size: 14px; font-weight: 500; color: #555; display: flex; align-items: center; gap: 10px; }
+    .lab-list li .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .lab-list li .dot.purple { background: var(--purple); }
+    .lab-list li .dot.blue { background: var(--blue); }
+    .lab-visual { flex: 0 0 340px; background: #0d0d0d; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .lab-visual-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .lab-visual-icon.purple { background: rgba(192,132,252,0.1); color: var(--purple); }
+    .lab-visual-icon.blue { background: rgba(96,165,250,0.1); color: var(--blue); }
+    .lab-visual-icon svg { width: 24px; height: 24px; }
+    
+    .mini-terminal { width: 100%; background: #111; border-radius: 10px; padding: 16px; font-family: var(--mono); font-size: 11px; color: #555; line-height: 1.9; overflow: hidden; }
+    .mini-terminal .prompt { color: #444; }
+    .mini-terminal .ok { color: var(--green); }
+    .mini-terminal .val { color: var(--blue); }
+    .mini-terminal .warn { color: var(--amber); }
+    .mini-terminal .hi { color: var(--green); }
+
     /* FOOTER */
     footer { background: #fff; border-top: 1px solid var(--border); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px; }
     footer a { color: #bbb; text-decoration: none; transition: color 0.15s; }
@@ -71,124 +96,15 @@
     .partner-logos a:hover { opacity: 0.7; }
     .partner-logos img { height: 22px; width: auto; }
 
-    /* ─── MISSION PROOF ─── */
-    .mission-section { background: #fff; padding: 100px 48px; }
-    .mission-inner { max-width: 1040px; margin: 0 auto; }
-
-    .mission-header { text-align: center; margin-bottom: 64px; }
-    .mission-header h2 { font-size: clamp(32px, 4vw, 46px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
-    .mission-header h2 .gray { color: var(--gray); }
-    .mission-header p { font-size: 16px; color: #777; max-width: 600px; margin: 0 auto; line-height: 1.7; }
-
-    /* Bounty banner */
-    .bounty-banner { display: flex; align-items: center; justify-content: center; gap: 32px; background: #0d0d0d; border-radius: 16px; padding: 28px 36px; margin-bottom: 48px; flex-wrap: wrap; }
-    .bounty-reward { text-align: center; }
-    .bounty-reward .reward-amount { font-family: var(--mono); font-size: clamp(28px, 3.5vw, 40px); font-weight: 800; color: #fff; letter-spacing: -0.03em; }
-    .bounty-reward .reward-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #555; margin-top: 4px; }
-    .bounty-divider { width: 1px; height: 48px; background: rgba(255,255,255,0.08); flex-shrink: 0; }
-    .bounty-meta { display: flex; flex-direction: column; gap: 6px; }
-    .bounty-meta-row { font-family: var(--mono); font-size: 12px; font-weight: 500; color: #666; display: flex; align-items: center; gap: 8px; }
-    .bounty-meta-row .meta-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-    .bounty-meta-row .meta-dot.green { background: var(--green); }
-    .bounty-meta-row .meta-dot.amber { background: var(--amber); }
-    .bounty-meta-row .meta-dot.blue { background: var(--blue); }
-    .bounty-meta-row span.hi { color: var(--green); }
-    .bounty-meta-row span.warn { color: var(--amber); }
-
-    /* Submission counter + pipeline row */
-    .mission-tracker { display: grid; grid-template-columns: 300px 1fr; gap: 24px; margin-bottom: 48px; }
-
-    /* Counter card */
-    .counter-card { background: #fafafa; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
-    .counter-number { font-family: var(--mono); font-size: 64px; font-weight: 800; color: #111; line-height: 1; letter-spacing: -0.04em; }
-    .counter-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; }
-    .counter-submission { width: 100%; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-align: left; }
-    .counter-submission .sub-tag { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-    .counter-submission .sub-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-    .counter-submission .sub-title { font-size: 13px; font-weight: 600; color: #333; line-height: 1.4; letter-spacing: -0.01em; }
-    .counter-submission .sub-method { font-family: var(--mono); font-size: 10px; color: #aaa; margin-top: 6px; }
-
-    /* Pipeline card */
-    .pipeline-card { background: #fafafa; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; }
-    .pipeline-card .pipeline-title { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; }
-    .pipeline-stages { display: flex; align-items: stretch; gap: 0; flex: 1; }
-    .pipeline-stage { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px 12px; position: relative; }
-    .pipeline-stage::after { content: ''; position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: var(--border); }
-    .pipeline-stage:last-child::after { display: none; }
-    .stage-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-    .stage-icon svg { width: 22px; height: 22px; }
-    .stage-icon.complete { background: rgba(74,222,128,0.1); color: var(--green); }
-    .stage-icon.active { background: rgba(251,191,36,0.15); color: var(--amber); animation: stagePulse 2.4s ease-in-out infinite; }
-    .stage-icon.pending { background: rgba(255,255,255,0.6); color: #ccc; }
-    @keyframes stagePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,0); } 50% { box-shadow: 0 0 0 8px rgba(251,191,36,0.08); } }
-    .stage-info { text-align: center; }
-    .stage-name { font-size: 14px; font-weight: 700; color: #111; letter-spacing: -0.01em; margin-bottom: 4px; }
-    .stage-name.dim { color: #bbb; }
-    .stage-desc { font-size: 11px; color: #999; line-height: 1.5; }
-    .stage-status { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
-    .stage-status.done { background: rgba(74,222,128,0.1); color: var(--green); }
-    .stage-status.in-progress { background: rgba(251,191,36,0.12); color: var(--amber); }
-    .stage-status.waiting { background: rgba(0,0,0,0.03); color: #ccc; }
-
-    /* Context explainer */
-    .mission-explainer { background: #0d0d0d; border-radius: 16px; padding: 36px 32px; margin-bottom: 48px; display: flex; gap: 48px; align-items: flex-start; }
-    .explainer-text { flex: 1; min-width: 0; }
-    .explainer-text h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #fff; margin-bottom: 12px; }
-    .explainer-text p { font-size: 14px; color: #777; line-height: 1.75; }
-    .explainer-text p .white { color: #ccc; }
-    .explainer-terminal { flex: 0 0 320px; background: #161616; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; font-family: var(--mono); font-size: 11px; color: #555; line-height: 2; overflow: hidden; }
-    .explainer-terminal .prompt { color: #444; }
-    .explainer-terminal .ok { color: var(--green); }
-    .explainer-terminal .val { color: var(--blue); }
-    .explainer-terminal .warn { color: var(--amber); }
-    .explainer-terminal .hi { color: var(--green); }
-    .explainer-terminal .purple { color: var(--purple); }
-
-    /* Participate cards */
-    .participate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .participate-card { background: #fafafa; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; }
-    .participate-card .card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .participate-card .card-icon svg { width: 22px; height: 22px; }
-    .participate-card .card-icon.green { background: rgba(74,222,128,0.1); color: var(--green); }
-    .participate-card .card-icon.blue { background: rgba(96,165,250,0.1); color: var(--blue); }
-    .participate-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 8px; }
-    .participate-card p { font-size: 14px; color: #888; line-height: 1.65; margin-bottom: 20px; }
-    .participate-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .participate-list li { font-size: 13px; font-weight: 500; color: #666; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
-    .participate-list li .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
-    .participate-list li .dot.green { background: var(--green); }
-    .participate-list li .dot.blue { background: var(--blue); }
-    .participate-list li a { color: var(--blue); text-decoration: none; transition: color 0.15s; }
-    .participate-list li a:hover { color: #93c5fd; }
-    .submit-btn { display: inline-block; padding: 11px 28px; background: #111; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: -0.01em; border-radius: 100px; text-decoration: none; transition: background 0.15s, transform 0.15s; margin-top: 20px; }
-    .submit-btn:hover { background: #333; transform: scale(1.03); }
-
-    /* Video Grid */
-    .video-section { margin-top: 48px; }
-    .video-section-header { margin-bottom: 24px; }
-    .video-section-header h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 4px; }
-    .video-section-header p { font-size: 13px; color: #999; }
-    .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .video-card { border-radius: 12px; overflow: hidden; background: #000; aspect-ratio: 16/9; }
-    .video-card iframe { width: 100%; height: 100%; border: 0; display: block; }
-
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .hero { padding: 80px 20px 32px; }
       .reports-section { padding: 40px 20px 80px; }
       .reports-grid { grid-template-columns: 1fr; }
-      .mission-section { padding: 60px 20px; }
-      .bounty-banner { flex-direction: column; gap: 16px; padding: 24px 20px; }
-      .bounty-divider { width: 80px; height: 1px; }
-      .mission-tracker { grid-template-columns: 1fr; }
-      .pipeline-stages { flex-wrap: wrap; }
-      .pipeline-stage { flex: none; width: 100%; }
-      .pipeline-stage::after { display: none; }
-      .mission-explainer { flex-direction: column; gap: 24px; padding: 28px 20px; }
-      .explainer-terminal { flex: none; width: 100%; }
-      .participate-grid { grid-template-columns: 1fr; }
-      .video-grid { grid-template-columns: 1fr; }
+      .data-tools-wrap { padding: 20px 0; }
+      .lab-section, .lab-section.reverse { flex-direction: column; padding: 60px 20px; gap: 32px; }
+      .lab-visual { flex: none; width: 100%; }
       footer { padding: 24px 20px; }
     }
   </style>
@@ -198,7 +114,7 @@
 <nav>
   <a class="nav-logo" href="/"><img src="images/logo.png" alt="American Energy Money"></a>
   <div class="nav-links">
-    <a class="nav-item" href="compute.html">Futures</a>
+    <a class="nav-item" href="compute.html">Compute</a>
     <a class="nav-item" href="engineering.html">Engineering</a>
     <a class="nav-item active" href="research.html">Research</a>
   </div>
@@ -209,7 +125,6 @@
   <p class="subtitle">Theory, analysis, and formal verification at the intersection of energy, entropy, and economic value.</p>
 </section>
 
-<!-- RESEARCH REPORTS -->
 <section class="reports-section">
   <span class="section-label">Research</span>
   <h2>Reports</h2>
@@ -245,10 +160,74 @@
   </div>
 </section>
 
+<section class="data-tools-wrap">
+  
+  <div class="lab-section reverse">
+    <div class="lab-text">
+      <span class="section-label">Data Layer</span>
+      <h2>API &amp; RPC Infrastructure</h2>
+      <p class="lab-desc">The foundational data layer powering our thermoeconomic research. High-performance RPC endpoints and on-chain indexers provide the raw material for deep protocol analysis.</p>
+      <ul class="lab-list">
+        <li><span class="dot blue"></span>Full-Node RPC Endpoints</li>
+        <li><span class="dot blue"></span>On-Chain Indexer Services</li>
+        <li><span class="dot blue"></span>Real-time Network Telemetry</li>
+      </ul>
+    </div>
+    <div class="lab-visual">
+      <div class="lab-visual-icon blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
+      </div>
+      <div class="mini-terminal">
+        <span class="prompt">$</span> curl -X POST rpc.aem.tech \<br>
+        &nbsp;&nbsp;-d '{"method":"quai_blockNumber"}'<br>
+        <span class="val">{"result":"0x2b705f"}</span><br>
+        <span class="prompt">$</span> aem data pull --range 7d<br>
+        <span class="ok">&#9679;</span> 142k blocks indexed<br>
+        <span class="ok">&#9679;</span> 0ms latency
+      </div>
+    </div>
+  </div>
+
+  <hr class="svc-divider">
+
+  <div class="lab-section">
+    <div class="lab-text">
+      <span class="section-label">Experiments</span>
+      <h2>Profitability Analysis</h2>
+      <p class="lab-desc">A testing environment comparing the economic returns of Quai mining against merge-mined blockchains — measuring real opportunity cost across SHA-256, Scrypt, and KawPow algorithms.</p>
+      <ul class="lab-list">
+        <li><span class="dot purple"></span>Quai vs Merge-Mined Chains</li>
+        <li><span class="dot purple"></span>Multi-Algorithm Benchmarks</li>
+        <li><span class="dot purple"></span>Opportunity Cost Analysis</li>
+      </ul>
+    </div>
+    <div class="lab-visual">
+      <div class="lab-visual-icon purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v7.4a2 2 0 0 1-.6 1.4L3.7 16.5A2 2 0 0 0 3 18v0a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v0a2 2 0 0 0-.7-1.5l-4.7-4.7a2 2 0 0 1-.6-1.4V3"/><line x1="9" y1="3" x2="15" y2="3"/></svg>
+      </div>
+      <div class="mini-terminal">
+        <span class="prompt">$</span> aem lab compare --algo sha256<br>
+        <span class="val">BTC</span>&nbsp; 0.00000312 /TH/day<br>
+        <span class="val">QUAI</span> 0.00004871 /TH/day<br>
+        <span class="ok">&#9650;</span> quai <span class="hi">+1,461%</span> vs btc<br>
+        <span class="prompt">$</span> aem lab opp-cost<br>
+        <span class="warn">&rarr;</span> $0.047/kWh delta
+      </div>
+    </div>
+  </div>
+
+</section>
+
 <footer>
   <span>&copy; 2026 American Energy Money</span>
   <div class="partner-logos">
     <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
     <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
     <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
-    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+</body>
+</html>
