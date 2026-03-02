@@ -1,12 +1,11 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Engineering — American Energy Money</title>
-  <meta name="description" content="Hashrate Engineering — Mining infrastructure, energy operations, and profitability experiments for proof-of-work energy money systems.">
+  <meta name="description" content="Electrical and Hardware Infrastructure — Physical energy systems and mining deployments for proof-of-work energy money systems.">
   <link rel="icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,29 +49,8 @@
     .infra-header h2 .gray { color: var(--gray); }
     .infra-header p { font-size: 16px; color: #777; max-width: 520px; margin: 0 auto; line-height: 1.7; }
 
-    .infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .infra-card { background: #fafafa; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; }
-    .infra-card-top { display: flex; align-items: flex-start; gap: 16px; }
-    .infra-card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .infra-card-icon svg { width: 22px; height: 22px; }
-    .infra-card-icon.blue { background: rgba(96,165,250,0.1); color: var(--blue); }
-    .infra-card-icon.green { background: rgba(74,222,128,0.1); color: var(--green); }
-    .infra-card-info h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 6px; }
-    .infra-card-info p { font-size: 14px; color: #888; line-height: 1.6; }
-    .infra-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; border-top: 1px solid var(--border); }
-    .infra-list li { font-size: 13px; font-weight: 500; color: #777; display: flex; align-items: center; gap: 10px; }
-    .infra-list li .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
-    .infra-list li .dot.blue { background: var(--blue); }
-    .infra-list li .dot.green { background: var(--green); }
-    .mini-terminal { width: 100%; background: #111; border-radius: 10px; padding: 16px; font-family: var(--mono); font-size: 11px; color: #555; line-height: 1.9; overflow: hidden; }
-    .mini-terminal .prompt { color: #444; }
-    .mini-terminal .ok { color: var(--green); }
-    .mini-terminal .val { color: var(--blue); }
-    .mini-terminal .warn { color: var(--amber); }
-    .mini-terminal .hi { color: var(--green); }
-
-    /* FLOW DIAGRAM — white bg, tight connection to cards above */
-    .flow-area { margin-top: 48px; display: flex; flex-direction: column; align-items: center; }
+    /* FLOW DIAGRAM — moved above cards, removed top margin, added bottom margin */
+    .flow-area { margin-bottom: 64px; display: flex; flex-direction: column; align-items: center; }
     .flow-label { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; margin-bottom: 32px; }
     .flow-container {
       width: 100%; max-width: 880px;
@@ -139,20 +117,27 @@
     .price-tick { animation: priceTick 3s ease-in-out infinite; }
     @keyframes priceTick { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    /* PROFITABILITY LAB */
-    .lab-section { padding: 100px 48px; display: flex; align-items: flex-start; gap: 64px; max-width: 1040px; margin: 0 auto; }
-    .lab-text { flex: 1; min-width: 0; }
-    .lab-text h2 { font-size: clamp(28px, 3.2vw, 38px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
-    .lab-text .lab-desc { font-size: 15px; color: #777; line-height: 1.7; margin-bottom: 28px; }
-    .lab-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .lab-list li { font-size: 14px; font-weight: 500; color: #555; display: flex; align-items: center; gap: 10px; }
-    .lab-list li .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; background: var(--purple); }
-    .lab-visual { flex: 0 0 320px; background: #0d0d0d; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-    .lab-visual-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(192,132,252,0.1); color: var(--purple); }
-    .lab-visual-icon svg { width: 24px; height: 24px; }
-
-    /* Divider */
-    .svc-divider { width: 100%; max-width: 960px; margin: 0 auto; border: none; border-top: 1px solid var(--border); }
+    /* CARDS */
+    .infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .infra-card { background: #fafafa; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; }
+    .infra-card-top { display: flex; align-items: flex-start; gap: 16px; }
+    .infra-card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .infra-card-icon svg { width: 22px; height: 22px; }
+    .infra-card-icon.blue { background: rgba(96,165,250,0.1); color: var(--blue); }
+    .infra-card-icon.green { background: rgba(74,222,128,0.1); color: var(--green); }
+    .infra-card-info h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 6px; }
+    .infra-card-info p { font-size: 14px; color: #888; line-height: 1.6; }
+    .infra-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; border-top: 1px solid var(--border); }
+    .infra-list li { font-size: 13px; font-weight: 500; color: #777; display: flex; align-items: center; gap: 10px; }
+    .infra-list li .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+    .infra-list li .dot.blue { background: var(--blue); }
+    .infra-list li .dot.green { background: var(--green); }
+    .mini-terminal { width: 100%; background: #111; border-radius: 10px; padding: 16px; font-family: var(--mono); font-size: 11px; color: #555; line-height: 1.9; overflow: hidden; }
+    .mini-terminal .prompt { color: #444; }
+    .mini-terminal .ok { color: var(--green); }
+    .mini-terminal .val { color: var(--blue); }
+    .mini-terminal .warn { color: var(--amber); }
+    .mini-terminal .hi { color: var(--green); }
 
     /* FOOTER */
     footer { background: #fff; border-top: 1px solid var(--border); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px; }
@@ -173,8 +158,6 @@
       .flow-row { flex-wrap: wrap; gap: 16px; justify-content: center; }
       .flow-connector { display: none; }
       .fork-svg, .converge-svg { display: none; }
-      .lab-section { flex-direction: column; padding: 60px 20px; gap: 32px; }
-      .lab-visual { flex: none; width: 100%; }
       footer { padding: 24px 20px; }
     }
     @media (max-width: 480px) {
@@ -199,78 +182,23 @@
 
 <section class="hero">
   <h1>Hashrate <span class="dim">Engineering</span></h1>
-  <p class="subtitle">Mining infrastructure, energy operations, and applied experiments in proof-of-work energy money systems.</p>
+  <p class="subtitle">Physical infrastructure, electrical operations, and hardware deployments in proof-of-work energy money systems.</p>
 </section>
 
-<!-- ═══ MINING + DATA INFRASTRUCTURE + FLOW DIAGRAM (all white) ═══ -->
 <section class="infra-flow-wrap">
   <div class="infra-inner">
 
     <div class="infra-header">
-      <span class="section-label">Services</span>
-      <h2>Mining + Data <span class="gray">Infrastructure</span></h2>
-      <p>Physical energy operations and full-node data services powering applied research on the Quai Network.</p>
+      <span class="section-label">Facilities</span>
+      <h2>Electrical + Hardware <span class="gray">Infrastructure</span></h2>
+      <p>Physical energy systems and mining deployments powering applied research on the Quai Network.</p>
     </div>
 
-    <div class="infra-grid">
-      <!-- Data Infrastructure -->
-      <div class="infra-card">
-        <div class="infra-card-top">
-          <div class="infra-card-icon blue">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
-          </div>
-          <div class="infra-card-info">
-            <h3>Data Infrastructure</h3>
-            <p>Full-node RPC endpoints and indexer services for efficient data access, organization, and query performance.</p>
-          </div>
-        </div>
-        <ul class="infra-list">
-          <li><span class="dot blue"></span>RPC Endpoints (Full Node)</li>
-          <li><span class="dot blue"></span>Indexer Services</li>
-          <li><span class="dot blue"></span>Efficient Data Organization &amp; Query</li>
-        </ul>
-        <div class="mini-terminal">
-          <span class="prompt">$</span> quai rpc status<br>
-          <span class="ok">&#9679;</span> node <span class="val">synced</span> block 2,847,391<br>
-          <span class="ok">&#9679;</span> indexer <span class="val">healthy</span> 14ms latency<br>
-          <span class="prompt">$</span> quai index query --zone cyprus-1<br>
-          <span class="val">&rarr;</span> 1,204 txns indexed
-        </div>
-      </div>
-
-      <!-- Energy Operations -->
-      <div class="infra-card">
-        <div class="infra-card-top">
-          <div class="infra-card-icon green">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-          </div>
-          <div class="infra-card-info">
-            <h3>Energy Operations</h3>
-            <p>Mining hardware powered by solar generation with battery storage for continuous, low-cost operation.</p>
-          </div>
-        </div>
-        <ul class="infra-list">
-          <li><span class="dot green"></span>Mining Hardware Operations</li>
-          <li><span class="dot green"></span>Solar Energy Harvesting</li>
-          <li><span class="dot green"></span>Battery Storage Systems</li>
-        </ul>
-        <div class="mini-terminal">
-          <span class="prompt">$</span> aem ops status<br>
-          <span class="ok">&#9679;</span> solar array <span class="val">4.2 kW</span> generating<br>
-          <span class="ok">&#9679;</span> battery <span class="val">87%</span> 13.2 kWh stored<br>
-          <span class="ok">&#9679;</span> hashrate <span class="val">318 TH/s</span> online<br>
-          <span class="warn">&rarr;</span> effective $0.02/kWh
-        </div>
-      </div>
-    </div>
-
-    <!-- FLOW DIAGRAM — directly below cards, same white wrapper -->
     <div class="flow-area">
       <span class="flow-label">Experimental Energy Money Lab</span>
       <div class="flow-container">
         <div class="flow-row">
 
-          <!-- Solar -->
           <div class="flow-node">
             <div class="flow-icon solar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
@@ -280,7 +208,6 @@
 
           <div class="flow-connector c1"><div class="line-bg"></div><div class="line-pulse"></div></div>
 
-          <!-- Battery -->
           <div class="flow-node">
             <div class="flow-icon battery">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="11" y1="10" x2="11" y2="14"/></svg>
@@ -290,7 +217,6 @@
 
           <div class="flow-connector c2"><div class="line-bg"></div><div class="line-pulse"></div></div>
 
-          <!-- Compute -->
           <div class="flow-node">
             <div class="flow-icon compute">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M9 2v2"/><path d="M9 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/></svg>
@@ -298,7 +224,6 @@
             <span class="flow-node-label">Compute</span>
           </div>
 
-          <!-- Fork SVG — splits to vertical stack -->
           <svg class="fork-svg" viewBox="0 0 80 72">
             <path class="fork-line" d="M0,36 L24,36 Q36,36 40,18 L56,12"/>
             <path class="fork-line" d="M0,36 L24,36 Q36,36 40,54 L56,60"/>
@@ -306,7 +231,6 @@
             <circle class="fork-dot bot" cx="42" cy="52" r="2.5" fill="#c084fc"/>
           </svg>
 
-          <!-- Vertical fork: Quai/Qi on top, AI Inference below -->
           <div class="fork-zone">
             <div class="fork-stack">
               <div class="fork-branch">
@@ -324,7 +248,6 @@
             </div>
           </div>
 
-          <!-- Converge SVG -->
           <svg class="converge-svg" viewBox="0 0 64 72">
             <path class="conv-line" d="M0,12 L16,12 Q28,12 32,36 L44,36 L64,36"/>
             <path class="conv-line" d="M0,60 L16,60 Q28,60 32,36"/>
@@ -332,7 +255,6 @@
             <circle class="conv-dot bot" cx="24" cy="52" r="2.5" fill="#c084fc"/>
           </svg>
 
-          <!-- Pricing Output — 3 lines -->
           <div class="pricing-output">
             <div class="pricing-box">
               <div class="price-label">Opportunity Cost</div>
@@ -349,35 +271,56 @@
       </div>
     </div>
 
-  </div>
-</section>
+    <div class="infra-grid">
+      <div class="infra-card">
+        <div class="infra-card-top">
+          <div class="infra-card-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+          </div>
+          <div class="infra-card-info">
+            <h3>Hardware Infrastructure</h3>
+            <p>High-density ASIC and GPU compute clusters designed for maximum efficiency and robust network security.</p>
+          </div>
+        </div>
+        <ul class="infra-list">
+          <li><span class="dot blue"></span>ASIC Mining Deployments</li>
+          <li><span class="dot blue"></span>GPU Compute Clusters</li>
+          <li><span class="dot blue"></span>Air &amp; Immersion Cooling Systems</li>
+        </ul>
+        <div class="mini-terminal">
+          <span class="prompt">$</span> aem hw status<br>
+          <span class="ok">&#9679;</span> cluster a <span class="val">online</span> 142 ASICs<br>
+          <span class="ok">&#9679;</span> gpu rig <span class="val">hashing</span> 100% load<br>
+          <span class="prompt">$</span> aem hw temps --zone 1<br>
+          <span class="val">&rarr;</span> stable 68°C / 4200 RPM
+        </div>
+      </div>
 
-<hr class="svc-divider">
+      <div class="infra-card">
+        <div class="infra-card-top">
+          <div class="infra-card-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="infra-card-info">
+            <h3>Electrical Infrastructure</h3>
+            <p>Smart load balancing, off-grid generation, and high-capacity storage for continuous, low-cost power delivery.</p>
+          </div>
+        </div>
+        <ul class="infra-list">
+          <li><span class="dot green"></span>Solar Energy Harvesting</li>
+          <li><span class="dot green"></span>Battery Storage &amp; PDUs</li>
+          <li><span class="dot green"></span>Grid Load Balancing</li>
+        </ul>
+        <div class="mini-terminal">
+          <span class="prompt">$</span> aem elec status<br>
+          <span class="ok">&#9679;</span> solar array <span class="val">4.2 kW</span> generating<br>
+          <span class="ok">&#9679;</span> battery <span class="val">87%</span> 13.2 kWh stored<br>
+          <span class="ok">&#9679;</span> grid draw <span class="val">0.0 kW</span> off-grid mode<br>
+          <span class="warn">&rarr;</span> net cost $0.02/kWh
+        </div>
+      </div>
+    </div>
 
-<!-- PROFITABILITY LAB -->
-<section class="lab-section">
-  <div class="lab-text">
-    <span class="section-label">Experiments</span>
-    <h2>Profitability Lab</h2>
-    <p class="lab-desc">A testing environment comparing the economic returns of Quai mining against merge-mined blockchains — measuring real opportunity cost across SHA-256, Scrypt, and KawPow algorithms.</p>
-    <ul class="lab-list">
-      <li><span class="dot"></span>Quai vs Merge-Mined Chains</li>
-      <li><span class="dot"></span>Multi-Algorithm Benchmarks</li>
-      <li><span class="dot"></span>Opportunity Cost Analysis</li>
-    </ul>
-  </div>
-  <div class="lab-visual">
-    <div class="lab-visual-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v7.4a2 2 0 0 1-.6 1.4L3.7 16.5A2 2 0 0 0 3 18v0a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v0a2 2 0 0 0-.7-1.5l-4.7-4.7a2 2 0 0 1-.6-1.4V3"/><line x1="9" y1="3" x2="15" y2="3"/></svg>
-    </div>
-    <div class="mini-terminal">
-      <span class="prompt">$</span> aem lab compare --algo sha256<br>
-      <span class="val">BTC</span>&nbsp; 0.00000312 /TH/day<br>
-      <span class="val">QUAI</span> 0.00004871 /TH/day<br>
-      <span class="ok">&#9650;</span> quai <span class="hi">+1,461%</span> vs btc<br>
-      <span class="prompt">$</span> aem lab opp-cost<br>
-      <span class="warn">&rarr;</span> $0.047/kWh delta
-    </div>
   </div>
 </section>
 
