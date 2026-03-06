@@ -260,7 +260,19 @@
       font-style: normal; font-weight: 600; color: #111;
     }
 
-    /* ─── CTA ─── */
+    /* ─── COMPARISON GRID ─── */
+    .comparison-grid { width: 100%; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .comp-row { display: grid; grid-template-columns: 1.2fr 1.5fr 1.5fr; border-bottom: 1px solid var(--border); }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-row > div { padding: 14px 18px; font-size: 0.88rem; line-height: 1.5; }
+    .comp-header { background: #f0f0f0; }
+    .comp-header > div { padding: 12px 18px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: #555; }
+    .comp-label { color: #333; font-weight: 600; background: #fafafa; }
+    .comp-no { color: #888; background: #fff; }
+    .comp-yes { color: #1a6e3c; background: #f0faf4; font-weight: 500; }
+    @media (max-width: 640px) {
+      .comp-row { grid-template-columns: 1fr; }
+    }
     .cta-section {
       background: #fff;
       padding: 120px 48px; text-align: center;
@@ -483,6 +495,72 @@
       <div class="step-num">→</div>
       <h3>Arbitrage the basis</h3>
       <p>Arbitrageurs trade the spread between the Qi futures price and actual spot compute costs, keeping the index price aligned with physical energy reality and providing liquidity to both sides of the market.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW COMPETITORS BUILD INDEXES ── -->
+<section class="section-light">
+  <h2>How competitors <span class="gray">build their indexes</span></h2>
+  <p class="lead">Other compute index providers — Silicon Data and peers — approach the problem as a data collection and normalization exercise. That methodology has real merit. It also has a structural ceiling.</p>
+
+  <div class="why-grid" style="margin-bottom: 40px;">
+    <div class="why-card" style="border-color: var(--border); background: #f9f9f9;">
+      <h3 style="color:#333; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">1 — Data Coverage</h3>
+      <p style="color:#555;">They aggregate GPU rental rates from cloud providers, colocation markets, brokered cluster sales, and private platforms — claiming 80%+ coverage of the H100 rental market.</p>
+    </div>
+    <div class="why-card" style="border-color: var(--border); background: #f9f9f9;">
+      <h3 style="color:#333; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">2 — Normalization</h3>
+      <p style="color:#555;">Prices are adjusted for GPU type, memory, rental term, interconnect speed, cluster scale, and geography — producing a "like-for-like" on-demand rate stripped of marketing noise.</p>
+    </div>
+    <div class="why-card" style="border-color: var(--border); background: #f9f9f9;">
+      <h3 style="color:#333; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">3 — Daily Validation</h3>
+      <p style="color:#555;">Indexes are recalculated each business day. Statistical filters remove stale or non-representative data. Independent oversight agents attest to calculation integrity.</p>
+    </div>
+    <div class="why-card" style="border-color: var(--border); background: #f9f9f9;">
+      <h3 style="color:#333; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">4 — Distribution</h3>
+      <p style="color:#555;">Published on Bloomberg Terminal (BBG: SDH100RT), distributed via direct API, and licensed to data partners including Kaiko. Historical archives available.</p>
+    </div>
+  </div>
+
+  <div class="index-block" style="border-color: #e0e0e0; background: #f4f4f4;">
+    <div class="index-label" style="background:#e8e8e8; color:#555;">The structural problem</div>
+    <h3 style="color: #222;">This is a survey index. It measures what vendors <em>charge</em> — not what compute <em>costs</em>.</h3>
+    <p style="color: #444;">A rental rate aggregated from commercial platforms reflects vendor margins, market positioning, capacity utilization, and competitive dynamics. It answers the question <em>"what is the current ask?"</em> — not <em>"what is the underlying cost of producing this computation?"</em></p>
+    <p style="color: #444;">The distinction collapses the moment markets thin out, vendors coordinate pricing, or a new generation of hardware reshapes the cost curve overnight. Survey indexes are backward-looking by construction: they can only tell you what was charged, not what the physics of computation actually demands.</p>
+    <p style="color: #444;">A futures market needs an index that is <strong>non-manipulable</strong>, <strong>anchored to physical reality</strong>, and <strong>forward-looking by structure</strong>. Rental rate surveys provide none of these.</p>
+  </div>
+
+  <div class="comparison-grid" style="margin-top:40px;">
+    <div class="comp-row comp-header">
+      <div></div>
+      <div>Survey Index <span style="color:#aaa; font-weight:400;">(e.g. Silicon Data)</span></div>
+      <div>Qi Energy Index</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-label">Source of truth</div>
+      <div class="comp-no">Vendor ask prices</div>
+      <div class="comp-yes">Thermodynamic cost of computation</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-label">Manipulation resistance</div>
+      <div class="comp-no">Depends on data network coverage</div>
+      <div class="comp-yes">Secured by PoW — falsifying requires real energy</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-label">Hardware generation risk</div>
+      <div class="comp-no">Index breaks when H100 is superseded</div>
+      <div class="comp-yes">Normalizes across hardware via energy denominator</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-label">Settlement suitability</div>
+      <div class="comp-no">Requires off-chain oracle and trust</div>
+      <div class="comp-yes">On-chain, auditable, no third-party attestation</div>
+    </div>
+    <div class="comp-row">
+      <div class="comp-label">Forward price signal</div>
+      <div class="comp-no">Backward-looking daily snapshot</div>
+      <div class="comp-yes">Perpetual futures mechanism aggregates expectations continuously</div>
     </div>
   </div>
 </section>
