@@ -1,13 +1,11 @@
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compute Futures — American Energy Money</title>
-  <meta name="description" content="A perpetual futures contract for inference compute — priced in Qi, settled in QUAI.">
+  <meta name="description" content="Index futures for inference compute — priced against the Qi energy index, settled in QUAI.">
   <link rel="icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,8 +67,15 @@
     .hero h1 .dim { color: #555; }
     .hero .subtitle {
       font-size: clamp(18px, 2vw, 22px); font-weight: 500;
-      color: #666; margin-top: 28px; max-width: 580px;
+      color: #666; margin-top: 28px; max-width: 600px;
       line-height: 1.6; letter-spacing: -0.01em;
+    }
+    .hero .tag-row {
+      display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; justify-content: center;
+    }
+    .hero-tag {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #444; border: 1px solid #2a2a2a; border-radius: 100px; padding: 8px 16px;
     }
 
     /* ─── SECTION ─── */
@@ -82,17 +87,56 @@
       background: #0d0d0d;
       padding: 100px 48px; text-align: center;
     }
-    .section-light h2, .section-dark h2 {
+    .section-mid {
+      background: #f7f7f7;
+      padding: 100px 48px; text-align: center;
+    }
+    .section-light h2, .section-dark h2, .section-mid h2 {
       font-size: clamp(32px, 4vw, 50px); font-weight: 700;
       letter-spacing: -0.03em; margin-bottom: 24px;
     }
     .section-dark h2 { color: #fff; }
     .section-light h2 .gray,
-    .section-dark h2 .gray { color: var(--gray); }
+    .section-dark h2 .gray,
+    .section-mid h2 .gray { color: var(--gray); }
     .lead {
       font-size: 18px; color: #666; max-width: 640px;
       margin: 0 auto 64px; line-height: 1.7;
     }
+
+    /* ─── COMPARE BLOCK ─── */
+    .compare-grid {
+      display: flex; gap: 2px; max-width: 860px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .compare-col {
+      flex: 1; padding: 40px 36px; text-align: left;
+    }
+    .compare-col:first-child {
+      background: #f9f9f9; border-right: 1px solid var(--border);
+    }
+    .compare-col:last-child { background: #fff; }
+    .compare-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .compare-col:first-child .compare-label { color: #bbb; }
+    .compare-col:last-child .compare-label { color: #111; }
+    .compare-col h3 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 20px; color: #111;
+    }
+    .compare-col ul {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+    }
+    .compare-col ul li {
+      font-size: 15px; color: #777; line-height: 1.6;
+      padding-left: 20px; position: relative;
+    }
+    .compare-col ul li::before {
+      content: '–'; position: absolute; left: 0; color: #ccc;
+    }
+    .compare-col:last-child ul li::before { color: #111; content: '→'; }
+    .compare-col:last-child ul li { color: #444; }
 
     /* ─── TOKEN PAIR ─── */
     .token-grid {
@@ -110,11 +154,8 @@
     }
     .token-label {
       font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; margin-bottom: 16px;
+      text-transform: uppercase; margin-bottom: 16px; color: #666;
     }
-    .token-label.quai-label { color: #888; }
-    .token-label.qi-label { color: #888; }
-    .section-dark .token-label { color: #666; }
     .token-card h3 {
       font-size: 26px; font-weight: 800; letter-spacing: -0.03em;
       margin-bottom: 16px;
@@ -124,6 +165,11 @@
       font-size: 15px; color: #777; line-height: 1.7;
     }
     .section-dark .token-card p { color: #888; }
+    .token-card .token-rule {
+      margin-top: 24px; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px; color: #555; line-height: 1.6;
+    }
 
     /* ─── FORMULA ─── */
     .formula-block {
@@ -145,9 +191,6 @@
     }
     .formula-note {
       font-size: 15px; color: #666; line-height: 1.7;
-    }
-    .formula-note span {
-      color: #999; font-weight: 600;
     }
     .var-list {
       margin-top: 28px;
@@ -192,17 +235,36 @@
       flex: 1; min-width: 260px; max-width: 300px;
       text-align: left;
     }
-    .why-card h3 {
-      font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
-      margin-bottom: 12px;
+    .why-card h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .why-card p { font-size: 15px; color: #777; line-height: 1.65; }
+
+    /* ─── INDEX EXPLAINER ─── */
+    .index-block {
+      max-width: 760px; margin: 0 auto;
+      background: #fafafa; border: 1px solid var(--border);
+      border-radius: 16px; padding: 52px 48px; text-align: left;
     }
-    .why-card p {
-      font-size: 15px; color: #777; line-height: 1.65;
+    .index-block .index-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #bbb; margin-bottom: 20px;
+    }
+    .index-block h3 {
+      font-size: 24px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px; color: #111;
+    }
+    .index-block p {
+      font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 16px;
+    }
+    .index-block p:last-child { margin-bottom: 0; }
+    .index-block em {
+      font-style: normal; font-weight: 600; color: #111;
     }
 
     /* ─── CTA ─── */
     .cta-section {
-      background: #fff; padding: 100px 48px; text-align: center;
+      background: #fff;
+      padding: 120px 48px; text-align: center;
+      border-top: 1px solid var(--border);
     }
     .cta-section h2 {
       font-size: clamp(36px, 5vw, 64px); font-weight: 800;
@@ -243,10 +305,13 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .hero, .section-light, .section-dark,
+      .hero, .section-light, .section-dark, .section-mid,
       .cta-section { padding-left: 20px; padding-right: 20px; }
       footer { padding: 24px 20px; }
       .formula-box { padding: 24px 20px; font-size: 15px; }
+      .compare-grid { flex-direction: column; }
+      .compare-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .index-block { padding: 36px 28px; }
     }
   </style>
 </head>
@@ -258,7 +323,7 @@
     <img src="images/logo.png" alt="American Energy Money">
   </a>
   <div class="nav-links">
-    <a class="nav-item active" href="compute.html">Futures</a>
+    <a class="nav-item active" href="compute.html">Compute</a>
     <a class="nav-item" href="engineering.html">Engineering</a>
     <a class="nav-item" href="research.html">Research</a>
   </div>
@@ -267,46 +332,95 @@
 <!-- ── HERO ── -->
 <section class="hero">
   <h1>Compute <span class="dim">Futures</span></h1>
-  <p class="subtitle">A perpetual futures contract for inference compute — priced in Qi, settled in QUAI.</p>
+  <p class="subtitle">Index futures for inference compute — priced against the Qi energy index, contracted and settled in QUAI.</p>
+  <div class="tag-row">
+    <span class="hero-tag">Cash-settled</span>
+    <span class="hero-tag">No hardware delivery</span>
+    <span class="hero-tag">Energy-indexed pricing</span>
+    <span class="hero-tag">Perpetual</span>
+  </div>
 </section>
 
 <!-- ── THE INSTRUMENT ── -->
 <section class="section-light">
   <h2><span class="gray">The</span> instrument</h2>
-  <p class="lead">A perpetual contract that lets agents acquire inference compute at a known energy cost — priced in Qi, the energy dollar. The market discovers the price. Settlement, contracting, and exchange all flow through QUAI.</p>
+  <p class="lead">A cash-settled index futures contract. The underlying is a standard unit of inference compute, valued in terms of the energy required to produce it. Like an equity index future, no asset is ever delivered — positions are settled financially against the index price.</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">01</div>
-      <h3>Perpetual</h3>
-      <p>No expiration date. A single contract that can be adopted as a standard through time, concentrating liquidity instead of fragmenting it across maturities.</p>
+      <h3>Index-style</h3>
+      <p>Just as E-mini S&P 500 futures don't deliver 500 stocks, a Compute Future doesn't deliver hardware. It settles cash against the Qi index — what the market says a unit of compute is worth in energy terms at expiry.</p>
     </div>
     <div class="step">
       <div class="step-num">02</div>
-      <h3>Qi-priced</h3>
-      <p>The futures price is denominated in Qi — the energy dollar. Qi is pegged to the real cost of performing work, so every price quote carries a physical meaning. Price discovery happens here, where traders reveal what inference is worth in energy terms.</p>
+      <h3>Qi-indexed</h3>
+      <p>The futures price is denominated in Qi, the energy dollar. Qi is unencumbered by anything except the direct cost of electricity — no speculative premium, no scarcity premium. It is the cleanest possible benchmark for pricing a compute unit against physical work.</p>
     </div>
     <div class="step">
       <div class="step-num">03</div>
       <h3>QUAI-settled</h3>
-      <p>All settlement, contracting, and exchange happens in QUAI — the scarce, programmable token that carries the network's full functionality. The convertible controller keeps Qi and QUAI equivalent, so energy-priced contracts resolve seamlessly into QUAI settlement flows.</p>
+      <p>All contract logic, margin, and settlement flows through QUAI — the programmable, highly liquid token on Quai Network. QUAI carries the full economic infrastructure. The convertible controller keeps Qi and QUAI equivalent, so energy-indexed prices resolve cleanly into QUAI settlement.</p>
     </div>
+  </div>
+</section>
+
+<!-- ── INDEX vs COMMODITY ── -->
+<section class="section-mid">
+  <h2>Index, <span class="gray">not commodity</span></h2>
+  <p class="lead">The distinction matters. Compute Futures belong to the index futures family — not commodity futures. Understanding why shapes everything about how the contract works.</p>
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-label">Commodity futures</div>
+      <h3>Physical delivery</h3>
+      <ul>
+        <li>The long position holder may take delivery of the underlying commodity at expiry</li>
+        <li>Price anchored to cost of producing and transporting a physical good</li>
+        <li>Designed for producers and consumers of tangible materials: oil, gas, grain</li>
+        <li>Delivery logistics and storage costs are built into the contract structure</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="compare-label">Compute Futures</div>
+      <h3>Access, not delivery</h3>
+      <ul>
+        <li>No hardware changes hands. You are not taking possession of a GPU</li>
+        <li>You are reserving the right to run computation through hardware at a future date — access, not ownership</li>
+        <li>Settlement is purely financial: cash against the Qi index price at settlement</li>
+        <li>Contract logic lives entirely on Quai Network in QUAI</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE UNDERLYING INDEX ── -->
+<section class="section-light">
+  <h2><span class="gray">The</span> underlying index</h2>
+  <p class="lead">What exactly is being priced? A standard unit of inference compute — defined in terms of the energy required to produce it.</p>
+  <div class="index-block">
+    <div class="index-label">The Qi Index</div>
+    <h3>Energy cost of computation, and nothing else</h3>
+    <p>Qi is Quai Network's energy-denominated token, minted in direct proportion to the difficulty-adjusted work performed by miners. Its purchasing power is anchored to the real cost of running hardware — the price of electricity. This makes it structurally different from any speculative or supply-capped asset.</p>
+    <p>When Qi serves as the pricing benchmark for a Compute Future, the quoted price carries a physical meaning: <em>how many kilowatt-hours of work is this inference unit worth?</em> There is no noise from scarcity, dilution, or market speculation — only the energy signal.</p>
+    <p>This is the same logic behind using a basket index to price equity futures: you strip away idiosyncratic variation and price against the underlying economic reality. For compute, that reality is electricity. Qi is that index.</p>
   </div>
 </section>
 
 <!-- ── TWO TOKENS ── -->
 <section class="section-dark">
   <h2>Two tokens, <span class="gray">one contract</span></h2>
-  <p class="lead">Quai Network's dual-token architecture maps directly onto the structure of perpetual futures. Qi prices, QUAI settles — and the convertible controller keeps them equivalent.</p>
+  <p class="lead">Quai Network's dual-token architecture maps directly onto the structure of index futures. Qi is the index. QUAI is the settlement and contract layer.</p>
   <div class="token-grid">
     <div class="token-card dark-card">
-      <div class="token-label">Price discovery</div>
+      <div class="token-label">The index</div>
       <h3>Qi</h3>
-      <p>The futures price f<sub>t</sub>. Qi is energy-denominated — pegged to the real cost of performing work on the network. When an agent buys a Compute Future, the Qi price expresses what a unit of inference compute is worth in physical energy terms, giving every quote a thermodynamic meaning.</p>
+      <p>The price benchmark. Qi is unencumbered by anything beyond the direct cost of electricity — no speculative premium, no fixed supply cap creating artificial scarcity. When an agent buys a Compute Future, the Qi price expresses what a unit of inference is worth in physical energy terms. Every quote has thermodynamic meaning.</p>
+      <div class="token-rule">Qi plays the role of the spot index — the observable, energy-anchored reference price that futures pricing converges toward.</div>
     </div>
     <div class="token-card dark-card">
-      <div class="token-label">Settlement &amp; functionality</div>
+      <div class="token-label">Settlement &amp; contract layer</div>
       <h3>QUAI</h3>
-      <p>The settlement layer. QUAI is scarce, programmable, and market-priced — carrying all contracting, exchange, conversion, and liquidity operations. Each settlement period, the net cash flow is paid in QUAI, anchoring the contract to the network's full economic infrastructure via the convertible controller.</p>
+      <p>The contract infrastructure. QUAI is scarce, programmable, and highly liquid — carrying all margin logic, settlement flows, exchange operations, and network functionality. Because QUAI is programmable, arbitrarily complex contract structures can be expressed on-chain. The convertible controller keeps Qi and QUAI equivalent, so energy-indexed prices resolve cleanly into QUAI settlement flows.</p>
+      <div class="token-rule">QUAI plays the role of the settlement currency — the liquid, programmable token in which all cash flows are actually paid.</div>
     </div>
   </div>
 </section>
@@ -314,17 +428,17 @@
 <!-- ── SETTLEMENT ── -->
 <section class="section-light">
   <h2><span class="gray">How</span> settlement works</h2>
-  <p class="lead">The daily resettlement combines the change in the Qi-denominated futures price with the difference between the energy dividend and the cost of capital — following the perpetual futures structure proposed by Shiller (1993). The resulting cash flow is settled in QUAI.</p>
+  <p class="lead">Each settlement cycle, the net cash flow combines the change in the Qi-indexed futures price with the difference between the energy dividend and the cost of capital — following the perpetual futures structure proposed by Shiller (1993). The resulting flow is paid in QUAI.</p>
   <div class="formula-block">
     <div class="formula-box" style="background: #fafafa; border-color: var(--border); color: #333;">
       s<sub>t+1</sub>&nbsp; = &nbsp;(f<sub>t+1</sub> − f<sub>t</sub>)&nbsp; + &nbsp;(d<sub>t+1</sub> − r<sub>t</sub> · f<sub>t</sub>)
     </div>
     <div class="formula-note">
       <div class="var-list">
-        <div class="var-item"><code>f<sub>t</sub></code> The perpetual futures price in Qi at time t — what the market says compute is worth in energy terms.</div>
-        <div class="var-item"><code>d<sub>t+1</sub></code> The energy dividend index — the Qi-denominated energy cost of inference actually delivered, converted to QUAI for settlement.</div>
-        <div class="var-item"><code>r<sub>t</sub></code> The return on an alternative asset between t and t+1 — the cost of capital for holding the position.</div>
-        <div class="var-item"><code>s<sub>t+1</sub></code> The net daily resettlement paid in QUAI from short to long. Combines both price movement and the energy dividend.</div>
+        <div class="var-item"><code>f<sub>t</sub></code> The perpetual futures price in Qi at time t — what the market reveals compute to be worth in energy terms at that moment.</div>
+        <div class="var-item"><code>d<sub>t+1</sub></code> The energy dividend index — the Qi-denominated energy cost of inference actually delivered during the period, converted to QUAI at settlement.</div>
+        <div class="var-item"><code>r<sub>t</sub></code> The return on an alternative asset between t and t+1 — the cost of capital for holding the position open.</div>
+        <div class="var-item"><code>s<sub>t+1</sub></code> The net settlement paid in QUAI from short to long. Combines price movement and the energy dividend — no physical delivery, just cash flows.</div>
       </div>
     </div>
   </div>
@@ -333,19 +447,19 @@
 <!-- ── WHY PERPETUAL ── -->
 <section class="section-dark">
   <h2>Why <span class="gray">perpetual</span></h2>
-  <p class="lead">Perpetual contracts solve specific problems that conventional futures cannot — particularly for assets where cash prices are difficult to observe directly.</p>
+  <p class="lead">Perpetual contracts solve problems that conventional quarterly futures cannot — especially for assets where the spot price is difficult to observe directly.</p>
   <div class="why-grid">
     <div class="why-card">
       <h3 style="color:#fff;">Liquidity concentration</h3>
-      <p style="color:#888;">A single perpetual contract absorbs all trading interest instead of splitting it across quarterly maturities. Every participant trades the same instrument, deepening the order book.</p>
+      <p style="color:#888;">A single perpetual contract absorbs all trading interest instead of splitting it across quarterly maturities. Every participant trades the same instrument, deepening the order book and tightening spreads.</p>
     </div>
     <div class="why-card">
-      <h3 style="color:#fff;">Cash-flow settlement</h3>
-      <p style="color:#888;">When the true price of compute is hard to observe, price it in what you can measure — the energy cost of work performed, denominated in Qi. Settlement then flows through QUAI, the network's programmable and liquid token.</p>
+      <h3 style="color:#fff;">No observable spot</h3>
+      <p style="color:#888;">The spot price of inference compute is hard to observe and highly fragmented across providers. Perpetual index futures sidestep this problem: price what you can measure directly — the energy cost denominated in Qi — and settle against that index.</p>
     </div>
     <div class="why-card">
-      <h3 style="color:#fff;">Price discovery</h3>
-      <p style="color:#888;">The funding mechanism creates periodic information aggregation. Traders reveal their beliefs about compute value every settlement cycle, driving the Qi-denominated futures price toward fair value.</p>
+      <h3 style="color:#fff;">Continuous price discovery</h3>
+      <p style="color:#888;">The funding mechanism creates periodic information aggregation. Each settlement cycle, traders reveal their beliefs about compute value, driving the Qi-indexed futures price toward fair value over time.</p>
     </div>
   </div>
 </section>
@@ -353,22 +467,22 @@
 <!-- ── DESIGNED FOR AGENTS ── -->
 <section class="section-light">
   <h2><span class="gray">Designed for</span> agents</h2>
-  <p class="lead">Autonomous agents need to acquire, budget, and allocate inference compute programmatically. Compute Futures give them a standard Qi-priced, QUAI-settled instrument to do it.</p>
+  <p class="lead">Autonomous agents need to acquire, budget, and allocate inference compute programmatically. Compute Futures give them a standard energy-indexed instrument to do it — all margin and settlement handled in QUAI, no hardware logistics required.</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">→</div>
-      <h3>Lock in cost</h3>
-      <p>An agent that needs inference over the next month can go long on a Compute Future and lock in the Qi-denominated energy cost of that compute today, with all margin and settlement handled in QUAI.</p>
+      <h3>Reserve access</h3>
+      <p>An agent that needs inference capacity over the next month goes long on a Compute Future, locking in the Qi-indexed energy cost of that compute today. No delivery, no hardware custody — just a financial commitment to the index price, settled in QUAI.</p>
     </div>
     <div class="step">
       <div class="step-num">→</div>
       <h3>Hedge supply</h3>
-      <p>A compute provider can go short — locking in QUAI revenue for capacity it plans to deliver, hedging against falling demand or price declines in the Qi-denominated market.</p>
+      <p>A compute provider goes short — locking in QUAI revenue for capacity it plans to deliver, hedging against falling demand or Qi-index price declines. The contract creates a binding financial commitment without the logistics of physical delivery.</p>
     </div>
     <div class="step">
       <div class="step-num">→</div>
-      <h3>Trade the basis</h3>
-      <p>Arbitrageurs can trade the spread between the Qi futures price and the QUAI settlement flow, keeping prices aligned and providing liquidity to both sides.</p>
+      <h3>Arbitrage the basis</h3>
+      <p>Arbitrageurs trade the spread between the Qi futures price and actual spot compute costs, keeping the index price aligned with physical energy reality and providing liquidity to both sides of the market.</p>
     </div>
   </div>
 </section>
@@ -376,7 +490,7 @@
 <!-- ── CTA ── -->
 <section class="cta-section">
   <h2>Try the Controller</h2>
-  <p>See how the convertible controller keeps Qi pricing and QUAI settlement equivalent — the engine behind Compute Futures.</p>
+  <p>See how the convertible controller keeps Qi indexed pricing and QUAI settlement equivalent — the engine behind Compute Futures.</p>
   <a class="cta-btn" href="controller.html">Launch Demo</a>
 </section>
 
