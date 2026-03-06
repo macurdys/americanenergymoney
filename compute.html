@@ -265,11 +265,11 @@
     .comp-row { display: grid; grid-template-columns: 1.2fr 1.5fr 1.5fr; border-bottom: 1px solid var(--border); }
     .comp-row:last-child { border-bottom: none; }
     .comp-row > div { padding: 14px 18px; font-size: 0.88rem; line-height: 1.5; }
-    .comp-header { background: #f0f0f0; }
-    .comp-header > div { padding: 12px 18px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: #555; }
-    .comp-label { color: #333; font-weight: 600; background: #fafafa; }
-    .comp-no { color: #888; background: #fff; }
-    .comp-yes { color: #1a6e3c; background: #f0faf4; font-weight: 500; }
+    .comp-header { background: #1a1a1a; }
+    .comp-header > div { padding: 12px 18px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: #888; }
+    .comp-label { color: #ccc; font-weight: 600; background: #111; }
+    .comp-no { color: #666; background: #0d0d0d; }
+    .comp-yes { color: #4ade80; background: #0a1a0f; font-weight: 500; }
     @media (max-width: 640px) {
       .comp-row { grid-template-columns: 1fr; }
     }
@@ -500,68 +500,71 @@
 </section>
 
 <!-- ── HOW COMPETITORS BUILD INDEXES ── -->
-<section class="section-light">
-  <h2>How competitors <span class="gray">build their indexes</span></h2>
-  <p class="lead">Other compute index providers — Silicon Data and peers — approach the problem as a data collection and normalization exercise. That methodology has real merit. It also has a structural ceiling.</p>
+<section style="background:#000; padding:100px 48px; text-align:center;">
+  <h2 style="font-size:clamp(32px,4vw,50px); font-weight:700; letter-spacing:-0.03em; margin-bottom:24px; color:#fff;">How competitors <span style="color:#555;">build their indexes</span></h2>
+  <p class="lead" style="color:#666;">Other compute index providers — Silicon Data and peers — approach the problem as a data collection and normalization exercise. That methodology has real merit. It also has a structural ceiling.</p>
 
-  <div class="why-grid" style="margin-bottom: 40px;">
-    <div class="why-card" style="border-color: var(--border); background: #f9f9f9;">
-      <h3 style="color:#333; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">1 — Data Coverage</h3>
-      <p style="color:#555;">They aggregate GPU rental rates from cloud providers, colocation markets, brokered cluster sales, and private platforms — claiming 80%+ coverage of the H100 rental market.</p>
+  <!-- 2×2 methodology grid — white cards on black -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:860px; margin:0 auto 48px; border:1px solid #222; border-radius:12px; overflow:hidden;">
+    <div style="background:#fff; padding:36px 32px; text-align:left; border-right:1px solid #eee; border-bottom:1px solid #eee;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">01 — Data Coverage</div>
+      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">They aggregate GPU rental rates from cloud providers, colocation markets, brokered cluster sales, and private platforms — claiming 80%+ coverage of the H100 rental market.</p>
     </div>
-    <div class="why-card" style="border-color: var(--border); background: #f9f9f9;">
-      <h3 style="color:#333; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">2 — Normalization</h3>
-      <p style="color:#555;">Prices are adjusted for GPU type, memory, rental term, interconnect speed, cluster scale, and geography — producing a "like-for-like" on-demand rate stripped of marketing noise.</p>
+    <div style="background:#fff; padding:36px 32px; text-align:left; border-bottom:1px solid #eee;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">02 — Normalization</div>
+      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">Prices are adjusted for GPU type, memory, rental term, interconnect speed, cluster scale, and geography — producing a like-for-like on-demand rate stripped of marketing noise.</p>
     </div>
-    <div class="why-card" style="border-color: var(--border); background: #f9f9f9;">
-      <h3 style="color:#333; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">3 — Daily Validation</h3>
-      <p style="color:#555;">Indexes are recalculated each business day. Statistical filters remove stale or non-representative data. Independent oversight agents attest to calculation integrity.</p>
+    <div style="background:#fff; padding:36px 32px; text-align:left; border-right:1px solid #eee;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">03 — Daily Validation</div>
+      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">Indexes are recalculated each business day. Statistical filters remove stale or non-representative data. Independent oversight agents attest to calculation integrity.</p>
     </div>
-    <div class="why-card" style="border-color: var(--border); background: #f9f9f9;">
-      <h3 style="color:#333; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">4 — Distribution</h3>
-      <p style="color:#555;">Published on Bloomberg Terminal (BBG: SDH100RT), distributed via direct API, and licensed to data partners including Kaiko. Historical archives available.</p>
+    <div style="background:#fff; padding:36px 32px; text-align:left;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">04 — Distribution</div>
+      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">Published on Bloomberg Terminal (BBG: SDH100RT), distributed via direct API, and licensed to data partners including Kaiko. Historical archives available.</p>
     </div>
   </div>
 
-  <div class="index-block" style="border-color: #e0e0e0; background: #f4f4f4;">
-    <div class="index-label" style="background:#e8e8e8; color:#555;">The structural problem</div>
-    <h3 style="color: #222;">This is a survey index. It measures what vendors <em>charge</em> — not what compute <em>costs</em>.</h3>
-    <p style="color: #444;">A rental rate aggregated from commercial platforms reflects vendor margins, market positioning, capacity utilization, and competitive dynamics. It answers the question <em>"what is the current ask?"</em> — not <em>"what is the underlying cost of producing this computation?"</em></p>
-    <p style="color: #444;">The distinction collapses the moment markets thin out, vendors coordinate pricing, or a new generation of hardware reshapes the cost curve overnight. Survey indexes are backward-looking by construction: they can only tell you what was charged, not what the physics of computation actually demands.</p>
-    <p style="color: #444;">A futures market needs an index that is <strong>non-manipulable</strong>, <strong>anchored to physical reality</strong>, and <strong>forward-looking by structure</strong>. Rental rate surveys provide none of these.</p>
-  </div>
-
-  <div class="comparison-grid" style="margin-top:40px;">
-    <div class="comp-row comp-header">
+  <!-- Comparison table — white background -->
+  <div style="max-width:860px; margin:0 auto 48px; background:#fff; border-radius:12px; overflow:hidden;">
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; border-bottom:2px solid #111; padding:14px 24px;">
       <div></div>
-      <div>Survey Index <span style="color:#aaa; font-weight:400;">(e.g. Silicon Data)</span></div>
-      <div>Qi Energy Index</div>
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#aaa; text-align:left; padding:0 16px;">Survey Index</div>
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#111; text-align:left; padding:0 16px;">Qi Energy Index</div>
     </div>
-    <div class="comp-row">
-      <div class="comp-label">Source of truth</div>
-      <div class="comp-no">Vendor ask prices</div>
-      <div class="comp-yes">Thermodynamic cost of computation</div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Source of truth</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Vendor ask prices</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Thermodynamic cost of computation</div>
     </div>
-    <div class="comp-row">
-      <div class="comp-label">Manipulation resistance</div>
-      <div class="comp-no">Depends on data network coverage</div>
-      <div class="comp-yes">Secured by PoW — falsifying requires real energy</div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Manipulation resistance</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Depends on data network coverage</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Secured by PoW — falsifying requires real energy</div>
     </div>
-    <div class="comp-row">
-      <div class="comp-label">Hardware generation risk</div>
-      <div class="comp-no">Index breaks when H100 is superseded</div>
-      <div class="comp-yes">Normalizes across hardware via energy denominator</div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Hardware generation risk</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Index breaks when H100 is superseded</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Normalizes across hardware via energy denominator</div>
     </div>
-    <div class="comp-row">
-      <div class="comp-label">Settlement suitability</div>
-      <div class="comp-no">Requires off-chain oracle and trust</div>
-      <div class="comp-yes">On-chain, auditable, no third-party attestation</div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Settlement suitability</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Requires off-chain oracle and trust</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">On-chain, auditable, no third-party attestation</div>
     </div>
-    <div class="comp-row">
-      <div class="comp-label">Forward price signal</div>
-      <div class="comp-no">Backward-looking daily snapshot</div>
-      <div class="comp-yes">Perpetual futures mechanism aggregates expectations continuously</div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Forward price signal</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Backward-looking daily snapshot</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Perpetual futures mechanism aggregates expectations continuously</div>
     </div>
+  </div>
+
+  <!-- Structural problem callout -->
+  <div style="max-width:860px; margin:0 auto; background:#111; border-left:3px solid #fff; border-radius:0 8px 8px 0; padding:40px 40px 40px 44px; text-align:left;">
+    <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-bottom:16px;">The structural problem</div>
+    <h3 style="font-size:22px; font-weight:800; color:#fff; letter-spacing:-0.02em; margin-bottom:20px; line-height:1.3;">This is a survey index. It measures what vendors <span style="color:#fff; text-decoration:underline; text-decoration-color:#444;">charge</span> — not what compute <span style="color:#fff; text-decoration:underline; text-decoration-color:#444;">costs</span>.</h3>
+    <p style="font-size:15px; color:#777; line-height:1.75; margin-bottom:16px;">A rental rate aggregated from commercial platforms reflects vendor margins, market positioning, capacity utilization, and competitive dynamics. It answers <em>"what is the current ask?"</em> — not <em>"what is the underlying cost of producing this computation?"</em></p>
+    <p style="font-size:15px; color:#777; line-height:1.75; margin-bottom:16px;">The distinction collapses the moment markets thin out, vendors coordinate pricing, or a new hardware generation reshapes the cost curve overnight. Survey indexes are backward-looking by construction: they can only tell you what was charged, not what the physics of computation actually demands.</p>
+    <p style="font-size:15px; color:#999; line-height:1.75; margin:0;">A futures market needs an index that is <strong style="color:#ddd;">non-manipulable</strong>, <strong style="color:#ddd;">anchored to physical reality</strong>, and <strong style="color:#ddd;">forward-looking by structure</strong>. Rental rate surveys provide none of these.</p>
   </div>
 </section>
 
