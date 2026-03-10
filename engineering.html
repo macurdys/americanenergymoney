@@ -140,26 +140,42 @@
     .mini-terminal .warn { color: var(--amber); }
     .mini-terminal .hi { color: var(--green); }
 
-    /* DATA & LAB SECTIONS */
-    .data-tools-wrap { background: #fff; padding: 60px 0; }
-    .svc-divider { width: 100%; max-width: 960px; margin: 0 auto; border: none; border-top: 1px solid var(--border); }
-    .lab-section { padding: 80px 48px; display: flex; align-items: center; gap: 64px; max-width: 1040px; margin: 0 auto; }
-    .lab-section.reverse { flex-direction: row-reverse; }
-    .lab-text { flex: 1; min-width: 0; }
-    .lab-text h2 { font-size: clamp(28px, 3.2vw, 38px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
-    .lab-text .lab-desc { font-size: 15px; color: #777; line-height: 1.7; margin-bottom: 28px; }
-    .lab-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .lab-list li { font-size: 14px; font-weight: 500; color: #555; display: flex; align-items: center; gap: 10px; }
-    .lab-list li .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-    .lab-list li .dot.purple { background: var(--purple); }
-    .lab-list li .dot.blue { background: var(--blue); }
-    .lab-visual { flex: 0 0 340px; background: #0d0d0d; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-    .lab-visual-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-    .lab-visual-icon.purple { background: rgba(192,132,252,0.1); color: var(--purple); }
-    .lab-visual-icon.blue { background: rgba(96,165,250,0.1); color: var(--blue); }
-    .lab-visual-icon svg { width: 24px; height: 24px; }
-    .action-btn { display: inline-block; padding: 11px 28px; background: #111; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: -0.01em; border-radius: 100px; text-decoration: none; transition: background 0.15s, transform 0.15s; margin-top: 28px; }
+    /* DATA & RPC SECTION */
+    .data-tools-wrap { background: #fafafa; border-top: 1px solid var(--border); padding: 80px 48px 100px; }
+    .data-tools-inner { max-width: 1040px; margin: 0 auto; }
+    .data-tools-header { text-align: center; margin-bottom: 56px; }
+    .data-tools-header h2 { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 14px; }
+    .data-tools-header h2 .gray { color: var(--gray); }
+    .data-tools-header p { font-size: 15px; color: #777; max-width: 500px; margin: 0 auto; line-height: 1.7; }
+    .rpc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .rpc-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px 28px; display: flex; flex-direction: column; gap: 0; transition: box-shadow 0.2s, transform 0.2s; }
+    .rpc-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-2px); }
+    .rpc-card-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .rpc-card-icon svg { width: 22px; height: 22px; }
+    .rpc-card-icon.blue { background: rgba(96,165,250,0.1); color: var(--blue); }
+    .rpc-card-icon.amber { background: rgba(251,191,36,0.1); color: var(--amber); }
+    .rpc-card-icon.purple { background: rgba(192,132,252,0.1); color: var(--purple); }
+    .rpc-card-tag { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #bbb; margin-bottom: 8px; }
+    .rpc-card h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.025em; color: #111; margin-bottom: 12px; }
+    .rpc-card-desc { font-size: 14px; color: #777; line-height: 1.7; margin-bottom: 20px; }
+    .rpc-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
+    .rpc-list li { font-size: 13px; font-weight: 500; color: #666; display: flex; align-items: center; gap: 9px; }
+    .rpc-list li .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+    .rpc-list li .dot.blue { background: var(--blue); }
+    .rpc-list li .dot.amber { background: var(--amber); }
+    .rpc-list li .dot.purple { background: var(--purple); }
+    .rpc-terminal { width: 100%; background: #111; border-radius: 10px; padding: 14px 16px; font-family: var(--mono); font-size: 11px; color: #555; line-height: 1.9; overflow: hidden; margin-bottom: 24px; flex: 1; }
+    .rpc-terminal .prompt { color: #444; }
+    .rpc-terminal .ok { color: var(--green); }
+    .rpc-terminal .val { color: var(--blue); }
+    .rpc-terminal .warn { color: var(--amber); }
+    .rpc-terminal .hi { color: var(--green); }
+    .rpc-terminal .lo { color: #ef4444; }
+    .rpc-card-footer { margin-top: auto; padding-top: 4px; }
+    .action-btn { display: inline-block; padding: 10px 24px; background: #111; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: -0.01em; border-radius: 100px; text-decoration: none; transition: background 0.15s, transform 0.15s; }
     .action-btn:hover { background: #333; transform: scale(1.03); }
+    .action-btn.outline { background: transparent; color: #111; border: 1.5px solid rgba(0,0,0,0.15); }
+    .action-btn.outline:hover { background: #f5f5f5; transform: scale(1.03); }
 
     /* FOOTER */
     footer { background: #fff; border-top: 1px solid var(--border); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px; }
@@ -182,6 +198,7 @@
       .fork-svg, .converge-svg { display: none; }
       .lab-section, .lab-section.reverse { flex-direction: column; padding: 60px 20px; gap: 32px; }
       .lab-visual { flex: none; width: 100%; }
+      .rpc-grid { grid-template-columns: 1fr; }
       footer { padding: 24px 20px; }
     }
     @media (max-width: 480px) {
@@ -311,13 +328,7 @@
           <li><span class="dot blue"></span>GPU Compute Clusters</li>
           <li><span class="dot blue"></span>Air &amp; Immersion Cooling Systems</li>
         </ul>
-        <div class="mini-terminal">
-          <span class="prompt">$</span> aem hw status<br>
-          <span class="ok">&#9679;</span> cluster a <span class="val">online</span> 142 ASICs<br>
-          <span class="ok">&#9679;</span> gpu rig <span class="val">hashing</span> 100% load<br>
-          <span class="prompt">$</span> aem hw temps --zone 1<br>
-          <span class="val">&rarr;</span> stable 68°C / 4200 RPM
-        </div>
+        <a href="#" class="action-btn outline" style="margin-top:8px;">Coming Soon</a>
       </div>
 
       <div class="infra-card">
@@ -335,13 +346,7 @@
           <li><span class="dot green"></span>Battery Storage &amp; PDUs</li>
           <li><span class="dot green"></span>Grid Load Balancing</li>
         </ul>
-        <div class="mini-terminal">
-          <span class="prompt">$</span> aem elec status<br>
-          <span class="ok">&#9679;</span> solar array <span class="val">4.2 kW</span> generating<br>
-          <span class="ok">&#9679;</span> battery <span class="val">87%</span> 13.2 kWh stored<br>
-          <span class="ok">&#9679;</span> grid draw <span class="val">0.0 kW</span> off-grid mode<br>
-          <span class="warn">&rarr;</span> net cost $0.02/kWh
-        </div>
+        <a href="#" class="action-btn outline" style="margin-top:8px;">Coming Soon</a>
       </div>
     </div>
 
@@ -349,62 +354,72 @@
 </section>
 
 <section class="data-tools-wrap">
+  <div class="data-tools-inner">
 
-  <div class="lab-section reverse">
-    <div class="lab-text">
+    <div class="data-tools-header">
       <span class="section-label">Data Layer</span>
-      <h2>API &amp; RPC Infrastructure</h2>
-      <p class="lab-desc">The foundational data layer powering our thermoeconomic research. High-performance RPC endpoints and on-chain indexers provide the raw material for deep protocol analysis.</p>
-      <ul class="lab-list">
-        <li><span class="dot blue"></span>Full-Node RPC Endpoints</li>
-        <li><span class="dot blue"></span>On-Chain Indexer Services</li>
-        <li><span class="dot blue"></span>Real-time Network Telemetry</li>
-      </ul>
-      <a href="https://access.ccdb.waexservices.com/request-access" class="action-btn" target="_blank" rel="noopener">Request API Access</a>
+      <h2>API &amp; RPC <span class="gray">Infrastructure</span></h2>
+      <p>High-performance endpoints, on-chain intelligence, and economic benchmarks powering applied thermoeconomic research on the Quai Network.</p>
     </div>
-    <div class="lab-visual">
-      <div class="lab-visual-icon blue">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
+
+    <div class="rpc-grid">
+
+      <!-- INDEXERS -->
+      <div class="rpc-card">
+        <div class="rpc-card-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="rpc-card-tag">Data Layer</div>
+        <h3>Indexers</h3>
+        <p class="rpc-card-desc">Full-node RPC endpoints and on-chain indexers that ingest every block, transaction, and workshare event — providing the raw material for deep protocol analysis.</p>
+        <ul class="rpc-list">
+          <li><span class="dot blue"></span>Full-Node RPC Endpoints</li>
+          <li><span class="dot blue"></span>On-Chain Indexer Services</li>
+          <li><span class="dot blue"></span>Real-time Network Telemetry</li>
+        </ul>
+        <div class="rpc-card-footer">
+          <a href="https://access.ccdb.waexservices.com/request-access" class="action-btn" target="_blank" rel="noopener">Request API Access</a>
+        </div>
       </div>
-      <div class="mini-terminal">
-        <span class="prompt">$</span> curl -X POST rpc.aem.tech \<br>
-        &nbsp;&nbsp;-d '{"method":"quai_blockNumber"}'<br>
-        <span class="val">{"result":"0x2b705f"}</span><br>
-        <span class="prompt">$</span> aem data pull --range 7d<br>
-        <span class="ok">&#9679;</span> 142k blocks indexed<br>
-        <span class="ok">&#9679;</span> 0ms latency
+
+      <!-- AGENTS -->
+      <div class="rpc-card">
+        <div class="rpc-card-icon amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 3-2 6h-4c0-3-2-4-2-6a4 4 0 0 1 4-4z"/><line x1="10" y1="16" x2="14" y2="16"/><line x1="10" y1="19" x2="14" y2="19"/><path d="M9 22h6"/></svg>
+        </div>
+        <div class="rpc-card-tag">Automation</div>
+        <h3>Agents</h3>
+        <p class="rpc-card-desc">Autonomous on-chain agents that monitor workshare events, trigger rebalancing logic, and surface entropy-anchored signals for downstream oracle and DAO systems.</p>
+        <ul class="rpc-list">
+          <li><span class="dot amber"></span>Workshare Event Monitors</li>
+          <li><span class="dot amber"></span>Oracle Feed Automation</li>
+          <li><span class="dot amber"></span>DAO Trigger Pipelines</li>
+        </ul>
+        <div class="rpc-card-footer">
+          <a href="#" class="action-btn outline">View Agent Docs</a>
+        </div>
       </div>
+
+      <!-- PROFITABILITY -->
+      <div class="rpc-card">
+        <div class="rpc-card-icon purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v7.4a2 2 0 0 1-.6 1.4L3.7 16.5A2 2 0 0 0 3 18v0a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v0a2 2 0 0 0-.7-1.5l-4.7-4.7a2 2 0 0 1-.6-1.4V3"/><line x1="9" y1="3" x2="15" y2="3"/></svg>
+        </div>
+        <div class="rpc-card-tag">Experiments</div>
+        <h3>Profitability Analysis</h3>
+        <p class="rpc-card-desc">A live benchmarking environment comparing economic returns across SHA-256, Scrypt, and KawPow — measuring opportunity cost against Quai's logarithmic emission schedule.</p>
+        <ul class="rpc-list">
+          <li><span class="dot purple"></span>Quai vs Merge-Mined Chains</li>
+          <li><span class="dot purple"></span>Multi-Algorithm Benchmarks</li>
+          <li><span class="dot purple"></span>Opportunity Cost Analysis</li>
+        </ul>
+        <div class="rpc-card-footer">
+          <a href="#" class="action-btn outline">Open Lab</a>
+        </div>
+      </div>
+
     </div>
   </div>
-
-  <hr class="svc-divider">
-
-  <div class="lab-section">
-    <div class="lab-text">
-      <span class="section-label">Experiments</span>
-      <h2>Profitability Analysis</h2>
-      <p class="lab-desc">A testing environment comparing the economic returns of Quai mining against merge-mined blockchains — measuring real opportunity cost across SHA-256, Scrypt, and KawPow algorithms.</p>
-      <ul class="lab-list">
-        <li><span class="dot purple"></span>Quai vs Merge-Mined Chains</li>
-        <li><span class="dot purple"></span>Multi-Algorithm Benchmarks</li>
-        <li><span class="dot purple"></span>Opportunity Cost Analysis</li>
-      </ul>
-    </div>
-    <div class="lab-visual">
-      <div class="lab-visual-icon purple">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v7.4a2 2 0 0 1-.6 1.4L3.7 16.5A2 2 0 0 0 3 18v0a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v0a2 2 0 0 0-.7-1.5l-4.7-4.7a2 2 0 0 1-.6-1.4V3"/><line x1="9" y1="3" x2="15" y2="3"/></svg>
-      </div>
-      <div class="mini-terminal">
-        <span class="prompt">$</span> aem lab compare --algo sha256<br>
-        <span class="val">BTC</span>&nbsp; 0.00000312 /TH/day<br>
-        <span class="val">QUAI</span> 0.00004871 /TH/day<br>
-        <span class="ok">&#9650;</span> quai <span class="hi">+1,461%</span> vs btc<br>
-        <span class="prompt">$</span> aem lab opp-cost<br>
-        <span class="warn">&rarr;</span> $0.047/kWh delta
-      </div>
-    </div>
-  </div>
-
 </section>
 
 <footer>
