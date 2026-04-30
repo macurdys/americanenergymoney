@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Pricing Stack — American Energy Money</title>
+  <meta name="description" content="How proof-of-work mining creates a thermodynamic floor price for compute — insights from a conversation with ComputeDesk.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gray: #999;
+      --dark: #111;
+      --white: #fff;
+      --border: rgba(0,0,0,0.07);
+      --border-light: rgba(255,255,255,0.08);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
+    .nav-logo span {
+      font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #111;
+    }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-item {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+      color: #444; text-decoration: none; cursor: pointer;
+      border-radius: 8px; transition: background 0.15s;
+    }
+    .nav-item:hover { background: #f5f5f5; }
+    .nav-item.active { color: #111; font-weight: 600; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: #0d0d0d;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 120px 48px 80px; text-align: center;
+    }
+    .hero-context {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: #555; margin-bottom: 32px;
+    }
+    .hero-context a { color: #888; text-decoration: underline; text-decoration-color: #444; }
+    .hero-context a:hover { color: #ccc; }
+    .hero h1 {
+      font-size: clamp(44px, 6vw, 72px);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
+      color: #fff; max-width: 900px;
+    }
+    .hero h1 .dim { color: #555; }
+    .hero .subtitle {
+      font-size: clamp(17px, 2vw, 20px); font-weight: 500;
+      color: #666; margin-top: 28px; max-width: 620px;
+      line-height: 1.65; letter-spacing: -0.01em;
+    }
+    .hero .tag-row {
+      display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; justify-content: center;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #444; border: 1px solid #2a2a2a; border-radius: 100px; padding: 7px 16px;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section-light { background: #fff; padding: 100px 48px; text-align: center; }
+    .section-dark { background: #0d0d0d; padding: 100px 48px; text-align: center; }
+    .section-mid { background: #f7f7f7; padding: 100px 48px; text-align: center; }
+    .section-light h2, .section-dark h2, .section-mid h2 {
+      font-size: clamp(30px, 4vw, 48px); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 24px;
+    }
+    .section-dark h2 { color: #fff; }
+    .section-light h2 .gray, .section-dark h2 .gray, .section-mid h2 .gray { color: var(--gray); }
+    .lead {
+      font-size: 17px; color: #666; max-width: 640px;
+      margin: 0 auto 64px; line-height: 1.7;
+    }
+    .section-dark .lead { color: #777; }
+
+    /* ─── NORMALIZATION STACK ─── */
+    .stack-container {
+      max-width: 700px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .stack-layer {
+      position: relative;
+      padding: 36px 40px;
+      text-align: left;
+      border-left: 3px solid;
+      transition: transform 0.2s;
+    }
+    .stack-layer:hover { transform: translateX(6px); }
+    .stack-layer.l-fuel { border-color: #6b3a2a; background: #1a1210; }
+    .stack-layer.l-elec { border-color: #c9a227; background: #161410; }
+    .stack-layer.l-gpu  { border-color: #3a7a5a; background: #101814; }
+    .stack-layer.l-work { border-color: #4a6aaa; background: #10141a; }
+    .stack-layer.l-hash { border-color: #fff; background: #141414; }
+    .stack-num {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .l-fuel .stack-num { color: #8a5a3a; }
+    .l-elec .stack-num { color: #c9a227; }
+    .l-gpu  .stack-num { color: #4a9a6a; }
+    .l-work .stack-num { color: #5a7aba; }
+    .l-hash .stack-num { color: #999; }
+    .stack-layer h3 {
+      font-size: 20px; font-weight: 800; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 10px;
+    }
+    .stack-layer p {
+      font-size: 14px; color: #777; line-height: 1.7; margin: 0;
+    }
+    .stack-layer p strong { color: #bbb; font-weight: 600; }
+    .stack-arrow {
+      display: flex; align-items: center; justify-content: center;
+      padding: 6px 0;
+      color: #333; font-size: 18px;
+    }
+
+    /* ─── INSIGHT CARDS ─── */
+    .insight-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; max-width: 860px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .insight-card {
+      padding: 40px 36px; text-align: left; background: #fff;
+    }
+    .insight-card:nth-child(odd) { border-right: 1px solid var(--border); }
+    .insight-card:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+    .insight-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #aaa; margin-bottom: 14px;
+    }
+    .insight-card h3 {
+      font-size: 18px; font-weight: 800; letter-spacing: -0.02em;
+      color: #111; margin-bottom: 12px; line-height: 1.3;
+    }
+    .insight-card p {
+      font-size: 14px; color: #777; line-height: 1.7; margin: 0;
+    }
+
+    /* ─── REGIME DIAGRAM ─── */
+    .regime-container {
+      display: flex; gap: 2px; max-width: 860px; margin: 0 auto;
+      border: 1px solid #222; border-radius: 16px; overflow: hidden;
+    }
+    .regime-col {
+      flex: 1; padding: 48px 36px; text-align: left;
+    }
+    .regime-col.regime-demand { background: #111; border-right: 1px solid #222; }
+    .regime-col.regime-supply { background: #0a0a0a; }
+    .regime-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .regime-demand .regime-tag { color: #4a9a6a; }
+    .regime-supply .regime-tag { color: #c9a227; }
+    .regime-col h3 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 16px; line-height: 1.25;
+    }
+    .regime-col p { font-size: 14px; color: #666; line-height: 1.7; }
+    .regime-col p strong { color: #aaa; font-weight: 600; }
+    .regime-signal {
+      margin-top: 24px; padding-top: 20px; border-top: 1px solid #222;
+      font-size: 13px; line-height: 1.6;
+    }
+    .regime-demand .regime-signal { color: #4a9a6a; }
+    .regime-supply .regime-signal { color: #c9a227; }
+
+    /* ─── FLOOR DIAGRAM ─── */
+    .floor-visual {
+      max-width: 860px; margin: 0 auto 48px;
+      position: relative;
+      border: 1px solid #222; border-radius: 16px; overflow: hidden;
+      background: #0a0a0a;
+    }
+    .floor-chart {
+      padding: 48px 40px 40px;
+      position: relative;
+    }
+    .floor-chart svg { width: 100%; height: auto; display: block; }
+    .floor-legend {
+      display: flex; gap: 32px; justify-content: center;
+      padding: 0 40px 36px; flex-wrap: wrap;
+    }
+    .floor-legend-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
+    }
+    .floor-legend-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+
+    /* ─── BIDIRECTIONAL ─── */
+    .bidir-container {
+      max-width: 860px; margin: 0 auto;
+      display: flex; align-items: stretch; gap: 2px;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .bidir-col {
+      flex: 1; padding: 44px 36px; text-align: left;
+    }
+    .bidir-col.bidir-left { background: #fafafa; border-right: 1px solid var(--border); }
+    .bidir-col.bidir-right { background: #fff; }
+    .bidir-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .bidir-left .bidir-label { color: #bbb; }
+    .bidir-right .bidir-label { color: #111; }
+    .bidir-col h3 {
+      font-size: 20px; font-weight: 800; letter-spacing: -0.02em;
+      color: #111; margin-bottom: 14px; line-height: 1.3;
+    }
+    .bidir-col p { font-size: 14px; color: #777; line-height: 1.7; }
+    .bidir-col p strong { color: #444; font-weight: 600; }
+    .bidir-arrow-center {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 12px;
+      background: #f0f0f0;
+      font-size: 22px; color: #bbb;
+    }
+
+    /* ─── CALLOUT ─── */
+    .callout-block {
+      max-width: 860px; margin: 0 auto;
+      background: #111; border-left: 3px solid #fff;
+      border-radius: 0 8px 8px 0;
+      padding: 44px 44px 44px 48px; text-align: left;
+    }
+    .callout-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: #555; margin-bottom: 16px;
+    }
+    .callout-block h3 {
+      font-size: 22px; font-weight: 800; color: #fff;
+      letter-spacing: -0.02em; margin-bottom: 20px; line-height: 1.35;
+    }
+    .callout-block h3 u { text-decoration-color: #444; }
+    .callout-block p {
+      font-size: 15px; color: #777; line-height: 1.75; margin-bottom: 16px;
+    }
+    .callout-block p:last-child { margin-bottom: 0; }
+    .callout-block p strong { color: #ddd; }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: #fff; padding: 80px 48px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 16px; color: #111;
+    }
+    .cta-section p {
+      font-size: 17px; color: #666; max-width: 520px;
+      margin: 0 auto 32px; line-height: 1.6;
+    }
+    .cta-btn {
+      display: inline-block; padding: 14px 36px;
+      font-size: 15px; font-weight: 600; letter-spacing: -0.01em;
+      background: #111; color: #fff; border-radius: 10px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .cta-btn:hover { background: #333; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 48px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: #999;
+    }
+    .partner-logos { display: flex; gap: 20px; align-items: center; }
+    .partner-logos a { opacity: 0.5; transition: opacity 0.2s; }
+    .partner-logos a:hover { opacity: 1; }
+    .partner-logos img { height: 18px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero, .section-light, .section-dark, .section-mid { padding-left: 20px; padding-right: 20px; }
+      .insight-grid { grid-template-columns: 1fr; }
+      .insight-card:nth-child(odd) { border-right: none; }
+      .insight-card:nth-child(-n+3) { border-bottom: 1px solid var(--border); }
+      .regime-container, .bidir-container { flex-direction: column; }
+      .regime-col.regime-demand, .bidir-col.bidir-left { border-right: none; border-bottom: 1px solid #222; }
+      .bidir-arrow-center { flex-direction: row; padding: 12px 0; }
+      .stack-layer { padding: 28px 24px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      .callout-block { padding: 32px 24px 32px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="images/logo.png" alt="">
+    <span>American Energy Money</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-item" href="index.html">Home</a>
+    <a class="nav-item" href="compute.html">Compute Futures</a>
+    <a class="nav-item active" href="pricing-conversation.html">Pricing Stack</a>
+    <a class="nav-item" href="controller.html">Controller</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-context">Research dialogue · <a href="https://www.compute-desk.com/" target="_blank" rel="noopener">ComputeDesk</a> × <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener">Wolfram Blockchain Labs</a></div>
+  <h1>The missing <span class="dim">floor price</span> for compute</h1>
+  <p class="subtitle">Compute markets price from the top down — vendor ask rates, rental surveys, offtake negotiations. What happens when you price from the bottom up, starting at the thermodynamic cost of a hash?</p>
+  <div class="tag-row">
+    <span class="hero-tag">Normalization Stack</span>
+    <span class="hero-tag">PoW Floor Price</span>
+    <span class="hero-tag">Bidirectional Tradeoff</span>
+    <span class="hero-tag">Behind-the-Meter Power</span>
+  </div>
+</section>
+
+<!-- ── THE NORMALIZATION STACK ── -->
+<section class="section-dark">
+  <h2>The normalization <span class="gray">stack</span></h2>
+  <p class="lead">Each layer commoditizes the mess below it. Fuel is geographically non-fungible. Electricity is a first normalization. Standard GPU hardware is a second. The algorithm is a third. And a random hash function is the ceiling — identically random output, everywhere, always.</p>
+
+  <div class="stack-container">
+    <div class="stack-layer l-fuel">
+      <div class="stack-num">Layer 0 — Non-fungible</div>
+      <h3>Fuel source</h3>
+      <p>Natural gas in Texas, solar in Arizona, hydro in Quebec. <strong>Geographically non-fungible</strong>, compositionally dynamic, and impossible to standardize directly.</p>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-elec">
+      <div class="stack-num">Layer 1 — First normalization</div>
+      <h3>Electricity</h3>
+      <p>A joule is a joule — but grid standards differ between ISOs, and <strong>behind-the-meter power isn't traded at all</strong>. PPAs further decouple electricity cost from compute price. This layer hides more than it reveals.</p>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-gpu">
+      <div class="stack-num">Layer 2 — Hardware normalization</div>
+      <h3>GPU compute</h3>
+      <p>One H100 in Virginia ≈ one H100 in Frankfurt. <strong>Standard hardware converts variable electricity into comparable computation.</strong> Performance deltas exist but are financially manageable — like light sweet crude in two ports.</p>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-work">
+      <div class="stack-num">Layer 3 — Workload normalization</div>
+      <h3>Inference</h3>
+      <p>Same model, same weights, different location. If you don't care about latency, <strong>inference is approximately fungible</strong>. A small delta, not a different product.</p>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-hash">
+      <div class="stack-num">Layer 4 — Maximum fungibility</div>
+      <h3>SHA-256 hash</h3>
+      <p>Output is <strong>identically random</strong> regardless of hardware, location, or fuel source. No latency sensitivity. No model dependency. The most standardized unit of computation that exists — and it already has a deep, liquid market.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPUTEDESK INSIGHTS ── -->
+<section class="section-light">
+  <h2>What ComputeDesk <span class="gray">sees</span></h2>
+  <p class="lead">ComputeDesk is building the capital markets stack for compute — regulated indices, pricing infrastructure, and derivative instruments. Here's what their team has learned about compute pricing.</p>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-label">01 — Embedded electricity</div>
+      <h3>Electricity is an input, not a readable output</h3>
+      <p>The cost of electricity is embedded in GPU-hour and token prices. But solving the inverse problem — tracing a compute rate back to an electricity cost — breaks down because PPAs fix the underlying power cost while compute rates vary freely above it.</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-label">02 — The invisible market</div>
+      <h3>Behind-the-meter power has no price discovery</h3>
+      <p>Grid power trades on exchanges like Nodal. But as data centers move off-grid — natural gas turbines, on-site generation — the electricity they consume has no market. Compute pricing could become the only proxy for this invisible energy market.</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-label">03 — Regime dependence</div>
+      <h3>The electricity signal depends on supply–demand balance</h3>
+      <p>When compute is demand-constrained, price collapses toward a spread over electricity cost — high correlation, high predictiveness. When supply-constrained (now), price is bid up by what compute is worth to buyers, drowning out the energy signal.</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-label">04 — Unsophisticated pricing</div>
+      <h3>GPU pricing is sales-driven, not quant-driven</h3>
+      <p>Most compute providers don't dynamically reprice. Rates update weekly or biweekly. Sellers respond to high demand by extending contract durations rather than raising prices — collapsing the spot market and destroying price discovery.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE REGIME DIAGRAM ── -->
+<section class="section-dark">
+  <h2>Two regimes, <span class="gray">two signals</span></h2>
+  <p class="lead">Whether compute price tells you anything about underlying energy cost depends entirely on who has market power.</p>
+
+  <div class="regime-container">
+    <div class="regime-col regime-demand">
+      <div class="regime-tag">Demand-constrained</div>
+      <h3>Price → electricity + spread</h3>
+      <p>When GPUs sit idle, providers compete on price. Rates collapse toward marginal energy cost plus a thin margin. <strong>In this regime, compute price is highly correlated with electricity price.</strong></p>
+      <div class="regime-signal">↳ Compute price is informative about energy cost</div>
+    </div>
+    <div class="regime-col regime-supply">
+      <div class="regime-tag">Supply-constrained (current)</div>
+      <h3>Price → willingness to pay</h3>
+      <p>When demand exceeds capacity, buyers bid up the price of compute based on what inference is <strong>worth to them</strong>, not what it costs to produce. The electricity signal is drowned out by margin and urgency.</p>
+      <div class="regime-signal">↳ Compute price reveals demand intensity, not energy cost</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE FLOOR PRICE CONCEPT ── -->
+<section class="section-mid">
+  <h2>The PoW <span class="gray">floor price</span></h2>
+  <p class="lead">When inference demand drops, GPUs don't have to sit idle. Proof-of-work mining creates an always-available fallback — a thermodynamic floor beneath compute infrastructure.</p>
+
+  <div class="floor-visual">
+    <div class="floor-chart">
+      <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid lines -->
+        <line x1="60" y1="40" x2="60" y2="260" stroke="#222" stroke-width="1"/>
+        <line x1="60" y1="260" x2="720" y2="260" stroke="#222" stroke-width="1"/>
+        <line x1="60" y1="180" x2="720" y2="180" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,6"/>
+        <line x1="60" y1="100" x2="720" y2="100" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,6"/>
+
+        <!-- Y-axis labels -->
+        <text x="52" y="44" fill="#555" font-size="10" font-family="Inter" text-anchor="end" font-weight="600">High</text>
+        <text x="52" y="264" fill="#555" font-size="10" font-family="Inter" text-anchor="end" font-weight="600">Low</text>
+        <text x="14" y="155" fill="#444" font-size="10" font-family="Inter" text-anchor="middle" font-weight="700" transform="rotate(-90,14,155)" letter-spacing="0.1em">$/GPU-HR</text>
+
+        <!-- X-axis labels -->
+        <text x="390" y="290" fill="#444" font-size="10" font-family="Inter" text-anchor="middle" font-weight="700" letter-spacing="0.1em">TIME →</text>
+
+        <!-- PoW floor line -->
+        <line x1="60" y1="230" x2="720" y2="230" stroke="#fff" stroke-width="2" stroke-dasharray="8,4" opacity="0.6"/>
+        <text x="726" y="226" fill="#999" font-size="10" font-family="Inter" font-weight="600">PoW FLOOR</text>
+
+        <!-- Electricity cost line -->
+        <line x1="60" y1="248" x2="720" y2="248" stroke="#c9a227" stroke-width="1.5" stroke-dasharray="3,4" opacity="0.5"/>
+        <text x="726" y="244" fill="#8a7a30" font-size="9" font-family="Inter" font-weight="600">ELECTRICITY</text>
+
+        <!-- Inference value area (above floor) -->
+        <path d="M60,120 C140,80 200,60 280,70 C340,78 380,130 420,100 C460,70 500,50 540,60 C580,70 620,110 680,90 L720,95" 
+              fill="none" stroke="#4a6aaa" stroke-width="2.5"/>
+
+        <!-- Tradeoff zone (shaded between inference and floor) -->
+        <path d="M60,120 C140,80 200,60 280,70 C340,78 380,130 420,100 C460,70 500,50 540,60 C580,70 620,110 680,90 L720,95 L720,230 L60,230 Z" 
+              fill="url(#inferenceGrad)" opacity="0.15"/>
+
+        <!-- Below-floor zone -->
+        <path d="M60,230 L720,230 L720,248 L60,248 Z" fill="#c9a227" opacity="0.06"/>
+
+        <defs>
+          <linearGradient id="inferenceGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4a6aaa"/>
+            <stop offset="100%" stop-color="#4a6aaa" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Tradeoff point marker -->
+        <circle cx="380" cy="230" r="6" fill="none" stroke="#fff" stroke-width="2"/>
+        <circle cx="380" cy="230" r="2.5" fill="#fff"/>
+        <line x1="380" y1="130" x2="380" y2="224" stroke="#fff" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
+        <text x="380" y="150" fill="#fff" font-size="10" font-family="Inter" text-anchor="middle" font-weight="600" opacity="0.7">TRADEOFF</text>
+        <text x="380" y="162" fill="#fff" font-size="10" font-family="Inter" text-anchor="middle" font-weight="600" opacity="0.7">POINT</text>
+
+        <!-- Annotation: inference premium -->
+        <text x="240" y="56" fill="#4a6aaa" font-size="10" font-family="Inter" font-weight="700" letter-spacing="0.06em">INFERENCE PREMIUM</text>
+
+        <!-- Annotation: PoW mining zone -->
+        <text x="580" y="242" fill="#777" font-size="9" font-family="Inter" font-weight="600" letter-spacing="0.06em">MINING ZONE</text>
+      </svg>
+    </div>
+    <div class="floor-legend">
+      <div class="floor-legend-item">
+        <div class="floor-legend-dot" style="background:#4a6aaa;"></div>
+        <span style="color:#888;">Inference value (market-driven)</span>
+      </div>
+      <div class="floor-legend-item">
+        <div class="floor-legend-dot" style="background:#fff; border:1px solid #444;"></div>
+        <span style="color:#888;">PoW mining floor (thermodynamic)</span>
+      </div>
+      <div class="floor-legend-item">
+        <div class="floor-legend-dot" style="background:#c9a227;"></div>
+        <span style="color:#888;">Electricity cost (base layer)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout-block">
+    <div class="callout-label">The key insight</div>
+    <h3>Mining is a <u>hedge</u> on compute infrastructure buildout</h3>
+    <p>If the primary value creation is inference, and that creates a higher dollar value, but sometimes you cannot get full utilization — then mining allows you to recuperate something. <strong>GPU-friendly proof of work turns idle capacity into revenue instead of loss.</strong></p>
+    <p>This only works if the PoW network is GPU-native. Bitcoin's SHA-256 runs on ASICs that can't do inference. A GPU-friendly proof-of-work system — like Quai Network — makes the tradeoff <strong>actually executable on the same hardware</strong>, which is what makes the floor real rather than theoretical.</p>
+  </div>
+</section>
+
+<!-- ── BIDIRECTIONAL TRADEOFF ── -->
+<section class="section-light">
+  <h2>The tradeoff goes <span class="gray">both ways</span></h2>
+  <p class="lead">The marginal conversion point between PoW mining and inference isn't just a floor — it's a pricing signal that works in both directions.</p>
+
+  <div class="bidir-container">
+    <div class="bidir-col bidir-left">
+      <div class="bidir-label">Mining → Inference</div>
+      <h3>Infrastructure already exists</h3>
+      <p>Major miners like Marathon have already built facilities, secured electricity, and deployed cooling and power infrastructure for Bitcoin mining. <strong>They are rapidly transitioning toward inference</strong> because the economics now say "go to inference."</p>
+      <p style="margin-top:16px;">The physical plant — power, cooling, networking — was amortized by mining revenue. Inference inherits infrastructure that has already been paid for.</p>
+    </div>
+    <div class="bidir-arrow-center">⇄</div>
+    <div class="bidir-col bidir-right">
+      <div class="bidir-label">Inference → Mining</div>
+      <h3>Downside protection for builders</h3>
+      <p>If you are building a data center for projected inference demand, <strong>GPU-native mining provides a hedge</strong> in case that demand doesn't materialize as expected.</p>
+      <p style="margin-top:16px;">Instead of stranded capacity and write-downs, you have a thermodynamic fallback that generates revenue proportional to the energy consumed. The floor price is set by physics, not by market sentiment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE STRUCTURAL ARGUMENT ── -->
+<section class="section-dark">
+  <h2>Why the <span class="gray">floor</span> matters for pricing</h2>
+  <p class="lead">ComputeDesk is building the capital markets infrastructure for compute. The missing piece in every compute index is a non-manipulable, energy-anchored lower bound.</p>
+
+  <div class="callout-block" style="margin-bottom: 48px;">
+    <div class="callout-label">The problem with survey indexes</div>
+    <h3>You can't build <u>futures</u> on a market where the floor is <u>unknown</u></h3>
+    <p>Current compute indexes aggregate what vendors <strong>charge</strong>. In a supply-constrained regime, that tells you willingness to pay, not cost of production. In a demand-constrained regime, prices collapse toward electricity plus margin — but nobody knows exactly where that floor is.</p>
+    <p>A GPU-native proof-of-work network provides the missing observable: the <strong>marginal revenue per GPU-hour from mining</strong>. This is a real, continuous, market-set price signal that establishes the floor beneath which no rational GPU operator would sell compute. <strong>It is the thermodynamic bid.</strong></p>
+  </div>
+
+  <div style="max-width:860px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; border:1px solid #222; border-radius:12px; overflow:hidden;">
+    <div style="background:#111; padding:36px 28px; text-align:left;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#555; margin-bottom:12px;">Without PoW floor</div>
+      <p style="font-size:14px; color:#666; line-height:1.7;">Futures settle against a survey index. Floor is estimated, not observed. Manipulation resistance depends on data coverage breadth.</p>
+    </div>
+    <div style="background:#111; padding:36px 28px; text-align:left; border-left:1px solid #222; border-right:1px solid #222;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#555; margin-bottom:12px;">With PoW floor</div>
+      <p style="font-size:14px; color:#ccc; line-height:1.7; font-weight:500;">Floor is a live, on-chain, thermodynamically anchored price. No survey needed. Falsifying requires real energy expenditure.</p>
+    </div>
+    <div style="background:#111; padding:36px 28px; text-align:left;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#555; margin-bottom:12px;">What this enables</div>
+      <p style="font-size:14px; color:#666; line-height:1.7;">Credible lower bound for options pricing. Put spreads with real meaning. Infrastructure insurance products with an observable strike.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2>Back to Compute Futures</h2>
+  <p>See how the Qi energy index and QUAI settlement create a full capital markets stack for compute.</p>
+  <a class="cta-btn" href="compute.html">Compute Futures ↗</a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>© 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://www.compute-desk.com/" target="_blank" rel="noopener"><img src="images/computedesk.png" alt="ComputeDesk"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+</body>
+</html>
