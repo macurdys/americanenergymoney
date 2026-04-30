@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,6 +118,7 @@
     .stack-layer.l-gpu  { border-color: #3a7a5a; background: #101814; }
     .stack-layer.l-work { border-color: #4a6aaa; background: #10141a; }
     .stack-layer.l-hash { border-color: #fff; background: #141414; }
+    .stack-layer.l-qi   { border-color: #c9a227; background: #161410; border-width: 3px; box-shadow: 0 0 24px rgba(201,162,39,0.08); }
     .stack-num {
       font-size: 10px; font-weight: 800; letter-spacing: 0.15em;
       text-transform: uppercase; margin-bottom: 8px;
@@ -126,6 +128,7 @@
     .l-gpu  .stack-num { color: #4a9a6a; }
     .l-work .stack-num { color: #5a7aba; }
     .l-hash .stack-num { color: #999; }
+    .l-qi   .stack-num { color: #c9a227; }
     .stack-layer h3 {
       font-size: 20px; font-weight: 800; letter-spacing: -0.02em;
       color: #fff; margin-bottom: 10px;
@@ -350,7 +353,7 @@
 <!-- ── THE NORMALIZATION STACK ── -->
 <section class="section-dark">
   <h2>The normalization <span class="gray">stack</span></h2>
-  <p class="lead">Each layer commoditizes the mess below it. Fuel is geographically non-fungible. Electricity is a first normalization. Standard GPU hardware is a second. The algorithm is a third. And a random hash function is the ceiling — identically random output, everywhere, always.</p>
+  <p class="lead">Each layer commoditizes the mess below it. Fuel is geographically non-fungible. Electricity is a first normalization. Standard GPU hardware is a second. The algorithm is a third. A random hash function is a fourth. And the final layer normalizes every compatible hashing algorithm into a single energy-denominated money output.</p>
 
   <div class="stack-container">
     <div class="stack-layer l-fuel">
@@ -381,6 +384,12 @@
       <div class="stack-num">Layer 4 — Maximum fungibility</div>
       <h3>SHA-256 hash</h3>
       <p>Output is <strong>identically random</strong> regardless of hardware, location, or fuel source. No latency sensitivity. No model dependency. The most standardized unit of computation that exists — and it already has a deep, liquid market.</p>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-qi">
+      <div class="stack-num">Layer 5 — Monetary normalization</div>
+      <h3>Energy-denominated token payout</h3>
+      <p>SHA-256, Scrypt, ProgPoW, and any other compatible hashing algorithm all produce different kinds of irreducible computational work — but <strong>a universal denominator token payout normalizes them into a single energy-denominated money output</strong>. The token has adaptable economics to which algorithm produced the hash. It measures the energy expended, point blank. This is the final normalization: from many proof-of-work algorithms to one thermodynamic unit of account.</p>
     </div>
   </div>
 </section>
@@ -518,6 +527,20 @@
     <h3>Mining is a <u>hedge</u> on compute infrastructure buildout</h3>
     <p>If the primary value creation is inference, and that creates a higher dollar value, but sometimes you cannot get full utilization — then mining allows you to recuperate something. <strong>GPU-friendly proof of work turns idle capacity into revenue instead of loss.</strong></p>
     <p>This only works if the PoW network is GPU-native. Bitcoin's SHA-256 runs on ASICs that can't do inference. A GPU-friendly proof-of-work system — like Quai Network — makes the tradeoff <strong>actually executable on the same hardware</strong>, which is what makes the floor real rather than theoretical.</p>
+  </div>
+</section>
+
+<!-- ── META: MARGINAL ECONOMICS ── -->
+<section class="section-dark">
+  <h2>The <span class="gray">meta</span></h2>
+  <p class="lead">There is a deeper structure hiding inside the tradeoff point.</p>
+
+  <div class="callout-block" style="border-left-color: #c9a227;">
+    <div class="callout-label">Marginal opportunity cost</div>
+    <h3>Each side <u>precisely defines</u> the unit economics of the other</h3>
+    <p>The marginal economic tradeoff between inference and GPUs performing proof of work isn't just a hedge — it's a <strong>mutual pricing oracle</strong>. The opportunity cost of running inference is the PoW revenue you forgo. The opportunity cost of mining is the inference revenue you forgo.</p>
+    <p>This means inference and proof of work don't just coexist — they <strong>price each other</strong>. At the margin, one precisely defines the unit economics of the other. The tradeoff point is not a static floor. It is a continuously updated, market-driven signal that tells you the real cost of compute from two independent directions simultaneously.</p>
+    <p>No survey index can produce this. It emerges only when both workloads compete for the same hardware, in real time, with real capital at stake.</p>
   </div>
 </section>
 
