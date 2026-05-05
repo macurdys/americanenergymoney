@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compute Bond — American Energy Money</title>
+  <meta name="description" content="A zero-coupon bond collateralized by locked coinbase emissions, tokenized for liquid secondary trading.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gray: #999;
+      --dark: #111;
+      --white: #fff;
+      --border: rgba(0,0,0,0.07);
+      --border-light: rgba(255,255,255,0.08);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
+    .nav-logo span {
+      font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #111;
+    }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-item {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+      color: #555; text-decoration: none; border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-item:hover { background: #f5f5f5; }
+    .nav-item.active { color: #111; font-weight: 600; }
+
+    /* ─── HERO ─── */
+    .hero {
+      max-width: 1200px; margin: 0 auto;
+      padding: 140px 48px 100px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+      margin-bottom: 28px;
+    }
+    .hero h1 .dim { color: #555; }
+    .hero .subtitle {
+      font-size: clamp(17px, 1.6vw, 20px);
+      color: #666;
+      max-width: 640px;
+      margin: 0 auto 36px;
+      line-height: 1.55;
+    }
+    .hero .tag-row {
+      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+    }
+    .hero-tag {
+      display: inline-block; padding: 6px 14px;
+      font-size: 13px; font-weight: 500; color: #444;
+      background: #f3f3f3; border-radius: 100px;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section-light {
+      padding: 100px 48px; text-align: center;
+    }
+    .section-dark {
+      padding: 100px 48px; text-align: center;
+      background: #0a0a0a; color: #fff;
+    }
+    .section-mid {
+      padding: 100px 48px; text-align: center;
+      background: #fafafa;
+    }
+    .section-light h2, .section-dark h2, .section-mid h2 {
+      font-size: clamp(32px, 4vw, 50px); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 24px;
+    }
+    .section-dark h2 { color: #fff; }
+    .section-light h2 .gray,
+    .section-dark h2 .gray,
+    .section-mid h2 .gray { color: var(--gray); }
+    .lead {
+      font-size: 18px; color: #666; max-width: 640px;
+      margin: 0 auto 64px; line-height: 1.7;
+    }
+    .section-dark .lead { color: #999; }
+
+    /* ─── COMPARE BLOCK ─── */
+    .compare-grid {
+      display: flex; gap: 2px; max-width: 860px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .compare-col {
+      flex: 1; padding: 40px 36px; text-align: left;
+    }
+    .compare-col:first-child {
+      background: #f9f9f9; border-right: 1px solid var(--border);
+    }
+    .compare-col:last-child { background: #fff; }
+    .compare-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .compare-col:first-child .compare-label { color: #bbb; }
+    .compare-col:last-child .compare-label { color: #111; }
+    .compare-col h3 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 20px; color: #111;
+    }
+    .compare-col ul {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+    }
+    .compare-col ul li {
+      font-size: 15px; color: #777; line-height: 1.6;
+      padding-left: 20px; position: relative;
+    }
+    .compare-col ul li::before {
+      content: '–'; position: absolute; left: 0; color: #ccc;
+    }
+    .compare-col:last-child ul li::before { color: #111; content: '→'; }
+    .compare-col:last-child ul li { color: #444; }
+
+    /* ─── TOKEN PAIR ─── */
+    .token-grid {
+      display: flex; gap: 32px; justify-content: center;
+      flex-wrap: wrap; max-width: 880px; margin: 0 auto;
+    }
+    .token-card {
+      flex: 1; min-width: 280px; max-width: 420px;
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 48px 36px; text-align: left;
+    }
+    .token-card.dark-card {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--border-light);
+    }
+    .token-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 16px; color: #666;
+    }
+    .token-card h3 {
+      font-size: 26px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .section-dark .token-card h3 { color: #fff; }
+    .token-card p {
+      font-size: 15px; color: #777; line-height: 1.7;
+    }
+    .section-dark .token-card p { color: #888; }
+
+    /* ─── FORMULA ─── */
+    .formula-block {
+      max-width: 720px; margin: 0 auto;
+      text-align: left;
+    }
+    .formula-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 18px;
+      color: #ccc;
+      letter-spacing: 0.01em;
+      line-height: 1.8;
+      text-align: center;
+    }
+    .formula-note {
+      font-size: 15px; color: #999; line-height: 1.7;
+    }
+    .var-list {
+      margin-top: 28px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .var-item {
+      display: flex; gap: 16px; align-items: baseline;
+      font-size: 15px; color: #999; line-height: 1.6;
+    }
+    .var-item code {
+      font-family: 'Courier New', Courier, monospace;
+      color: #ccc; font-size: 15px;
+      min-width: 48px; flex-shrink: 0;
+    }
+
+    /* ─── STEPS ─── */
+    .steps {
+      display: flex; gap: 48px; justify-content: center;
+      flex-wrap: wrap; max-width: 960px; margin: 0 auto;
+    }
+    .step {
+      flex: 1; min-width: 240px; max-width: 280px; text-align: left;
+    }
+    .step-num {
+      font-size: 48px; font-weight: 800; letter-spacing: -0.04em;
+      color: #e0e0e0; margin-bottom: 16px;
+    }
+    .step h3 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .step p {
+      font-size: 15px; color: #777; line-height: 1.65;
+    }
+
+    /* ─── WHY SECTION ─── */
+    .why-grid {
+      display: flex; gap: 32px; justify-content: center;
+      flex-wrap: wrap; max-width: 960px; margin: 0 auto;
+    }
+    .why-card {
+      flex: 1; min-width: 260px; max-width: 300px;
+      text-align: left;
+    }
+    .why-card h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; color: #fff; }
+    .why-card p { font-size: 15px; color: #888; line-height: 1.65; }
+
+    /* ─── INSTRUMENT EXPLAINER ─── */
+    .index-block {
+      max-width: 760px; margin: 0 auto;
+      background: #fafafa; border: 1px solid var(--border);
+      border-radius: 16px; padding: 52px 48px; text-align: left;
+    }
+    .index-block .index-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #bbb; margin-bottom: 20px;
+    }
+    .index-block h3 {
+      font-size: 24px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px; color: #111;
+    }
+    .index-block p {
+      font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 16px;
+    }
+    .index-block p:last-child { margin-bottom: 0; }
+    .index-block em {
+      font-style: normal; font-weight: 600; color: #111;
+    }
+
+    /* ─── YIELD TABLE ─── */
+    .yield-table {
+      max-width: 860px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    .yield-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1.4fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .yield-row:last-child { border-bottom: none; }
+    .yield-row > div {
+      padding: 18px 22px; font-size: 15px; color: #444;
+      text-align: left; line-height: 1.5;
+    }
+    .yield-header { background: #fafafa; }
+    .yield-header > div {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #888;
+    }
+    .yield-row .yield-tenor { font-weight: 700; color: #111; }
+    .yield-row .yield-mult { font-family: 'Courier New', Courier, monospace; color: #111; }
+    .yield-row .yield-apy { font-weight: 600; color: #111; }
+    @media (max-width: 640px) {
+      .yield-row { grid-template-columns: 1fr 1fr; }
+      .yield-header > div:nth-child(4),
+      .yield-row > div:nth-child(4) { display: none; }
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: #fff;
+      padding: 120px 48px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-size: clamp(36px, 5vw, 64px); font-weight: 800;
+      letter-spacing: -0.04em; margin-bottom: 24px;
+    }
+    .cta-section p {
+      font-size: 18px; color: #777; max-width: 520px;
+      margin: 0 auto 48px; line-height: 1.6;
+    }
+    .cta-btn {
+      display: inline-block; padding: 16px 40px;
+      background: #111; color: #fff;
+      font-size: 16px; font-weight: 700; letter-spacing: -0.01em;
+      border-radius: 100px; text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .cta-btn:hover { background: #333; transform: scale(1.03); }
+    .cta-btn.outline {
+      background: transparent; color: #111; border: 1px solid #111;
+      margin-left: 12px;
+    }
+    .cta-btn.outline:hover { background: #111; color: #fff; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 48px; text-align: center;
+      font-size: 13px; color: #999;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 80px 20px 60px; }
+      .hero, .section-light, .section-dark, .section-mid,
+      .cta-section { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="images/logo.png" alt="American Energy Money">
+  </a>
+  <div class="nav-links">
+    <a class="nav-item active" href="compute.html">Compute</a>
+    <a class="nav-item" href="engineering.html">Engineering</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1>Compute <span class="dim">Bond</span></h1>
+  <p class="subtitle">A zero-coupon bond collateralized by locked coinbase emissions — tokenized for liquid secondary trading.</p>
+  <div class="tag-row">
+    <span class="hero-tag">Zero-coupon</span>
+    <span class="hero-tag">Discount-priced</span>
+    <span class="hero-tag">Coinbase-collateralized</span>
+    <span class="hero-tag">Liquid principal</span>
+  </div>
+</section>
+
+<!-- ── THE INSTRUMENT ── -->
+<section class="section-light">
+  <h2><span class="gray">The</span> instrument</h2>
+  <p class="lead">A fixed-term bond. Locked coinbase emissions form the collateral. Holders receive a tokenized principal claim that trades freely until maturity, when it redeems one-for-one against the underlying reward. <em style="color:#999;font-style:normal;">Technically a zero-coupon discount instrument — a bill in classical taxonomy.</em></p>
+
+  <div class="token-grid">
+    <div class="token-card">
+      <div class="token-label">Form</div>
+      <h3>Zero-coupon</h3>
+      <p>No periodic interest. The note is issued at a discount to face value; yield accrues as price pulls to par. Pricing matches a Treasury STRIP or a brokered CD — well-understood instruments with decades of precedent.</p>
+    </div>
+    <div class="token-card">
+      <div class="token-label">Collateral</div>
+      <h3>Locked coinbase</h3>
+      <p>Each note is fully backed by a specific tranche of locked block rewards. Face value is the unlocked reward at maturity. The collateral is protocol-native — not synthesized, not rehypothecated.</p>
+    </div>
+    <div class="token-card">
+      <div class="token-label">Liquidity</div>
+      <h3>Tokenized principal</h3>
+      <p>The note itself is a transferable token. Holders sell into a secondary market at any time without unlocking the underlying collateral. Capital efficiency without breaking the lock.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── DISCOUNT, NOT COMMODITY ── -->
+<section class="section-mid">
+  <h2>A bond, <span class="gray">not a staking receipt</span></h2>
+  <p class="lead">A Compute Bond is a fixed-income instrument with a defined maturity. It is not a perpetual yield wrapper, not a liquid staking derivative, and not a rebasing token.</p>
+
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-label">Liquid Staking Token</div>
+      <h3>Perpetual yield share</h3>
+      <ul>
+        <li>No maturity date</li>
+        <li>Rebasing or appreciating balance</li>
+        <li>Redeemable on validator queues</li>
+        <li>Yield depends on ongoing performance</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="compare-label">Compute Bond</div>
+      <h3>Fixed-term discount</h3>
+      <ul>
+        <li>Defined maturity: 3, 6, or 12 months</li>
+        <li>Static face value, discount price</li>
+        <li>Redeems one-for-one at maturity</li>
+        <li>Yield fixed at issuance, locked at the protocol</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="section-dark">
+  <h2><span class="gray">How</span> pricing works</h2>
+  <p class="lead">Price is determined by remaining time to maturity and the prevailing rate at which the market discounts future coinbase. As maturity approaches, price pulls to face value — the same accretion mechanic as a Treasury bill.</p>
+
+  <div class="formula-block">
+    <div class="formula-box">
+      P&nbsp;=&nbsp;F&nbsp;/&nbsp;(1&nbsp;+&nbsp;r)<sup>t</sup>
+    </div>
+    <p class="formula-note">A Compute Bond prices like any zero-coupon instrument. Face value <em>F</em> is fixed at issuance — the locked coinbase reward, payable at maturity. Discount rate <em>r</em> is set by the secondary market. Time-to-maturity <em>t</em> shrinks deterministically toward zero.</p>
+    <div class="var-list">
+      <div class="var-item"><code>P</code><span>Current secondary-market price of the bond</span></div>
+      <div class="var-item"><code>F</code><span>Face value — the unlocked reward at maturity</span></div>
+      <div class="var-item"><code>r</code><span>Implied discount rate from market trades</span></div>
+      <div class="var-item"><code>t</code><span>Time remaining until the lock expires</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ISSUANCE FLOW ── -->
+<section class="section-light">
+  <h2><span class="gray">How</span> issuance works</h2>
+  <p class="lead">A miner produces a block, elects a lock duration, and receives a tokenized bond. The bond circulates freely; the underlying collateral remains locked at the protocol level until maturity.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Block reward locked</h3>
+      <p>A miner mines a block and elects a lock period at the protocol level. The coinbase reward is locked in place for the full term.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Bond issued</h3>
+      <p>The lock generates a transferable token representing claim on the unlocked face value at maturity. The bond is issued at a discount.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Secondary trading</h3>
+      <p>The miner can hold to maturity for full face value, or sell the bond immediately for present value. Either way, the lock holds.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Maturity redemption</h3>
+      <p>At maturity, whoever holds the bond redeems one-for-one against the unlocked reward. The collateral is consumed; the bond is burned.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── YIELD TABLE ── -->
+<section class="section-mid">
+  <h2>Term <span class="gray">structure</span></h2>
+  <p class="lead">Lock multipliers form the protocol-issued yield curve. Longer terms carry richer multipliers; year-one issuance carries the highest premium and tapers as the network matures.</p>
+
+  <div class="yield-table">
+    <div class="yield-row yield-header">
+      <div>Tenor</div>
+      <div>Year 1 Multiplier</div>
+      <div>Implied APY</div>
+      <div>Analog</div>
+    </div>
+    <div class="yield-row">
+      <div class="yield-tenor">2 weeks</div>
+      <div class="yield-mult">1.000×</div>
+      <div class="yield-apy">—</div>
+      <div>Standard maturity, no premium</div>
+    </div>
+    <div class="yield-row">
+      <div class="yield-tenor">3 months</div>
+      <div class="yield-mult">1.035×</div>
+      <div class="yield-apy">~14% APY</div>
+      <div>13-week T-Bill analog</div>
+    </div>
+    <div class="yield-row">
+      <div class="yield-tenor">6 months</div>
+      <div class="yield-mult">1.100×</div>
+      <div class="yield-apy">~21% APY</div>
+      <div>26-week T-Bill analog</div>
+    </div>
+    <div class="yield-row">
+      <div class="yield-tenor">12 months</div>
+      <div class="yield-mult">1.250×</div>
+      <div class="yield-apy">25% APY</div>
+      <div>1-year T-Note analog</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY THIS WORKS ── -->
+<section class="section-dark">
+  <h2>Why <span class="gray">it works</span></h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <h3>Real collateral</h3>
+      <p>The note is backed by protocol-locked emissions — not by a counterparty's promise to pay. Default risk is governed by the protocol, not by an issuer.</p>
+    </div>
+    <div class="why-card">
+      <h3>Defined yield</h3>
+      <p>The premium is set at issuance by the lock multiplier. Holders know the maturity payoff at the moment of purchase.</p>
+    </div>
+    <div class="why-card">
+      <h3>Liquid principal</h3>
+      <p>Miners get capital flexibility without surrendering the lock premium. Buyers get exposure to a fixed-yield instrument without operating mining hardware.</p>
+    </div>
+    <div class="why-card">
+      <h3>A real yield curve</h3>
+      <p>Three tenors trading simultaneously produce observable points on a discount curve — the foundation rate that all other derivatives can price against.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── PAIRED INSTRUMENT ── -->
+<section class="section-light">
+  <h2>Paired with <span class="gray">Compute Futures</span></h2>
+  <div class="index-block">
+    <div class="index-label">Two halves of an energy capital market</div>
+    <h3>Spot index, term structure</h3>
+    <p>Compute Futures price the cost of compute <em>today</em> — a perpetual index settled in QUAI against an energy-denominated underlying. Compute Bonds price the cost of compute <em>tomorrow</em> — a fixed-term discount instrument with a defined maturity and a defined face value.</p>
+    <p>Together they form the two pillars of an energy-denominated capital market: a derivative against the spot index, and a discount curve against locked emissions. Every other instrument — basis trades, calendar spreads, structured yield products — prices off these two surfaces.</p>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2>A bond on the energy economy.</h2>
+  <p>Lock coinbase. Tokenize the principal. Trade it like any other discount note. Redeem at face value when the term expires.</p>
+  <a href="compute.html" class="cta-btn">Pair with Compute Futures</a>
+  <a href="https://docs.qu.ai/learn/advanced-introduction/liquid-mining-tokens" class="cta-btn outline" target="_blank" rel="noopener">Read the protocol spec</a>
+</section>
+
+<footer>
+  © American Energy Money — Compute Bond · Zero-coupon bond on locked coinbase emissions
+</footer>
+
+</body>
+</html>
