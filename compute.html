@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -296,6 +297,384 @@
     }
     .cta-btn:hover { background: #333; transform: scale(1.03); }
 
+    /* ─── INSTRUMENT PAIR CARDS (HERO) — flag-themed static outline ─── */
+    .pair-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; max-width: 1080px; margin: 56px auto 0;
+    }
+    .pair-card {
+      position: relative;
+      border: 2px solid var(--border); border-radius: 18px;
+      padding: 40px 36px 32px; text-align: left;
+      background: #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+    }
+    .pair-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.08);
+    }
+    .pair-card .pc-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .pair-card h3 {
+      font-size: 32px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 14px; color: #111; line-height: 1.05;
+    }
+    .pair-card .pc-tagline {
+      font-size: 15px; color: #666; line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .pair-card .pc-meta {
+      display: flex; gap: 20px; flex-wrap: wrap;
+      padding-top: 24px; margin-top: auto;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: #888;
+    }
+    .pair-card .pc-meta span strong {
+      color: #111; font-weight: 600; display: block; font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .pair-card .pc-arrow {
+      position: absolute; top: 36px; right: 36px;
+      font-size: 20px;
+      transition: transform 0.2s;
+    }
+    .pair-card:hover .pc-arrow { transform: translate(4px, -4px); }
+
+    /* Red variant — Futures (static outline only) */
+    .pair-card.card-red { border-color: #B31942; }
+    .pair-card.card-red .pc-label { color: #B31942; }
+    .pair-card.card-red .pc-arrow { color: #B31942; }
+
+    /* Blue variant — Bonds (static outline only) */
+    .pair-card.card-blue { border-color: #0A3161; }
+    .pair-card.card-blue .pc-label { color: #0A3161; }
+    .pair-card.card-blue .pc-arrow { color: #0A3161; }
+
+    @media (max-width: 768px) {
+      .pair-cards { grid-template-columns: 1fr; gap: 16px; }
+      .pair-card { padding: 32px 28px; }
+    }
+
+    /* ─── SOLVES-FOR EXPLAINERS ─── */
+    .solves-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px; max-width: 1080px; margin: 0 auto; text-align: left;
+    }
+    .solves-col {
+      padding: 0;
+    }
+    .solves-col .sc-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #999; margin-bottom: 12px;
+    }
+    #futures .sc-eyebrow { color: #B31942; }
+    #bonds .sc-eyebrow { color: #0A3161; }
+    .solves-col h3 {
+      font-size: 26px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px; color: #111;
+    }
+    .solves-col .sc-lead {
+      font-size: 16px; color: #555; line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .solves-col .sc-block {
+      padding: 20px 0; border-top: 1px solid var(--border);
+    }
+    .solves-col .sc-block:last-child { border-bottom: 1px solid var(--border); }
+    .solves-col .sc-block .sc-q {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #aaa; margin-bottom: 8px;
+    }
+    .solves-col .sc-block .sc-a {
+      font-size: 15px; color: #333; line-height: 1.65;
+    }
+    @media (max-width: 768px) {
+      .solves-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .solves-col .sc-readmore {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 24px;
+      font-size: 14px; font-weight: 700; letter-spacing: -0.01em;
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .solves-col .sc-readmore:hover { gap: 10px; }
+    #futures .sc-readmore { color: #B31942; }
+    #bonds .sc-readmore { color: #0A3161; }
+
+    /* ─── COMPARE TABLE (TWO INSTRUMENTS) ─── */
+    .pair-table {
+      max-width: 960px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    }
+    .pair-row {
+      display: grid;
+      grid-template-columns: 1.1fr 1.4fr 1.4fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .pair-row:last-child { border-bottom: none; }
+    .pair-row > div {
+      padding: 18px 22px; font-size: 15px; color: #333;
+      text-align: left; line-height: 1.55;
+    }
+    .pair-row .pair-dim {
+      background: #fafafa; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #888;
+      display: flex; align-items: center;
+    }
+    .pair-row.pair-header > div {
+      background: #111; color: #fff;
+      font-size: 13px; font-weight: 700; letter-spacing: -0.01em;
+    }
+    .pair-row.pair-header .pair-dim {
+      background: #111; color: #888;
+      font-size: 11px; letter-spacing: 0.1em;
+    }
+    @media (max-width: 768px) {
+      .pair-row { grid-template-columns: 1fr; }
+      .pair-row .pair-dim {
+        background: #f0f0f0; padding: 10px 22px;
+      }
+    }
+
+    /* ─── ENERGY FOUNDATION ─── */
+    .energy-block {
+      max-width: 820px; margin: 0 auto; text-align: left;
+    }
+    .energy-block .eb-pillars {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px; margin-top: 48px;
+    }
+    .energy-block .eb-pillar {
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+    }
+    .energy-block .eb-pillar .eb-num {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      color: #555; margin-bottom: 14px;
+    }
+    .energy-block .eb-pillar h4 {
+      font-size: 17px; font-weight: 700; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 10px;
+    }
+    .energy-block .eb-pillar p {
+      font-size: 14px; color: #888; line-height: 1.6;
+    }
+    .energy-block .eb-prose {
+      font-size: 17px; color: #bbb; line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .energy-block .eb-prose strong {
+      color: #fff; font-weight: 600;
+    }
+    .energy-block .eb-prose em {
+      font-style: normal; color: #fff; font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      .energy-block .eb-pillars { grid-template-columns: 1fr; }
+    }
+
+    /* ─── PRICING STACK INTRO ─── */
+    .pricing-intro {
+      max-width: 760px; margin: 0 auto 64px;
+    }
+    .pricing-intro .pi-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: #aaa; margin-bottom: 28px;
+    }
+    .pricing-intro .pi-eyebrow a { color: #888; text-decoration: underline; text-decoration-color: #ccc; }
+    .pricing-intro .pi-eyebrow a:hover { color: #555; }
+
+    /* ─── NORMALIZATION STACK ─── */
+    .stack-container {
+      max-width: 700px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .stack-layer {
+      position: relative;
+      padding: 36px 40px;
+      text-align: left;
+      border-left: 3px solid;
+      transition: transform 0.2s;
+    }
+    .stack-layer:hover { transform: translateX(6px); }
+    .stack-layer.l-fuel { border-color: #6b3a2a; background: #1a1210; }
+    .stack-layer.l-elec { border-color: #c9a227; background: #161410; }
+    .stack-layer.l-gpu  { border-color: #3a7a5a; background: #101814; }
+    .stack-layer.l-work { border-color: #4a6aaa; background: #10141a; }
+    .stack-layer.l-hash { border-color: #fff; background: #141414; }
+    .stack-layer.l-qi   { border-color: #c9a227; background: #161410; border-width: 3px; box-shadow: 0 0 24px rgba(201,162,39,0.08); }
+    .stack-num {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .l-fuel .stack-num { color: #8a5a3a; }
+    .l-elec .stack-num { color: #c9a227; }
+    .l-gpu  .stack-num { color: #4a9a6a; }
+    .l-work .stack-num { color: #5a7aba; }
+    .l-hash .stack-num { color: #999; }
+    .l-qi   .stack-num { color: #c9a227; }
+    .stack-layer h3 {
+      font-size: 20px; font-weight: 800; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 10px;
+    }
+    .stack-layer p {
+      font-size: 14px; color: #777; line-height: 1.7; margin: 0;
+    }
+    .stack-layer p strong { color: #bbb; font-weight: 600; }
+    .stack-arrow {
+      display: flex; align-items: center; justify-content: center;
+      padding: 6px 0;
+      color: #333; font-size: 18px;
+    }
+
+    /* ─── INSIGHT CARDS ─── */
+    .insight-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; max-width: 860px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .insight-card {
+      padding: 40px 36px; text-align: left; background: #fff;
+    }
+    .insight-card:nth-child(odd) { border-right: 1px solid var(--border); }
+    .insight-card:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+    .insight-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #aaa; margin-bottom: 14px;
+    }
+    .insight-card h3 {
+      font-size: 18px; font-weight: 800; letter-spacing: -0.02em;
+      color: #111; margin-bottom: 12px; line-height: 1.3;
+    }
+    .insight-card p {
+      font-size: 14px; color: #777; line-height: 1.7; margin: 0;
+    }
+
+    /* ─── REGIME DIAGRAM ─── */
+    .regime-container {
+      display: flex; gap: 2px; max-width: 860px; margin: 0 auto;
+      border: 1px solid #222; border-radius: 16px; overflow: hidden;
+    }
+    .regime-col {
+      flex: 1; padding: 48px 36px; text-align: left;
+    }
+    .regime-col.regime-demand { background: #111; border-right: 1px solid #222; }
+    .regime-col.regime-supply { background: #0a0a0a; }
+    .regime-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .regime-demand .regime-tag { color: #4a9a6a; }
+    .regime-supply .regime-tag { color: #c9a227; }
+    .regime-col h3 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 16px; line-height: 1.25;
+    }
+    .regime-col p { font-size: 14px; color: #666; line-height: 1.7; }
+    .regime-col p strong { color: #aaa; font-weight: 600; }
+    .regime-signal {
+      margin-top: 24px; padding-top: 20px; border-top: 1px solid #222;
+      font-size: 13px; line-height: 1.6;
+    }
+    .regime-demand .regime-signal { color: #4a9a6a; }
+    .regime-supply .regime-signal { color: #c9a227; }
+
+    /* ─── FLOOR DIAGRAM ─── */
+    .floor-visual {
+      max-width: 860px; margin: 0 auto 48px;
+      position: relative;
+      border: 1px solid #222; border-radius: 16px; overflow: hidden;
+      background: #0a0a0a;
+    }
+    .floor-chart {
+      padding: 48px 40px 40px;
+      position: relative;
+    }
+    .floor-chart svg { width: 100%; height: auto; display: block; }
+    .floor-legend {
+      display: flex; gap: 32px; justify-content: center;
+      padding: 0 40px 36px; flex-wrap: wrap;
+    }
+    .floor-legend-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
+    }
+    .floor-legend-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+
+    /* ─── BIDIRECTIONAL ─── */
+    .bidir-container {
+      max-width: 860px; margin: 0 auto;
+      display: flex; align-items: stretch; gap: 2px;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .bidir-col {
+      flex: 1; padding: 44px 36px; text-align: left;
+    }
+    .bidir-col.bidir-left { background: #fafafa; border-right: 1px solid var(--border); }
+    .bidir-col.bidir-right { background: #fff; }
+    .bidir-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .bidir-left .bidir-label { color: #bbb; }
+    .bidir-right .bidir-label { color: #111; }
+    .bidir-col h3 {
+      font-size: 20px; font-weight: 800; letter-spacing: -0.02em;
+      color: #111; margin-bottom: 14px; line-height: 1.3;
+    }
+    .bidir-col p { font-size: 14px; color: #777; line-height: 1.7; }
+    .bidir-col p strong { color: #444; font-weight: 600; }
+    .bidir-arrow-center {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 12px;
+      background: #f0f0f0;
+      font-size: 22px; color: #bbb;
+    }
+
+    /* ─── CALLOUT BLOCK ─── */
+    .callout-block {
+      max-width: 860px; margin: 0 auto;
+      background: #111; border-left: 3px solid #fff;
+      border-radius: 0 8px 8px 0;
+      padding: 44px 44px 44px 48px; text-align: left;
+    }
+    .callout-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: #555; margin-bottom: 16px;
+    }
+    .callout-block h3 {
+      font-size: 22px; font-weight: 800; color: #fff;
+      letter-spacing: -0.02em; margin-bottom: 20px; line-height: 1.35;
+    }
+    .callout-block h3 u { text-decoration-color: #444; }
+    .callout-block p {
+      font-size: 15px; color: #777; line-height: 1.75; margin-bottom: 16px;
+    }
+    .callout-block p:last-child { margin-bottom: 0; }
+    .callout-block p strong { color: #ddd; }
+
+    /* ─── PRICING RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .insight-grid { grid-template-columns: 1fr; }
+      .insight-card:nth-child(odd) { border-right: none; }
+      .insight-card:nth-child(-n+3) { border-bottom: 1px solid var(--border); }
+      .regime-container, .bidir-container { flex-direction: column; }
+      .regime-col.regime-demand, .bidir-col.bidir-left { border-right: none; border-bottom: 1px solid #222; }
+      .bidir-arrow-center { flex-direction: row; padding: 12px 0; }
+      .stack-layer { padding: 28px 24px; }
+      .callout-block { padding: 32px 24px 32px 28px; }
+    }
+
     /* ─── FOOTER ─── */
     footer {
       background: #fff; border-top: 1px solid var(--border);
@@ -342,230 +721,423 @@
   </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- ── HERO: COMPUTE CAPITAL MARKETS ── -->
 <section class="hero">
-  <h1>Compute <span class="dim">Futures</span></h1>
-  <p class="subtitle">Index futures for inference compute — priced against the Qi energy index, contracted and settled in QUAI.</p>
-  <div class="tag-row">
-    <span class="hero-tag">Cash-settled</span>
-    <span class="hero-tag">No hardware delivery</span>
-    <span class="hero-tag">Energy-indexed pricing</span>
-    <span class="hero-tag">Perpetual</span>
+  <h1>Compute <span class="dim">Capital Markets</span></h1>
+
+  <div class="pair-cards">
+    <a class="pair-card card-red" href="compute-futures.html">
+      <span class="pc-arrow">↗</span>
+      <div class="pc-label">Spot Index Derivative</div>
+      <h3>Futures</h3>
+      <p class="pc-tagline">A perpetual, cash-settled futures contract priced against the Qi energy index. Hedges and discovers the price of compute today.</p>
+      <div class="pc-meta">
+        <span><strong>Form</strong>Perpetual future</span>
+        <span><strong>Underlying</strong>Qi energy index</span>
+        <span><strong>Settlement</strong>QUAI</span>
+      </div>
+    </a>
+    <a class="pair-card card-blue" href="compute-bond.html">
+      <span class="pc-arrow">↗</span>
+      <div class="pc-label">Fixed-Income Instrument</div>
+      <h3>Bonds</h3>
+      <p class="pc-tagline">A zero-coupon bond collateralized by locked coinbase emissions, tokenized for liquid secondary trading. Finances and discounts the price of compute tomorrow.</p>
+      <div class="pc-meta">
+        <span><strong>Form</strong>Zero-coupon bond</span>
+        <span><strong>Collateral</strong>Locked coinbase</span>
+        <span><strong>Settlement</strong>QUAI</span>
+      </div>
+    </a>
   </div>
 </section>
 
-<!-- ── THE INSTRUMENT ── -->
+<!-- ── WHAT EACH SOLVES ── -->
 <section class="section-light">
-  <h2><span class="gray">The</span> instrument</h2>
-  <p class="lead">A cash-settled index futures contract. The underlying is a standard unit of inference compute, valued in terms of the energy required to produce it. Like an equity index future, no asset is ever delivered — positions are settled financially against the index price.</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <h3>Index-style</h3>
-      <p>Just as E-mini S&P 500 futures don't deliver 500 stocks, a Compute Future doesn't deliver hardware. It settles cash against the Qi index — what the market says a unit of compute is worth in energy terms at expiry.</p>
+  <h2>What <span class="gray">each solves</span></h2>
+  <p class="lead">The two instruments answer different questions. Futures answer <em style="font-style:normal;font-weight:600;color:#111;">"what is compute worth right now?"</em> Bonds answer <em style="font-style:normal;font-weight:600;color:#111;">"what is the future cost of compute today?"</em></p>
+
+  <div class="solves-grid">
+    <div class="solves-col" id="futures">
+      <div class="sc-eyebrow">Futures</div>
+      <h3>Spot price discovery for inference</h3>
+      <p class="sc-lead">A cash-settled, perpetual futures contract on a standard unit of inference compute. The underlying is the Qi energy index — what one unit of compute costs in raw energy terms. No hardware delivers; positions settle financially against the index.</p>
+
+      <div class="sc-block">
+        <div class="sc-q">The problem</div>
+        <div class="sc-a">There is no observable, non-manipulable price for inference compute. Existing benchmarks are <strong>survey indexes</strong> — they aggregate what vendors <em style="font-style:normal;font-weight:600;">charge</em>, not what compute <em style="font-style:normal;font-weight:600;">costs</em>. They reflect margin and capacity politics, not physics.</div>
+      </div>
+      <div class="sc-block">
+        <div class="sc-q">What it solves</div>
+        <div class="sc-a">A futures market produces a forward-looking, manipulation-resistant price for the cost of computation. AI agents, model operators, and infrastructure providers can hedge their compute exposure the same way airlines hedge fuel.</div>
+      </div>
+      <div class="sc-block">
+        <div class="sc-q">Who needs it</div>
+        <div class="sc-a">Inference-heavy operators who carry compute as a variable cost. Hyperscalers managing capacity risk. Treasuries hedging future training runs. Speculators expressing views on the energy cost of intelligence.</div>
+      </div>
+      <a class="sc-readmore" href="compute-futures.html">Read the Futures spec →</a>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <h3>Qi-indexed</h3>
-      <p>The futures price is denominated in Qi, the energy dollar. Qi is unencumbered by anything except the direct cost of electricity — no speculative premium, no scarcity premium. It is the cleanest possible benchmark for pricing a compute unit against physical work.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <h3>QUAI-settled</h3>
-      <p>All contract logic, margin, and settlement flows through QUAI — the programmable, highly liquid token on Quai Network. QUAI carries the full economic infrastructure. The convertible controller keeps Qi and QUAI equivalent, so energy-indexed prices resolve cleanly into QUAI settlement.</p>
+
+    <div class="solves-col" id="bonds">
+      <div class="sc-eyebrow">Bonds</div>
+      <h3>Fixed-income against locked emissions</h3>
+      <p class="sc-lead">A zero-coupon bond. Locked coinbase rewards form the collateral. The bond is issued at a discount to face value and tokenized — holders can hold to maturity for full face value, or sell into a secondary market at any time. Yield is fixed at issuance by the protocol's lock multiplier.</p>
+
+      <div class="sc-block">
+        <div class="sc-q">The problem</div>
+        <div class="sc-a">GPU mining networks lack long-term capital commitment. Miners can switch chains in hours, leaving networks vulnerable to rental-hashrate attacks. ASIC networks solve this with hardware lock-in; GPU networks need a financial mechanism instead.</div>
+      </div>
+      <div class="sc-block">
+        <div class="sc-q">What it solves</div>
+        <div class="sc-a">Locked rewards create ASIC-like commitment without specialized hardware. Tokenized principal preserves capital flexibility — miners can sell the bond for immediate liquidity without breaking the lock. The protocol gets security; the miner gets cash flow.</div>
+      </div>
+      <div class="sc-block">
+        <div class="sc-q">Who needs it</div>
+        <div class="sc-a">Miners optimizing between yield and liquidity. Capital allocators seeking real-yield exposure to compute infrastructure without operating hardware. DeFi protocols building structured products on top of a defined yield curve.</div>
+      </div>
+      <a class="sc-readmore" href="compute-bond.html">Read the Bonds spec →</a>
     </div>
   </div>
 </section>
 
-<!-- ── INDEX vs COMMODITY ── -->
+<!-- ── SIDE-BY-SIDE COMPARISON ── -->
 <section class="section-mid">
-  <h2>Index, <span class="gray">not commodity</span></h2>
-  <p class="lead">The distinction matters. Compute Futures belong to the index futures family — not commodity futures. Understanding why shapes everything about how the contract works.</p>
-  <div class="compare-grid">
-    <div class="compare-col">
-      <div class="compare-label">Commodity futures</div>
-      <h3>Physical delivery</h3>
-      <ul>
-        <li>The long position holder may take delivery of the underlying commodity at expiry</li>
-        <li>Price anchored to cost of producing and transporting a physical good</li>
-        <li>Designed for producers and consumers of tangible materials: oil, gas, grain</li>
-        <li>Delivery logistics and storage costs are built into the contract structure</li>
-      </ul>
+  <h2>Two instruments, <span class="gray">two markets</span></h2>
+  <p class="lead">Together they form a complete capital market for energy-denominated computation. Futures address the derivatives market; Bonds address the fixed-income market. Every other instrument prices off one of these two surfaces.</p>
+
+  <div class="pair-table">
+    <div class="pair-row pair-header">
+      <div class="pair-dim">Dimension</div>
+      <div>Futures</div>
+      <div>Bonds</div>
     </div>
-    <div class="compare-col">
-      <div class="compare-label">Compute Futures</div>
-      <h3>Access, not delivery</h3>
-      <ul>
-        <li>No hardware changes hands. You are not taking possession of a GPU</li>
-        <li>You are reserving the right to run computation through hardware at a future date — access, not ownership</li>
-        <li>Settlement is purely financial: cash against the Qi index price at settlement</li>
-        <li>Contract logic lives entirely on Quai Network in QUAI</li>
-      </ul>
+    <div class="pair-row">
+      <div class="pair-dim">Asset class</div>
+      <div>Derivative — perpetual index future</div>
+      <div>Fixed-income — zero-coupon bond</div>
+    </div>
+    <div class="pair-row">
+      <div class="pair-dim">Time horizon</div>
+      <div>Spot price, no maturity</div>
+      <div>Fixed term: 3, 6, or 12 months</div>
+    </div>
+    <div class="pair-row">
+      <div class="pair-dim">Underlying</div>
+      <div>Qi energy index per compute unit</div>
+      <div>Locked coinbase emission, payable at maturity</div>
+    </div>
+    <div class="pair-row">
+      <div class="pair-dim">Yield mechanism</div>
+      <div>Funding rate, basis trades</div>
+      <div>Discount to face value, lock multiplier</div>
+    </div>
+    <div class="pair-row">
+      <div class="pair-dim">Primary market addressed</div>
+      <div>Compute hedgers, agents, speculators</div>
+      <div>Miners, real-yield investors, DeFi treasuries</div>
+    </div>
+    <div class="pair-row">
+      <div class="pair-dim">TradFi analog</div>
+      <div>E-mini S&P 500 future, Brent crude future</div>
+      <div>Treasury bill, brokered CD, Pendle PT</div>
+    </div>
+    <div class="pair-row">
+      <div class="pair-dim">What it produces</div>
+      <div>Forward price surface — the spot curve</div>
+      <div>Discount curve — the term structure</div>
     </div>
   </div>
 </section>
 
-<!-- ── THE UNDERLYING INDEX ── -->
-<section class="section-light">
-  <h2><span class="gray">The</span> underlying index</h2>
-  <p class="lead">What exactly is being priced? A standard unit of inference compute — defined in terms of the energy required to produce it.</p>
-  <div class="index-block">
-    <div class="index-label">The Qi Index</div>
-    <h3>Energy cost of computation, and nothing else</h3>
-    <p>Qi is Quai Network's energy-denominated token, minted in direct proportion to the difficulty-adjusted work performed by miners. Its purchasing power is anchored to the real cost of running hardware — the price of electricity. This makes it structurally different from any speculative or supply-capped asset.</p>
-    <p>When Qi serves as the pricing benchmark for a Compute Future, the quoted price carries a physical meaning: <em>how many kilowatt-hours of work is this inference unit worth?</em> There is no noise from scarcity, dilution, or market speculation — only the energy signal.</p>
-    <p>This is the same logic behind using a basket index to price equity futures: you strip away idiosyncratic variation and price against the underlying economic reality. For compute, that reality is electricity. Qi is that index.</p>
-  </div>
-</section>
-
-<!-- ── TWO TOKENS ── -->
+<!-- ── WHY ENERGY IS FUNDAMENTAL ── -->
 <section class="section-dark">
-  <h2>Two tokens, <span class="gray">one contract</span></h2>
-  <p class="lead">Quai Network's dual-token architecture maps directly onto the structure of index futures. Qi is the index. QUAI is the settlement and contract layer.</p>
-  <div class="token-grid">
-    <div class="token-card dark-card">
-      <div class="token-label">The index</div>
-      <h3>Qi</h3>
-      <p>The price benchmark. Qi is unencumbered by anything beyond the direct cost of electricity — no speculative premium, no fixed supply cap creating artificial scarcity. When an agent buys a Compute Future, the Qi price expresses what a unit of inference is worth in physical energy terms. Every quote has thermodynamic meaning.</p>
-      <div class="token-rule">Qi plays the role of the spot index — the observable, energy-anchored reference price that futures pricing converges toward.</div>
-    </div>
-    <div class="token-card dark-card">
-      <div class="token-label">Settlement &amp; contract layer</div>
-      <h3>QUAI</h3>
-      <p>The contract infrastructure. QUAI is scarce, programmable, and highly liquid — carrying all margin logic, settlement flows, exchange operations, and network functionality. Because QUAI is programmable, arbitrarily complex contract structures can be expressed on-chain. The convertible controller keeps Qi and QUAI equivalent, so energy-indexed prices resolve cleanly into QUAI settlement flows.</p>
-      <div class="token-rule">QUAI plays the role of the settlement currency — the liquid, programmable token in which all cash flows are actually paid.</div>
-    </div>
-  </div>
-</section>
+  <h2>Why <span class="gray">start with energy</span></h2>
+  <p class="lead">Both instruments share a single anchor: the energy cost of computation, measured by Proof of Work. This is not an arbitrary design choice. It is the only honest unit of account for compute pricing.</p>
 
-<!-- ── SETTLEMENT ── -->
-<section class="section-light">
-  <h2><span class="gray">How</span> settlement works</h2>
-  <p class="lead">Each settlement cycle, the net cash flow combines the change in the Qi-indexed futures price with the difference between the energy dividend and the cost of capital — following the perpetual futures structure proposed by Shiller (1993). The resulting flow is paid in QUAI.</p>
-  <div class="formula-block">
-    <div class="formula-box" style="background: #fafafa; border-color: var(--border); color: #333;">
-      s<sub>t+1</sub>&nbsp; = &nbsp;(f<sub>t+1</sub> − f<sub>t</sub>)&nbsp; + &nbsp;(d<sub>t+1</sub> − r<sub>t</sub> · f<sub>t</sub>)
-    </div>
-    <div class="formula-note">
-      <div class="var-list">
-        <div class="var-item"><code>f<sub>t</sub></code> The perpetual futures price in Qi at time t — what the market reveals compute to be worth in energy terms at that moment.</div>
-        <div class="var-item"><code>d<sub>t+1</sub></code> The energy dividend index — the Qi-denominated energy cost of inference actually delivered during the period, converted to QUAI at settlement.</div>
-        <div class="var-item"><code>r<sub>t</sub></code> The return on an alternative asset between t and t+1 — the cost of capital for holding the position open.</div>
-        <div class="var-item"><code>s<sub>t+1</sub></code> The net settlement paid in QUAI from short to long. Combines price movement and the energy dividend — no physical delivery, just cash flows.</div>
+  <div class="energy-block">
+    <p class="eb-prose">Computation is, fundamentally, the orderly conversion of energy into change of state. <strong>Every floating-point operation, every hash, every inference token is paid for in joules.</strong> The cost floor of any computation is the electricity it consumes — everything above that is margin, capacity premium, or speculation.</p>
+    <p class="eb-prose">Proof of Work is the only consensus mechanism that bonds tokens to physical reality. A miner cannot produce a valid block without expending verifiable electrical work. The block reward is, by construction, <em>a receipt for energy spent</em>. This makes the coinbase emission the cleanest possible reference price for one unit of compute — denominated in nothing but joules.</p>
+    <p class="eb-prose">Stake-based systems cannot do this. Their unit of account is the token itself, which is circular: <strong>the price of compute is whatever holders agree it is.</strong> Energy is exogenous. Energy is non-arbitrary. Energy is the same physical quantity in Texas, Iceland, and Sichuan.</p>
+
+    <div class="eb-pillars">
+      <div class="eb-pillar">
+        <div class="eb-num">01</div>
+        <h4>Non-arbitrary</h4>
+        <p>Joules are the same everywhere. No vendor can manipulate the underlying; no token holder can vote it higher. The physics is the price.</p>
+      </div>
+      <div class="eb-pillar">
+        <div class="eb-num">02</div>
+        <h4>Forward-looking</h4>
+        <p>Energy markets already trade decades into the future. Anchoring compute to energy inherits a mature term structure, not a survey of recent rentals.</p>
+      </div>
+      <div class="eb-pillar">
+        <div class="eb-num">03</div>
+        <h4>Verifiable</h4>
+        <p>Proof of Work makes the energy expenditure cryptographically auditable. The block itself is the receipt — no oracle, no trust, no off-chain attestation.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── WHY PERPETUAL ── -->
+<!-- ══════════════════════════════════════════════ -->
+<!-- ══════════ PRICING STACK DEEP DIVE ══════════ -->
+<!-- ══════════════════════════════════════════════ -->
+
+<!-- ── PRICING STACK INTRO ── -->
 <section class="section-dark">
-  <h2>Why <span class="gray">perpetual</span></h2>
-  <p class="lead">Perpetual contracts solve problems that conventional quarterly futures cannot — especially for assets where the spot price is difficult to observe directly.</p>
-  <div class="why-grid">
-    <div class="why-card">
-      <h3 style="color:#fff;">Liquidity concentration</h3>
-      <p style="color:#888;">A single perpetual contract absorbs all trading interest instead of splitting it across quarterly maturities. Every participant trades the same instrument, deepening the order book and tightening spreads.</p>
+  <div class="pricing-intro">
+    <div class="pi-eyebrow">Research dialogue · A compute capital markets competitor × <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener">Wolfram Blockchain Labs</a></div>
+  </div>
+  <h2>The missing <span class="gray">floor price</span> for compute</h2>
+  <p class="lead">Compute markets price from the top down — vendor ask rates, rental surveys, offtake negotiations. What happens when you price from the bottom up, starting at the thermodynamic cost of a hash?</p>
+</section>
+
+<!-- ── THE NORMALIZATION STACK ── -->
+<section class="section-dark" style="padding-top: 0;">
+  <h2>The normalization <span class="gray">stack</span></h2>
+  <p class="lead">Each layer commoditizes the mess below it. Fuel is geographically non-fungible. Electricity is a first normalization. Standard GPU hardware is a second. The algorithm is a third. A random hash function is a fourth. And the final layer normalizes every compatible hashing algorithm into a single energy-denominated money output.</p>
+
+  <div class="stack-container">
+    <div class="stack-layer l-fuel">
+      <div class="stack-num">Layer 0 — Non-fungible</div>
+      <h3>Fuel source</h3>
+      <p>Natural gas in Texas, solar in Arizona, hydro in Quebec. <strong>Geographically non-fungible</strong>, compositionally dynamic, and impossible to standardize directly.</p>
     </div>
-    <div class="why-card">
-      <h3 style="color:#fff;">No observable spot</h3>
-      <p style="color:#888;">The spot price of inference compute is hard to observe and highly fragmented across providers. Perpetual index futures sidestep this problem: price what you can measure directly — the energy cost denominated in Qi — and settle against that index.</p>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-elec">
+      <div class="stack-num">Layer 1 — First normalization</div>
+      <h3>Electricity</h3>
+      <p>A joule is a joule — but grid standards differ between ISOs, and <strong>behind-the-meter power isn't traded at all</strong>. PPAs further decouple electricity cost from compute price. This layer hides more than it reveals.</p>
     </div>
-    <div class="why-card">
-      <h3 style="color:#fff;">Continuous price discovery</h3>
-      <p style="color:#888;">The funding mechanism creates periodic information aggregation. Each settlement cycle, traders reveal their beliefs about compute value, driving the Qi-indexed futures price toward fair value over time.</p>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-gpu">
+      <div class="stack-num">Layer 2 — Hardware normalization</div>
+      <h3>GPU compute</h3>
+      <p>One H100 in Virginia ≈ one H100 in Frankfurt. <strong>Standard hardware converts variable electricity into comparable computation.</strong> Performance deltas exist but are financially manageable — like light sweet crude in two ports.</p>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-work">
+      <div class="stack-num">Layer 3 — Workload normalization</div>
+      <h3>Inference</h3>
+      <p>Same model, same weights, different location. If you don't care about latency, <strong>inference is approximately fungible</strong>. A small delta, not a different product.</p>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-hash">
+      <div class="stack-num">Layer 4 — Maximum fungibility</div>
+      <h3>SHA-256 hash</h3>
+      <p>Output is <strong>identically random</strong> regardless of hardware, location, or fuel source. No latency sensitivity. No model dependency. The most standardized unit of computation that exists — and it already has a deep, liquid market.</p>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-qi" style="border-color: #3a7a5a;">
+      <div class="stack-num" style="color: #4a9a6a;">Layer 5 — Algorithm normalization</div>
+      <h3>Merge-mined proof of work</h3>
+      <p>SHA-256, Scrypt, ProgPoW, and any other compatible hashing algorithm all produce different kinds of irreducible computational work. <a href="https://soap.qu.ai/" target="_blank" rel="noopener" style="color:#4a9a6a; text-decoration:underline; text-decoration-color:#2a5a3a; font-weight:600;">SOAP</a> <strong>merge-mines across these algorithms simultaneously</strong>, unifying heterogeneous proof-of-work hardware into a single security and economic layer.</p>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer l-qi">
+      <div class="stack-num">Layer 6 — Monetary normalization</div>
+      <h3><a href="https://qi.xyz/what-is-qi.html" target="_blank" rel="noopener" style="color:#c9a227; text-decoration:none;">$Qi</a> — Energy-denominated money</h3>
+      <p>A <strong>universal denominator token payout normalizes them into a single energy-denominated money output</strong>. The token has adaptable economics to which algorithm produced the hash. It measures the energy expended, point blank. This is the final normalization: from many proof-of-work algorithms to one thermodynamic unit of account.</p>
     </div>
   </div>
 </section>
 
-<!-- ── DESIGNED FOR AGENTS ── -->
+<!-- ── COMPETITOR INSIGHTS ── -->
 <section class="section-light">
-  <h2><span class="gray">Designed for</span> agents</h2>
-  <p class="lead">Autonomous agents need to acquire, budget, and allocate inference compute programmatically. Compute Futures give them a standard energy-indexed instrument to do it — all margin and settlement handled in QUAI, no hardware logistics required.</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">→</div>
-      <h3>Reserve access</h3>
-      <p>An agent that needs inference capacity over the next month goes long on a Compute Future, locking in the Qi-indexed energy cost of that compute today. No delivery, no hardware custody — just a financial commitment to the index price, settled in QUAI.</p>
+  <h2>What competitors <span class="gray">see</span></h2>
+  <p class="lead">Competitors are building capital markets stacks for compute — regulated indices, pricing infrastructure, and derivative instruments. Here is what the leading teams have learned about compute pricing.</p>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-label">01 — Embedded electricity</div>
+      <h3>Electricity is an input, not a readable output</h3>
+      <p>The cost of electricity is embedded in GPU-hour and token prices. But solving the inverse problem — tracing a compute rate back to an electricity cost — breaks down because PPAs fix the underlying power cost while compute rates vary freely above it.</p>
     </div>
-    <div class="step">
-      <div class="step-num">→</div>
-      <h3>Hedge supply</h3>
-      <p>A compute provider goes short — locking in QUAI revenue for capacity it plans to deliver, hedging against falling demand or Qi-index price declines. The contract creates a binding financial commitment without the logistics of physical delivery.</p>
+    <div class="insight-card">
+      <div class="insight-label">02 — The invisible market</div>
+      <h3>Behind-the-meter power has no price discovery</h3>
+      <p>Grid power trades on exchanges like Nodal. But as data centers move off-grid — natural gas turbines, on-site generation — the electricity they consume has no market. Compute pricing could become the only proxy for this invisible energy market.</p>
     </div>
-    <div class="step">
-      <div class="step-num">→</div>
-      <h3>Arbitrage the basis</h3>
-      <p>Arbitrageurs trade the spread between the Qi futures price and actual spot compute costs, keeping the index price aligned with physical energy reality and providing liquidity to both sides of the market.</p>
+    <div class="insight-card">
+      <div class="insight-label">03 — Regime dependence</div>
+      <h3>The electricity signal depends on supply–demand balance</h3>
+      <p>When compute is demand-constrained, price collapses toward a spread over electricity cost — high correlation, high predictiveness. When supply-constrained (now), price is bid up by what compute is worth to buyers, drowning out the energy signal.</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-label">04 — Unsophisticated pricing</div>
+      <h3>GPU pricing is sales-driven, not quant-driven</h3>
+      <p>Most compute providers don't dynamically reprice. Rates update weekly or biweekly. Sellers respond to high demand by extending contract durations rather than raising prices — collapsing the spot market and destroying price discovery.</p>
     </div>
   </div>
 </section>
 
-<!-- ── HOW COMPETITORS BUILD INDEXES ── -->
-<section style="background:#000; padding:100px 48px; text-align:center;">
-  <h2 style="font-size:clamp(32px,4vw,50px); font-weight:700; letter-spacing:-0.03em; margin-bottom:24px; color:#fff;">How competitors <span style="color:#555;">build their indexes</span></h2>
-  <p class="lead" style="color:#666;">Other compute index providers — Silicon Data and peers — approach the problem as a data collection and normalization exercise. That methodology has real merit. It also has a structural ceiling.</p>
+<!-- ── THE REGIME DIAGRAM ── -->
+<section class="section-dark">
+  <h2>Two regimes, <span class="gray">two signals</span></h2>
+  <p class="lead">Whether compute price tells you anything about underlying energy cost depends entirely on who has market power.</p>
 
-  <!-- 2×2 methodology grid — white cards on black -->
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:860px; margin:0 auto 48px; border:1px solid #222; border-radius:12px; overflow:hidden;">
-    <div style="background:#fff; padding:36px 32px; text-align:left; border-right:1px solid #eee; border-bottom:1px solid #eee;">
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">01 — Data Coverage</div>
-      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">They aggregate GPU rental rates from cloud providers, colocation markets, brokered cluster sales, and private platforms — claiming 80%+ coverage of the H100 rental market.</p>
+  <div class="regime-container">
+    <div class="regime-col regime-demand">
+      <div class="regime-tag">Demand-constrained</div>
+      <h3>Price → electricity + spread</h3>
+      <p>When GPUs sit idle, providers compete on price. Rates collapse toward marginal energy cost plus a thin margin. <strong>In this regime, compute price is highly correlated with electricity price.</strong></p>
+      <div class="regime-signal">↳ Compute price is informative about energy cost</div>
     </div>
-    <div style="background:#fff; padding:36px 32px; text-align:left; border-bottom:1px solid #eee;">
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">02 — Normalization</div>
-      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">Prices are adjusted for GPU type, memory, rental term, interconnect speed, cluster scale, and geography — producing a like-for-like on-demand rate stripped of marketing noise.</p>
+    <div class="regime-col regime-supply">
+      <div class="regime-tag">Supply-constrained (current)</div>
+      <h3>Price → willingness to pay</h3>
+      <p>When demand exceeds capacity, buyers bid up the price of compute based on what inference is <strong>worth to them</strong>, not what it costs to produce. The electricity signal is drowned out by margin and urgency.</p>
+      <div class="regime-signal">↳ Compute price reveals demand intensity, not energy cost</div>
     </div>
-    <div style="background:#fff; padding:36px 32px; text-align:left; border-right:1px solid #eee;">
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">03 — Daily Validation</div>
-      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">Indexes are recalculated each business day. Statistical filters remove stale or non-representative data. Independent oversight agents attest to calculation integrity.</p>
+  </div>
+</section>
+
+<!-- ── THE FLOOR PRICE CONCEPT ── -->
+<section class="section-mid">
+  <h2>The PoW <span class="gray">floor price</span></h2>
+  <p class="lead">When inference demand drops, GPUs don't have to sit idle. Proof-of-work mining creates an always-available fallback — a thermodynamic floor beneath compute infrastructure.</p>
+
+  <div class="floor-visual">
+    <div class="floor-chart">
+      <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid lines -->
+        <line x1="60" y1="40" x2="60" y2="260" stroke="#222" stroke-width="1"/>
+        <line x1="60" y1="260" x2="720" y2="260" stroke="#222" stroke-width="1"/>
+        <line x1="60" y1="180" x2="720" y2="180" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,6"/>
+        <line x1="60" y1="100" x2="720" y2="100" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,6"/>
+
+        <!-- Y-axis labels -->
+        <text x="52" y="44" fill="#555" font-size="10" font-family="Inter" text-anchor="end" font-weight="600">High</text>
+        <text x="52" y="264" fill="#555" font-size="10" font-family="Inter" text-anchor="end" font-weight="600">Low</text>
+        <text x="14" y="155" fill="#444" font-size="10" font-family="Inter" text-anchor="middle" font-weight="700" transform="rotate(-90,14,155)" letter-spacing="0.1em">$/GPU-HR</text>
+
+        <!-- X-axis labels -->
+        <text x="390" y="290" fill="#444" font-size="10" font-family="Inter" text-anchor="middle" font-weight="700" letter-spacing="0.1em">TIME →</text>
+
+        <!-- PoW floor line -->
+        <line x1="60" y1="230" x2="720" y2="230" stroke="#fff" stroke-width="2" stroke-dasharray="8,4" opacity="0.6"/>
+        <text x="726" y="226" fill="#999" font-size="10" font-family="Inter" font-weight="600">PoW FLOOR</text>
+
+        <!-- Electricity cost line -->
+        <line x1="60" y1="248" x2="720" y2="248" stroke="#c9a227" stroke-width="1.5" stroke-dasharray="3,4" opacity="0.5"/>
+        <text x="726" y="244" fill="#8a7a30" font-size="9" font-family="Inter" font-weight="600">ELECTRICITY</text>
+
+        <!-- Inference value area (above floor) -->
+        <path d="M60,120 C140,80 200,60 280,70 C340,78 380,130 420,100 C460,70 500,50 540,60 C580,70 620,110 680,90 L720,95"
+              fill="none" stroke="#4a6aaa" stroke-width="2.5"/>
+
+        <!-- Tradeoff zone (shaded between inference and floor) -->
+        <path d="M60,120 C140,80 200,60 280,70 C340,78 380,130 420,100 C460,70 500,50 540,60 C580,70 620,110 680,90 L720,95 L720,230 L60,230 Z"
+              fill="url(#inferenceGrad)" opacity="0.15"/>
+
+        <!-- Below-floor zone -->
+        <path d="M60,230 L720,230 L720,248 L60,248 Z" fill="#c9a227" opacity="0.06"/>
+
+        <defs>
+          <linearGradient id="inferenceGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4a6aaa"/>
+            <stop offset="100%" stop-color="#4a6aaa" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Tradeoff point marker -->
+        <circle cx="380" cy="230" r="6" fill="none" stroke="#fff" stroke-width="2"/>
+        <circle cx="380" cy="230" r="2.5" fill="#fff"/>
+        <line x1="380" y1="130" x2="380" y2="224" stroke="#fff" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
+        <text x="380" y="150" fill="#fff" font-size="10" font-family="Inter" text-anchor="middle" font-weight="600" opacity="0.7">TRADEOFF</text>
+        <text x="380" y="162" fill="#fff" font-size="10" font-family="Inter" text-anchor="middle" font-weight="600" opacity="0.7">POINT</text>
+
+        <!-- Annotation: inference premium -->
+        <text x="240" y="56" fill="#4a6aaa" font-size="10" font-family="Inter" font-weight="700" letter-spacing="0.06em">INFERENCE PREMIUM</text>
+
+        <!-- Annotation: PoW mining zone -->
+        <text x="580" y="242" fill="#777" font-size="9" font-family="Inter" font-weight="600" letter-spacing="0.06em">MINING ZONE</text>
+      </svg>
     </div>
-    <div style="background:#fff; padding:36px 32px; text-align:left;">
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">04 — Distribution</div>
-      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">Published on Bloomberg Terminal (BBG: SDH100RT), distributed via direct API, and licensed to data partners including Kaiko. Historical archives available.</p>
+    <div class="floor-legend">
+      <div class="floor-legend-item">
+        <div class="floor-legend-dot" style="background:#4a6aaa;"></div>
+        <span style="color:#888;">Inference value (market-driven)</span>
+      </div>
+      <div class="floor-legend-item">
+        <div class="floor-legend-dot" style="background:#fff; border:1px solid #444;"></div>
+        <span style="color:#888;">PoW mining floor (thermodynamic)</span>
+      </div>
+      <div class="floor-legend-item">
+        <div class="floor-legend-dot" style="background:#c9a227;"></div>
+        <span style="color:#888;">Electricity cost (base layer)</span>
+      </div>
     </div>
   </div>
 
-  <!-- Comparison table — white background -->
-  <div style="max-width:860px; margin:0 auto 48px; background:#fff; border-radius:12px; overflow:hidden;">
-    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; border-bottom:2px solid #111; padding:14px 24px;">
-      <div></div>
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#aaa; text-align:left; padding:0 16px;">Survey Index</div>
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#111; text-align:left; padding:0 16px;">Qi Energy Index</div>
+  <div class="callout-block">
+    <div class="callout-label">The key insight</div>
+    <h3>Mining is a <u>hedge</u> on compute infrastructure buildout</h3>
+    <p>If the primary value creation is inference, and that creates a higher dollar value, but sometimes you cannot get full utilization — then mining allows you to recuperate something. <strong>GPU-friendly proof of work turns idle capacity into revenue instead of loss.</strong></p>
+    <p>This only works if the PoW network is GPU-native. Bitcoin's SHA-256 runs on ASICs that can't do inference. A GPU-friendly proof-of-work system — like Quai Network — makes the tradeoff <strong>actually executable on the same hardware</strong>, which is what makes the floor real rather than theoretical.</p>
+  </div>
+</section>
+
+<!-- ── META: MARGINAL ECONOMICS ── -->
+<section class="section-dark">
+  <h2>The <span class="gray">meta</span></h2>
+  <p class="lead">There is a deeper structure hiding inside the tradeoff point.</p>
+
+  <div class="callout-block" style="border-left-color: #c9a227;">
+    <div class="callout-label">Marginal opportunity cost</div>
+    <h3>Each side <u>precisely defines</u> the unit economics of the other</h3>
+    <p>The marginal economic tradeoff between inference and GPUs performing proof of work isn't just a hedge — it's a <strong>mutual pricing oracle</strong>. The opportunity cost of running inference is the PoW revenue you forgo. The opportunity cost of mining is the inference revenue you forgo.</p>
+    <p>This means inference and proof of work don't just coexist — they <strong>price each other</strong>. At the margin, one precisely defines the unit economics of the other. The tradeoff point is not a static floor. It is a continuously updated, market-driven signal that tells you the real cost of compute from two independent directions simultaneously.</p>
+    <p>No survey index can produce this. It emerges only when both workloads compete for the same hardware, in real time, with real capital at stake.</p>
+  </div>
+</section>
+
+<!-- ── BIDIRECTIONAL TRADEOFF ── -->
+<section class="section-light">
+  <h2>The tradeoff goes <span class="gray">both ways</span></h2>
+  <p class="lead">The marginal conversion point between PoW mining and inference isn't just a floor — it's a pricing signal that works in both directions.</p>
+
+  <div class="bidir-container">
+    <div class="bidir-col bidir-left">
+      <div class="bidir-label">Mining → Inference</div>
+      <h3>Infrastructure already exists</h3>
+      <p>Major miners like Marathon have already built facilities, secured electricity, and deployed cooling and power infrastructure for Bitcoin mining. <strong>They are rapidly transitioning toward inference</strong> because the economics now say "go to inference."</p>
+      <p style="margin-top:16px;">The physical plant — power, cooling, networking — was amortized by mining revenue. Inference inherits infrastructure that has already been paid for.</p>
     </div>
-    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
-      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Source of truth</div>
-      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Vendor ask prices</div>
-      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Thermodynamic cost of computation</div>
-    </div>
-    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
-      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Manipulation resistance</div>
-      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Depends on data network coverage</div>
-      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Secured by PoW — falsifying requires real energy</div>
-    </div>
-    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
-      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Hardware generation risk</div>
-      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Index breaks when H100 is superseded</div>
-      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Normalizes across hardware via energy denominator</div>
-    </div>
-    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
-      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Settlement suitability</div>
-      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Requires off-chain oracle and trust</div>
-      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">On-chain, auditable, no third-party attestation</div>
-    </div>
-    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px;">
-      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Forward price signal</div>
-      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Backward-looking daily snapshot</div>
-      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Perpetual futures mechanism aggregates expectations continuously</div>
+    <div class="bidir-arrow-center">⇄</div>
+    <div class="bidir-col bidir-right">
+      <div class="bidir-label">Inference → Mining</div>
+      <h3>Downside protection for builders</h3>
+      <p>If you are building a data center for projected inference demand, <strong>GPU-native mining provides a hedge</strong> in case that demand doesn't materialize as expected.</p>
+      <p style="margin-top:16px;">Instead of stranded capacity and write-downs, you have a thermodynamic fallback that generates revenue proportional to the energy consumed. The floor price is set by physics, not by market sentiment.</p>
     </div>
   </div>
+</section>
 
-  <!-- Structural problem callout -->
-  <div style="max-width:860px; margin:0 auto; background:#111; border-left:3px solid #fff; border-radius:0 8px 8px 0; padding:40px 40px 40px 44px; text-align:left;">
-    <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-bottom:16px;">The structural problem</div>
-    <h3 style="font-size:22px; font-weight:800; color:#fff; letter-spacing:-0.02em; margin-bottom:20px; line-height:1.3;">This is a survey index. It measures what vendors <span style="color:#fff; text-decoration:underline; text-decoration-color:#444;">charge</span> — not what compute <span style="color:#fff; text-decoration:underline; text-decoration-color:#444;">costs</span>.</h3>
-    <p style="font-size:15px; color:#777; line-height:1.75; margin-bottom:16px;">A rental rate aggregated from commercial platforms reflects vendor margins, market positioning, capacity utilization, and competitive dynamics. It answers <em>"what is the current ask?"</em> — not <em>"what is the underlying cost of producing this computation?"</em></p>
-    <p style="font-size:15px; color:#777; line-height:1.75; margin-bottom:16px;">The distinction collapses the moment markets thin out, vendors coordinate pricing, or a new hardware generation reshapes the cost curve overnight. Survey indexes are backward-looking by construction: they can only tell you what was charged, not what the physics of computation actually demands.</p>
-    <p style="font-size:15px; color:#999; line-height:1.75; margin:0;">A futures market needs an index that is <strong style="color:#ddd;">non-manipulable</strong>, <strong style="color:#ddd;">anchored to physical reality</strong>, and <strong style="color:#ddd;">forward-looking by structure</strong>. Rental rate surveys provide none of these.</p>
+<!-- ── THE STRUCTURAL ARGUMENT ── -->
+<section class="section-dark">
+  <h2>Why the <span class="gray">floor</span> matters for pricing</h2>
+  <p class="lead">Competitors are building capital markets infrastructure for compute. The missing piece in every compute index is a non-manipulable, energy-anchored lower bound.</p>
+
+  <div class="callout-block" style="margin-bottom: 48px;">
+    <div class="callout-label">The problem with survey indexes</div>
+    <h3>You can't build <u>futures</u> on a market where the floor is <u>unknown</u></h3>
+    <p>Current compute indexes aggregate what vendors <strong>charge</strong>. In a supply-constrained regime, that tells you willingness to pay, not cost of production. In a demand-constrained regime, prices collapse toward electricity plus margin — but nobody knows exactly where that floor is.</p>
+    <p>A GPU-native proof-of-work network provides the missing observable: the <strong>marginal revenue per GPU-hour from mining</strong>. This is a real, continuous, market-set price signal that establishes the floor beneath which no rational GPU operator would sell compute. <strong>It is the thermodynamic bid.</strong></p>
+  </div>
+
+  <div style="max-width:860px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; border:1px solid #222; border-radius:12px; overflow:hidden;">
+    <div style="background:#111; padding:36px 28px; text-align:left;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#555; margin-bottom:12px;">Without PoW floor</div>
+      <p style="font-size:14px; color:#666; line-height:1.7;">Futures settle against a survey index. Floor is estimated, not observed. Manipulation resistance depends on data coverage breadth.</p>
+    </div>
+    <div style="background:#111; padding:36px 28px; text-align:left; border-left:1px solid #222; border-right:1px solid #222;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#555; margin-bottom:12px;">With PoW floor</div>
+      <p style="font-size:14px; color:#ccc; line-height:1.7; font-weight:500;">Floor is a live, on-chain, thermodynamically anchored price. No survey needed. Falsifying requires real energy expenditure.</p>
+    </div>
+    <div style="background:#111; padding:36px 28px; text-align:left;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#555; margin-bottom:12px;">What this enables</div>
+      <p style="font-size:14px; color:#666; line-height:1.7;">Credible lower bound for options pricing. Put spreads with real meaning. Infrastructure insurance products with an observable strike.</p>
+    </div>
   </div>
 </section>
 
@@ -574,7 +1146,6 @@
   <h2>Try the Controller</h2>
   <p>See how the convertible controller keeps Qi indexed pricing and QUAI settlement equivalent — the engine behind Compute Futures.</p>
   <a class="cta-btn" href="controller.html">Launch Demo</a>
-  <a class="cta-btn" href="pricing-conversation.html" style="margin-left:12px; background:#fff; color:#111; border:1px solid #ddd;">The Pricing Stack ↗</a>
 </section>
 
 <!-- ── FOOTER ── -->
