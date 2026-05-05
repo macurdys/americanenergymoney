@@ -1,0 +1,772 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compute Futures — American Energy Money</title>
+  <meta name="description" content="Cash-settled, perpetual index futures on inference compute — priced against the Qi energy index, settled in QUAI.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gray: #999;
+      --dark: #111;
+      --white: #fff;
+      --border: rgba(0,0,0,0.07);
+      --border-light: rgba(255,255,255,0.08);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
+    .nav-logo span {
+      font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #111;
+    }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-item {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+      color: #444; text-decoration: none; cursor: pointer;
+      border-radius: 8px; transition: background 0.15s;
+    }
+    .nav-item:hover { background: #f5f5f5; }
+    .nav-item.active { color: #111; font-weight: 600; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: #0d0d0d;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 120px 48px 100px; text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(52px, 7vw, 84px);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+      color: #fff;
+    }
+    .hero h1 .dim { color: #555; }
+    .hero .subtitle {
+      font-size: clamp(18px, 2vw, 22px); font-weight: 500;
+      color: #666; margin-top: 28px; max-width: 600px;
+      line-height: 1.6; letter-spacing: -0.01em;
+    }
+    .hero .tag-row {
+      display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; justify-content: center;
+    }
+    .hero-tag {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #444; border: 1px solid #2a2a2a; border-radius: 100px; padding: 8px 16px;
+    }
+
+    /* ─── SECTION ─── */
+    .section-light {
+      background: #fff;
+      padding: 100px 48px; text-align: center;
+    }
+    .section-dark {
+      background: #0d0d0d;
+      padding: 100px 48px; text-align: center;
+    }
+    .section-mid {
+      background: #f7f7f7;
+      padding: 100px 48px; text-align: center;
+    }
+    .section-light h2, .section-dark h2, .section-mid h2 {
+      font-size: clamp(32px, 4vw, 50px); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 24px;
+    }
+    .section-dark h2 { color: #fff; }
+    .section-light h2 .gray,
+    .section-dark h2 .gray,
+    .section-mid h2 .gray { color: var(--gray); }
+    .lead {
+      font-size: 18px; color: #666; max-width: 640px;
+      margin: 0 auto 64px; line-height: 1.7;
+    }
+
+    /* ─── COMPARE BLOCK ─── */
+    .compare-grid {
+      display: flex; gap: 2px; max-width: 860px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .compare-col {
+      flex: 1; padding: 40px 36px; text-align: left;
+    }
+    .compare-col:first-child {
+      background: #f9f9f9; border-right: 1px solid var(--border);
+    }
+    .compare-col:last-child { background: #fff; }
+    .compare-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .compare-col:first-child .compare-label { color: #bbb; }
+    .compare-col:last-child .compare-label { color: #111; }
+    .compare-col h3 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 20px; color: #111;
+    }
+    .compare-col ul {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+    }
+    .compare-col ul li {
+      font-size: 15px; color: #777; line-height: 1.6;
+      padding-left: 20px; position: relative;
+    }
+    .compare-col ul li::before {
+      content: '–'; position: absolute; left: 0; color: #ccc;
+    }
+    .compare-col:last-child ul li::before { color: #111; content: '→'; }
+    .compare-col:last-child ul li { color: #444; }
+
+    /* ─── TOKEN PAIR ─── */
+    .token-grid {
+      display: flex; gap: 32px; justify-content: center;
+      flex-wrap: wrap; max-width: 880px; margin: 0 auto;
+    }
+    .token-card {
+      flex: 1; min-width: 280px; max-width: 420px;
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 48px 36px; text-align: left;
+    }
+    .token-card.dark-card {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--border-light);
+    }
+    .token-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 16px; color: #666;
+    }
+    .token-card h3 {
+      font-size: 26px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .section-dark .token-card h3 { color: #fff; }
+    .token-card p {
+      font-size: 15px; color: #777; line-height: 1.7;
+    }
+    .section-dark .token-card p { color: #888; }
+    .token-card .token-rule {
+      margin-top: 24px; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px; color: #555; line-height: 1.6;
+    }
+
+    /* ─── FORMULA ─── */
+    .formula-block {
+      max-width: 720px; margin: 0 auto;
+      text-align: left;
+    }
+    .formula-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 18px;
+      color: #ccc;
+      letter-spacing: 0.01em;
+      line-height: 1.8;
+      text-align: center;
+    }
+    .formula-note {
+      font-size: 15px; color: #666; line-height: 1.7;
+    }
+    .var-list {
+      margin-top: 28px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .var-item {
+      display: flex; gap: 16px; align-items: baseline;
+      font-size: 15px; color: #666; line-height: 1.6;
+    }
+    .var-item code {
+      font-family: 'Courier New', Courier, monospace;
+      color: #aaa; font-size: 15px;
+      min-width: 48px; flex-shrink: 0;
+    }
+
+    /* ─── STEPS ─── */
+    .steps {
+      display: flex; gap: 48px; justify-content: center;
+      flex-wrap: wrap; max-width: 960px; margin: 0 auto;
+    }
+    .step {
+      flex: 1; min-width: 240px; max-width: 280px; text-align: left;
+    }
+    .step-num {
+      font-size: 48px; font-weight: 800; letter-spacing: -0.04em;
+      color: #e0e0e0; margin-bottom: 16px;
+    }
+    .step h3 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .step p {
+      font-size: 15px; color: #777; line-height: 1.65;
+    }
+
+    /* ─── WHY SECTION ─── */
+    .why-grid {
+      display: flex; gap: 32px; justify-content: center;
+      flex-wrap: wrap; max-width: 960px; margin: 0 auto;
+    }
+    .why-card {
+      flex: 1; min-width: 260px; max-width: 300px;
+      text-align: left;
+    }
+    .why-card h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .why-card p { font-size: 15px; color: #777; line-height: 1.65; }
+
+    /* ─── INDEX EXPLAINER ─── */
+    .index-block {
+      max-width: 760px; margin: 0 auto;
+      background: #fafafa; border: 1px solid var(--border);
+      border-radius: 16px; padding: 52px 48px; text-align: left;
+    }
+    .index-block .index-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #bbb; margin-bottom: 20px;
+    }
+    .index-block h3 {
+      font-size: 24px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px; color: #111;
+    }
+    .index-block p {
+      font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 16px;
+    }
+    .index-block p:last-child { margin-bottom: 0; }
+    .index-block em {
+      font-style: normal; font-weight: 600; color: #111;
+    }
+
+    /* ─── COMPARISON GRID ─── */
+    .comparison-grid { width: 100%; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .comp-row { display: grid; grid-template-columns: 1.2fr 1.5fr 1.5fr; border-bottom: 1px solid var(--border); }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-row > div { padding: 14px 18px; font-size: 0.88rem; line-height: 1.5; }
+    .comp-header { background: #1a1a1a; }
+    .comp-header > div { padding: 12px 18px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: #888; }
+    .comp-label { color: #ccc; font-weight: 600; background: #111; }
+    .comp-no { color: #666; background: #0d0d0d; }
+    .comp-yes { color: #4ade80; background: #0a1a0f; font-weight: 500; }
+    @media (max-width: 640px) {
+      .comp-row { grid-template-columns: 1fr; }
+    }
+    .cta-section {
+      background: #fff;
+      padding: 120px 48px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-size: clamp(36px, 5vw, 64px); font-weight: 800;
+      letter-spacing: -0.04em; margin-bottom: 24px;
+    }
+    .cta-section p {
+      font-size: 18px; color: #777; max-width: 480px;
+      margin: 0 auto 48px; line-height: 1.6;
+    }
+    .cta-btn {
+      display: inline-block; padding: 16px 40px;
+      background: #111; color: #fff;
+      font-size: 16px; font-weight: 700; letter-spacing: -0.01em;
+      border-radius: 100px; text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .cta-btn:hover { background: #333; transform: scale(1.03); }
+
+    /* ─── INSTRUMENT PAIR CARDS (HERO) — minimal CTA, flag-themed ─── */
+    .pair-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; max-width: 880px; margin: 56px auto 0;
+    }
+    .pair-card {
+      position: relative;
+      border: 2px solid var(--border); border-radius: 16px;
+      padding: 36px 36px 32px; text-align: left;
+      background: #fff;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.2s;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+    }
+    .pair-card .pc-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .pair-card h3 {
+      font-size: 36px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 24px; color: #111; line-height: 1.0;
+    }
+    .pair-card .pc-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: auto; padding-top: 8px;
+      font-size: 15px; font-weight: 700; letter-spacing: -0.01em;
+    }
+    .pair-card .pc-cta .pc-arrow-inline {
+      display: inline-block; transition: transform 0.2s;
+    }
+    .pair-card:hover .pc-cta .pc-arrow-inline { transform: translateX(4px); }
+
+    /* Red variant — Futures */
+    .pair-card.card-red {
+      border-color: #B31942;
+    }
+    .pair-card.card-red .pc-label { color: #B31942; }
+    .pair-card.card-red .pc-cta { color: #B31942; }
+    .pair-card.card-red:hover {
+      background: #B31942; border-color: #B31942;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(179, 25, 66, 0.18);
+    }
+    .pair-card.card-red:hover .pc-label,
+    .pair-card.card-red:hover h3,
+    .pair-card.card-red:hover .pc-cta { color: #fff; }
+
+    /* Blue variant — Bonds */
+    .pair-card.card-blue {
+      border-color: #0A3161;
+    }
+    .pair-card.card-blue .pc-label { color: #0A3161; }
+    .pair-card.card-blue .pc-cta { color: #0A3161; }
+    .pair-card.card-blue:hover {
+      background: #0A3161; border-color: #0A3161;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(10, 49, 97, 0.20);
+    }
+    .pair-card.card-blue:hover .pc-label,
+    .pair-card.card-blue:hover h3,
+    .pair-card.card-blue:hover .pc-cta { color: #fff; }
+
+    @media (max-width: 768px) {
+      .pair-cards { grid-template-columns: 1fr; gap: 16px; }
+      .pair-card { padding: 28px 28px 24px; }
+      .pair-card h3 { font-size: 30px; }
+    }
+
+    /* ─── SOLVES-FOR EXPLAINERS ─── */
+    .solves-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px; max-width: 1080px; margin: 0 auto; text-align: left;
+    }
+    .solves-col {
+      padding: 0;
+    }
+    .solves-col .sc-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #999; margin-bottom: 12px;
+    }
+    #futures .sc-eyebrow { color: #B31942; }
+    #bonds .sc-eyebrow { color: #0A3161; }
+    .solves-col h3 {
+      font-size: 26px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px; color: #111;
+    }
+    .solves-col .sc-lead {
+      font-size: 16px; color: #555; line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .solves-col .sc-block {
+      padding: 20px 0; border-top: 1px solid var(--border);
+    }
+    .solves-col .sc-block:last-child { border-bottom: 1px solid var(--border); }
+    .solves-col .sc-block .sc-q {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #aaa; margin-bottom: 8px;
+    }
+    .solves-col .sc-block .sc-a {
+      font-size: 15px; color: #333; line-height: 1.65;
+    }
+    @media (max-width: 768px) {
+      .solves-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* ─── COMPARE TABLE (TWO INSTRUMENTS) ─── */
+    .pair-table {
+      max-width: 960px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    }
+    .pair-row {
+      display: grid;
+      grid-template-columns: 1.1fr 1.4fr 1.4fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .pair-row:last-child { border-bottom: none; }
+    .pair-row > div {
+      padding: 18px 22px; font-size: 15px; color: #333;
+      text-align: left; line-height: 1.55;
+    }
+    .pair-row .pair-dim {
+      background: #fafafa; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #888;
+      display: flex; align-items: center;
+    }
+    .pair-row.pair-header > div {
+      background: #111; color: #fff;
+      font-size: 13px; font-weight: 700; letter-spacing: -0.01em;
+    }
+    .pair-row.pair-header .pair-dim {
+      background: #111; color: #888;
+      font-size: 11px; letter-spacing: 0.1em;
+    }
+    @media (max-width: 768px) {
+      .pair-row { grid-template-columns: 1fr; }
+      .pair-row .pair-dim {
+        background: #f0f0f0; padding: 10px 22px;
+      }
+    }
+
+    /* ─── ENERGY FOUNDATION ─── */
+    .energy-block {
+      max-width: 820px; margin: 0 auto; text-align: left;
+    }
+    .energy-block .eb-pillars {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px; margin-top: 48px;
+    }
+    .energy-block .eb-pillar {
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+    }
+    .energy-block .eb-pillar .eb-num {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      color: #555; margin-bottom: 14px;
+    }
+    .energy-block .eb-pillar h4 {
+      font-size: 17px; font-weight: 700; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 10px;
+    }
+    .energy-block .eb-pillar p {
+      font-size: 14px; color: #888; line-height: 1.6;
+    }
+    .energy-block .eb-prose {
+      font-size: 17px; color: #bbb; line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .energy-block .eb-prose strong {
+      color: #fff; font-weight: 600;
+    }
+    .energy-block .eb-prose em {
+      font-style: normal; color: #fff; font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      .energy-block .eb-pillars { grid-template-columns: 1fr; }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #fff; border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px;
+    }
+    footer a { color: #bbb; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: #444; }
+    .partner-logos {
+      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+    }
+    .partner-logos a {
+      display: flex; align-items: center;
+      transition: opacity 0.2s;
+    }
+    .partner-logos a:hover { opacity: 0.7; }
+    .partner-logos img { height: 22px; width: auto; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero, .section-light, .section-dark, .section-mid,
+      .cta-section { padding-left: 20px; padding-right: 20px; }
+      footer { padding: 24px 20px; }
+      .formula-box { padding: 24px 20px; font-size: 15px; }
+      .compare-grid { flex-direction: column; }
+      .compare-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .index-block { padding: 36px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="images/logo.png" alt="American Energy Money">
+  </a>
+  <div class="nav-links">
+    <a class="nav-item active" href="compute.html">Compute</a>
+    <a class="nav-item" href="engineering.html">Engineering</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1>Compute <span class="dim">Futures</span></h1>
+  <p class="subtitle">Cash-settled, perpetual index futures on inference compute — priced against the Qi energy index, contracted and settled in QUAI.</p>
+  <div class="tag-row">
+    <span class="hero-tag">Cash-settled</span>
+    <span class="hero-tag">No hardware delivery</span>
+    <span class="hero-tag">Energy-indexed pricing</span>
+    <span class="hero-tag">Perpetual</span>
+  </div>
+</section>
+
+<!-- ── THE INSTRUMENT ── -->
+<section class="section-light">
+  <h2><span class="gray">The</span> instrument</h2>
+  <p class="lead">A cash-settled index futures contract. The underlying is a standard unit of inference compute, valued in terms of the energy required to produce it. Like an equity index future, no asset is ever delivered — positions are settled financially against the index price.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Index-style</h3>
+      <p>Just as E-mini S&P 500 futures don't deliver 500 stocks, a Compute Future doesn't deliver hardware. It settles cash against the Qi index — what the market says a unit of compute is worth in energy terms at expiry.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Qi-indexed</h3>
+      <p>The futures price is denominated in Qi, the energy dollar. Qi is unencumbered by anything except the direct cost of electricity — no speculative premium, no scarcity premium. It is the cleanest possible benchmark for pricing a compute unit against physical work.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>QUAI-settled</h3>
+      <p>All contract logic, margin, and settlement flows through QUAI — the programmable, highly liquid token on Quai Network. QUAI carries the full economic infrastructure. The convertible controller keeps Qi and QUAI equivalent, so energy-indexed prices resolve cleanly into QUAI settlement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── INDEX vs COMMODITY ── -->
+<section class="section-mid">
+  <h2>Index, <span class="gray">not commodity</span></h2>
+  <p class="lead">The distinction matters. Compute Futures belong to the index futures family — not commodity futures. Understanding why shapes everything about how the contract works.</p>
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-label">Commodity futures</div>
+      <h3>Physical delivery</h3>
+      <ul>
+        <li>The long position holder may take delivery of the underlying commodity at expiry</li>
+        <li>Price anchored to cost of producing and transporting a physical good</li>
+        <li>Designed for producers and consumers of tangible materials: oil, gas, grain</li>
+        <li>Delivery logistics and storage costs are built into the contract structure</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="compare-label">Compute Futures</div>
+      <h3>Access, not delivery</h3>
+      <ul>
+        <li>No hardware changes hands. You are not taking possession of a GPU</li>
+        <li>You are reserving the right to run computation through hardware at a future date — access, not ownership</li>
+        <li>Settlement is purely financial: cash against the Qi index price at settlement</li>
+        <li>Contract logic lives entirely on Quai Network in QUAI</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE UNDERLYING INDEX ── -->
+<section class="section-light">
+  <h2><span class="gray">The</span> underlying index</h2>
+  <p class="lead">What exactly is being priced? A standard unit of inference compute — defined in terms of the energy required to produce it.</p>
+  <div class="index-block">
+    <div class="index-label">The Qi Index</div>
+    <h3>Energy cost of computation, and nothing else</h3>
+    <p>Qi is Quai Network's energy-denominated token, minted in direct proportion to the difficulty-adjusted work performed by miners. Its purchasing power is anchored to the real cost of running hardware — the price of electricity. This makes it structurally different from any speculative or supply-capped asset.</p>
+    <p>When Qi serves as the pricing benchmark for a Compute Future, the quoted price carries a physical meaning: <em>how many kilowatt-hours of work is this inference unit worth?</em> There is no noise from scarcity, dilution, or market speculation — only the energy signal.</p>
+    <p>This is the same logic behind using a basket index to price equity futures: you strip away idiosyncratic variation and price against the underlying economic reality. For compute, that reality is electricity. Qi is that index.</p>
+  </div>
+</section>
+
+<!-- ── TWO TOKENS ── -->
+<section class="section-dark">
+  <h2>Two tokens, <span class="gray">one contract</span></h2>
+  <p class="lead">Quai Network's dual-token architecture maps directly onto the structure of index futures. Qi is the index. QUAI is the settlement and contract layer.</p>
+  <div class="token-grid">
+    <div class="token-card dark-card">
+      <div class="token-label">The index</div>
+      <h3>Qi</h3>
+      <p>The price benchmark. Qi is unencumbered by anything beyond the direct cost of electricity — no speculative premium, no fixed supply cap creating artificial scarcity. When an agent buys a Compute Future, the Qi price expresses what a unit of inference is worth in physical energy terms. Every quote has thermodynamic meaning.</p>
+      <div class="token-rule">Qi plays the role of the spot index — the observable, energy-anchored reference price that futures pricing converges toward.</div>
+    </div>
+    <div class="token-card dark-card">
+      <div class="token-label">Settlement &amp; contract layer</div>
+      <h3>QUAI</h3>
+      <p>The contract infrastructure. QUAI is scarce, programmable, and highly liquid — carrying all margin logic, settlement flows, exchange operations, and network functionality. Because QUAI is programmable, arbitrarily complex contract structures can be expressed on-chain. The convertible controller keeps Qi and QUAI equivalent, so energy-indexed prices resolve cleanly into QUAI settlement flows.</p>
+      <div class="token-rule">QUAI plays the role of the settlement currency — the liquid, programmable token in which all cash flows are actually paid.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SETTLEMENT ── -->
+<section class="section-light">
+  <h2><span class="gray">How</span> settlement works</h2>
+  <p class="lead">Each settlement cycle, the net cash flow combines the change in the Qi-indexed futures price with the difference between the energy dividend and the cost of capital — following the perpetual futures structure proposed by Shiller (1993). The resulting flow is paid in QUAI.</p>
+  <div class="formula-block">
+    <div class="formula-box" style="background: #fafafa; border-color: var(--border); color: #333;">
+      s<sub>t+1</sub>&nbsp; = &nbsp;(f<sub>t+1</sub> − f<sub>t</sub>)&nbsp; + &nbsp;(d<sub>t+1</sub> − r<sub>t</sub> · f<sub>t</sub>)
+    </div>
+    <div class="formula-note">
+      <div class="var-list">
+        <div class="var-item"><code>f<sub>t</sub></code> The perpetual futures price in Qi at time t — what the market reveals compute to be worth in energy terms at that moment.</div>
+        <div class="var-item"><code>d<sub>t+1</sub></code> The energy dividend index — the Qi-denominated energy cost of inference actually delivered during the period, converted to QUAI at settlement.</div>
+        <div class="var-item"><code>r<sub>t</sub></code> The return on an alternative asset between t and t+1 — the cost of capital for holding the position open.</div>
+        <div class="var-item"><code>s<sub>t+1</sub></code> The net settlement paid in QUAI from short to long. Combines price movement and the energy dividend — no physical delivery, just cash flows.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY PERPETUAL ── -->
+<section class="section-dark">
+  <h2>Why <span class="gray">perpetual</span></h2>
+  <p class="lead">Perpetual contracts solve problems that conventional quarterly futures cannot — especially for assets where the spot price is difficult to observe directly.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <h3 style="color:#fff;">Liquidity concentration</h3>
+      <p style="color:#888;">A single perpetual contract absorbs all trading interest instead of splitting it across quarterly maturities. Every participant trades the same instrument, deepening the order book and tightening spreads.</p>
+    </div>
+    <div class="why-card">
+      <h3 style="color:#fff;">No observable spot</h3>
+      <p style="color:#888;">The spot price of inference compute is hard to observe and highly fragmented across providers. Perpetual index futures sidestep this problem: price what you can measure directly — the energy cost denominated in Qi — and settle against that index.</p>
+    </div>
+    <div class="why-card">
+      <h3 style="color:#fff;">Continuous price discovery</h3>
+      <p style="color:#888;">The funding mechanism creates periodic information aggregation. Each settlement cycle, traders reveal their beliefs about compute value, driving the Qi-indexed futures price toward fair value over time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── DESIGNED FOR AGENTS ── -->
+<section class="section-light">
+  <h2><span class="gray">Designed for</span> agents</h2>
+  <p class="lead">Autonomous agents need to acquire, budget, and allocate inference compute programmatically. Compute Futures give them a standard energy-indexed instrument to do it — all margin and settlement handled in QUAI, no hardware logistics required.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">→</div>
+      <h3>Reserve access</h3>
+      <p>An agent that needs inference capacity over the next month goes long on a Compute Future, locking in the Qi-indexed energy cost of that compute today. No delivery, no hardware custody — just a financial commitment to the index price, settled in QUAI.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">→</div>
+      <h3>Hedge supply</h3>
+      <p>A compute provider goes short — locking in QUAI revenue for capacity it plans to deliver, hedging against falling demand or Qi-index price declines. The contract creates a binding financial commitment without the logistics of physical delivery.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">→</div>
+      <h3>Arbitrage the basis</h3>
+      <p>Arbitrageurs trade the spread between the Qi futures price and actual spot compute costs, keeping the index price aligned with physical energy reality and providing liquidity to both sides of the market.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW COMPETITORS BUILD INDEXES ── -->
+<section style="background:#000; padding:100px 48px; text-align:center;">
+  <h2 style="font-size:clamp(32px,4vw,50px); font-weight:700; letter-spacing:-0.03em; margin-bottom:24px; color:#fff;">How competitors <span style="color:#555;">build their indexes</span></h2>
+  <p class="lead" style="color:#666;">Other compute index providers — Silicon Data and peers — approach the problem as a data collection and normalization exercise. That methodology has real merit. It also has a structural ceiling.</p>
+
+  <!-- 2×2 methodology grid — white cards on black -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:860px; margin:0 auto 48px; border:1px solid #222; border-radius:12px; overflow:hidden;">
+    <div style="background:#fff; padding:36px 32px; text-align:left; border-right:1px solid #eee; border-bottom:1px solid #eee;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">01 — Data Coverage</div>
+      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">They aggregate GPU rental rates from cloud providers, colocation markets, brokered cluster sales, and private platforms — claiming 80%+ coverage of the H100 rental market.</p>
+    </div>
+    <div style="background:#fff; padding:36px 32px; text-align:left; border-bottom:1px solid #eee;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">02 — Normalization</div>
+      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">Prices are adjusted for GPU type, memory, rental term, interconnect speed, cluster scale, and geography — producing a like-for-like on-demand rate stripped of marketing noise.</p>
+    </div>
+    <div style="background:#fff; padding:36px 32px; text-align:left; border-right:1px solid #eee;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">03 — Daily Validation</div>
+      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">Indexes are recalculated each business day. Statistical filters remove stale or non-representative data. Independent oversight agents attest to calculation integrity.</p>
+    </div>
+    <div style="background:#fff; padding:36px 32px; text-align:left;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:12px;">04 — Distribution</div>
+      <p style="font-size:15px; color:#333; line-height:1.7; margin:0;">Published on Bloomberg Terminal (BBG: SDH100RT), distributed via direct API, and licensed to data partners including Kaiko. Historical archives available.</p>
+    </div>
+  </div>
+
+  <!-- Comparison table — white background -->
+  <div style="max-width:860px; margin:0 auto 48px; background:#fff; border-radius:12px; overflow:hidden;">
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; border-bottom:2px solid #111; padding:14px 24px;">
+      <div></div>
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#aaa; text-align:left; padding:0 16px;">Survey Index</div>
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#111; text-align:left; padding:0 16px;">Qi Energy Index</div>
+    </div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Source of truth</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Vendor ask prices</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Thermodynamic cost of computation</div>
+    </div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Manipulation resistance</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Depends on data network coverage</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Secured by PoW — falsifying requires real energy</div>
+    </div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Hardware generation risk</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Index breaks when H100 is superseded</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Normalizes across hardware via energy denominator</div>
+    </div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px; border-bottom:1px solid #eee;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Settlement suitability</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Requires off-chain oracle and trust</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">On-chain, auditable, no third-party attestation</div>
+    </div>
+    <div style="display:grid; grid-template-columns:1.4fr 1.5fr 1.5fr; padding:16px 24px;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; text-align:left; line-height:1.5;">Forward price signal</div>
+      <div style="font-size:14px; color:#bbb; text-align:left; padding:0 16px; line-height:1.6;">Backward-looking daily snapshot</div>
+      <div style="font-size:14px; color:#111; text-align:left; padding:0 16px; line-height:1.6; font-weight:600;">Perpetual futures mechanism aggregates expectations continuously</div>
+    </div>
+  </div>
+
+  <!-- Structural problem callout -->
+  <div style="max-width:860px; margin:0 auto; background:#111; border-left:3px solid #fff; border-radius:0 8px 8px 0; padding:40px 40px 40px 44px; text-align:left;">
+    <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-bottom:16px;">The structural problem</div>
+    <h3 style="font-size:22px; font-weight:800; color:#fff; letter-spacing:-0.02em; margin-bottom:20px; line-height:1.3;">This is a survey index. It measures what vendors <span style="color:#fff; text-decoration:underline; text-decoration-color:#444;">charge</span> — not what compute <span style="color:#fff; text-decoration:underline; text-decoration-color:#444;">costs</span>.</h3>
+    <p style="font-size:15px; color:#777; line-height:1.75; margin-bottom:16px;">A rental rate aggregated from commercial platforms reflects vendor margins, market positioning, capacity utilization, and competitive dynamics. It answers <em>"what is the current ask?"</em> — not <em>"what is the underlying cost of producing this computation?"</em></p>
+    <p style="font-size:15px; color:#777; line-height:1.75; margin-bottom:16px;">The distinction collapses the moment markets thin out, vendors coordinate pricing, or a new hardware generation reshapes the cost curve overnight. Survey indexes are backward-looking by construction: they can only tell you what was charged, not what the physics of computation actually demands.</p>
+    <p style="font-size:15px; color:#999; line-height:1.75; margin:0;">A futures market needs an index that is <strong style="color:#ddd;">non-manipulable</strong>, <strong style="color:#ddd;">anchored to physical reality</strong>, and <strong style="color:#ddd;">forward-looking by structure</strong>. Rental rate surveys provide none of these.</p>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2>Try the Controller</h2>
+  <p>See how the convertible controller keeps Qi indexed pricing and QUAI settlement equivalent — the engine behind Compute Futures.</p>
+  <a class="cta-btn" href="controller.html">Launch Demo</a>
+  <a class="cta-btn" href="pricing-conversation.html" style="margin-left:12px; background:#fff; color:#111; border:1px solid #ddd;">The Pricing Stack ↗</a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>© 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+</body>
+</html>
