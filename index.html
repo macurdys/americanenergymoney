@@ -156,8 +156,23 @@
     }
     .brief-video {
       max-width: 900px; width: 100%; height: auto;
+      aspect-ratio: 16 / 9;
       border-radius: 12px; display: block;
       background: #000;
+    }
+    .brief-fallback {
+      max-width: 900px; width: 100%; height: auto;
+      border-radius: 12px; display: block;
+    }
+    .brief-error {
+      max-width: 900px; width: 100%;
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 12px;
+      padding: 22px 26px; text-align: left;
+      font-size: 14px; line-height: 1.65; color: #999;
+    }
+    .brief-error code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px; color: #ddd;
     }
     .brief-caption {
       font-size: 14px; color: #666; line-height: 1.65;
@@ -309,12 +324,14 @@
 <section class="theoretical">
   <h2>Theoretical Brief</h2>
   <div class="brief-video-wrap">
-    <video class="brief-video"
-           src="images/uniform-distribution.mp4"
+    <video class="brief-video" id="briefVideo"
            poster="images/uniform-distribution-poster.jpg"
-           autoplay muted loop playsinline preload="metadata"
+           width="1280" height="720"
+           autoplay muted loop playsinline preload="auto"
            aria-label="Animation of a uniform distribution over hash space">
-      Your browser does not support the video tag.
+      <source src="images/uniform-distribution.mp4" type="video/mp4">
+      <img class="brief-fallback" src="images/uniform-distribution-poster.jpg"
+           alt="A uniform distribution over hash space">
     </video>
   </div>
   <p class="brief-caption">SHA-256 outputs are uniform and equiprobable across a 2<sup>256</sup> state space. Counting consecutive leading zeros imposes a constraint on that space &mdash; and each zero is a bit of uncertainty removed.</p>
@@ -335,6 +352,46 @@
     <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
   </div>
 </footer>
+
+<script>
+(function () {
+  var v = document.getElementById('briefVideo');
+  if (!v) return;
+
+  // Autoplay can be refused even when muted (low-power mode, strict settings).
+  // Fall back to showing controls rather than a frozen poster.
+  function tryPlay() {
+    var p = v.play();
+    if (p && typeof p.catch === 'function') {
+      p.catch(function () { v.setAttribute('controls', ''); });
+    }
+  }
+  if (v.readyState >= 2) tryPlay();
+  v.addEventListener('loadeddata', tryPlay);
+
+  // Repaint when the tab regains focus — some browsers pause background video.
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && v.paused && !v.hasAttribute('controls')) tryPlay();
+  });
+
+  // If the file itself cannot be fetched or decoded, say so plainly.
+  function fail() {
+    if (v.dataset.failed) return;
+    v.dataset.failed = '1';
+    var box = document.createElement('div');
+    box.className = 'brief-error';
+    box.innerHTML = 'Video did not load. Confirm ' +
+      '<code>images/uniform-distribution.mp4</code> and ' +
+      '<code>images/uniform-distribution-poster.jpg</code> are uploaded, ' +
+      'that the folder name is lowercase <code>images</code>, and that the page ' +
+      'is served over http rather than opened from the file system.';
+    v.replaceWith(box);
+  }
+  v.addEventListener('error', fail, true);
+  var src = v.querySelector('source');
+  if (src) src.addEventListener('error', fail);
+})();
+</script>
 
 </body>
 </html>
