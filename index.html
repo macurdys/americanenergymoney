@@ -1,387 +1,173 @@
 
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>American Energy Money</title>
-  <meta name="description" content="The Intersection of Value and Science">
-  <link rel="icon" href="images/logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --gray: #999;
-      --dark: #111;
-      --white: #fff;
-      --border: rgba(0,0,0,0.07);
-    }
-
-    html { font-size: 16px; scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
-
-    /* ─── NAV ─── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      height: 60px;
-      display: flex; align-items: center;
-      padding: 0 48px;
-      gap: 32px;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      text-decoration: none; flex-shrink: 0;
-    }
-    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
-    .nav-logo span {
-      font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #111;
-    }
-    .nav-links { display: flex; gap: 4px; margin-left: auto; }
-    .nav-item {
-      display: flex; align-items: center; gap: 4px;
-      padding: 8px 14px;
-      font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
-      color: #444; text-decoration: none; cursor: pointer;
-      border-radius: 8px; transition: background 0.15s;
-    }
-    .nav-item:hover { background: #f5f5f5; }
-    .nav-chevron { opacity: 0.4; transition: transform 0.2s; }
-    .nav-item:hover .nav-chevron { transform: rotate(180deg); }
-
-    /* ─── HERO LIGHT ─── */
-    .hero-light {
-      background: #fff;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 80px 48px 0;
-    }
-    .hero-light h1 {
-      font-size: clamp(52px, 7vw, 84px);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
-      text-align: center;
-    }
-    .hero-light h1.gray { color: var(--gray); }
-    .hero-flag-wrap {
-      margin-top: 56px; width: 100%; max-width: 620px;
-      border-radius: 16px; overflow: hidden; display: block;
-    }
-    .hero-flag-wrap img { width: 100%; height: auto; display: block; }
-    .hero-shadow {
-      width: 100%; max-width: 480px;
-      margin-top: 6px; margin-bottom: 0;
-      opacity: 0.45;
-    }
-
-    /* ─── HERO DARK ─── */
-    .hero-dark {
-      background: #0d0d0d;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 100px 48px 80px; text-align: center;
-    }
-    .hero-dark .title-row {
-      font-size: clamp(52px, 7vw, 84px);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
-      color: #fff; margin-bottom: 48px;
-    }
-    .hero-dark .title-row .dim {
-      background: radial-gradient(50% 50% at 50% 50%, #999 0%, rgba(153,153,153,0) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .wolfram-img-wrap {
-      width: 100%; max-width: 540px;
-      border-radius: 16px; overflow: hidden; margin-bottom: 56px;
-    }
-    .wolfram-img-wrap a { display: block; }
-    .wolfram-img-wrap img { width: 100%; height: auto; display: block; }
-    .equation {
-      font-size: clamp(26px, 3.2vw, 44px);
-      font-weight: 700; letter-spacing: -0.03em; line-height: 1.5;
-      color: #fff;
-    }
-    .equation a {
-      font-size: clamp(32px, 4vw, 54px);
-      color: #fff; text-decoration: underline; text-underline-offset: 5px;
-    }
-
-    /* ─── SCIENTIFIC MONEY ─── */
-    .sci-money {
-      background: #fff;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 100px 48px 80px; text-align: center;
-    }
-    .sci-money h1 {
-      font-size: clamp(52px, 7vw, 84px);
-      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
-    }
-    .sci-money h1 .gray { color: var(--gray); }
-    .entropy-img-wrap {
-      width: 100%; max-width: 400px; border-radius: 16px;
-      overflow: hidden; margin: 48px 0;
-    }
-    .entropy-img-wrap a { display: block; }
-    .entropy-img-wrap img { width: 100%; height: auto; display: block; }
-    .entropy-headline {
-      font-size: clamp(24px, 3.2vw, 42px); font-weight: 700;
-      letter-spacing: -0.03em; line-height: 1.1;
-      max-width: 720px; margin-bottom: 32px;
-    }
-    .entropy-footnote {
-      font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
-      color: #ababab; max-width: 640px; line-height: 1.7; text-align: left;
-    }
-    .entropy-footnote .black { color: #000; }
-    .entropy-footnote a { color: #aaa; }
-
-    /* ─── THEORETICAL BRIEF ─── */
-    .theoretical {
-      background: #000; padding: 80px 0 80px; text-align: center; overflow: hidden;
-    }
-    .theoretical h2 {
-      font-size: clamp(32px, 4vw, 50px); font-weight: 700;
-      letter-spacing: -0.03em; color: #fff; margin-bottom: 48px;
-    }
-    .brief-video-wrap {
-      width: 100%; padding: 0 48px;
-      display: flex; justify-content: center;
-    }
-    .brief-frame {
-      position: relative; max-width: 900px; width: 100%;
-      border-radius: 12px; overflow: hidden; background: #000;
-    }
-    .brief-video {
-      width: 100%; height: auto; aspect-ratio: 16 / 9;
-      display: block; background: #000;
-    }
-    .brief-controls {
-      position: absolute; left: 14px; bottom: 14px;
-      display: flex; gap: 8px;
-      opacity: 0.55; transition: opacity 0.2s;
-    }
-    .brief-frame:hover .brief-controls,
-    .brief-controls:focus-within { opacity: 1; }
-    .vbtn {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: rgba(0,0,0,0.55);
-      border: 1px solid rgba(255,255,255,0.22);
-      color: #fff; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s, border-color 0.15s;
-      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-      padding: 0;
-    }
-    .vbtn:hover { background: rgba(0,0,0,0.8); border-color: rgba(255,255,255,0.5); }
-    .vbtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-    .vbtn svg { width: 17px; height: 17px; display: block; }
-    .vbtn .ico-hide { display: none; }
-    .vbtn.is-on .ico-hide { display: block; }
-    .vbtn.is-on .ico-show { display: none; }
-    @media (hover: none) { .brief-controls { opacity: 1; } }
-    .brief-fallback {
-      max-width: 900px; width: 100%; height: auto;
-      border-radius: 12px; display: block;
-    }
-    .brief-error {
-      max-width: 900px; width: 100%;
-      border: 1px solid rgba(255,255,255,0.15); border-radius: 12px;
-      padding: 22px 26px; text-align: left;
-      font-size: 14px; line-height: 1.65; color: #999;
-    }
-    .brief-error code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 13px; color: #ddd;
-    }
-    .brief-caption {
-      font-size: 14px; color: #666; line-height: 1.65;
-      max-width: 620px; margin: 28px auto 0; padding: 0 24px;
-    }
-
-    /* ─── TEAM ─── */
-    .team-section {
-      background: #fff; padding: 100px 48px; text-align: center;
-    }
-    .team-section h2 {
-      font-size: clamp(32px, 4vw, 50px); font-weight: 700;
-      letter-spacing: -0.03em; margin-bottom: 64px;
-    }
-    .team-grid {
-      display: flex; gap: 40px; justify-content: center;
-      flex-wrap: wrap; max-width: 860px; margin: 0 auto;
-    }
-    .team-card {
-      display: flex; flex-direction: column; align-items: center; gap: 14px; width: 180px;
-    }
-    .team-avatar {
-      width: 88px; height: 88px; border-radius: 50%;
-      background: #f2f2f2; display: flex; align-items: center;
-      justify-content: center; font-size: 32px; overflow: hidden;
-    }
-    .team-name { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
-    .team-role { font-size: 13px; color: #999; letter-spacing: -0.01em; line-height: 1.4; }
-
-    /* ─── JOIN CTA ─── */
-    .join-section {
-      background: #000; padding: 100px 48px; text-align: center;
-    }
-    .join-section h2 {
-      font-size: clamp(36px, 5vw, 64px); font-weight: 800;
-      letter-spacing: -0.04em; color: #fff; margin-bottom: 24px;
-    }
-    .join-section p {
-      font-size: 18px; color: #777; max-width: 480px;
-      margin: 0 auto 48px; line-height: 1.6;
-    }
-    .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .join-btn {
-      display: inline-block; padding: 15px 32px;
-      background: #fff; color: #000;
-      font-size: 15px; font-weight: 700; letter-spacing: -0.01em;
-      border-radius: 100px; text-decoration: none;
-      transition: background 0.15s, transform 0.15s;
-    }
-    .join-btn:hover { background: #e0e0e0; transform: scale(1.03); }
-    .join-btn.outline {
-      background: transparent; color: #fff;
-      border: 1.5px solid rgba(255,255,255,0.25);
-    }
-    .join-btn.outline:hover { background: rgba(255,255,255,0.07); }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: #fff; border-top: 1px solid var(--border);
-      padding: 28px 48px;
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px;
-    }
-    footer a { color: #bbb; text-decoration: none; transition: color 0.15s; }
-    footer a:hover { color: #444; }
-    .footer-links { display: flex; gap: 24px; }
-    .partner-logos {
-      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
-    }
-    .partner-logos a {
-      display: flex; align-items: center;
-      transition: opacity 0.2s;
-    }
-    .partner-logos a:hover { opacity: 0.7; }
-    .partner-logos img { height: 22px; width: auto; }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .hero-light, .hero-dark, .sci-money,
-      .team-section, .join-section { padding-left: 20px; padding-right: 20px; }
-      .brief-video-wrap { padding: 0 16px; }
-      footer { padding: 24px 20px; }
-      .footer-links { gap: 16px; flex-wrap: wrap; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American Energy Money</title>
+<meta name="description" content="Energy-denominated money. Wolfram Physics, proof of work, and active inference converging on a thermodynamic foundation for economic value.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="aem-theme.css">
 </head>
-<body>
+<body data-theme="paper">
 
-<!-- ── NAV ── -->
-<nav>
-  <a class="nav-logo" href="/">
-    <img src="images/logo.png" alt="American Energy Money">
-  </a>
+<div class="ground" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="/"><img src="images/logo.png" alt="American Energy Money"></a>
   <div class="nav-links">
     <a class="nav-item" href="compute.html">Compute</a>
+    <a class="nav-item" href="compute-index.html">Index</a>
+    <a class="nav-item" href="infrastructure.html">Infrastructure</a>
     <a class="nav-item" href="research.html">Research</a>
   </div>
 </nav>
 
-<!-- ── HERO LIGHT ── -->
-<section class="hero-light">
-  <h1>American</h1>
-  <h1 class="gray">Energy Money</h1>
-  <a class="hero-flag-wrap" href="https://www.whitehouse.gov/presidential-actions/2025/01/unleashing-american-energy/" target="_blank" rel="noopener">
-    <img src="images/american-flag.png" alt="American Flag — Unleashing American Energy">
-  </a>
-  <img class="hero-shadow" src="images/shadow1.png" alt="" aria-hidden="true">
-</section>
+<div class="rail" aria-hidden="true"><div class="rail-fill" id="railFill"></div></div>
+<nav class="rail-marks" aria-label="Page sections">
+  <a class="rmark" href="#top"><i></i><span>Money</span></a>
+  <a class="rmark" href="#thesis"><i></i><span>Thesis</span></a>
+  <a class="rmark" href="#scientific"><i></i><span>Entropy</span></a>
+  <a class="rmark" href="#brief"><i></i><span>Brief</span></a>
+  <a class="rmark" href="#work"><i></i><span>Work</span></a>
+</nav>
 
-<!-- ── HERO DARK ── -->
-<section class="hero-dark">
-  <div class="title-row">
-    <span class="dim">American</span><br>Energy Money
-  </div>
-  <div class="wolfram-img-wrap">
-    <a href="https://www.wolframphysics.org/" target="_blank" rel="noopener">
-      <img src="images/wolfram-physics.png" alt="Wolfram Physics">
-    </a>
-  </div>
-  <p class="equation">
-    &nbsp;&nbsp;&nbsp;Wolfram Physics<br>
-    + Proof of Work<br>
-    + Active Inference<br>
-    =<br>
-    <a href="https://thermoeconomics.info/" target="_blank" rel="noopener">Thermoeconomics</a>
-  </p>
-</section>
+<main>
 
-<!-- ── SCIENTIFIC MONEY ── -->
-<section class="sci-money">
-  <h1><span class="gray">Scientific</span> Money</h1>
-  <div class="entropy-img-wrap">
-    <a href="https://arxiv.org/pdf/2303.04305" target="_blank" rel="noopener">
-      <img src="images/entropy-minima-poem.png" alt="Entropy Minima — PoEM">
-    </a>
-  </div>
-  <p class="entropy-headline">Entropy is provably minimized* and delivered in algorithmic payloads.</p>
-  <p class="entropy-footnote">
-    <span class="black">*</span>Where Shannon entropy is minimized; and where statistical mechanics = statistical inference
-    under the Maximum Entropy Principle. See Shannon
-    (<a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" target="_blank" rel="noopener">1948</a>)
-    &amp; Jaynes
-    (<a href="https://bayes.wustl.edu/etj/articles/theory.1.pdf" target="_blank" rel="noopener">1957</a>)
-  </p>
-</section>
-
-<!-- ── THEORETICAL BRIEF ── -->
-<section class="theoretical">
-  <h2>Theoretical Brief</h2>
-  <div class="brief-video-wrap">
-    <div class="brief-frame" id="briefFrame">
-      <video class="brief-video" id="briefVideo"
-             poster="images/uniform-distribution-poster.jpg"
-             width="1280" height="720"
-             autoplay muted loop playsinline preload="auto"
-             aria-label="Animation of a uniform distribution over hash space">
-        <source src="images/uniform-distribution.mp4" type="video/mp4">
-        <img class="brief-fallback" src="images/uniform-distribution-poster.jpg"
-             alt="A uniform distribution over hash space">
-      </video>
-      <div class="brief-controls">
-        <button type="button" class="vbtn is-on" id="btnPlay" aria-label="Pause video" aria-pressed="true">
-          <svg class="ico-hide" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-          <svg class="ico-show" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.3-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z"/></svg>
-        </button>
-        <button type="button" class="vbtn" id="btnMute" aria-label="Unmute video" aria-pressed="false">
-          <svg class="ico-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
-          <svg class="ico-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M18.36 5.64a9 9 0 0 1 0 12.72"/></svg>
-        </button>
+  <!-- ── HERO ── -->
+  <section class="band hero" id="top">
+    <div class="rise in">
+      <h1>American<span class="l2">Energy Money</span></h1>
+      <p class="hero-sub">Money whose production cost is a physical quantity. Not a policy, not a promise &mdash; a number you can meter at the wall.</p>
+      <div class="hero-meta">
+        <a class="flaglink" href="https://www.whitehouse.gov/presidential-actions/2025/01/unleashing-american-energy/" target="_blank" rel="noopener">
+          <b>Unleashing American Energy</b>
+          <img src="images/american-flag.png" alt="United States flag">
+        </a>
       </div>
     </div>
-  </div>
-  <p class="brief-caption">SHA-256 outputs are uniform and equiprobable across a 2<sup>256</sup> state space. Counting consecutive leading zeros imposes a constraint on that space &mdash; and each zero is a bit of uncertainty removed.</p>
-</section>
+    <div class="scrollcue" aria-hidden="true"><em></em> Scroll</div>
+  </section>
 
+  <div class="bleed"></div>
 
+  <!-- ── THESIS ── -->
+  <section class="band seq" id="thesis">
+    <div class="eyebrow rise">The convergence</div>
+    <div class="eqrow">
+      <p class="eq rise d1">
+        Wolfram Physics<br>
+        <span class="op">+</span>Proof of Work<br>
+        <span class="op">+</span>Active Inference
+        <span class="sum"></span>
+        <a href="https://thermoeconomics.info/" target="_blank" rel="noopener">Thermoeconomics</a>
+      </p>
+      <figure class="figure rise d2">
+        <a href="https://www.wolframphysics.org/" target="_blank" rel="noopener">
+          <img src="images/wolfram-physics.png" alt="Wolfram Physics hypergraph">
+          <figcaption>Wolfram Physics &middot; hypergraph rewriting &nearr;</figcaption>
+        </a>
+      </figure>
+    </div>
+  </section>
 
+  <div class="bleed"></div>
 
+  <!-- ── SCIENTIFIC MONEY ── -->
+  <section class="band seq" id="scientific">
+    <div class="eyebrow rise">The mechanism</div>
+    <div class="statement">
+      <h2 class="rise d1"><span class="mut">Scientific</span><br>Money</h2>
+      <div class="stat-body">
+        <figure class="figure rise d2">
+          <a href="https://arxiv.org/pdf/2303.04305" target="_blank" rel="noopener">
+            <img src="images/entropy-minima-poem.png" alt="Proof of Entropy Minima">
+            <figcaption>Proof of Entropy Minima &middot; arXiv &nearr;</figcaption>
+          </a>
+        </figure>
+        <div class="rise d3">
+          <p class="lede">Entropy is <span class="hi">provably minimized</span><sup style="font-size:.5em;vertical-align:super;color:var(--mark)">*</sup> and delivered in algorithmic payloads.</p>
+          <p class="fnote">
+            <sup>*</sup> Where Shannon entropy is minimized, and where statistical mechanics equals statistical
+            inference under the Maximum Entropy Principle. See Shannon
+            (<a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" target="_blank" rel="noopener">1948</a>)
+            and Jaynes
+            (<a href="https://bayes.wustl.edu/etj/articles/theory.1.pdf" target="_blank" rel="noopener">1957</a>).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ── FOOTER ── -->
+  <div class="bleed"></div>
+
+  <!-- ── THEORETICAL BRIEF ── -->
+  <section class="band seq" id="brief">
+    <div class="eyebrow rise">Theoretical brief</div>
+    <div class="rise d1">
+      <div class="brief-frame" id="briefFrame">
+        <video class="brief-video" id="briefVideo"
+               poster="images/uniform-distribution-poster.jpg"
+               width="1280" height="720"
+               autoplay muted loop playsinline preload="auto"
+               aria-label="Animation of a uniform distribution over hash space">
+          <source src="images/uniform-distribution.mp4" type="video/mp4">
+          <img src="images/uniform-distribution-poster.jpg" style="width:100%;display:block"
+               alt="A uniform distribution over hash space">
+        </video>
+        <div class="brief-controls">
+          <button type="button" class="vbtn is-on" id="btnPlay" aria-label="Pause video" aria-pressed="true">
+            <svg class="ico-hide" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            <svg class="ico-show" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.3-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z"/></svg>
+          </button>
+          <button type="button" class="vbtn" id="btnMute" aria-label="Unmute video" aria-pressed="false">
+            <svg class="ico-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+            <svg class="ico-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M18.36 5.64a9 9 0 0 1 0 12.72"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="vcap">SHA-256 outputs are uniform and equiprobable across a 2<sup>256</sup> state space. Counting consecutive leading zeros imposes a constraint on that space &mdash; and each zero is a bit of uncertainty removed.</p>
+    </div>
+  </section>
+
+  <div class="bleed"></div>
+
+  <!-- ── WORK ── -->
+  <section class="band seq seq--tall" id="work">
+    <div class="eyebrow rise">Where it goes</div>
+    <h2 class="rise d1" style="font-size:clamp(30px,4.6vw,58px);font-weight:800;letter-spacing:-0.042em;line-height:1.04;max-width:15ch">
+      A benchmark, <span style="color:var(--fg3)">the instruments<br>that cite it,</span> and the meters<br>underneath.
+    </h2>
+    <div class="pillars rise d2">
+      <a class="pill" href="compute-index.html">
+        <div class="pn">01 &middot; Benchmark</div>
+        <h3>Compute Index</h3>
+        <p>WTI &mdash; the Watt&middot;Token Index. An open method for delivered work per unit of energy, and the contract spec for trading it.</p>
+        <div class="go">Open <span aria-hidden="true">&rarr;</span></div>
+      </a>
+      <a class="pill" href="compute.html">
+        <div class="pn">02 &middot; Instruments</div>
+        <h3>Capital Markets</h3>
+        <p>Futures for the spot curve, bonds for the term structure, options for the volatility surface. Three surfaces, one anchor.</p>
+        <div class="go">Open <span aria-hidden="true">&rarr;</span></div>
+      </a>
+      <a class="pill" href="research.html">
+        <div class="pn">03 &middot; Foundations</div>
+        <h3>Research</h3>
+        <p>Nine open-access papers and theses connecting energy, entropy, and proof of work to the foundations of economic value.</p>
+        <div class="go">Open <span aria-hidden="true">&rarr;</span></div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
 <footer>
-  <span>© 2026 American Energy Money</span>
+  <span>&copy; 2026 American Energy Money</span>
   <div class="partner-logos">
     <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
     <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
@@ -391,84 +177,7 @@
   </div>
 </footer>
 
-<script>
-(function () {
-  var v    = document.getElementById('briefVideo');
-  var play = document.getElementById('btnPlay');
-  var mute = document.getElementById('btnMute');
-  if (!v) return;
-
-  // Audio starts OFF. The muted attribute is also what lets autoplay run at all.
-  v.muted = true;
-
-  function syncPlay() {
-    var playing = !v.paused && !v.ended;
-    play.classList.toggle('is-on', playing);
-    play.setAttribute('aria-pressed', playing ? 'true' : 'false');
-    play.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
-  }
-  function syncMute() {
-    mute.classList.toggle('is-on', !v.muted);
-    mute.setAttribute('aria-pressed', v.muted ? 'false' : 'true');
-    mute.setAttribute('aria-label', v.muted ? 'Unmute video' : 'Mute video');
-  }
-
-  // Autoplay can still be refused (low-power mode, strict settings).
-  // Fall back to a paused first frame with a working play button.
-  function tryPlay() {
-    var p = v.play();
-    if (p && typeof p.catch === 'function') p.catch(syncPlay);
-  }
-  if (v.readyState >= 2) tryPlay();
-  v.addEventListener('loadeddata', tryPlay);
-
-  var userPaused = false;
-  play.addEventListener('click', function () {
-    if (v.paused) {
-      userPaused = false;
-      var p = v.play(); if (p && p.catch) p.catch(function(){});
-    } else {
-      userPaused = true;
-      v.pause();
-    }
-  });
-
-  mute.addEventListener('click', function () {
-    v.muted = !v.muted;
-    // Unmuting is a user gesture, so a resume here is always permitted.
-    if (!v.muted && v.paused) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
-    syncMute();
-  });
-
-  ['play', 'pause', 'ended'].forEach(function (e) { v.addEventListener(e, syncPlay); });
-  v.addEventListener('volumechange', syncMute);
-
-  // Resume on tab refocus, but never override a deliberate pause.
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden && v.paused && !userPaused) tryPlay();
-  });
-
-  // If the file cannot be fetched or decoded, say so plainly.
-  function fail() {
-    var frame = document.getElementById('briefFrame');
-    if (!frame || frame.dataset.failed) return;
-    frame.dataset.failed = '1';
-    var box = document.createElement('div');
-    box.className = 'brief-error';
-    box.innerHTML = 'Video did not load. Confirm ' +
-      '<code>images/uniform-distribution.mp4</code> and ' +
-      '<code>images/uniform-distribution-poster.jpg</code> are uploaded, ' +
-      'that the folder name is lowercase <code>images</code>, and that the page ' +
-      'is served over http rather than opened from the file system.';
-    frame.replaceWith(box);
-  }
-  v.addEventListener('error', fail, true);
-  var src = v.querySelector('source');
-  if (src) src.addEventListener('error', fail);
-
-  syncPlay(); syncMute();
-})();
-</script>
+<script src="aem-theme.js"></script>
 
 </body>
 </html>
