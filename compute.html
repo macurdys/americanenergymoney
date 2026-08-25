@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -299,13 +300,13 @@
 
     /* ─── INSTRUMENT PAIR CARDS (HERO) — flag-themed static outline ─── */
     .pair-cards {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 20px; max-width: 1080px; margin: 56px auto 0;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 18px; max-width: 1140px; margin: 56px auto 0;
     }
     .pair-card {
       position: relative;
       border: 2px solid var(--border); border-radius: 18px;
-      padding: 40px 36px 32px; text-align: left;
+      padding: 34px 30px 28px; text-align: left;
       background: #fff;
       transition: transform 0.2s, box-shadow 0.2s;
       text-decoration: none; color: inherit;
@@ -320,16 +321,16 @@
       text-transform: uppercase; margin-bottom: 16px;
     }
     .pair-card h3 {
-      font-size: 32px; font-weight: 800; letter-spacing: -0.03em;
-      margin-bottom: 14px; color: #111; line-height: 1.05;
+      font-size: 28px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 12px; color: #111; line-height: 1.05;
     }
     .pair-card .pc-tagline {
-      font-size: 15px; color: #666; line-height: 1.6;
-      margin-bottom: 28px;
+      font-size: 14.5px; color: #666; line-height: 1.6;
+      margin-bottom: 26px;
     }
     .pair-card .pc-meta {
-      display: flex; gap: 20px; flex-wrap: wrap;
-      padding-top: 24px; margin-top: auto;
+      display: flex; gap: 16px; flex-wrap: wrap;
+      padding-top: 22px; margin-top: auto;
       border-top: 1px solid var(--border);
       font-size: 13px; color: #888;
     }
@@ -338,7 +339,7 @@
       letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;
     }
     .pair-card .pc-arrow {
-      position: absolute; top: 36px; right: 36px;
+      position: absolute; top: 30px; right: 30px;
       font-size: 20px;
       transition: transform 0.2s;
     }
@@ -354,15 +355,21 @@
     .pair-card.card-blue .pc-label { color: #0A3161; }
     .pair-card.card-blue .pc-arrow { color: #0A3161; }
 
-    @media (max-width: 768px) {
-      .pair-cards { grid-template-columns: 1fr; gap: 16px; }
+    /* Ink variant — Options (static outline only) */
+    .pair-card.card-ink { border-color: #111; }
+    .pair-card.card-ink .pc-label { color: #111; }
+    .pair-card.card-ink .pc-arrow { color: #111; }
+
+    @media (max-width: 1000px) {
+      .pair-cards { grid-template-columns: 1fr; gap: 16px; max-width: 640px; }
       .pair-card { padding: 32px 28px; }
+      .pair-card h3 { font-size: 32px; }
     }
 
     /* ─── SOLVES-FOR EXPLAINERS ─── */
     .solves-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 32px; max-width: 1080px; margin: 0 auto; text-align: left;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 30px; max-width: 1140px; margin: 0 auto; text-align: left;
     }
     .solves-col {
       padding: 0;
@@ -373,8 +380,9 @@
     }
     #futures .sc-eyebrow { color: #B31942; }
     #bonds .sc-eyebrow { color: #0A3161; }
+    #options .sc-eyebrow { color: #111; }
     .solves-col h3 {
-      font-size: 26px; font-weight: 800; letter-spacing: -0.03em;
+      font-size: 23px; font-weight: 800; letter-spacing: -0.03em;
       margin-bottom: 16px; color: #111;
     }
     .solves-col .sc-lead {
@@ -392,8 +400,9 @@
     .solves-col .sc-block .sc-a {
       font-size: 15px; color: #333; line-height: 1.65;
     }
-    @media (max-width: 768px) {
-      .solves-grid { grid-template-columns: 1fr; gap: 48px; }
+    @media (max-width: 1000px) {
+      .solves-grid { grid-template-columns: 1fr; gap: 48px; max-width: 640px; }
+      .solves-col h3 { font-size: 26px; }
     }
 
     .solves-col .sc-readmore {
@@ -406,20 +415,21 @@
     .solves-col .sc-readmore:hover { gap: 10px; }
     #futures .sc-readmore { color: #B31942; }
     #bonds .sc-readmore { color: #0A3161; }
+    #options .sc-readmore { color: #111; }
 
-    /* ─── COMPARE TABLE (TWO INSTRUMENTS) ─── */
+    /* ─── COMPARE TABLE (THREE INSTRUMENTS) ─── */
     .pair-table {
-      max-width: 960px; margin: 0 auto;
+      max-width: 1100px; margin: 0 auto;
       border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
     }
     .pair-row {
       display: grid;
-      grid-template-columns: 1.1fr 1.4fr 1.4fr;
+      grid-template-columns: 0.95fr 1.35fr 1.35fr 1.35fr;
       border-bottom: 1px solid var(--border);
     }
     .pair-row:last-child { border-bottom: none; }
     .pair-row > div {
-      padding: 18px 22px; font-size: 15px; color: #333;
+      padding: 18px 20px; font-size: 14.5px; color: #333;
       text-align: left; line-height: 1.55;
     }
     .pair-row .pair-dim {
@@ -435,7 +445,7 @@
       background: #111; color: #888;
       font-size: 11px; letter-spacing: 0.1em;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1000px) {
       .pair-row { grid-template-columns: 1fr; }
       .pair-row .pair-dim {
         background: #f0f0f0; padding: 10px 22px;
@@ -747,13 +757,24 @@
         <span><strong>Settlement</strong>QUAI</span>
       </div>
     </a>
+    <a class="pair-card card-ink" href="compute-options.html">
+      <span class="pc-arrow">↗</span>
+      <div class="pc-label">Convexity Instrument</div>
+      <h3>Options</h3>
+      <p class="pc-tagline">A convertible claim on deferred mining rewards, written by miners against the block election they are currently forced to waste. Prices the uncertainty in the cost of compute.</p>
+      <div class="pc-meta">
+        <span><strong>Form</strong>Convertible LMT</span>
+        <span><strong>Strike</strong>Qi conversion ratio</span>
+        <span><strong>Settlement</strong>QUAI</span>
+      </div>
+    </a>
   </div>
 </section>
 
 <!-- ── WHAT EACH SOLVES ── -->
 <section class="section-light">
   <h2>What <span class="gray">each solves</span></h2>
-  <p class="lead">The two instruments answer different questions. Futures answer <em style="font-style:normal;font-weight:600;color:#111;">"what is compute worth right now?"</em> Bonds answer <em style="font-style:normal;font-weight:600;color:#111;">"what is the future cost of compute today?"</em></p>
+  <p class="lead">The three instruments answer different questions. Futures answer <em style="font-style:normal;font-weight:600;color:#111;">"what is compute worth right now?"</em> Bonds answer <em style="font-style:normal;font-weight:600;color:#111;">"what is the future cost of compute today?"</em> Options answer <em style="font-style:normal;font-weight:600;color:#111;">"how uncertain is that cost?"</em></p>
 
   <div class="solves-grid">
     <div class="solves-col" id="futures">
@@ -795,54 +816,82 @@
       </div>
       <a class="sc-readmore" href="compute-bond.html">Read the Bonds spec →</a>
     </div>
+
+    <div class="solves-col" id="options">
+      <div class="sc-eyebrow">Options</div>
+      <h3>Convexity from the block election</h3>
+      <p class="sc-lead">A convertible claim on a deferred mining reward. The holder may convert into the other token at a fixed ratio at maturity; the miner grants that right in exchange for a lower accretion rate. Strip the bond floor away and what remains is a pure exchange option on QUAI against Qi.</p>
+
+      <div class="sc-block">
+        <div class="sc-q">The problem</div>
+        <div class="sc-a">Every block already contains an option — the miner elects QUAI or Qi, a payoff of <em style="font-style:normal;font-weight:600;">max(QUAI, Qi)</em>. But the election is fixed at block time, so it is exercised immediately at intrinsic value and <strong>all of its time value is destroyed</strong>. Nothing in the system prices the uncertainty it was compensating for.</div>
+      </div>
+      <div class="sc-block">
+        <div class="sc-q">What it solves</div>
+        <div class="sc-a">Making the conversion right assignable lets miners sell value they were going to burn anyway. Every convertible that trades reveals an implied volatility on the QUAI/Qi pair — a live, observable price for uncertainty that the protocol currently has no way to measure.</div>
+      </div>
+      <div class="sc-block">
+        <div class="sc-q">Who needs it</div>
+        <div class="sc-a">Miners monetizing wasted time value and financing hardware against it. Operators buying a cap on their compute cost or a floor under their compute revenue. Anyone who needs convexity to be funded and contractual rather than promised by a mechanism.</div>
+      </div>
+      <a class="sc-readmore" href="compute-options.html">Read the Options spec →</a>
+    </div>
   </div>
 </section>
 
 <!-- ── SIDE-BY-SIDE COMPARISON ── -->
 <section class="section-mid">
-  <h2>Two instruments, <span class="gray">two markets</span></h2>
-  <p class="lead">Together they form a complete capital market for energy-denominated computation. Futures address the derivatives market; Bonds address the fixed-income market. Every other instrument prices off one of these two surfaces.</p>
+  <h2>Three instruments, <span class="gray">three surfaces</span></h2>
+  <p class="lead">Together they form a complete capital market for energy-denominated computation. Futures produce the spot curve, Bonds the term structure, Options the volatility surface. Every other instrument prices off one of these three.</p>
 
   <div class="pair-table">
     <div class="pair-row pair-header">
       <div class="pair-dim">Dimension</div>
       <div>Futures</div>
       <div>Bonds</div>
+      <div>Options</div>
     </div>
     <div class="pair-row">
       <div class="pair-dim">Asset class</div>
       <div>Derivative — perpetual index future</div>
       <div>Fixed-income — zero-coupon bond</div>
+      <div>Derivative — convertible exchange option</div>
     </div>
     <div class="pair-row">
       <div class="pair-dim">Time horizon</div>
       <div>Spot price, no maturity</div>
       <div>Fixed term: 3, 6, or 12 months</div>
+      <div>Fixed expiry: 3, 6, or 12 months</div>
     </div>
     <div class="pair-row">
       <div class="pair-dim">Underlying</div>
       <div>Qi energy index per compute unit</div>
       <div>Locked coinbase emission, payable at maturity</div>
+      <div>QUAI/Qi conversion ratio, struck in Qi</div>
     </div>
     <div class="pair-row">
       <div class="pair-dim">Yield mechanism</div>
       <div>Funding rate, basis trades</div>
       <div>Discount to face value, lock multiplier</div>
+      <div>Premium, paid for by reduced accretion</div>
     </div>
     <div class="pair-row">
       <div class="pair-dim">Primary market addressed</div>
       <div>Compute hedgers, agents, speculators</div>
       <div>Miners, real-yield investors, DeFi treasuries</div>
+      <div>Miners writing convexity, operators buying it</div>
     </div>
     <div class="pair-row">
       <div class="pair-dim">TradFi analog</div>
       <div>E-mini S&P 500 future, Brent crude future</div>
       <div>Treasury bill, brokered CD, Pendle PT</div>
+      <div>Convertible bond, FX exchange option</div>
     </div>
     <div class="pair-row">
       <div class="pair-dim">What it produces</div>
       <div>Forward price surface — the spot curve</div>
       <div>Discount curve — the term structure</div>
+      <div>Implied volatility — the price of uncertainty</div>
     </div>
   </div>
 </section>
@@ -850,7 +899,7 @@
 <!-- ── WHY ENERGY IS FUNDAMENTAL ── -->
 <section class="section-dark">
   <h2>Why <span class="gray">start with energy</span></h2>
-  <p class="lead">Both instruments share a single anchor: the energy cost of computation, measured by Proof of Work. This is not an arbitrary design choice. It is the only honest unit of account for compute pricing.</p>
+  <p class="lead">All three instruments share a single anchor: the energy cost of computation, measured by Proof of Work. This is not an arbitrary design choice. It is the only honest unit of account for compute pricing.</p>
 
   <div class="energy-block">
     <p class="eb-prose">Computation is, fundamentally, the orderly conversion of energy into change of state. <strong>Every floating-point operation, every hash, every inference token is paid for in joules.</strong> The cost floor of any computation is the electricity it consumes — everything above that is margin, capacity premium, or speculation.</p>
