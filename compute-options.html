@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compute Options — American Energy Money</title>
+  <meta name="description" content="Every mined block contains an exchange option that forced exercise destroys. Liquid Mining Tokens and convertible LMTs make it tradable — struck in Qi, settled in QUAI.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gray: #999;
+      --dark: #111;
+      --white: #fff;
+      --border: rgba(0,0,0,0.07);
+      --border-light: rgba(255,255,255,0.08);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 4px; }
+    .nav-logo span {
+      font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #111;
+    }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-item {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+      color: #444; text-decoration: none; cursor: pointer;
+      border-radius: 8px; transition: background 0.15s;
+    }
+    .nav-item:hover { background: #f5f5f5; }
+    .nav-item.active { color: #111; font-weight: 600; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: #0d0d0d;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 120px 48px 100px; text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(52px, 7vw, 84px);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+      color: #fff;
+    }
+    .hero h1 .dim { color: #555; }
+    .hero .subtitle {
+      font-size: clamp(18px, 2vw, 22px); font-weight: 500;
+      color: #666; margin-top: 28px; max-width: 600px;
+      line-height: 1.6; letter-spacing: -0.01em;
+    }
+    .hero .tag-row {
+      display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; justify-content: center;
+    }
+    .hero-tag {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #444; border: 1px solid #2a2a2a; border-radius: 100px; padding: 8px 16px;
+    }
+
+    /* ─── SECTION ─── */
+    .section-light {
+      background: #fff;
+      padding: 100px 48px; text-align: center;
+    }
+    .section-dark {
+      background: #0d0d0d;
+      padding: 100px 48px; text-align: center;
+    }
+    .section-mid {
+      background: #f7f7f7;
+      padding: 100px 48px; text-align: center;
+    }
+    .section-light h2, .section-dark h2, .section-mid h2 {
+      font-size: clamp(32px, 4vw, 50px); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 24px;
+    }
+    .section-dark h2 { color: #fff; }
+    .section-light h2 .gray,
+    .section-dark h2 .gray,
+    .section-mid h2 .gray { color: var(--gray); }
+    .lead {
+      font-size: 18px; color: #666; max-width: 640px;
+      margin: 0 auto 64px; line-height: 1.7;
+    }
+
+    /* ─── COMPARE BLOCK ─── */
+    .compare-grid {
+      display: flex; gap: 2px; max-width: 860px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .compare-col {
+      flex: 1; padding: 40px 36px; text-align: left;
+    }
+    .compare-col:first-child {
+      background: #f9f9f9; border-right: 1px solid var(--border);
+    }
+    .compare-col:last-child { background: #fff; }
+    .compare-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .compare-col:first-child .compare-label { color: #bbb; }
+    .compare-col:last-child .compare-label { color: #111; }
+    .compare-col h3 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 20px; color: #111;
+    }
+    .compare-col ul {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+    }
+    .compare-col ul li {
+      font-size: 15px; color: #777; line-height: 1.6;
+      padding-left: 20px; position: relative;
+    }
+    .compare-col ul li::before {
+      content: '–'; position: absolute; left: 0; color: #ccc;
+    }
+    .compare-col:last-child ul li::before { color: #111; content: '→'; }
+    .compare-col:last-child ul li { color: #444; }
+
+    /* ─── TOKEN PAIR ─── */
+    .token-grid {
+      display: flex; gap: 32px; justify-content: center;
+      flex-wrap: wrap; max-width: 880px; margin: 0 auto;
+    }
+    .token-card {
+      flex: 1; min-width: 280px; max-width: 420px;
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 48px 36px; text-align: left;
+    }
+    .token-card.dark-card {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--border-light);
+    }
+    .token-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 16px; color: #666;
+    }
+    .token-card h3 {
+      font-size: 26px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .section-dark .token-card h3 { color: #fff; }
+    .token-card p {
+      font-size: 15px; color: #777; line-height: 1.7;
+    }
+    .section-dark .token-card p { color: #888; }
+    .token-card .token-rule {
+      margin-top: 24px; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px; color: #555; line-height: 1.6;
+    }
+
+    /* ─── FORMULA ─── */
+    .formula-block {
+      max-width: 720px; margin: 0 auto;
+      text-align: left;
+    }
+    .formula-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 18px;
+      color: #ccc;
+      letter-spacing: 0.01em;
+      line-height: 1.8;
+      text-align: center;
+    }
+    .formula-note {
+      font-size: 15px; color: #666; line-height: 1.7;
+    }
+    .var-list {
+      margin-top: 28px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .var-item {
+      display: flex; gap: 16px; align-items: baseline;
+      font-size: 15px; color: #666; line-height: 1.6;
+    }
+    .var-item code {
+      font-family: 'Courier New', Courier, monospace;
+      color: #aaa; font-size: 15px;
+      min-width: 48px; flex-shrink: 0;
+    }
+
+    /* ─── STEPS ─── */
+    .steps {
+      display: flex; gap: 48px; justify-content: center;
+      flex-wrap: wrap; max-width: 960px; margin: 0 auto;
+    }
+    .step {
+      flex: 1; min-width: 240px; max-width: 280px; text-align: left;
+    }
+    .step-num {
+      font-size: 48px; font-weight: 800; letter-spacing: -0.04em;
+      color: #e0e0e0; margin-bottom: 16px;
+    }
+    .step h3 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .step p {
+      font-size: 15px; color: #777; line-height: 1.65;
+    }
+
+    /* ─── WHY SECTION ─── */
+    .why-grid {
+      display: flex; gap: 32px; justify-content: center;
+      flex-wrap: wrap; max-width: 960px; margin: 0 auto;
+    }
+    .why-card {
+      flex: 1; min-width: 260px; max-width: 300px;
+      text-align: left;
+    }
+    .why-card h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .why-card p { font-size: 15px; color: #777; line-height: 1.65; }
+
+    /* ─── INDEX EXPLAINER ─── */
+    .index-block {
+      max-width: 760px; margin: 0 auto;
+      background: #fafafa; border: 1px solid var(--border);
+      border-radius: 16px; padding: 52px 48px; text-align: left;
+    }
+    .index-block .index-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #bbb; margin-bottom: 20px;
+    }
+    .index-block h3 {
+      font-size: 24px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px; color: #111;
+    }
+    .index-block p {
+      font-size: 16px; color: #555; line-height: 1.75; margin-bottom: 16px;
+    }
+    .index-block p:last-child { margin-bottom: 0; }
+    .index-block em {
+      font-style: normal; font-weight: 600; color: #111;
+    }
+
+    /* ─── COMPARISON GRID ─── */
+    .comparison-grid { width: 100%; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .comp-row { display: grid; grid-template-columns: 1.2fr 1.5fr 1.5fr; border-bottom: 1px solid var(--border); }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-row > div { padding: 14px 18px; font-size: 0.88rem; line-height: 1.5; }
+    .comp-header { background: #1a1a1a; }
+    .comp-header > div { padding: 12px 18px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: #888; }
+    .comp-label { color: #ccc; font-weight: 600; background: #111; }
+    .comp-no { color: #666; background: #0d0d0d; }
+    .comp-yes { color: #4ade80; background: #0a1a0f; font-weight: 500; }
+    @media (max-width: 640px) {
+      .comp-row { grid-template-columns: 1fr; }
+    }
+    .cta-section {
+      background: #fff;
+      padding: 120px 48px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-size: clamp(36px, 5vw, 64px); font-weight: 800;
+      letter-spacing: -0.04em; margin-bottom: 24px;
+    }
+    .cta-section p {
+      font-size: 18px; color: #777; max-width: 480px;
+      margin: 0 auto 48px; line-height: 1.6;
+    }
+    .cta-btn {
+      display: inline-block; padding: 16px 40px;
+      background: #111; color: #fff;
+      font-size: 16px; font-weight: 700; letter-spacing: -0.01em;
+      border-radius: 100px; text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .cta-btn:hover { background: #333; transform: scale(1.03); }
+
+    /* ─── INSTRUMENT PAIR CARDS (HERO) — minimal CTA, flag-themed ─── */
+    .pair-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; max-width: 880px; margin: 56px auto 0;
+    }
+    .pair-card {
+      position: relative;
+      border: 2px solid var(--border); border-radius: 16px;
+      padding: 36px 36px 32px; text-align: left;
+      background: #fff;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.2s;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+    }
+    .pair-card .pc-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .pair-card h3 {
+      font-size: 36px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 24px; color: #111; line-height: 1.0;
+    }
+    .pair-card .pc-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: auto; padding-top: 8px;
+      font-size: 15px; font-weight: 700; letter-spacing: -0.01em;
+    }
+    .pair-card .pc-cta .pc-arrow-inline {
+      display: inline-block; transition: transform 0.2s;
+    }
+    .pair-card:hover .pc-cta .pc-arrow-inline { transform: translateX(4px); }
+
+    /* Red variant — Futures */
+    .pair-card.card-red {
+      border-color: #B31942;
+    }
+    .pair-card.card-red .pc-label { color: #B31942; }
+    .pair-card.card-red .pc-cta { color: #B31942; }
+    .pair-card.card-red:hover {
+      background: #B31942; border-color: #B31942;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(179, 25, 66, 0.18);
+    }
+    .pair-card.card-red:hover .pc-label,
+    .pair-card.card-red:hover h3,
+    .pair-card.card-red:hover .pc-cta { color: #fff; }
+
+    /* Blue variant — Bonds */
+    .pair-card.card-blue {
+      border-color: #0A3161;
+    }
+    .pair-card.card-blue .pc-label { color: #0A3161; }
+    .pair-card.card-blue .pc-cta { color: #0A3161; }
+    .pair-card.card-blue:hover {
+      background: #0A3161; border-color: #0A3161;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(10, 49, 97, 0.20);
+    }
+    .pair-card.card-blue:hover .pc-label,
+    .pair-card.card-blue:hover h3,
+    .pair-card.card-blue:hover .pc-cta { color: #fff; }
+
+    @media (max-width: 768px) {
+      .pair-cards { grid-template-columns: 1fr; gap: 16px; }
+      .pair-card { padding: 28px 28px 24px; }
+      .pair-card h3 { font-size: 30px; }
+    }
+
+    /* ─── SOLVES-FOR EXPLAINERS ─── */
+    .solves-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px; max-width: 1080px; margin: 0 auto; text-align: left;
+    }
+    .solves-col {
+      padding: 0;
+    }
+    .solves-col .sc-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #999; margin-bottom: 12px;
+    }
+    #futures .sc-eyebrow { color: #B31942; }
+    #bonds .sc-eyebrow { color: #0A3161; }
+    .solves-col h3 {
+      font-size: 26px; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 16px; color: #111;
+    }
+    .solves-col .sc-lead {
+      font-size: 16px; color: #555; line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .solves-col .sc-block {
+      padding: 20px 0; border-top: 1px solid var(--border);
+    }
+    .solves-col .sc-block:last-child { border-bottom: 1px solid var(--border); }
+    .solves-col .sc-block .sc-q {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #aaa; margin-bottom: 8px;
+    }
+    .solves-col .sc-block .sc-a {
+      font-size: 15px; color: #333; line-height: 1.65;
+    }
+    @media (max-width: 768px) {
+      .solves-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* ─── COMPARE TABLE (TWO INSTRUMENTS) ─── */
+    .pair-table {
+      max-width: 960px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    }
+    .pair-row {
+      display: grid;
+      grid-template-columns: 1.1fr 1.4fr 1.4fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .pair-row:last-child { border-bottom: none; }
+    .pair-row > div {
+      padding: 18px 22px; font-size: 15px; color: #333;
+      text-align: left; line-height: 1.55;
+    }
+    .pair-row .pair-dim {
+      background: #fafafa; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #888;
+      display: flex; align-items: center;
+    }
+    .pair-row.pair-header > div {
+      background: #111; color: #fff;
+      font-size: 13px; font-weight: 700; letter-spacing: -0.01em;
+    }
+    .pair-row.pair-header .pair-dim {
+      background: #111; color: #888;
+      font-size: 11px; letter-spacing: 0.1em;
+    }
+    @media (max-width: 768px) {
+      .pair-row { grid-template-columns: 1fr; }
+      .pair-row .pair-dim {
+        background: #f0f0f0; padding: 10px 22px;
+      }
+    }
+
+    /* ─── ENERGY FOUNDATION ─── */
+    .energy-block {
+      max-width: 820px; margin: 0 auto; text-align: left;
+    }
+    .energy-block .eb-pillars {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px; margin-top: 48px;
+    }
+    .energy-block .eb-pillar {
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+    }
+    .energy-block .eb-pillar .eb-num {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      color: #555; margin-bottom: 14px;
+    }
+    .energy-block .eb-pillar h4 {
+      font-size: 17px; font-weight: 700; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 10px;
+    }
+    .energy-block .eb-pillar p {
+      font-size: 14px; color: #888; line-height: 1.6;
+    }
+    .energy-block .eb-prose {
+      font-size: 17px; color: #bbb; line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .energy-block .eb-prose strong {
+      color: #fff; font-weight: 600;
+    }
+    .energy-block .eb-prose em {
+      font-style: normal; color: #fff; font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      .energy-block .eb-pillars { grid-template-columns: 1fr; }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #fff; border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 12px;
+    }
+    footer a { color: #bbb; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: #444; }
+    .partner-logos {
+      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+    }
+    .partner-logos a {
+      display: flex; align-items: center;
+      transition: opacity 0.2s;
+    }
+    .partner-logos a:hover { opacity: 0.7; }
+    .partner-logos img { height: 22px; width: auto; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero, .section-light, .section-dark, .section-mid,
+      .cta-section { padding-left: 20px; padding-right: 20px; }
+      footer { padding: 24px 20px; }
+      .formula-box { padding: 24px 20px; font-size: 15px; }
+      .compare-grid { flex-direction: column; }
+      .compare-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .index-block { padding: 36px 28px; }
+    }
+
+    /* ─── PAYOFF EXPLAINER (options only) ─── */
+    .payoff-wrap {
+      max-width: 900px; margin: 0 auto; background: #fff;
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 40px; text-align: left;
+    }
+    .payoff-controls {
+      display: flex; gap: 32px; flex-wrap: wrap;
+      padding-bottom: 28px; margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .payoff-controls > div { flex: 1; min-width: 190px; }
+    .payoff-controls label {
+      display: block; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #999; margin-bottom: 10px;
+    }
+    .payoff-controls label b { float: right; font-size: 14px; color: #111; letter-spacing: 0; }
+    .payoff-controls input[type=range] {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      background: transparent; cursor: pointer;
+    }
+    .payoff-controls input[type=range]::-webkit-slider-runnable-track {
+      height: 3px; background: #e5e5e5; border-radius: 2px;
+    }
+    .payoff-controls input[type=range]::-moz-range-track {
+      height: 3px; background: #e5e5e5; border-radius: 2px;
+    }
+    .payoff-controls input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+      background: #111; margin-top: -6.5px;
+    }
+    .payoff-controls input[type=range]::-moz-range-thumb {
+      width: 16px; height: 16px; border: 0; border-radius: 50%; background: #111;
+    }
+    .toggle-row { display: flex; gap: 8px; }
+    .toggle-row button {
+      flex: 1; padding: 9px 0; font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 600; color: #666;
+      background: #f5f5f5; border: 1px solid var(--border);
+      border-radius: 8px; cursor: pointer; transition: 0.15s;
+    }
+    .toggle-row button.on { background: #111; color: #fff; border-color: #111; }
+    .payoff-chart svg { display: block; width: 100%; height: auto; }
+    .readout {
+      margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border);
+      display: flex; gap: 36px; flex-wrap: wrap;
+    }
+    .readout div { flex: 1; min-width: 130px; }
+    .readout span {
+      display: block; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #999; margin-bottom: 6px;
+    }
+    .readout b { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+    .payoff-note {
+      margin-top: 24px; font-size: 15px; color: #666; line-height: 1.75;
+    }
+    .payoff-note strong { color: #111; font-weight: 600; }
+    @media (max-width: 640px) {
+      .payoff-wrap { padding: 28px 22px; }
+      .readout { gap: 20px; }
+      .readout b { font-size: 21px; }
+    }
+
+    /* ─── LEG TOGGLES ─── */
+    .leg-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .leg-row button {
+      flex: 1; min-width: 92px; padding: 10px 0;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      color: #666; background: #f5f5f5; border: 1px solid var(--border);
+      border-radius: 8px; cursor: pointer; transition: 0.15s;
+    }
+    .leg-row button.on { background: #111; color: #fff; border-color: #111; }
+
+    /* ─── DEFERRAL LADDER ─── */
+    .ladder { max-width: 860px; margin: 0 auto; text-align: left; }
+    .rung {
+      display: grid; grid-template-columns: 58px 1fr 108px;
+      align-items: center; gap: 18px;
+      padding: 18px 0; border-bottom: 1px solid var(--border-light);
+    }
+    .rung:last-child { border-bottom: none; }
+    .rung .tenor { font-size: 15px; font-weight: 700; color: #fff; }
+    .rung .track { height: 26px; background: #1a1a1a; border-radius: 4px; overflow: hidden; }
+    .rung .track i { display: block; height: 100%; background: #fff; opacity: 0.9; }
+    .rung .track i.warn { background: #666; }
+    .rung .ann { text-align: right; font-size: 15px; font-weight: 700; color: #fff; }
+    .rung .ann s { display: block; text-decoration: none; font-size: 11px; font-weight: 500; color: #555; }
+    .ladder-head {
+      display: grid; grid-template-columns: 58px 1fr 108px; gap: 18px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #555; padding-bottom: 12px;
+      border-bottom: 1px solid #222;
+    }
+    .ladder-head span:last-child { text-align: right; }
+
+    /* ─── DUALITY PANELS ─── */
+    .dual { display: flex; gap: 2px; max-width: 860px; margin: 0 auto;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .dual-col { flex: 1; padding: 32px 30px 28px; text-align: left; background: #fff; }
+    .dual-col:first-child { background: #f9f9f9; border-right: 1px solid var(--border); }
+    .dual-col .dl {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #999; margin-bottom: 10px;
+    }
+    .dual-col h4 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .dual-col p { font-size: 14px; color: #666; line-height: 1.7; margin: 0; }
+    .dual-col svg { display: block; width: 100%; height: auto; margin: 16px 0 14px; }
+    .dual-eq {
+      max-width: 860px; margin: 24px auto 0; padding: 22px 26px;
+      background: #111; border-radius: 12px; text-align: center;
+      font-size: 17px; font-weight: 600; color: #fff; letter-spacing: -0.01em;
+    }
+    .dual-eq em { font-style: normal; color: #666; }
+    @media (max-width: 720px) {
+      .dual { flex-direction: column; }
+      .dual-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .rung, .ladder-head { grid-template-columns: 46px 1fr 84px; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="images/logo.png" alt="American Energy Money">
+  </a>
+  <div class="nav-links">
+    <a class="nav-item active" href="compute.html">Compute</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1>Compute <span class="dim">Options</span></h1>
+  <p class="subtitle">Every mined block already contains an option. The protocol forces it to be exercised immediately and its time value is destroyed. Liquid Mining Tokens make it tradable instead.</p>
+  <div class="tag-row">
+    <span class="hero-tag">Election at every block</span>
+    <span class="hero-tag">Struck in energy</span>
+    <span class="hero-tag">Recovered time value</span>
+    <span class="hero-tag">Dual-numeraire</span>
+  </div>
+</section>
+
+<!-- ── THE OPTION IN EVERY BLOCK ── -->
+<section class="section-light">
+  <h2><span class="gray">The option in</span> every block</h2>
+  <p class="lead">A miner who finds a block does not simply receive a reward. They choose which reward to receive — QUAI, the monetary token, or Qi, the energy token. That choice is an option, and it has a name.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>The election</h3>
+      <p>At the moment a block is found, the miner elects to mint QUAI or Qi. The payoff of that choice is the greater of the two values — <em>max(QUAI, Qi)</em>. That is not a metaphor for an option. It is the payoff function of an exchange option, exactly.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>The forced exercise</h3>
+      <p>The election is fixed at block time. The miner cannot wait, cannot sell the right, cannot let it run. They are compelled to exercise immediately, at intrinsic value, and everything the option was worth beyond that is destroyed.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>The waste</h3>
+      <p>Time value is the entire reason options are worth more than their immediate payoff. Forced exercise at block time burns all of it — every block, at every miner, permanently. That destroyed value is the raw material for everything on this page.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE DUALITY ── -->
+<section class="section-mid">
+  <h2>One contract, <span class="gray">two names</span></h2>
+  <p class="lead">People say QUAI is a call on Qi, and that Qi is a put on QUAI. Both are true — but they are not two facts. They are the same contract described from two sides, and understanding why is the whole design.</p>
+  <div class="dual">
+    <div class="dual-col">
+      <div class="dl">Priced in Qi — energy as the unit</div>
+      <h4>It looks like a call</h4>
+      <svg viewBox="0 0 320 130" role="img" aria-label="Payoff rising to the right, the shape of a call option">
+        <line x1="26" y1="104" x2="304" y2="104" stroke="#ddd" stroke-width="1.5"/>
+        <line x1="165" y1="16" x2="165" y2="104" stroke="#ddd" stroke-width="1" stroke-dasharray="3 4"/>
+        <path d="M30 88 L165 88 L300 22" fill="none" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+        <text x="30" y="122" font-size="10" fill="#aaa" font-weight="600">cheap QUAI</text>
+        <text x="300" y="122" text-anchor="end" font-size="10" fill="#aaa" font-weight="600">dear QUAI</text>
+      </svg>
+      <p>Hold Qi, and you hold the right to acquire QUAI. Energy is the unit you count in, so the payoff rises as QUAI gets more expensive in energy terms. Every desk would book this as a call.</p>
+    </div>
+    <div class="dual-col">
+      <div class="dl">Priced in QUAI — money as the unit</div>
+      <h4>It looks like a put</h4>
+      <svg viewBox="0 0 320 130" role="img" aria-label="Payoff falling to the right, the shape of a put option">
+        <line x1="26" y1="104" x2="304" y2="104" stroke="#ddd" stroke-width="1.5"/>
+        <line x1="165" y1="16" x2="165" y2="104" stroke="#ddd" stroke-width="1" stroke-dasharray="3 4"/>
+        <path d="M30 22 L165 88 L300 88" fill="none" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+        <text x="30" y="122" font-size="10" fill="#aaa" font-weight="600">dear Qi</text>
+        <text x="300" y="122" text-anchor="end" font-size="10" fill="#aaa" font-weight="600">cheap Qi</text>
+      </svg>
+      <p>Flip the unit. Count in QUAI instead, and the identical contract now pays off as Qi gets cheaper. Nothing about the contract changed — only the denominator. Every desk would book this as a put.</p>
+    </div>
+  </div>
+  <div class="dual-eq">
+    max(A,&nbsp;B) &nbsp;=&nbsp; B&nbsp;+&nbsp;(A&nbsp;&minus;&nbsp;B)<sup>+</sup> &nbsp;<em>=</em>&nbsp; A&nbsp;+&nbsp;(B&nbsp;&minus;&nbsp;A)<sup>+</sup>
+  </div>
+  <p class="lead" style="margin-top:28px; margin-bottom:0;">This is the identity behind the block election. It is standard in currency markets — a dollar call is a yen put, the same ticket sold twice. The practical consequence matters: <strong style="color:#111;">you cannot build a straddle by holding both tokens.</strong> Holding QUAI and Qi is holding two underlyings. Two contracts are needed, and someone has to write them.</p>
+</section>
+
+<!-- ── LMTs ── -->
+<section class="section-dark">
+  <h2>Liquid <span class="gray">Mining Tokens</span></h2>
+  <p class="lead">Instead of taking the reward at once, a miner can defer it and accept a fixed yield. That deferred claim is tokenized and trades freely. This is the ladder the whole market is built on.</p>
+
+  <div class="ladder">
+    <div class="ladder-head"><span>Term</span><span>Stated yield on the deferred reward</span><span>Annualized</span></div>
+    <div class="rung">
+      <span class="tenor">3 mo</span>
+      <div class="track"><i style="width:40%"></i></div>
+      <span class="ann">46.4%<s>10% stated</s></span>
+    </div>
+    <div class="rung">
+      <span class="tenor">6 mo</span>
+      <div class="track"><i style="width:60%"></i></div>
+      <span class="ann">32.3%<s>15% stated</s></span>
+    </div>
+    <div class="rung">
+      <span class="tenor">12 mo</span>
+      <div class="track"><i class="warn" style="width:100%"></i></div>
+      <span class="ann">25.0%<s>25% stated</s></span>
+    </div>
+  </div>
+
+  <div class="index-block" style="background:#111; border-color:#222; margin-top:56px;">
+    <div class="index-label" style="color:#555;">What an LMT actually is</div>
+    <h3 style="color:#fff;">A zero-coupon bond, not an option</h3>
+    <p style="color:#888;">Because the QUAI-or-Qi election is fixed at block time, a deferred reward is a claim on a known quantity of a known token at a known date. There is no choice left inside it. An LMT is a bond — and that is a feature, because two bonds in two units give you something no single token can.</p>
+    <p style="color:#888;">Deferred Qi claims form one curve. Deferred QUAI claims form another. Qi is minted against difficulty-adjusted work, so the Qi curve is a <strong style="color:#ddd;">real rate</strong> — the price of energy through time. The QUAI curve is <strong style="color:#ddd;">nominal</strong>. The gap between them is a breakeven: the market's live estimate of how fast monetary premium is growing against physical work.</p>
+    <p style="color:#999;">A falling breakeven is the earliest available warning that premium is decaying relative to energy. It is a measurement rather than an assertion, and it exists as soon as both LMT curves trade.</p>
+  </div>
+
+  <div style="max-width:860px; margin:32px auto 0; background:#111; border-left:3px solid #fff; border-radius:0 8px 8px 0; padding:32px 34px; text-align:left;">
+    <div style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-bottom:14px;">Open design question</div>
+    <p style="font-size:15px; color:#888; line-height:1.75; margin:0;">The ladder above is inverted at the front. Rolling the three-month four times compounds to 46.4% against 25% for locking twelve months — so under a static schedule the long tenor never prints. Either the accretion rates become controller-set, or the long tenors have to carry something the short ones do not. That is a live question, not a settled one.</p>
+  </div>
+</section>
+
+<!-- ── CONVERTIBLE LMTs ── -->
+<section class="section-light">
+  <h2><span class="gray">Convertible</span> LMTs</h2>
+  <p class="lead">Here is where the option comes back. A convertible LMT is a deferred Qi claim that the holder may convert into QUAI at a fixed ratio at maturity — or the mirror image, deferred QUAI convertible into Qi.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>The miner writes it</h3>
+      <p>The miner accepts a lower accretion rate in exchange for granting the conversion right. They are selling time value they were going to destroy anyway at block time. Nothing is manufactured — a right that already existed is simply made assignable.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Two strips fall out</h3>
+      <p>A convertible decomposes cleanly into a bond floor plus an exchange option. Strip the floor away and you are left with the option alone: energy-denominated downside protection on one side, the pure conversion right on the other.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>It prints a price</h3>
+      <p>Every convertible that trades reveals what the market pays for the QUAI-versus-Qi conversion right. That is an observed implied volatility on the pair — a number the protocol currently has no closed form for and no way to measure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE STRADDLE ── -->
+<section class="section-mid">
+  <h2><span class="gray">Building the</span> straddle</h2>
+  <p class="lead">One convertible gives you half the shape. Buy the Qi-side convertible and the QUAI-side convertible together, strip both floors, and size them to the same notional — and the straddle finally exists, because two separate counterparties wrote the two halves.</p>
+
+  <div class="payoff-wrap">
+    <div class="payoff-controls">
+      <div>
+        <label>Legs held</label>
+        <div class="leg-row">
+          <button id="bQi" class="on">Qi side</button>
+          <button id="bQu" class="on">QUAI side</button>
+        </div>
+      </div>
+      <div>
+        <label>Conversion ratio <b><span id="oF"></span> Qi</b></label>
+        <input type="range" id="iF" min="25" max="60" step="1" value="41">
+      </div>
+      <div>
+        <label>Settlement <b><span id="oS"></span> Qi</b></label>
+        <input type="range" id="iS" min="12" max="76" step="1" value="52">
+      </div>
+      <div>
+        <label>Premium per leg <b><span id="oP"></span> Qi</b></label>
+        <input type="range" id="iP" min="1" max="12" step="0.5" value="5">
+      </div>
+    </div>
+
+    <div class="payoff-chart">
+      <svg id="chart" viewBox="0 0 860 340" role="img"
+        aria-label="Payoff of the dual-numeraire straddle against the settlement ratio of Qi per QUAI"></svg>
+    </div>
+
+    <div class="readout">
+      <div><span>Position</span><b id="rPos" style="font-size:19px;">—</b></div>
+      <div><span>Payoff</span><b id="rPay">—</b></div>
+      <div><span>Profit</span><b id="rPnl">—</b></div>
+      <div><span>Breakevens</span><b id="rBe" style="font-size:19px;">—</b></div>
+    </div>
+
+    <p class="payoff-note" id="note"></p>
+  </div>
+</section>
+
+<!-- ── WHY IT MATTERS ── -->
+<section class="section-dark">
+  <h2>Why this <span class="gray">is the point</span></h2>
+  <p class="lead">A straddle is not a speculative flourish here. It is the only instrument that prices something the network otherwise has to assert on faith.</p>
+  <div class="index-block" style="background:#111; border-color:#222;">
+    <div class="index-label" style="color:#555;">Convexity cannot be created — only relocated</div>
+    <h3 style="color:#fff;">Every straddle needs a writer, and the writer must be funded</h3>
+    <p style="color:#888;">A price floor a protocol simply promises is, in options terms, a written put with no collateral behind it. That is precisely the structure that spirals: the guarantee is backed by the same system whose failure would trigger it. Naming it that way makes the failure mode legible instead of mysterious.</p>
+    <p style="color:#888;">A convertible LMT is different in kind. The conversion right is written by a specific miner, against a specific deferred reward that already exists, in exchange for a specific reduction in yield. It is a funded, contractual position. Nobody is short an option they have not been paid for.</p>
+    <p style="color:#999;">And once the two convertibles trade, the spread between them is a live, observable price of volatility on QUAI against Qi. Floor belief stops being a matter of argument and becomes a market quote that anyone can read.</p>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2>Try the Controller</h2>
+  <p>See how the convertible controller keeps energy-denominated strikes and QUAI settlement equivalent — the engine underneath all of this.</p>
+  <a class="cta-btn" href="controller.html">Launch Demo</a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>© 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var qi = true, qu = true;
+  var $ = function (id) { return document.getElementById(id); };
+  var F = function () { return +$('iF').value; };
+  var S = function () { return +$('iS').value; };
+  var P = function () { return +$('iP').value; };
+
+  // Qi-side convertible, floor stripped: right to take QUAI -> pays when S rises.
+  function legQi(s) { return Math.max(s - F(), 0); }
+  // QUAI-side convertible, floor stripped: right to take Qi -> pays when S falls.
+  function legQu(s) { return Math.max(F() - s, 0); }
+  function gross(s) { return (qi ? legQi(s) : 0) + (qu ? legQu(s) : 0); }
+  function cost() { return (qi ? P() : 0) + (qu ? P() : 0); }
+
+  var LO = 12, HI = 76, W = 860, H = 340;
+  var M = { l: 62, r: 26, t: 24, b: 48 };
+
+  function draw() {
+    var f = F(), s = S(), c = cost();
+    var top = Math.max(gross(LO), gross(HI));
+    var ymax = Math.max(top - c, c) * 1.1 || 10;
+    var ymin = -Math.max(c, 1) * 1.7;
+
+    var X = function (v) { return M.l + (v - LO) / (HI - LO) * (W - M.l - M.r); };
+    var Y = function (v) { return H - M.b - (v - ymin) / (ymax - ymin) * (H - M.t - M.b); };
+
+    var g = '';
+    for (var i = 0; i <= 4; i++) {
+      var v = ymin + (ymax - ymin) * i / 4;
+      g += '<line x1="' + M.l + '" y1="' + Y(v).toFixed(1) + '" x2="' + (W - M.r) +
+           '" y2="' + Y(v).toFixed(1) + '" stroke="#eee" stroke-width="1"/>' +
+           '<text x="' + (M.l - 10) + '" y="' + (Y(v) + 4).toFixed(1) +
+           '" text-anchor="end" font-size="11" fill="#bbb" font-weight="500">' +
+           v.toFixed(0) + '</text>';
+    }
+    var xt = '';
+    [LO, 28, 44, 60, HI].forEach(function (v) {
+      xt += '<text x="' + X(v).toFixed(1) + '" y="' + (H - 24) +
+            '" text-anchor="middle" font-size="11" fill="#bbb" font-weight="500">' + v + '</text>';
+    });
+
+    var pts = [LO, f, HI];
+    function path(fn, off) {
+      return pts.map(function (x, i) {
+        return (i ? 'L' : 'M') + X(x).toFixed(1) + ' ' + Y(fn(x) - off).toFixed(1);
+      }).join(' ');
+    }
+
+    var ghost = '';
+    if (qi && qu) {
+      ghost =
+        '<path d="' + path(legQi, P()) + '" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="5 5"/>' +
+        '<path d="' + path(legQu, P()) + '" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="5 5"/>' +
+        '<text x="' + (W - M.r - 4) + '" y="' + (M.t + 14) + '" text-anchor="end" font-size="11" ' +
+        'fill="#bbb" font-weight="600">dashed = each leg alone</text>';
+    }
+
+    var body = '';
+    if (qi || qu) {
+      body = '<path d="' + path(gross, c) + '" fill="none" stroke="#111" stroke-width="2.5" ' +
+             'stroke-linejoin="round"/>' +
+             '<circle cx="' + X(s).toFixed(1) + '" cy="' + Y(gross(s) - c).toFixed(1) + '" r="6" fill="#111"/>';
+    } else {
+      body = '<text x="' + (W / 2) + '" y="' + (H / 2) + '" text-anchor="middle" font-size="14" ' +
+             'fill="#bbb" font-weight="600">No legs held. Turn one on.</text>';
+    }
+
+    $('chart').innerHTML = g +
+      '<line x1="' + M.l + '" y1="' + Y(0).toFixed(1) + '" x2="' + (W - M.r) +
+        '" y2="' + Y(0).toFixed(1) + '" stroke="#ccc" stroke-width="1.5"/>' +
+      '<line x1="' + X(f).toFixed(1) + '" y1="' + M.t + '" x2="' + X(f).toFixed(1) +
+        '" y2="' + (H - M.b) + '" stroke="#ccc" stroke-width="1" stroke-dasharray="3 4"/>' +
+      '<text x="' + (X(f) + 7).toFixed(1) + '" y="' + (M.t + 14) +
+        '" font-size="11" fill="#999" font-weight="600">conversion ' + f + '</text>' +
+      ghost +
+      '<line x1="' + X(s).toFixed(1) + '" y1="' + M.t + '" x2="' + X(s).toFixed(1) +
+        '" y2="' + (H - M.b) + '" stroke="#111" stroke-width="1.5"/>' +
+      body + xt +
+      '<text x="' + (W / 2) + '" y="' + (H - 5) + '" text-anchor="middle" font-size="11" ' +
+        'fill="#999" font-weight="600">Settlement ratio at maturity — Qi per QUAI</text>';
+  }
+
+  function render() {
+    var f = F(), s = S(), p = P(), c = cost();
+    $('oF').textContent = f;
+    $('oS').textContent = s;
+    $('oP').textContent = p.toFixed(1);
+
+    var pay = gross(s), pnl = pay - c;
+    var pos = (qi && qu) ? 'Straddle' : qi ? 'Call only' : qu ? 'Put only' : 'Flat';
+    $('rPos').textContent = pos;
+    $('rPay').textContent = pay.toFixed(1) + ' Qi';
+    $('rPnl').textContent = (pnl >= 0 ? '+' : '') + pnl.toFixed(1) + ' Qi';
+    $('rPnl').style.color = pnl >= 0 ? '#111' : '#bbb';
+
+    if (qi && qu) $('rBe').textContent = (f - c).toFixed(1) + ' / ' + (f + c).toFixed(1);
+    else if (qi) $('rBe').textContent = (f + c).toFixed(1) + ' Qi';
+    else if (qu) $('rBe').textContent = (f - c).toFixed(1) + ' Qi';
+    else $('rBe').textContent = '—';
+
+    var n;
+    if (!qi && !qu) {
+      n = 'Nothing held. The two legs are written by different counterparties — a miner ' +
+          'deferring into Qi and a miner deferring into QUAI — so you assemble the position ' +
+          'by buying both, not by holding both tokens.';
+    } else if (qi && qu) {
+      n = pnl >= 0
+        ? 'The ratio settled at <strong>' + s + '</strong> against a conversion level of ' + f +
+          '. It moved far enough in one direction to cover both premiums, and <strong>the direction ' +
+          'did not matter</strong> — the same profit appears at ' + (2 * f - s).toFixed(0) +
+          '. That is the defining property: this position has a view on magnitude, not on sign.'
+        : 'The ratio settled at <strong>' + s + '</strong>, close to the conversion level of ' + f +
+          '. Both legs are held, so the position cannot be blindsided by direction — but quiet ' +
+          'markets are what it loses to. The maximum loss is the ' + c.toFixed(1) +
+          ' Qi of combined premium, and it occurs exactly at the conversion ratio.';
+    } else if (qi) {
+      n = 'Only the Qi-side convertible. This is the right to take QUAI, so it pays as QUAI grows ' +
+          'more expensive in energy terms. Held alone it is directional — a bet that monetary ' +
+          'premium expands against physical work. Turn on the QUAI side to remove the direction.';
+    } else {
+      n = 'Only the QUAI-side convertible. This is the right to take Qi, so it pays as QUAI falls ' +
+          'against energy. Held alone it is a bet on premium decay — and it is the leg a miner with ' +
+          'fixed power costs actually wants. Turn on the Qi side to remove the direction.';
+    }
+    $('note').innerHTML = n;
+    draw();
+  }
+
+  ['iF', 'iS', 'iP'].forEach(function (id) { $(id).addEventListener('input', render); });
+  $('bQi').addEventListener('click', function () {
+    qi = !qi; $('bQi').className = qi ? 'on' : ''; render();
+  });
+  $('bQu').addEventListener('click', function () {
+    qu = !qu; $('bQu').className = qu ? 'on' : ''; render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
