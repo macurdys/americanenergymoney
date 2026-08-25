@@ -360,8 +360,34 @@
     .pair-card.card-ink .pc-label { color: #111; }
     .pair-card.card-ink .pc-arrow { color: #111; }
 
+    /* ─── FOUNDATION LINKS (below the instrument tiles) ─── */
+    .found-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 18px; max-width: 1140px; margin: 18px auto 0;
+    }
+    .found-card {
+      display: flex; align-items: center; gap: 18px;
+      border: 1px solid rgba(255,255,255,0.14); border-radius: 14px;
+      padding: 24px 28px; text-decoration: none; text-align: left;
+      background: rgba(255,255,255,0.03); transition: background 0.2s, border-color 0.2s;
+    }
+    .found-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.3); }
+    .found-card .fc-body { flex: 1; }
+    .found-card .fc-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #666; margin-bottom: 7px;
+    }
+    .found-card h4 {
+      font-size: 19px; font-weight: 800; letter-spacing: -0.025em;
+      color: #fff; margin-bottom: 6px; line-height: 1.15;
+    }
+    .found-card p { font-size: 13.5px; color: #777; line-height: 1.55; margin: 0; }
+    .found-card .fc-arrow { font-size: 18px; color: #666; transition: transform 0.2s; }
+    .found-card:hover .fc-arrow { transform: translate(4px, -4px); color: #fff; }
+
     @media (max-width: 1000px) {
       .pair-cards { grid-template-columns: 1fr; gap: 16px; max-width: 640px; }
+      .found-row { grid-template-columns: 1fr; max-width: 640px; }
       .pair-card { padding: 32px 28px; }
       .pair-card h3 { font-size: 32px; }
     }
@@ -767,6 +793,25 @@
         <span><strong>Strike</strong>Qi conversion ratio</span>
         <span><strong>Settlement</strong>QUAI</span>
       </div>
+    </a>
+  </div>
+
+  <div class="found-row">
+    <a class="found-card" href="compute-index.html">
+      <div class="fc-body">
+        <div class="fc-label">The benchmark</div>
+        <h4>Compute Index</h4>
+        <p>WTI — the Watt&middot;Token Index. The reference rate all three instruments settle against, plus the open contract specification.</p>
+      </div>
+      <span class="fc-arrow">&#8599;</span>
+    </a>
+    <a class="found-card" href="infrastructure.html">
+      <div class="fc-body">
+        <div class="fc-label">The meters</div>
+        <h4>Infrastructure</h4>
+        <p>Energy systems, mining deployments, full-node RPC endpoints, and the telemetry the index is calibrated from.</p>
+      </div>
+      <span class="fc-arrow">&#8599;</span>
     </a>
   </div>
 </section>
