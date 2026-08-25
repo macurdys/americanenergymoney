@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compute Options — American Energy Money</title>
+<meta name="description" content="Every mined block contains an exchange option that forced exercise destroys. Liquid Mining Tokens make it tradable — struck in Qi, settled in QUAI.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="aem-theme.css">
+</head>
+<body data-theme="paper">
+
+<div class="ground" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html"><img src="images/logo.png" alt="American Energy Money"></a>
+  <div class="nav-links">
+    <a class="nav-item active" href="compute.html">Compute</a>
+    <a class="nav-item" href="compute-index.html">Index</a>
+    <a class="nav-item" href="infrastructure.html">Infrastructure</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<div class="rail" aria-hidden="true"><div class="rail-fill" id="railFill"></div></div>
+<nav class="rail-marks" aria-label="Page sections">
+  <a class="rmark" href="#top"><i></i><span>Options</span></a>
+  <a class="rmark" href="#block"><i></i><span>Block</span></a>
+  <a class="rmark" href="#duality"><i></i><span>Duality</span></a>
+  <a class="rmark" href="#lmt"><i></i><span>LMTs</span></a>
+  <a class="rmark" href="#convertible"><i></i><span>Convertible</span></a>
+  <a class="rmark" href="#straddle"><i></i><span>Straddle</span></a>
+</nav>
+
+<main>
+  <section class="band hero" id="top">
+    <div class="rise in">
+      <h1>Compute<span class="l2">Options</span></h1>
+      <p class="hero-sub">Every mined block already contains an option. The protocol forces it to be exercised immediately and its time value is destroyed. Liquid Mining Tokens make it tradable instead.</p>
+    </div>
+    <div class="scrollcue" aria-hidden="true"><em></em> Scroll</div>
+  </section>
+
+  <div class="bleed"></div>
+
+  <section class="band seq" id="block">
+    <div class="eyebrow rise">The option in every block</div>
+    <h2 class="h2 rise">Every block already <span class="mut">contains one.</span></h2>
+    <p class="lead-p rise d1">A miner who finds a block does not simply receive a reward. They choose which reward to receive &mdash; QUAI, the monetary token, or Qi, the energy token. That choice is an option.</p>
+    <div class="steps rise d1">
+      <div class="step"><div class="n">01 &middot; The election</div><h4>max(QUAI, Qi)</h4><p>At the moment a block is found the miner elects which token to mint. The payoff of that choice is the greater of the two values. That is not a metaphor for an option &mdash; it is the payoff function of an exchange option, exactly.</p></div>
+      <div class="step"><div class="n">02 &middot; Forced exercise</div><h4>No waiting, no selling</h4><p>The election is fixed at block time. The miner cannot wait, cannot sell the right, cannot let it run. They are compelled to exercise immediately, at intrinsic value.</p></div>
+      <div class="step"><div class="n">03 &middot; The waste</div><h4>Time value destroyed</h4><p>Time value is the entire reason options are worth more than their immediate payoff. Forced exercise burns all of it, at every miner, every block. That destroyed value is the raw material for everything below.</p></div>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="duality">
+    <div class="eyebrow rise">One contract, two names</div>
+    <div class="compare rise d1">
+      <div class="ccol">
+        <div class="k">Priced in Qi &mdash; energy as the unit</div>
+        <h4>It looks like a call</h4>
+        <svg viewBox="0 0 320 120" role="img" aria-label="Payoff rising to the right" style="width:100%;height:auto;margin:14px 0 6px">
+          <line x1="26" y1="96" x2="304" y2="96" stroke="currentColor" stroke-width="1.5" opacity=".2"/>
+          <line x1="165" y1="14" x2="165" y2="96" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity=".2"/>
+          <path d="M30 82 L165 82 L300 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <ul><li>Hold Qi and you hold the right to acquire QUAI</li>
+        <li>Energy is the unit you count in, so payoff rises as QUAI grows expensive in energy terms</li>
+        <li>Any desk would book this as a call</li></ul>
+      </div>
+      <div class="ccol">
+        <div class="k">Priced in QUAI &mdash; money as the unit</div>
+        <h4>It looks like a put</h4>
+        <svg viewBox="0 0 320 120" role="img" aria-label="Payoff falling to the right" style="width:100%;height:auto;margin:14px 0 6px">
+          <line x1="26" y1="96" x2="304" y2="96" stroke="currentColor" stroke-width="1.5" opacity=".2"/>
+          <line x1="165" y1="14" x2="165" y2="96" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity=".2"/>
+          <path d="M30 20 L165 82 L300 82" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <ul><li>Flip the unit and count in QUAI instead</li>
+        <li>The identical contract now pays off as Qi gets cheaper &mdash; only the denominator changed</li>
+        <li>Any desk would book this as a put</li></ul>
+      </div>
+    </div>
+    <div class="specline rise d2" style="text-align:center;font-size:15px">
+      max(A,&nbsp;B) &nbsp;=&nbsp; B&nbsp;+&nbsp;(A&nbsp;&minus;&nbsp;B)<sup>+</sup>
+      <span class="sep">=</span> A&nbsp;+&nbsp;(B&nbsp;&minus;&nbsp;A)<sup>+</sup>
+    </div>
+    <p class="p rise d2" style="margin-top:22px">This is the identity behind the block election, and it is standard in
+      currency markets &mdash; a dollar call is a yen put, the same ticket sold twice. The practical consequence:
+      <strong>you cannot build a straddle by holding both tokens.</strong> Holding QUAI and Qi is holding two
+      underlyings. Two contracts are needed, and someone has to write them.</p>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="lmt">
+    <div class="eyebrow rise">Liquid Mining Tokens</div>
+    <h2 class="h2 rise">Defer the reward, <span class="mut">tokenize the claim.</span></h2>
+    <p class="lead-p rise d1">Instead of taking the reward at once, a miner defers it and accepts a fixed yield. That deferred claim is tokenized and trades freely.</p>
+    <div class="ctable rise d1">
+      <div class="crow head c2"><div class="dim">Term</div><div>Stated yield on the deferred reward</div><div>Annualized</div></div>
+      <div class="crow c2"><div class="dim">3 months</div><div>10%</div><div>46.4%</div></div>
+      <div class="crow c2"><div class="dim">6 months</div><div>15%</div><div>32.3%</div></div>
+      <div class="crow c2"><div class="dim">12 months</div><div>25%</div><div>25.0%</div></div>
+    </div>
+    <div class="callout rise d1"><div class="k">What an LMT actually is</div><h4>A zero-coupon bond, not an option</h4>
+      <p>Because the election is fixed at block time, a deferred reward is a claim on a known quantity of a known token at a known date. There is no choice left inside it.</p>
+      <p>That is a feature. Deferred Qi claims form one curve and deferred QUAI claims form another. Qi is minted against difficulty-adjusted work, so the Qi curve is a <strong>real rate</strong> &mdash; the price of energy through time. The QUAI curve is <strong>nominal</strong>. The gap between them is a breakeven: the market estimate of how fast monetary premium is growing against physical work.</p>
+      <p>A falling breakeven is the earliest available warning that premium is decaying relative to energy. It is a measurement rather than an assertion, and it exists as soon as both curves trade.</p>
+    </div>
+    <div class="callout rise d1"><div class="k">Open design question</div><h4>The ladder is inverted at the front</h4>
+      <p>Rolling the three-month four times compounds to 46.4% against 25% for locking twelve months, so under a static schedule the long tenor never prints. Either accretion becomes controller-set, or long tenors carry something the short ones do not. That is live, not settled.</p>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="convertible">
+    <div class="eyebrow rise">Convertible LMTs</div>
+    <h2 class="h2 rise">Where the option <span class="mut">comes back.</span></h2>
+    <p class="lead-p rise d1">A convertible LMT is a deferred Qi claim the holder may convert into QUAI at a fixed ratio at maturity &mdash; or the mirror image, deferred QUAI convertible into Qi.</p>
+    <div class="steps rise d1">
+      <div class="step"><div class="n">01 &middot; The writer</div><h4>The miner sells it</h4><p>The miner accepts a lower accretion rate in exchange for granting the conversion right. They are selling time value they were going to destroy anyway. Nothing is manufactured &mdash; an existing right is made assignable.</p></div>
+      <div class="step"><div class="n">02 &middot; The strips</div><h4>Floor plus option</h4><p>A convertible decomposes cleanly into a bond floor and an exchange option. Strip the floor and the option stands alone: energy-denominated downside on one side, the pure conversion right on the other.</p></div>
+      <div class="step"><div class="n">03 &middot; The price</div><h4>An observable volatility</h4><p>Every convertible that trades reveals what the market pays for the conversion right &mdash; an implied volatility on the pair, a number the protocol has no closed form for and currently cannot measure.</p></div>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq seq--tall" id="straddle">
+    <div class="eyebrow rise">Building the straddle</div>
+    <h2 class="h2 rise">Two writers, <span class="mut">one position.</span></h2>
+    <p class="p rise d1">One convertible gives you half the shape. Buy the Qi-side convertible and the QUAI-side convertible together, strip both floors, and size them to the same notional &mdash; and the straddle exists, because two separate counterparties wrote the two halves.</p>
+    <div class="compare rise d1">
+      <div class="ccol"><div class="k">Qi side</div><h4>Convertible Qi &mdash; call on the ratio</h4>
+        <ul>
+        <li>The right to take QUAI, so it pays as QUAI grows expensive in energy terms</li>
+        <li>Held alone it is a directional bet that monetary premium expands against physical work</li>
+        </ul>
+      </div>
+      <div class="ccol"><div class="k">QUAI side</div><h4>Convertible QUAI &mdash; put on the ratio</h4>
+        <ul>
+        <li>The right to take Qi, so it pays as QUAI falls against energy</li>
+        <li>Held alone it is a bet on premium decay, and the leg a miner with fixed power costs actually wants</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout rise d1"><div class="k">Why this is the point</div><h4>Convexity cannot be created, only relocated</h4>
+      <p>A price floor a protocol simply promises is, in options terms, a written put with no collateral behind it. That is precisely the structure that spirals: the guarantee is backed by the same system whose failure would trigger it.</p>
+      <p>A convertible LMT is different in kind. The conversion right is written by a specific miner, against a specific deferred reward that already exists, in exchange for a specific reduction in yield. It is funded and contractual. Nobody is short an option they have not been paid for.</p>
+      <p>Once both convertibles trade, the spread between them is a live price of volatility on QUAI against Qi. Floor belief stops being an argument and becomes a quote.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>&copy; 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+<script src="aem-theme.js"></script>
+
+</body>
+</html>

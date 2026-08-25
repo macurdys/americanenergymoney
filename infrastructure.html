@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infrastructure — American Energy Money</title>
+<meta name="description" content="Electrical and hardware infrastructure, plus API and RPC endpoints, powering applied thermoeconomic research on the Quai Network.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="aem-theme.css">
+</head>
+<body data-theme="paper">
+
+<div class="ground" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html"><img src="images/logo.png" alt="American Energy Money"></a>
+  <div class="nav-links">
+    <a class="nav-item" href="compute.html">Compute</a>
+    <a class="nav-item" href="compute-index.html">Index</a>
+    <a class="nav-item active" href="infrastructure.html">Infrastructure</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<div class="rail" aria-hidden="true"><div class="rail-fill" id="railFill"></div></div>
+<nav class="rail-marks" aria-label="Page sections">
+  <a class="rmark" href="#top"><i></i><span>Infra</span></a>
+  <a class="rmark" href="#facilities"><i></i><span>Facilities</span></a>
+  <a class="rmark" href="#data"><i></i><span>Data</span></a>
+  <a class="rmark" href="#why"><i></i><span>Why</span></a>
+</nav>
+
+<main>
+  <section class="band hero" id="top">
+    <div class="rise in">
+      <h1>Compute<span class="l2">Infrastructure</span></h1>
+      <p class="hero-sub">The physical and data layers underneath the market. Energy systems, mining deployments, full-node endpoints, and the telemetry the index is calibrated from.</p>
+    </div>
+    <div class="scrollcue" aria-hidden="true"><em></em> Scroll</div>
+  </section>
+
+  <div class="bleed"></div>
+
+  <section class="band seq" id="facilities">
+    <div class="eyebrow rise">Applied research &middot; Facilities</div>
+    <h2 class="h2 rise">Electrical + hardware <span class="mut">infrastructure</span></h2>
+    <p class="lead-p rise d1">Physical energy systems and mining deployments powering applied research on the Quai Network.</p>
+    <div class="cards two rise d1">
+      <div class="card"><div class="k">Compute</div><h4>Hardware infrastructure</h4><p>High-density ASIC and GPU clusters designed for efficiency and network security.</p><ul><li>ASIC mining deployments</li><li>GPU compute clusters</li><li>Air and immersion cooling</li></ul><div class="foot">Coming soon</div></div>
+      <div class="card"><div class="k">Power</div><h4>Electrical infrastructure</h4><p>Smart load balancing, off-grid generation, and storage for continuous low-cost power.</p><ul><li>Solar energy harvesting</li><li>Battery storage and PDUs</li><li>Grid load balancing</li></ul><div class="foot">Coming soon</div></div>
+    </div>
+    <div class="callout rise d1"><div class="k">Experimental energy money lab</div><h4>Solar &rarr; storage &rarr; compute &rarr; a priced decision</h4>
+      <p>Generation feeds storage, storage feeds compute, and compute forks: hash to Quai and Qi, or route the same watts to AI inference. Both branches reconverge on a single number &mdash; the opportunity cost per kilowatt-hour of choosing one over the other.</p>
+      <p>That delta is the measurement the site exists to take. It is what an index of delivered work per unit of energy has to be calibrated against, and it cannot be obtained from a price survey.</p>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="data">
+    <div class="eyebrow rise">Applied research &middot; Data layer</div>
+    <h2 class="h2 rise">API &amp; RPC <span class="mut">infrastructure</span></h2>
+    <p class="lead-p rise d1">High-performance endpoints, on-chain intelligence, and economic benchmarks powering applied thermoeconomic research on the Quai Network.</p>
+    <div class="cards rise d1">
+      <div class="card"><div class="k">Data layer</div><h4>Indexers</h4><p>Full-node RPC endpoints and on-chain indexers ingesting every block, transaction, and workshare event.</p><ul><li>Full-node RPC endpoints</li><li>On-chain indexer services</li><li>Real-time network telemetry</li></ul><div class="foot"><a class="golink" href="https://access.ccdb.waexservices.com/request-access" target="_blank" rel="noopener">Request API access &rarr;</a></div></div>
+      <div class="card"><div class="k">Automation</div><h4>Agents</h4><p>Autonomous on-chain agents monitoring workshare events, triggering rebalancing, and surfacing entropy-anchored signals.</p><ul><li>Workshare event monitors</li><li>Oracle feed automation</li><li>DAO trigger pipelines</li></ul><div class="foot">Docs coming soon</div></div>
+      <div class="card"><div class="k">Experiments</div><h4>Profitability analysis</h4><p>A live benchmarking environment comparing returns across SHA-256, Scrypt, and KawPow against Quai's emission schedule.</p><ul><li>Quai vs merge-mined chains</li><li>Multi-algorithm benchmarks</li><li>Opportunity cost analysis</li></ul><div class="foot">Lab coming soon</div></div>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq seq--tall" id="why">
+    <div class="eyebrow rise">Why this sits under the market</div>
+    <h2 class="h2 rise">A benchmark is only as good <span class="mut">as the meters behind it.</span></h2>
+    <p class="p rise d1">An index for delivered work per unit of energy cannot be assembled from vendor price surveys. It needs metered power at the rack, block-level telemetry from a live proof-of-work network, and a site where both are observed at the same time.</p>
+    <p class="p rise d1">The energy lab measures the cost side. The data layer measures the work side. The gap between them is the number <a href="compute-index.html">WTI</a> is trying to publish.</p>
+    <div class="cards two rise d1">
+      <a class="card" href="compute-index.html"><div class="k">The benchmark</div><h4>Compute Index</h4><p>What the telemetry above is calibrating.</p><div class="foot">Open &rarr;</div></a>
+      <a class="card" href="compute.html"><div class="k">The instruments</div><h4>Capital Markets</h4><p>Futures, bonds, and options settling against it.</p><div class="foot">Open &rarr;</div></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>&copy; 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+<script src="aem-theme.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compute Capital Markets — American Energy Money</title>
+<meta name="description" content="Futures, bonds, and options on energy-denominated computation — priced against the Qi energy index and settled in QUAI.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="aem-theme.css">
+</head>
+<body data-theme="paper">
+
+<div class="ground" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html"><img src="images/logo.png" alt="American Energy Money"></a>
+  <div class="nav-links">
+    <a class="nav-item active" href="compute.html">Compute</a>
+    <a class="nav-item" href="compute-index.html">Index</a>
+    <a class="nav-item" href="infrastructure.html">Infrastructure</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<div class="rail" aria-hidden="true"><div class="rail-fill" id="railFill"></div></div>
+<nav class="rail-marks" aria-label="Page sections">
+  <a class="rmark" href="#top"><i></i><span>Markets</span></a>
+  <a class="rmark" href="#instruments"><i></i><span>Instruments</span></a>
+  <a class="rmark" href="#solves"><i></i><span>Compare</span></a>
+  <a class="rmark" href="#problem"><i></i><span>Problem</span></a>
+  <a class="rmark" href="#anchor"><i></i><span>Anchor</span></a>
+</nav>
+
+<main>
+  <section class="band hero" id="top">
+    <div class="rise in">
+      <h1>Compute<span class="l2">Capital Markets</span></h1>
+      <p class="hero-sub">Three instruments on one physical anchor: the energy cost of computation, measured by proof of work.</p>
+    </div>
+    <div class="scrollcue" aria-hidden="true"><em></em> Scroll</div>
+  </section>
+
+  <div class="bleed"></div>
+
+  <section class="band seq" id="instruments">
+    <div class="eyebrow rise">The instruments</div>
+    <h2 class="h2 rise">Three instruments, <span class="mut">three surfaces</span></h2>
+    <p class="lead-p rise d1">Together they form a complete capital market for energy-denominated computation. Futures produce the spot curve, bonds the term structure, options the volatility surface. Every other instrument prices off one of these three.</p>
+    <div class="cards rise d1">
+      <a class="card" href="compute-futures.html"><div class="k">Spot index derivative</div><h4>Futures</h4><p>A perpetual, cash-settled futures contract priced against the Qi energy index. Hedges and discovers the price of compute today.</p><ul><li>Perpetual future</li><li>Qi energy index</li><li>QUAI settlement</li></ul><div class="foot">Read the spec &rarr;</div></a>
+      <a class="card" href="compute-bond.html"><div class="k">Fixed-income instrument</div><h4>Bonds</h4><p>A zero-coupon bond collateralized by locked coinbase emissions, tokenized for liquid secondary trading. Finances the price of compute tomorrow.</p><ul><li>Zero-coupon bond</li><li>Locked coinbase</li><li>QUAI settlement</li></ul><div class="foot">Read the spec &rarr;</div></a>
+      <a class="card" href="compute-options.html"><div class="k">Convexity instrument</div><h4>Options</h4><p>A convertible claim on deferred mining rewards, written by miners against the block election they are currently forced to waste. Prices the uncertainty.</p><ul><li>Convertible LMT</li><li>Qi conversion ratio</li><li>QUAI settlement</li></ul><div class="foot">Read the spec &rarr;</div></a>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="solves">
+    <div class="eyebrow rise">What each solves</div>
+    <p class="lead-p lead-p rise">Futures answer <strong>what is compute worth right now?</strong> Bonds answer <strong>what is the future cost of compute today?</strong> Options answer <strong>how uncertain is that cost?</strong></p>
+    <div class="ctable rise d1">
+      <div class="crow head c3"><div class="dim">Dimension</div><div>Futures</div><div>Bonds</div><div>Options</div></div>
+      <div class="crow c3"><div class="dim">Asset class</div><div>Derivative &mdash; perpetual index future</div><div>Fixed-income &mdash; zero-coupon bond</div><div>Derivative &mdash; convertible exchange option</div></div>
+      <div class="crow c3"><div class="dim">Time horizon</div><div>Spot price, no maturity</div><div>Fixed term: 3, 6, or 12 months</div><div>Fixed expiry: 3, 6, or 12 months</div></div>
+      <div class="crow c3"><div class="dim">Underlying</div><div>Qi energy index per compute unit</div><div>Locked coinbase emission at maturity</div><div>QUAI/Qi conversion ratio, struck in Qi</div></div>
+      <div class="crow c3"><div class="dim">Yield mechanism</div><div>Funding rate, basis trades</div><div>Discount to face, lock multiplier</div><div>Premium, paid for by reduced accretion</div></div>
+      <div class="crow c3"><div class="dim">Primary market</div><div>Compute hedgers, agents, speculators</div><div>Miners, real-yield investors, treasuries</div><div>Miners writing convexity, operators buying it</div></div>
+      <div class="crow c3"><div class="dim">TradFi analog</div><div>E-mini S&amp;P 500, Brent crude future</div><div>Treasury bill, brokered CD</div><div>Convertible bond, FX exchange option</div></div>
+      <div class="crow c3"><div class="dim">What it produces</div><div>Forward price surface &mdash; the spot curve</div><div>Discount curve &mdash; the term structure</div><div>Implied volatility &mdash; the price of uncertainty</div></div>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="problem">
+    <div class="eyebrow rise">The structural problem</div>
+    <h2 class="h2 rise">It measures what vendors <span class="mut">charge</span> &mdash;<br>not what compute <span class="mut">costs.</span></h2>
+    <p class="p rise d1">A rental rate aggregated from commercial platforms reflects vendor margins, market positioning, capacity utilization, and competitive dynamics. It answers <strong>what is the current ask</strong> &mdash; not what it costs to produce the computation.</p>
+    <p class="p rise d1">The distinction collapses the moment markets thin out, vendors coordinate pricing, or a new hardware generation reshapes the cost curve overnight. Survey indexes are backward-looking by construction: they report what was charged, not what the physics demands.</p>
+    <div class="callout rise d1"><div class="k">What a futures market needs</div><h4>Non-manipulable, anchored to physical reality, forward-looking by structure.</h4>
+      <p>Rental-rate surveys provide none of these. An index built on delivered work per unit of energy provides all three, because the underlying quantity is metered rather than reported.</p>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq seq--tall" id="anchor">
+    <div class="eyebrow rise">The common anchor</div>
+    <h2 class="h2 rise">All three share <span class="mut">one anchor.</span></h2>
+    <p class="p rise d1">The energy cost of computation, measured by proof of work. This is not an arbitrary design choice &mdash; it is the only honest unit of account for compute pricing.</p>
+    <div class="compare rise d1">
+      <div class="ccol"><div class="k">Why not price the machine</div><h4>A benchmark denominated in silicon expires on the next tape-out</h4>
+        <ul>
+        <li>An H100 is not an H200, and training and inference depreciate on different curves</li>
+        <li>A hardware-tracking benchmark must be rewritten every generation</li>
+        <li>That rewrite lands exactly when collateral values and financing paths need it to hold still</li>
+        <li>Fungibility fails: an hour of a named chip is not comparable across clusters or terms</li>
+        </ul>
+      </div>
+      <div class="ccol"><div class="k">Why price the work</div><h4>Work does not decay</h4>
+        <ul>
+        <li>Beneath every token there is an irreducible thermodynamic cost to erasing a bit</li>
+        <li>The ratio of useful output to energy spent is measurable in any generation, on any architecture</li>
+        <li>It holds for architectures not yet designed &mdash; the invariant a durable benchmark needs</li>
+        <li>One H100 in Virginia is approximately one H100 in Frankfurt, once you price the watts</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cards rise d1">
+      <a class="card" href="compute-index.html"><div class="k">The benchmark</div><h4>Compute Index</h4><p>WTI &mdash; the reference rate all three instruments settle against, plus the open contract specification.</p><div class="foot">Open &rarr;</div></a>
+      <a class="card" href="infrastructure.html"><div class="k">The meters</div><h4>Infrastructure</h4><p>Energy systems, mining deployments, full-node RPC endpoints, and the telemetry the index is calibrated from.</p><div class="foot">Open &rarr;</div></a>
+          <a class="card" href="controller.html"><div class="k">The engine</div><h4>Qi / Quai Controller</h4><p>The dual-token mechanism keeping energy-indexed pricing and QUAI settlement equivalent. Interactive simulator.</p><div class="foot">Open &rarr;</div></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>&copy; 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+<script src="aem-theme.js"></script>
+
+</body>
+</html>

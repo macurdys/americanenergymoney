@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compute Index — American Energy Money</title>
+<meta name="description" content="WTI, the Watt·Token Index — an open benchmark and contract specification for delivered work per unit of energy.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="aem-theme.css">
+</head>
+<body data-theme="paper">
+
+<div class="ground" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html"><img src="images/logo.png" alt="American Energy Money"></a>
+  <div class="nav-links">
+    <a class="nav-item" href="compute.html">Compute</a>
+    <a class="nav-item active" href="compute-index.html">Index</a>
+    <a class="nav-item" href="infrastructure.html">Infrastructure</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<div class="rail" aria-hidden="true"><div class="rail-fill" id="railFill"></div></div>
+<nav class="rail-marks" aria-label="Page sections">
+  <a class="rmark" href="#top"><i></i><span>Index</span></a>
+  <a class="rmark" href="#spread"><i></i><span>Spread</span></a>
+  <a class="rmark" href="#instrument"><i></i><span>WTI</span></a>
+  <a class="rmark" href="#work"><i></i><span>Work</span></a>
+  <a class="rmark" href="#plugs"><i></i><span>Plugs in</span></a>
+</nav>
+
+<main>
+  <section class="band hero" id="top">
+    <div class="rise in">
+      <h1>Compute<span class="l2">Index</span></h1>
+      <p class="hero-sub">WTI &mdash; the Watt&middot;Token Index. An open method for measuring delivered work per unit of energy, and a contract specification for trading it.</p>
+    </div>
+    <div class="scrollcue" aria-hidden="true"><em></em> Scroll</div>
+  </section>
+
+  <div class="bleed"></div>
+
+  <section class="band seq" id="spread">
+    <div class="eyebrow rise">The compute spread</div>
+    <h2 class="h2 rise">A margin nobody <span class="mut">can price.</span></h2>
+    <p class="p rise d1">A workload's margin is the gap between what it sells for and what it costs to power. Power traders have priced that kind of gap for forty years &mdash; they call theirs the spark spread, and it is why a generator can finance a plant before it knows next summer&rsquo;s price.</p>
+    <p class="p rise d1">Compute has no such instrument. There is <strong>no reference rate for the price of work per unit of energy</strong>, and no standardized forward to hedge it. Once a chip is racked its capital cost is sunk, and the marginal cost of the next workload is mostly the electricity it draws &mdash; so the number that decides the economics is not the price of compute or the price of power. It is the distance between them.</p>
+    <div class="stats rise d1">
+      <div class="stat"><div class="v">2&times;</div>
+        <p>The U.S. interconnection queue holds roughly twice the capacity the installed grid serves today.</p>
+        <a href="https://www.latitudemedia.com/news/the-us-interconnection-queue-is-twice-its-installed-capacity/" target="_blank" rel="noopener">Latitude Media &rarr;</a></div>
+      <div class="stat"><div class="v">9&times;</div>
+        <p>PJM's capacity auction cleared about nine times higher year over year in a single cycle.</p>
+        <a href="https://www.utilitydive.com/news/pjm-interconnection-capacity-auction-vistra-constellation/722872/" target="_blank" rel="noopener">Utility Dive &rarr;</a></div>
+      <div class="stat"><div class="v">40%</div>
+        <p>Share of each watt entering an AI data center that actually reaches the GPU.</p>
+        <a href="https://epoch.ai/data-insights/gpus-power-usage-in-ai-data-centers" target="_blank" rel="noopener">Epoch AI &rarr;</a></div>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="instrument">
+    <div class="eyebrow rise">The instrument</div>
+    <h2 class="h2 rise">WTI &mdash; <span class="mut">the Watt&middot;Token Index</span></h2>
+    <p class="p rise d1">Oil became financeable when it got a benchmark. Before Brent and WTI, crude moved through opaque concessions and private contracts; after, it moved through futures, covenants, and audit footnotes. The benchmark came first, and the capital followed it.</p>
+    <p class="p rise d1">Compute is at the stage oil was before the benchmark. We are writing the two documents that stage needs: a method for measuring delivered work per unit of energy, and a contract specification for trading it.</p>
+    <div class="specline rise d1">
+      <span class="tk">WTI&middot;1M</span><span class="sep">|</span><span class="lb">unit</span> 1 megatoken delivered<span class="sep">|</span><span class="lb">class</span> 70B dense<span class="sep">|</span><span class="lb">latency</span> p99 &le; 100 ms<span class="sep">|</span><span class="lb">energy</span> MWh at node<span class="sep">|</span><span class="lb">settle</span> cash, spread to nodal<br>
+      <span class="tk">WTI&middot;FWD</span><span class="sep">|</span><span class="lb">tenor</span> 3 / 6 / 12 mo<span class="sep">|</span><span class="lb">basis</span> work, not silicon<span class="sep">|</span><span class="lb">margin</span> daily mark<span class="sep">|</span><span class="lb">obsolescence</span> class re-spec, not roll
+    </div>
+    <p class="speccap rise d1">Draft. Written to be implemented by anyone, including venues we do not run.</p>
+    <div class="cards two rise d1">
+      <div class="card"><div class="k">01 &middot; Method</div><h4>WTI&middot;Ref</h4><p>An open methodology for delivered work per unit of energy across chip class, region, and workload tier &mdash; published with a reference implementation and a dated calibration run against public nodal prices and proof-of-work telemetry. Not a live tape: a method you can run yourself, on a date we stand behind.</p></div>
+      <div class="card"><div class="k">02 &middot; Specification</div><h4>WTI&middot;Spec</h4><p>A public contract specification for a power-adjusted compute forward: unit definition, settlement source, tenor, margin treatment, and how a contract survives a hardware generation. Not a venue: the definition anyone clearing this trade will need to cite.</p></div>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="work">
+    <div class="eyebrow rise">Why work, not chips</div>
+    <h2 class="h2 rise">A benchmark in silicon <span class="mut">expires on the next tape-out.</span></h2>
+    <p class="p rise d1">Every attempt to standardize compute so far has priced the machine: an hour of a named chip, split by term and cluster size. That number decays with each generation. An H100 is not an H200, training and inference depreciate on different curves, and a benchmark tracking the hardware has to be rewritten every time the hardware moves &mdash; precisely when collateral values and financing paths depend on it holding still.</p>
+    <p class="p rise d1">Work does not decay. Beneath every token there is an irreducible thermodynamic cost to erasing a bit, and the ratio of useful output to energy spent is measurable in any generation, on any architecture, including ones not yet designed. That is the invariant a durable benchmark has to be built on. Our grounding is <a href="https://arxiv.org/pdf/2303.04305" target="_blank" rel="noopener">Proof of Entropy Minima</a>, which measures work as entropy provably minimized, and the broader <a href="https://thermoeconomics.info/" target="_blank" rel="noopener">thermoeconomic</a> framework it sits inside.</p>
+    <div class="callout rise d1"><div class="k">Already trading</div><h4>There is one forward curve on energy-denominated work</h4>
+      <p>On <a href="https://qu.ai" target="_blank" rel="noopener">Quai</a>, miners can defer receipt of mined tokens by three, six, or twelve months in exchange for yield. That is a term structure on work, quoted at three tenors, with real counterparties taking the other side &mdash; as far as we know, the only observable forward curve on energy-denominated compute anywhere. We study it as a calibration input, and as evidence that the market clears.</p>
+    </div>
+    <div class="callout rise d1"><div class="k">On the roadmap</div><h4>Settlement in energy</h4>
+      <p>A benchmark denominated in work invites a settlement asset denominated in the same thing. Our roadmap runs toward energy-denominated settlement on <a href="https://qi.xyz" target="_blank" rel="noopener">Qi</a> &mdash; clearing a compute forward in the unit it is priced in, rather than translating twice through dollars. The controller economics that would make that safe are still open research, and we treat them that way: the index and the specification stand on their own.</p>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq seq--tall" id="plugs">
+    <div class="eyebrow rise">Where it plugs in</div>
+    <h2 class="h2 rise">The reference rate <span class="mut">the instruments cite.</span></h2>
+    <p class="p rise d1">WTI&middot;Ref defines the number. The instruments are what you trade against it &mdash; futures for the spot curve, bonds for the term structure, options for the volatility surface. The benchmark comes first; the contracts cite it.</p>
+    <div class="cards rise d1">
+      <a class="card" href="compute-futures.html"><div class="k">Settles against WTI</div><h4>Compute Futures</h4><p>A perpetual, cash-settled index future producing the forward price surface.</p><div class="foot">Open &rarr;</div></a>
+      <a class="card" href="compute-options.html"><div class="k">Calibrates from WTI</div><h4>Compute Options</h4><p>Convertible claims whose premiums reveal the implied volatility of energy-denominated work.</p><div class="foot">Open &rarr;</div></a>
+      <a class="card" href="infrastructure.html"><div class="k">Meters both sides</div><h4>Infrastructure</h4><p>The facilities and endpoints producing the telemetry the index is calibrated from.</p><div class="foot">Open &rarr;</div></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>&copy; 2026 American Energy Money</span>
+  <div class="partner-logos">
+    <a href="https://qu.ai" target="_blank" rel="noopener"><img src="images/quai.png" alt="Quai Network"></a>
+    <a href="https://thermoeconomics.info" target="_blank" rel="noopener"><img src="images/thermoecon.png" alt="Thermoeconomics"></a>
+    <a href="https://alphamine.tech/" target="_blank" rel="noopener"><img src="images/alphamine.png" alt="Alphamine"></a>
+    <a href="https://qi.xyz" target="_blank" rel="noopener"><img src="images/qi.png" alt="Qi"></a>
+    <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
+  </div>
+</footer>
+
+<script src="aem-theme.js"></script>
+
+</body>
+</html>
