@@ -3,6 +3,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -149,41 +150,19 @@
       font-size: clamp(32px, 4vw, 50px); font-weight: 700;
       letter-spacing: -0.03em; color: #fff; margin-bottom: 48px;
     }
-    .carousel-outer { position: relative; width: 100%; overflow: hidden; }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
-      cursor: grab; user-select: none;
-    }
-    .carousel-track.dragging { transition: none; cursor: grabbing; }
-    .carousel-slide {
-      flex-shrink: 0; width: 100%; padding: 0 48px;
+    .brief-video-wrap {
+      width: 100%; padding: 0 48px;
       display: flex; justify-content: center;
     }
-    .carousel-slide img {
+    .brief-video {
       max-width: 900px; width: 100%; height: auto;
-      border-radius: 12px; object-fit: contain;
+      border-radius: 12px; display: block;
+      background: #000;
     }
-    .carousel-btn-wrap {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 16px; pointer-events: none;
+    .brief-caption {
+      font-size: 14px; color: #666; line-height: 1.65;
+      max-width: 620px; margin: 28px auto 0; padding: 0 24px;
     }
-    .carousel-btn {
-      pointer-events: auto; width: 44px; height: 44px;
-      border-radius: 50%; background: rgba(0,0,0,0.4); border: none;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s; color: #fff;
-    }
-    .carousel-btn:hover { background: rgba(0,0,0,0.7); }
-    .carousel-dots {
-      display: flex; gap: 8px; justify-content: center; margin-top: 28px;
-    }
-    .dot {
-      width: 10px; height: 10px; border-radius: 50%; background: #fff;
-      opacity: 0.35; cursor: pointer; transition: opacity 0.2s; border: none;
-    }
-    .dot.active { opacity: 1; }
 
     /* ─── TEAM ─── */
     .team-section {
@@ -260,7 +239,7 @@
       nav { padding: 0 20px; }
       .hero-light, .hero-dark, .sci-money,
       .team-section, .join-section { padding-left: 20px; padding-right: 20px; }
-      .carousel-slide { padding: 0 16px; }
+      .brief-video-wrap { padding: 0 16px; }
       footer { padding: 24px 20px; }
       .footer-links { gap: 16px; flex-wrap: wrap; }
     }
@@ -329,26 +308,16 @@
 <!-- ── THEORETICAL BRIEF ── -->
 <section class="theoretical">
   <h2>Theoretical Brief</h2>
-  <div class="carousel-outer">
-    <div class="carousel-track" id="carousel">
-      <div class="carousel-slide"><img src="images/brief-01.png" alt="Brief 1" loading="lazy"></div>
-      <div class="carousel-slide"><img src="images/brief-02.png" alt="Brief 2" loading="lazy"></div>
-      <div class="carousel-slide"><img src="images/brief-03.png" alt="Brief 3" loading="lazy"></div>
-    </div>
-    <div class="carousel-btn-wrap">
-      <button class="carousel-btn" id="prev" aria-label="Previous">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <button class="carousel-btn" id="next" aria-label="Next">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </button>
-    </div>
+  <div class="brief-video-wrap">
+    <video class="brief-video"
+           src="images/uniform-distribution.mp4"
+           poster="images/uniform-distribution-poster.jpg"
+           autoplay muted loop playsinline preload="metadata"
+           aria-label="Animation of a uniform distribution over hash space">
+      Your browser does not support the video tag.
+    </video>
   </div>
-  <div class="carousel-dots" id="dots"></div>
+  <p class="brief-caption">SHA-256 outputs are uniform and equiprobable across a 2<sup>256</sup> state space. Counting consecutive leading zeros imposes a constraint on that space &mdash; and each zero is a bit of uncertainty removed.</p>
 </section>
 
 
@@ -366,56 +335,6 @@
     <a href="https://www.wolframblockchainlabs.com" target="_blank" rel="noopener"><img src="images/wbl.png" alt="Wolfram Blockchain Labs"></a>
   </div>
 </footer>
-
-<script>
-  const track = document.getElementById('carousel');
-  const dotsContainer = document.getElementById('dots');
-  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
-  const total = slides.length;
-  let current = 0;
-  let autoTimer;
-
-  // Build dots
-  slides.forEach((_, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'dot' + (i === 0 ? ' active' : '');
-    btn.setAttribute('aria-label', `Slide ${i + 1}`);
-    btn.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(btn);
-  });
-
-  function goTo(n) {
-    current = ((n % total) + total) % total;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  function startAuto() {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(() => goTo(current + 1), 5000);
-  }
-
-  document.getElementById('prev').addEventListener('click', () => { goTo(current - 1); startAuto(); });
-  document.getElementById('next').addEventListener('click', () => { goTo(current + 1); startAuto(); });
-
-  // Touch / drag
-  let dragStart = null;
-  track.addEventListener('pointerdown', e => {
-    dragStart = e.clientX;
-    track.classList.add('dragging');
-    track.setPointerCapture(e.pointerId);
-  });
-  track.addEventListener('pointerup', e => {
-    if (dragStart === null) return;
-    const dx = e.clientX - dragStart;
-    track.classList.remove('dragging');
-    dragStart = null;
-    if (dx < -50) { goTo(current + 1); startAuto(); }
-    else if (dx > 50) { goTo(current - 1); startAuto(); }
-  });
-
-  startAuto();
-</script>
 
 </body>
 </html>
