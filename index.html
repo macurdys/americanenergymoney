@@ -154,12 +154,38 @@
       width: 100%; padding: 0 48px;
       display: flex; justify-content: center;
     }
-    .brief-video {
-      max-width: 900px; width: 100%; height: auto;
-      aspect-ratio: 16 / 9;
-      border-radius: 12px; display: block;
-      background: #000;
+    .brief-frame {
+      position: relative; max-width: 900px; width: 100%;
+      border-radius: 12px; overflow: hidden; background: #000;
     }
+    .brief-video {
+      width: 100%; height: auto; aspect-ratio: 16 / 9;
+      display: block; background: #000;
+    }
+    .brief-controls {
+      position: absolute; left: 14px; bottom: 14px;
+      display: flex; gap: 8px;
+      opacity: 0.55; transition: opacity 0.2s;
+    }
+    .brief-frame:hover .brief-controls,
+    .brief-controls:focus-within { opacity: 1; }
+    .vbtn {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: #fff; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, border-color 0.15s;
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      padding: 0;
+    }
+    .vbtn:hover { background: rgba(0,0,0,0.8); border-color: rgba(255,255,255,0.5); }
+    .vbtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    .vbtn svg { width: 17px; height: 17px; display: block; }
+    .vbtn .ico-hide { display: none; }
+    .vbtn.is-on .ico-hide { display: block; }
+    .vbtn.is-on .ico-show { display: none; }
+    @media (hover: none) { .brief-controls { opacity: 1; } }
     .brief-fallback {
       max-width: 900px; width: 100%; height: auto;
       border-radius: 12px; display: block;
@@ -324,15 +350,27 @@
 <section class="theoretical">
   <h2>Theoretical Brief</h2>
   <div class="brief-video-wrap">
-    <video class="brief-video" id="briefVideo"
-           poster="images/uniform-distribution-poster.jpg"
-           width="1280" height="720"
-           autoplay muted loop playsinline preload="auto"
-           aria-label="Animation of a uniform distribution over hash space">
-      <source src="images/uniform-distribution.mp4" type="video/mp4">
-      <img class="brief-fallback" src="images/uniform-distribution-poster.jpg"
-           alt="A uniform distribution over hash space">
-    </video>
+    <div class="brief-frame" id="briefFrame">
+      <video class="brief-video" id="briefVideo"
+             poster="images/uniform-distribution-poster.jpg"
+             width="1280" height="720"
+             autoplay muted loop playsinline preload="auto"
+             aria-label="Animation of a uniform distribution over hash space">
+        <source src="images/uniform-distribution.mp4" type="video/mp4">
+        <img class="brief-fallback" src="images/uniform-distribution-poster.jpg"
+             alt="A uniform distribution over hash space">
+      </video>
+      <div class="brief-controls">
+        <button type="button" class="vbtn is-on" id="btnPlay" aria-label="Pause video" aria-pressed="true">
+          <svg class="ico-hide" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+          <svg class="ico-show" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.3-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z"/></svg>
+        </button>
+        <button type="button" class="vbtn" id="btnMute" aria-label="Unmute video" aria-pressed="false">
+          <svg class="ico-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+          <svg class="ico-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M18.36 5.64a9 9 0 0 1 0 12.72"/></svg>
+        </button>
+      </div>
+    </div>
   </div>
   <p class="brief-caption">SHA-256 outputs are uniform and equiprobable across a 2<sup>256</sup> state space. Counting consecutive leading zeros imposes a constraint on that space &mdash; and each zero is a bit of uncertainty removed.</p>
 </section>
@@ -355,29 +393,66 @@
 
 <script>
 (function () {
-  var v = document.getElementById('briefVideo');
+  var v    = document.getElementById('briefVideo');
+  var play = document.getElementById('btnPlay');
+  var mute = document.getElementById('btnMute');
   if (!v) return;
 
-  // Autoplay can be refused even when muted (low-power mode, strict settings).
-  // Fall back to showing controls rather than a frozen poster.
+  // Audio starts OFF. The muted attribute is also what lets autoplay run at all.
+  v.muted = true;
+
+  function syncPlay() {
+    var playing = !v.paused && !v.ended;
+    play.classList.toggle('is-on', playing);
+    play.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    play.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+  }
+  function syncMute() {
+    mute.classList.toggle('is-on', !v.muted);
+    mute.setAttribute('aria-pressed', v.muted ? 'false' : 'true');
+    mute.setAttribute('aria-label', v.muted ? 'Unmute video' : 'Mute video');
+  }
+
+  // Autoplay can still be refused (low-power mode, strict settings).
+  // Fall back to a paused first frame with a working play button.
   function tryPlay() {
     var p = v.play();
-    if (p && typeof p.catch === 'function') {
-      p.catch(function () { v.setAttribute('controls', ''); });
-    }
+    if (p && typeof p.catch === 'function') p.catch(syncPlay);
   }
   if (v.readyState >= 2) tryPlay();
   v.addEventListener('loadeddata', tryPlay);
 
-  // Repaint when the tab regains focus — some browsers pause background video.
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden && v.paused && !v.hasAttribute('controls')) tryPlay();
+  var userPaused = false;
+  play.addEventListener('click', function () {
+    if (v.paused) {
+      userPaused = false;
+      var p = v.play(); if (p && p.catch) p.catch(function(){});
+    } else {
+      userPaused = true;
+      v.pause();
+    }
   });
 
-  // If the file itself cannot be fetched or decoded, say so plainly.
+  mute.addEventListener('click', function () {
+    v.muted = !v.muted;
+    // Unmuting is a user gesture, so a resume here is always permitted.
+    if (!v.muted && v.paused) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+    syncMute();
+  });
+
+  ['play', 'pause', 'ended'].forEach(function (e) { v.addEventListener(e, syncPlay); });
+  v.addEventListener('volumechange', syncMute);
+
+  // Resume on tab refocus, but never override a deliberate pause.
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && v.paused && !userPaused) tryPlay();
+  });
+
+  // If the file cannot be fetched or decoded, say so plainly.
   function fail() {
-    if (v.dataset.failed) return;
-    v.dataset.failed = '1';
+    var frame = document.getElementById('briefFrame');
+    if (!frame || frame.dataset.failed) return;
+    frame.dataset.failed = '1';
     var box = document.createElement('div');
     box.className = 'brief-error';
     box.innerHTML = 'Video did not load. Confirm ' +
@@ -385,11 +460,13 @@
       '<code>images/uniform-distribution-poster.jpg</code> are uploaded, ' +
       'that the folder name is lowercase <code>images</code>, and that the page ' +
       'is served over http rather than opened from the file system.';
-    v.replaceWith(box);
+    frame.replaceWith(box);
   }
   v.addEventListener('error', fail, true);
   var src = v.querySelector('source');
   if (src) src.addEventListener('error', fail);
+
+  syncPlay(); syncMute();
 })();
 </script>
 
