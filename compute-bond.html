@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compute Bonds — American Energy Money</title>
+<meta name="description" content="Zero-coupon bonds collateralized by locked coinbase emissions, tokenized for liquid secondary trading and settled in QUAI.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="aem-theme.css">
+</head>
+<body data-theme="paper">
+
+<div class="ground" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html"><img src="images/logo.png" alt="American Energy Money"></a>
+  <div class="nav-links">
+    <a class="nav-item active" href="compute.html">Compute</a>
+    <a class="nav-item" href="compute-index.html">Index</a>
+    <a class="nav-item" href="infrastructure.html">Infrastructure</a>
+    <a class="nav-item" href="research.html">Research</a>
+  </div>
+</nav>
+
+<main>
+  <section class="band hero" id="top">
+    <div class="rise in">
+      <h1>Compute<span class="l2">Bonds</span></h1>
+      <p class="hero-sub">A zero-coupon bond collateralized by locked coinbase emissions, tokenized so the principal stays liquid while the lock holds.</p>
+    </div>
+    <div class="scrollcue" aria-hidden="true"><em></em> Scroll</div>
+  </section>
+
+  <div class="bleed"></div>
+
+  <section class="band seq" id="instrument">
+    <div class="eyebrow rise">The instrument</div>
+    <h2 class="h2 rise">A bond, <span class="mut">not a staking receipt</span></h2>
+    <p class="lead-p rise d1">Locked coinbase rewards form the collateral. The bond is issued at a discount to face value and tokenized &mdash; hold to maturity for full face, or sell into the secondary market at any time.</p>
+    <div class="steps rise d1">
+      <div class="step"><div class="n">01 &middot; Collateral</div><h4>Locked coinbase</h4><p>A miner locks a portion of block rewards for a fixed term. The lock is enforced by the protocol, not by a custodian, and the locked emission is the asset backing the note.</p></div>
+      <div class="step"><div class="n">02 &middot; Pricing</div><h4>Discount to face</h4><p>The bond issues below face value and accretes to par at maturity. Yield is fixed at issuance by the protocol lock multiplier &mdash; there is no rate committee and no discretionary adjustment.</p></div>
+      <div class="step"><div class="n">03 &middot; Liquidity</div><h4>Tokenized principal</h4><p>The claim trades freely while the underlying stays locked. The miner gets cash flow without breaking the commitment; the protocol keeps the security the lock was bought for.</p></div>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="problem">
+    <div class="eyebrow rise">What it solves</div>
+    <h2 class="h2 rise">GPU networks lack <span class="mut">capital commitment.</span></h2>
+    <p class="p rise d1">Miners can switch chains in hours, which leaves a network exposed to rental-hashrate attacks. ASIC networks solve this with hardware lock-in &mdash; capital that physically cannot go anywhere else. GPU networks have no such constraint and need a financial mechanism instead.</p>
+    <p class="p rise d1">Locked rewards create ASIC-like commitment without specialized hardware. Tokenizing the principal preserves capital flexibility, so the miner is not choosing between security and solvency.</p>
+    <div class="callout rise d1"><div class="k">The trade</div><h4>Security for the protocol, cash flow for the miner</h4>
+      <p>A lock the miner would otherwise refuse becomes acceptable once the claim on it is liquid. That is the whole mechanism: the protocol buys duration, and the miner sells it without surrendering access to capital.</p>
+    </div>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq" id="term">
+    <div class="eyebrow rise">Term structure</div>
+    <p class="lead-p lead-p rise">Three tenors, each a point on a discount curve denominated in energy-backed emission.</p>
+    <div class="ctable rise d1">
+      <div class="crow head c2"><div class="dim">Tenor</div><div>Lock period</div><div>Character</div></div>
+      <div class="crow c2"><div class="dim">Short</div><div>3 months</div><div>Working capital against near-term emission. Thinnest discount, highest turnover.</div></div>
+      <div class="crow c2"><div class="dim">Mid</div><div>6 months</div><div>The reference tenor. Deep enough to price, short enough that miners will write it.</div></div>
+      <div class="crow c2"><div class="dim">Long</div><div>12 months</div><div>Genuine duration. Prices the market view on emission and difficulty a year out.</div></div>
+    </div>
+    <p class="p rise d1">Taken together the three points give the compute economy something it has never had: an observable discount curve on energy-denominated work, quoted by counterparties with real positions.</p>
+  </section>
+  <div class="bleed"></div>
+
+  <section class="band seq seq--tall" id="pair">
+    <div class="eyebrow rise">Paired with futures</div>
+    <h2 class="h2 rise">A bond on <span class="mut">the energy economy.</span></h2>
+    <p class="p rise d1">Futures price compute today; bonds price compute tomorrow. One produces the spot curve, the other the term structure, and each is more useful because the other exists &mdash; a discount curve without a spot reference is unanchored, and a spot rate without a curve cannot be financed against.</p>
+    <div class="cards two rise d1">
+      <a class="card" href="compute-futures.html"><div class="k">Prices today</div><h4>Compute Futures</h4><p>The perpetual spot reference all term pricing discounts back to.</p><div class="foot">Open &rarr;</div></a>
+      <a class="card" href="compute-options.html"><div class="k">Prices uncertainty</div><h4>Compute Options</h4><p>Convexity written by miners against the block election they currently waste.</p><div class="foot">Open &rarr;</div></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>&copy; 2026 American Energy Money</span>
+</footer>
+
+<script src="aem-theme.js"></script>
+
+</body>
+</html>
