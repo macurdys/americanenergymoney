@@ -1,14 +1,11 @@
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research — American Energy Money</title>
-  <meta name="description" content="Research reports on thermoeconomics, mining economics, and energy-money systems.">
+  <title>Thermoeconomic Research — American Energy Money</title>
+  <meta name="description" content="A computational framework connecting energy, entropy, and proof of work to the foundations of economic value. Nine open-access papers and theses from Wolfram Blockchain Labs.">
   <link rel="icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -285,6 +282,97 @@
       .fork-branch .flow-icon svg { width: 18px; height: 18px; }
       .pricing-box { min-width: 120px; padding: 10px 14px; }
     }
+
+    /* ═══ RESEARCH PEDESTAL ═══ */
+    .hero .byline { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:#4a4a4a; margin-top:30px; position:relative; }
+    .hero .eyebrow-tag { font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#666; margin-bottom:26px; position:relative; display:block; }
+
+    /* thesis block */
+    .te-wrap { background:#0d0d0d; padding:110px 48px; }
+    .te-inner { max-width:980px; margin:0 auto; }
+    .te-inner h2 { font-size:clamp(36px,5vw,60px); font-weight:800; letter-spacing:-0.04em; line-height:1.02; color:#fff; margin-bottom:30px; }
+    .te-inner h2 .gray { color:#4a4a4a; }
+    .te-inner h3 { font-size:clamp(22px,2.6vw,30px); font-weight:700; letter-spacing:-0.03em; color:#fff; line-height:1.25; margin-bottom:18px; }
+    .te-inner p { font-size:17px; line-height:1.78; color:#8a8a8a; margin-bottom:22px; max-width:780px; }
+    .te-inner p.big { font-size:20px; color:#c8c8c8; line-height:1.7; }
+    .te-inner p strong { color:#e4e4e4; font-weight:600; }
+    .te-inner a.inline { color:#fff; text-decoration:underline; text-decoration-color:#3a3a3a; text-underline-offset:3px; }
+    .te-inner a.inline:hover { text-decoration-color:#fff; }
+    .te-rule { border:none; border-top:1px solid rgba(255,255,255,0.09); margin:70px 0 56px; }
+
+    /* four lineages */
+    .lineage { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; margin-top:44px; border:1px solid rgba(255,255,255,0.09); border-radius:16px; overflow:hidden; }
+    .lin { padding:32px 30px; background:rgba(255,255,255,0.022); }
+    .lin .k { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#555; margin-bottom:14px; }
+    .lin h4 { font-size:19px; font-weight:700; letter-spacing:-0.025em; color:#fff; margin-bottom:11px; }
+    .lin p { font-size:14.5px; color:#7a7a7a; line-height:1.68; margin:0 0 16px; }
+    .lin .cites { display:flex; flex-wrap:wrap; gap:7px; }
+    .lin .cites a { font-family:var(--mono); font-size:10.5px; font-weight:500; letter-spacing:0.03em; color:#888; border:1px solid rgba(255,255,255,0.13); border-radius:100px; padding:4px 11px; text-decoration:none; transition:0.15s; }
+    .lin .cites a:hover { color:#fff; border-color:#fff; }
+
+    /* results */
+    .results { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:44px; }
+    .res { padding:30px 26px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.09); border-radius:14px; }
+    .res .eq { font-family:var(--mono); font-size:15px; font-weight:600; color:#fff; margin-bottom:16px; letter-spacing:-0.01em; line-height:1.4; }
+    .res h5 { font-size:15px; font-weight:700; letter-spacing:-0.02em; color:#ddd; margin-bottom:9px; }
+    .res p { font-size:13.5px; color:#787878; line-height:1.65; margin:0; }
+
+    /* tech tree */
+    .tree-wrap { background:#111; padding:100px 48px; }
+    .tree-inner { max-width:900px; margin:0 auto; }
+    .tree { display:flex; flex-direction:column; gap:8px; margin-top:44px; }
+    .tier { display:grid; grid-template-columns:112px 1fr; gap:20px; align-items:center; padding:18px 22px; border:1px solid rgba(255,255,255,0.08); border-radius:12px; background:rgba(255,255,255,0.022); }
+    .tier .lvl { font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:0.11em; text-transform:uppercase; color:#5a5a5a; }
+    .tier .items { display:flex; flex-wrap:wrap; gap:7px; }
+    .tier .items span { font-size:13px; font-weight:500; color:#9a9a9a; background:rgba(255,255,255,0.05); border-radius:6px; padding:5px 11px; letter-spacing:-0.01em; }
+    .tier.apex { background:#fff; border-color:#fff; }
+    .tier.apex .lvl { color:#888; }
+    .tier.apex .items span { background:transparent; color:#111; font-size:19px; font-weight:800; letter-spacing:-0.03em; padding:0; }
+
+    /* corpus */
+    .corpus-wrap { background:#fff; padding:110px 48px; }
+    .corpus-inner { max-width:1000px; margin:0 auto; }
+    .corpus-inner h2 { font-size:clamp(34px,4.4vw,52px); font-weight:800; letter-spacing:-0.035em; margin-bottom:20px; }
+    .corpus-inner h2 .gray { color:var(--gray); }
+    .corpus-lead { font-size:17px; color:#666; line-height:1.7; max-width:700px; margin-bottom:56px; }
+    .paper { display:grid; grid-template-columns:132px 1fr; gap:30px; padding:34px 0; border-top:1px solid var(--border); }
+    .paper:last-of-type { border-bottom:1px solid var(--border); }
+    .paper .meta { font-family:var(--mono); font-size:10.5px; line-height:1.9; color:#aaa; letter-spacing:0.04em; }
+    .paper .meta b { display:block; color:#111; font-weight:600; letter-spacing:0.11em; text-transform:uppercase; margin-bottom:4px; }
+    .paper h3 { font-size:23px; font-weight:800; letter-spacing:-0.03em; line-height:1.2; margin-bottom:8px; }
+    .paper .authors { font-size:13.5px; color:#999; margin-bottom:14px; letter-spacing:-0.01em; }
+    .paper .abs { font-size:15.5px; color:#555; line-height:1.7; margin-bottom:16px; }
+    .paper .abs strong { color:#111; font-weight:600; }
+    .paper .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
+    .paper .chips span { font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:0.05em; color:#888; background:#f4f4f4; border-radius:100px; padding:4px 10px; }
+    .paper .go { font-size:14px; font-weight:700; letter-spacing:-0.01em; color:#111; text-decoration:none; border-bottom:1.5px solid #111; padding-bottom:1px; }
+    .paper .go:hover { color:#555; border-color:#555; }
+
+    .decks { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:52px; }
+    .deck { padding:26px 24px; border:1px solid var(--border); border-radius:14px; text-decoration:none; display:block; transition:0.15s; }
+    .deck:hover { border-color:#111; transform:translateY(-2px); }
+    .deck .dk { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#bbb; margin-bottom:12px; }
+    .deck h4 { font-size:17px; font-weight:700; letter-spacing:-0.025em; color:#111; margin-bottom:8px; line-height:1.25; }
+    .deck p { font-size:13.5px; color:#777; line-height:1.6; margin:0; }
+
+    /* reports */
+    .reports-section { padding:96px 48px 104px; background:#fafafa; border-bottom:1px solid var(--border); }
+    .reports-lead { max-width:660px; }
+    .reports-note { max-width:840px; margin:60px auto 0; padding:32px 36px; background:#fff; border:1px solid var(--border); border-radius:14px; text-align:left; }
+    .reports-note h4 { font-size:17px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px; }
+    .reports-note p { font-size:15px; color:#666; line-height:1.72; margin:0; }
+    .report-card { display:flex; flex-direction:column; }
+    .report-body { display:flex; flex-direction:column; flex:1; }
+    .report-footer { margin-top:auto; }
+
+    @media (max-width:900px) {
+      .lineage, .results, .decks { grid-template-columns:1fr; }
+      .te-wrap, .tree-wrap, .corpus-wrap, .reports-section { padding-left:24px; padding-right:24px; }
+      .tier { grid-template-columns:1fr; gap:12px; }
+      .paper { grid-template-columns:1fr; gap:14px; }
+      .paper .meta { display:flex; gap:14px; }
+      .paper .meta b { margin-bottom:0; }
+    }
   </style>
 </head>
 <body>
@@ -298,365 +386,19 @@
 </nav>
 
 <section class="hero">
+  <span class="eyebrow-tag">A new science is emerging</span>
   <h1>Thermoeconomic <span class="dim">Research</span></h1>
-  <p class="subtitle">Theory, analysis, and formal verification at the intersection of energy, entropy, and economic value.</p>
+  <p class="subtitle">Economic value is not an abstraction. It is energy expended, entropy produced, work performed — and it obeys the same laws as everything else that does.</p>
+  <p class="byline">Steph Macurdy &middot; Wolfram Blockchain Labs &middot; UTXO Alliance</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- ══════════════════════════ MARKETS ════════════════════════ -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-
-<section class="mkt light" id="markets">
-  <div class="mkt-inner">
-    <span class="section-label">Compute Capital Markets</span>
-    <h2><span class="gray">The compute</span><br>spread</h2>
-    <p>
-      A workload's margin is the gap between what it sells for and what it costs to power.
-      Power traders have priced that kind of gap for forty years — they call theirs the spark spread,
-      and it is why a generator can finance a plant before it knows next summer's price.
-    </p>
-    <p>
-      Compute has no such instrument. There is <strong>no reference rate for the price of work per unit of
-      energy</strong>, and no standardized forward to hedge it. Once a chip is racked its capital cost is sunk,
-      and the marginal cost of the next workload is mostly the electricity it draws — so the number that
-      decides the economics isn't the price of compute or the price of power. It's the distance between them.
-    </p>
-
-    <div class="mkt-stats">
-      <div class="mkt-stat">
-        <div class="num">2&times;</div>
-        <div class="cap">The U.S. interconnection queue holds roughly twice the capacity the installed grid serves today.</div>
-        <a href="https://www.latitudemedia.com/news/the-us-interconnection-queue-is-twice-its-installed-capacity/" target="_blank" rel="noopener">LATITUDE MEDIA &rarr;</a>
-      </div>
-      <div class="mkt-stat">
-        <div class="num">9&times;</div>
-        <div class="cap">PJM's capacity auction cleared about nine times higher year over year in a single cycle.</div>
-        <a href="https://www.utilitydive.com/news/pjm-interconnection-capacity-auction-vistra-constellation/722872/" target="_blank" rel="noopener">UTILITY DIVE &rarr;</a>
-      </div>
-      <div class="mkt-stat">
-        <div class="num">40%</div>
-        <div class="cap">Share of each watt entering an AI data center that actually reaches the GPU.</div>
-        <a href="https://epoch.ai/data-insights/gpus-power-usage-in-ai-data-centers" target="_blank" rel="noopener">EPOCH AI &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="mkt dark">
-  <div class="mkt-inner">
-    <span class="section-label">The Instrument</span>
-    <h2>WTI<br><span class="gray">the Watt&middot;Token Index</span></h2>
-    <p>
-      Oil became financeable when it got a benchmark. Before Brent and WTI, crude moved through opaque
-      concessions and private contracts; after, it moved through futures, covenants, and audit footnotes.
-      The benchmark came first, and the capital followed it.
-    </p>
-    <p>
-      Compute is at the stage oil was before the benchmark. We are writing the two documents that stage needs:
-      a method for measuring delivered work per unit of energy, and a contract specification for trading it.
-    </p>
-
-    <div class="spec-line" role="figure" aria-label="Draft contract specification line">
-      <span class="tkr">WTI&middot;1M</span><span class="sep">|</span><span class="lbl">unit</span> 1 megatoken delivered<span class="sep">|</span><span class="lbl">class</span> 70B dense<span class="sep">|</span><span class="lbl">latency</span> p99 &le; 100 ms<span class="sep">|</span><span class="lbl">energy</span> MWh at node<span class="sep">|</span><span class="lbl">settle</span> cash, spread to nodal<br>
-      <span class="tkr">WTI&middot;FWD</span><span class="sep">|</span><span class="lbl">tenor</span> 3 / 6 / 12 mo<span class="sep">|</span><span class="lbl">basis</span> work, not silicon<span class="sep">|</span><span class="lbl">margin</span> daily mark<span class="sep">|</span><span class="lbl">obsolescence</span> class re-spec, not roll
-    </div>
-    <p class="spec-caption">Draft. Written to be implemented by anyone, including venues we do not run.</p>
-
-    <div class="mkt-cards">
-      <div class="mkt-card">
-        <div class="tag">01 &mdash; Method</div>
-        <h4>WTI&middot;Ref</h4>
-        <p>
-          An open methodology for delivered work per unit of energy, across chip class, region, and
-          workload tier — published with a reference implementation and a dated calibration run against
-          public nodal prices and proof-of-work telemetry.
-        </p>
-        <p class="not">Not a live tape. A method you can run yourself, on a date we stand behind.</p>
-      </div>
-      <div class="mkt-card">
-        <div class="tag">02 &mdash; Specification</div>
-        <h4>WTI&middot;Spec</h4>
-        <p>
-          A public contract specification for a power-adjusted compute forward: unit definition,
-          settlement source, tenor, margin treatment, and how a contract survives a hardware generation.
-        </p>
-        <p class="not">Not a venue. The definition anyone clearing this trade will need to cite.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="mkt light">
-  <div class="mkt-inner">
-    <span class="section-label">Why work, not chips</span>
-    <h3>A benchmark denominated in silicon expires<br>on the next tape-out.</h3>
-    <p>
-      Every attempt to standardize compute so far has priced the machine: an hour of a named chip, split by
-      term and cluster size. That number decays with each generation. An H100 is not an H200, training and
-      inference depreciate on different curves, and a benchmark that tracks the hardware has to be rewritten
-      every time the hardware moves — precisely when collateral values and financing paths depend on it holding still.
-    </p>
-    <p>
-      Work does not decay. Beneath every token there is an irreducible thermodynamic cost to erasing a bit,
-      and the ratio of useful output to energy spent is measurable in any generation, on any architecture,
-      including ones not yet designed. That is the invariant a durable benchmark has to be built on.
-      Our grounding for it is
-      <a class="inline" href="https://arxiv.org/pdf/2303.04305" target="_blank" rel="noopener">Proof of Entropy Minima</a>,
-      which measures work as entropy provably minimized, and the broader
-      <a class="inline" href="https://thermoeconomics.info/" target="_blank" rel="noopener">thermoeconomic</a>
-      framework it sits inside.
-    </p>
-
-    <div class="mkt-note">
-      <h3 style="margin-bottom:14px;">There is already one forward curve on energy-denominated work.</h3>
-      <p>
-        On <a class="inline" href="https://qu.ai" target="_blank" rel="noopener">Quai</a>, miners can defer
-        receipt of mined tokens by three, six, or twelve months in exchange for yield. That is a term
-        structure on work, quoted at three tenors, with real counterparties taking the other side of it —
-        as far as we know, the only observable forward curve on energy-denominated compute anywhere.
-        We are studying it as a calibration input, and as evidence that the market clears.
-      </p>
-    </div>
-
-    <hr class="mkt-rule">
-
-    <span class="section-label">On the roadmap</span>
-    <h3>Settlement in energy.</h3>
-    <p>
-      A benchmark denominated in work invites a settlement asset denominated in the same thing. Our roadmap
-      runs toward energy-denominated settlement on
-      <a class="inline" href="https://qi.xyz" target="_blank" rel="noopener">Qi</a> — clearing a compute
-      forward in the unit it is priced in, rather than translating twice through dollars. The controller
-      economics that would make that safe are still open research, and we are treating them that way:
-      the index and the specification stand on their own, and do not depend on it.
-    </p>
-
-    <hr class="mkt-rule">
-
-    <span class="section-label">Sources</span>
-    <ul class="mkt-sources">
-      <li><span>U.S. interconnection queue versus installed capacity</span><a href="https://www.latitudemedia.com/news/the-us-interconnection-queue-is-twice-its-installed-capacity/" target="_blank" rel="noopener">Latitude Media</a></li>
-      <li><span>PJM capacity auction clearing, year over year</span><a href="https://www.utilitydive.com/news/pjm-interconnection-capacity-auction-vistra-constellation/722872/" target="_blank" rel="noopener">Utility Dive</a></li>
-      <li><span>Share of facility power reaching the GPU</span><a href="https://epoch.ai/data-insights/gpus-power-usage-in-ai-data-centers" target="_blank" rel="noopener">Epoch AI</a></li>
-      <li><span>Rack-level power draw, GB200 NVL72</span><a href="https://www.nvidia.com/en-us/data-center/gb200-nvl72/" target="_blank" rel="noopener">NVIDIA</a></li>
-      <li><span>800 V HVDC architecture for AI factories</span><a href="https://developer.nvidia.com/blog/nvidia-800-v-hvdc-architecture-will-power-the-next-generation-of-ai-factories/" target="_blank" rel="noopener">NVIDIA</a></li>
-      <li><span>Renewable power generation costs</span><a href="https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2022/Jul/IRENA_Renewable_Power_Generation_Costs_2021.pdf" target="_blank" rel="noopener">IRENA</a></li>
-      <li><span>Record negative power prices in Europe, 2025</span><a href="https://www.bloomberg.com/news/articles/2026-01-05/europe-saw-record-surge-in-negative-power-prices-in-2025" target="_blank" rel="noopener">Bloomberg</a></li>
-      <li><span>Short-duration storage and the path to longer duration</span><a href="https://ieefa.org/resources/market-success-short-duration-batteries-paves-way-longer-lasting-storage" target="_blank" rel="noopener">IEEFA</a></li>
-      <li><span>Electric utility residential customer satisfaction</span><a href="https://www.jdpower.com/business/press-releases/2025-us-electric-utility-residential-customer-satisfaction-study" target="_blank" rel="noopener">J.D. Power</a></li>
-      <li><span>Large power transformer lead times</span><a href="https://www.powermag.com/transformers-in-2026-shortage-scramble-or-self-inflicted-crisis/" target="_blank" rel="noopener">POWER</a></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- ════════════════════════ ENGINEERING ══════════════════════ -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-
-<section class="infra-flow-wrap">
-  <div class="infra-inner">
-
-    <div class="infra-header">
-      <span class="section-label" style="color:#bbb;">Applied Research · Facilities</span>
-      <h2>Electrical + Hardware <span class="gray">Infrastructure</span></h2>
-      <p>Physical energy systems and mining deployments powering applied research on the Quai Network.</p>
-    </div>
-
-    <div class="flow-area">
-      <span class="flow-label">Experimental Energy Money Lab</span>
-      <div class="flow-container">
-        <div class="flow-row">
-
-          <div class="flow-node">
-            <div class="flow-icon solar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-            </div>
-            <span class="flow-node-label">Solar</span>
-          </div>
-
-          <div class="flow-connector c1"><div class="line-bg"></div><div class="line-pulse"></div></div>
-
-          <div class="flow-node">
-            <div class="flow-icon battery">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="11" y1="10" x2="11" y2="14"/></svg>
-            </div>
-            <span class="flow-node-label">Battery</span>
-          </div>
-
-          <div class="flow-connector c2"><div class="line-bg"></div><div class="line-pulse"></div></div>
-
-          <div class="flow-node">
-            <div class="flow-icon compute">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M9 2v2"/><path d="M9 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/></svg>
-            </div>
-            <span class="flow-node-label">Compute</span>
-          </div>
-
-          <svg class="fork-svg" viewBox="0 0 80 72">
-            <path class="fork-line" d="M0,36 L24,36 Q36,36 40,18 L56,12"/>
-            <path class="fork-line" d="M0,36 L24,36 Q36,36 40,54 L56,60"/>
-            <circle class="fork-dot top" cx="42" cy="20" r="2.5" fill="#60a5fa"/>
-            <circle class="fork-dot bot" cx="42" cy="52" r="2.5" fill="#c084fc"/>
-          </svg>
-
-          <div class="fork-zone">
-            <div class="fork-stack">
-              <div class="fork-branch">
-                <div class="flow-icon output-qi">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                </div>
-                <span class="fork-branch-label">Quai / Qi</span>
-              </div>
-              <div class="fork-branch">
-                <div class="flow-icon output-ai">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 3-2 6h-4c0-3-2-4-2-6a4 4 0 0 1 4-4z"/><line x1="10" y1="16" x2="14" y2="16"/><line x1="10" y1="19" x2="14" y2="19"/></svg>
-                </div>
-                <span class="fork-branch-label">AI Inference</span>
-              </div>
-            </div>
-          </div>
-
-          <svg class="converge-svg" viewBox="0 0 64 72">
-            <path class="conv-line" d="M0,12 L16,12 Q28,12 32,36 L44,36 L64,36"/>
-            <path class="conv-line" d="M0,60 L16,60 Q28,60 32,36"/>
-            <circle class="conv-dot top" cx="24" cy="20" r="2.5" fill="#60a5fa"/>
-            <circle class="conv-dot bot" cx="24" cy="52" r="2.5" fill="#c084fc"/>
-          </svg>
-
-          <div class="pricing-output">
-            <div class="pricing-box">
-              <div class="price-label">Opportunity Cost</div>
-              <div class="price-values price-tick">
-                <div class="price-line"><span class="chain">QUAI</span> <span class="hi">+$0.047</span></div>
-                <div class="price-line"><span class="chain">BTC</span> <span class="lo">&#8722;$0.031</span></div>
-                <div class="price-line"><span class="chain">AGENT</span> <span class="mid">+$0.019</span></div>
-              </div>
-            </div>
-            <span class="pricing-output-label">$/kWh Delta</span>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="infra-grid">
-      <div class="infra-card">
-        <div class="infra-card-top">
-          <div class="infra-card-icon blue">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
-          </div>
-          <div class="infra-card-info">
-            <h3>Hardware Infrastructure</h3>
-            <p>High-density ASIC and GPU compute clusters designed for maximum efficiency and robust network security.</p>
-          </div>
-        </div>
-        <ul class="infra-list">
-          <li><span class="dot blue"></span>ASIC Mining Deployments</li>
-          <li><span class="dot blue"></span>GPU Compute Clusters</li>
-          <li><span class="dot blue"></span>Air &amp; Immersion Cooling Systems</li>
-        </ul>
-        <a href="#" class="action-btn outline" style="margin-top:8px;">Coming Soon</a>
-      </div>
-
-      <div class="infra-card">
-        <div class="infra-card-top">
-          <div class="infra-card-icon green">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <div class="infra-card-info">
-            <h3>Electrical Infrastructure</h3>
-            <p>Smart load balancing, off-grid generation, and high-capacity storage for continuous, low-cost power delivery.</p>
-          </div>
-        </div>
-        <ul class="infra-list">
-          <li><span class="dot green"></span>Solar Energy Harvesting</li>
-          <li><span class="dot green"></span>Battery Storage &amp; PDUs</li>
-          <li><span class="dot green"></span>Grid Load Balancing</li>
-        </ul>
-        <a href="#" class="action-btn outline" style="margin-top:8px;">Coming Soon</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="data-tools-wrap">
-  <div class="data-tools-inner">
-
-    <div class="data-tools-header">
-      <span class="section-label" style="color:#bbb;">Applied Research · Data Layer</span>
-      <h2>API &amp; RPC <span class="gray">Infrastructure</span></h2>
-      <p>High-performance endpoints, on-chain intelligence, and economic benchmarks powering applied thermoeconomic research on the Quai Network.</p>
-    </div>
-
-    <div class="rpc-grid">
-
-      <!-- INDEXERS -->
-      <div class="rpc-card">
-        <div class="rpc-card-icon blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
-        </div>
-        <div class="rpc-card-tag">Data Layer</div>
-        <h3>Indexers</h3>
-        <p class="rpc-card-desc">Full-node RPC endpoints and on-chain indexers that ingest every block, transaction, and workshare event — providing the raw material for deep protocol analysis.</p>
-        <ul class="rpc-list">
-          <li><span class="dot blue"></span>Full-Node RPC Endpoints</li>
-          <li><span class="dot blue"></span>On-Chain Indexer Services</li>
-          <li><span class="dot blue"></span>Real-time Network Telemetry</li>
-        </ul>
-        <div class="rpc-card-footer">
-          <a href="https://access.ccdb.waexservices.com/request-access" class="action-btn" target="_blank" rel="noopener">Request API Access</a>
-        </div>
-      </div>
-
-      <!-- AGENTS -->
-      <div class="rpc-card">
-        <div class="rpc-card-icon amber">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 2-2 3-2 6h-4c0-3-2-4-2-6a4 4 0 0 1 4-4z"/><line x1="10" y1="16" x2="14" y2="16"/><line x1="10" y1="19" x2="14" y2="19"/><path d="M9 22h6"/></svg>
-        </div>
-        <div class="rpc-card-tag">Automation</div>
-        <h3>Agents</h3>
-        <p class="rpc-card-desc">Autonomous on-chain agents that monitor workshare events, trigger rebalancing logic, and surface entropy-anchored signals for downstream oracle and DAO systems.</p>
-        <ul class="rpc-list">
-          <li><span class="dot amber"></span>Workshare Event Monitors</li>
-          <li><span class="dot amber"></span>Oracle Feed Automation</li>
-          <li><span class="dot amber"></span>DAO Trigger Pipelines</li>
-        </ul>
-        <div class="rpc-card-footer">
-          <a href="#" class="action-btn outline">View Agent Docs</a>
-        </div>
-      </div>
-
-      <!-- PROFITABILITY -->
-      <div class="rpc-card">
-        <div class="rpc-card-icon purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v7.4a2 2 0 0 1-.6 1.4L3.7 16.5A2 2 0 0 0 3 18v0a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v0a2 2 0 0 0-.7-1.5l-4.7-4.7a2 2 0 0 1-.6-1.4V3"/><line x1="9" y1="3" x2="15" y2="3"/></svg>
-        </div>
-        <div class="rpc-card-tag">Experiments</div>
-        <h3>Profitability Analysis</h3>
-        <p class="rpc-card-desc">A live benchmarking environment comparing economic returns across SHA-256, Scrypt, and KawPow — measuring opportunity cost against Quai's logarithmic emission schedule.</p>
-        <ul class="rpc-list">
-          <li><span class="dot purple"></span>Quai vs Merge-Mined Chains</li>
-          <li><span class="dot purple"></span>Multi-Algorithm Benchmarks</li>
-          <li><span class="dot purple"></span>Opportunity Cost Analysis</li>
-        </ul>
-        <div class="rpc-card-footer">
-          <a href="#" class="action-btn outline">Open Lab</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- ═════════════════════ END ENGINEERING ═════════════════════ -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-
+<!-- ══════════════════════ REPORTS ══════════════════════ -->
 <section class="reports-section">
-  <span class="section-label">Research</span>
+  <span class="section-label">Commissioned &amp; Applied</span>
   <h2>Reports</h2>
-  <p class="reports-lead">In-depth analysis on thermoeconomics, mining economics, and energy-money systems.</p>
+  <p class="reports-lead">The applied write-ups — narrower than the theory, worked through to a number,
+    and priced because they take the framework somewhere specific. $20 each, delivered as PDF.
+    The full research corpus further down this page is open access and always will be.</p>
   <div class="reports-grid">
     <div class="report-card">
       <div class="report-cover"><span class="report-cover-label">AEM Report &#8470;1</span></div>
@@ -686,7 +428,308 @@
       </div>
     </div>
   </div>
+
+  <div class="reports-note">
+    <h4>What a purchase gets you</h4>
+    <p>The full derivation, the underlying data, and the assumptions written out rather than buried —
+      including the ones we are least sure about. Where a report depends on a model, the model is specified
+      well enough to be re-run and disagreed with. Bulk and institutional licensing available on request.</p>
+  </div>
 </section>
+
+<!-- ══════════════════════ THE THESIS ══════════════════════ -->
+<section class="te-wrap" id="thermoeconomics">
+  <div class="te-inner">
+    <span class="section-label" style="color:#4a4a4a;">thermoeconomics.info &middot; The Framework</span>
+    <h2>Where physics<br>meets <span class="gray">economics.</span></h2>
+    <p class="big">
+      A computational framework connecting energy, entropy, and proof of work to the foundations of
+      economic value. Not a metaphor borrowed from thermodynamics — a formal isomorphism, derived and
+      defended in full.
+    </p>
+    <p>
+      The central claim is narrow enough to be wrong: a monetary unit that cannot be produced without
+      expending energy inherits a floor from thermodynamics, and that floor is <strong>computable rather
+      than asserted</strong>. Everything downstream — the index, the instruments, the facilities — is an
+      attempt to hold that claim to account.
+    </p>
+    <p>
+      The framework is assembled from four independent lineages that were never meant to meet. Each
+      arrived at the same boundary from a different direction. Thermoeconomics is the argument that the
+      boundary is the same one.
+    </p>
+
+    <div class="lineage">
+      <div class="lin">
+        <div class="k">Lineage 01 &middot; Entropy</div>
+        <h4>Information and heat are one quantity</h4>
+        <p>Shannon showed information carries a mathematical structure identical to thermodynamic entropy. Jaynes turned that identity into a universal inference engine: given limited information, maximize entropy. Wolfram asks whether the universe is itself a computation, and irreversibility its signature.</p>
+        <div class="cites">
+          <a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" target="_blank" rel="noopener">Shannon 1948</a>
+          <a href="https://bayes.wustl.edu/etj/articles/theory.1.pdf" target="_blank" rel="noopener">Jaynes 1957</a>
+          <a href="https://content.wolfram.com/sites/13/2024/10/33-2-1.pdf" target="_blank" rel="noopener">Wolfram 2022</a>
+        </div>
+      </div>
+      <div class="lin">
+        <div class="k">Lineage 02 &middot; Distributed Computing</div>
+        <h4>Time in a network is logical, not physical</h4>
+        <p>Lamport proved that without a global clock, logical ordering is the only coherent notion of time in a network. FLP proved guaranteed consensus in an asynchronous system is impossible — which is precisely what makes probabilistic proof of work the theoretically correct answer rather than a compromise.</p>
+        <div class="cites">
+          <a href="https://lamport.azurewebsites.net/pubs/time-clocks.pdf" target="_blank" rel="noopener">Lamport 1978</a>
+          <a href="https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf" target="_blank" rel="noopener">FLP 1985</a>
+        </div>
+      </div>
+      <div class="lin">
+        <div class="k">Lineage 03 &middot; Energy</div>
+        <h4>Computation has an irreducible physical cost</h4>
+        <p>Landauer established that erasing a bit dissipates real heat — at minimum k<sub>B</sub>T&nbsp;ln&nbsp;2. Bennett showed even reversible computation cannot fully escape the floor. Information is not an abstraction sitting above physics. It is physics.</p>
+        <div class="cites">
+          <a href="https://worrydream.com/refs/Landauer_1961_-_Irreversibility_and_Heat_Generation_in_the_Computing_Process.pdf" target="_blank" rel="noopener">Landauer 1961</a>
+          <a href="https://mathweb.ucsd.edu/~sbuss/CourseWeb/Math268_2013W/Bennett_Reversibiity.pdf" target="_blank" rel="noopener">Bennett 1973</a>
+        </div>
+      </div>
+      <div class="lin">
+        <div class="k">Lineage 04 &middot; Proof of Work</div>
+        <h4>Where the theory became a protocol</h4>
+        <p>Hashcash made computational cost a currency of attention; Nakamoto turned it into trustless accounting. Proof of Entropy Minima then reframes the whole mechanism as a provable statement about entropy rather than a race for hashes — which is what finally makes work comparable across architectures.</p>
+        <div class="cites">
+          <a href="http://www.hashcash.org/hashcash.pdf" target="_blank" rel="noopener">Back 2002</a>
+          <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Nakamoto 2008</a>
+          <a href="https://arxiv.org/pdf/2303.04305" target="_blank" rel="noopener">Kreder 2023</a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="te-rule">
+
+    <span class="section-label" style="color:#4a4a4a;">Selected results</span>
+    <h3>Three claims the framework<br>is willing to be judged on.</h3>
+
+    <div class="results">
+      <div class="res">
+        <div class="eq">P<sub>min</sub> = V<sub>C</sub>(S(E<sub>R</sub>))</div>
+        <h5>The monetary floor</h5>
+        <p>The market capitalizes the thermodynamic sacrifice of proof of work into the value of the monetary unit, creating a liquid claim on future energy. A floor with a derivation rather than a promise.</p>
+      </div>
+      <div class="res">
+        <div class="eq">&Delta;S = 2<sup>&minus;n</sup></div>
+        <h5>Information as rank</h5>
+        <p>Threshold methods are lossy compression — they discard surplus entropy reduction. Ranking outputs by absolute value extracts the maximum information available in the state space, and reaches the physical limit of finality.</p>
+      </div>
+      <div class="res">
+        <div class="eq">E &ge; k<sub>B</sub>T&nbsp;ln&nbsp;2</div>
+        <h5>Energy as numeraire</h5>
+        <p>Beneath every bit erased there is an irreducible cost, verified experimentally. Gold rewards stockpiling; energy rewards production. Denominating in the one input every industry requires aligns capital with expansion itself.</p>
+      </div>
+    </div>
+
+    <a class="action-btn" href="https://thermoeconomics.info/" target="_blank" rel="noopener" style="background:#fff;color:#111;margin-top:44px;">Visit thermoeconomics.info &nearr;</a>
+  </div>
+</section>
+
+<!-- ══════════════════════ TECH TREE ══════════════════════ -->
+<section class="tree-wrap">
+  <div class="tree-inner">
+    <span class="section-label" style="color:#4a4a4a;">The Ontology</span>
+    <h2 style="font-size:clamp(32px,4.2vw,48px);font-weight:800;letter-spacing:-0.035em;color:#fff;margin-bottom:20px;">The tech tree</h2>
+    <p style="font-size:17px;line-height:1.75;color:#8a8a8a;max-width:680px;">
+      The claim sits at the top. Everything below it is what it had to stand on — seven layers, each one
+      load-bearing for the next. Nothing in the field is asserted without the layer beneath it being in place.
+    </p>
+
+    <div class="tree">
+      <div class="tier apex">
+        <span class="lvl">6 &middot; Field</span>
+        <div class="items"><span>Computational Thermoeconomics</span></div>
+      </div>
+      <div class="tier">
+        <span class="lvl">5 &middot; Application</span>
+        <div class="items"><span>Token &amp; Controller Design</span><span>Mining Economics &amp; Difficulty</span><span>Fat Tails, Options &amp; Portfolios</span><span>AI Infrastructure &amp; Neuro-Symbolic Agents</span></div>
+      </div>
+      <div class="tier">
+        <span class="lvl">4 &middot; Synthesis</span>
+        <div class="items"><span>Energy = Cross-Entropy</span><span>Proof of Entropy Minima</span><span>Thermoeconomic Geodesics</span><span>Hash Possibility Space</span><span>Holographic Sharding</span></div>
+      </div>
+      <div class="tier">
+        <span class="lvl">3 &middot; Systems</span>
+        <div class="items"><span>Distributed Consensus</span><span>Cryptography &amp; Hash Functions</span><span>Wolfram Physics</span><span>Active Inference &amp; Bayesian Mechanics</span></div>
+      </div>
+      <div class="tier">
+        <span class="lvl">2 &middot; Inference</span>
+        <div class="items"><span>MaxEnt &amp; Bayesian Inference</span><span>Information Geometry</span><span>Fluctuation Theorems</span><span>Thermodynamics of Computation</span></div>
+      </div>
+      <div class="tier">
+        <span class="lvl">1 &middot; Foundations</span>
+        <div class="items"><span>Probability &amp; Statistics</span><span>Shannon Information Theory</span><span>Thermodynamics &amp; Statistical Mechanics</span><span>Theory of Computation</span></div>
+      </div>
+      <div class="tier">
+        <span class="lvl">0 &middot; Ground</span>
+        <div class="items"><span>Complex Systems &amp; Emergence</span></div>
+      </div>
+    </div>
+
+    <a class="action-btn" href="https://thermoeconomics.info/tree.html" target="_blank" rel="noopener" style="background:#fff;color:#111;">Open the tech tree &nearr;</a>
+  </div>
+</section>
+
+<!-- ══════════════════════ THE CORPUS ══════════════════════ -->
+<section class="corpus-wrap">
+  <div class="corpus-inner">
+    <span class="section-label">The Corpus</span>
+    <h2>Published <span class="gray">work</span></h2>
+    <p class="corpus-lead">Nine papers and theses, open access, every one with its derivation shown. Listed newest first.</p>
+
+    <div class="paper">
+      <div class="meta"><b>Framework</b>June 2026<br>4 pages</div>
+      <div>
+        <h3>The Thermoeconomics of Computation</h3>
+        <div class="authors">Steph Macurdy &middot; Wolfram Research</div>
+        <p class="abs">All computational work sits on a continuous spectrum bounded by pure entropy production at one end and pure free-energy extraction at the other. Treating <strong>the kilowatt as both the constraint and the medium of exchange</strong>, operators face a strict opportunity cost between routing power to cryptographic consensus or to AI inference — and the global equilibrium closes into a thermodynamic loop where energy secures the ledger and intelligence optimizes the next kilowatt.</p>
+        <div class="chips"><span>Kilowatt Opportunity Cost</span><span>Expected Free Energy</span><span>Logistic Function</span><span>Landauer Limit</span></div>
+        <a class="go" href="https://thermoeconomics.info/thermoeconomics_of_computation.pdf" target="_blank" rel="noopener">Read the paper &rarr;</a>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="meta"><b>Paper</b>Dec 2025<br>11 pages</div>
+      <div>
+        <h3>A Thermoeconomic Operator</h3>
+        <div class="authors">Steph Macurdy &middot; Wolfram Research</div>
+        <p class="abs">Every proof-of-work protocol anchors to the same physical phenomenon — repeated hash-based Bernoulli trials whose outcomes are IID. This paper connects that process to the Maximum Entropy Principle and the Generalized Boltzmann Distribution, the only distribution where Gibbs-Shannon entropy equals thermodynamic entropy. The blockchain is then read <strong>not as a ledger but as an operator</strong>: a machine converting physical work into informational order.</p>
+        <div class="chips"><span>Maximum Entropy</span><span>Boltzmann Distribution</span><span>PoEM</span><span>Formal Isomorphism</span><span>Qi Emission</span></div>
+        <a class="go" href="https://thermoeconomics.info/Thermodyanmic_Operator_V5.pdf" target="_blank" rel="noopener">Read the paper &rarr;</a>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="meta"><b>Report</b>Nov 2025<br>24 pages</div>
+      <div>
+        <h3>Qi / Quai — Controller Report</h3>
+        <div class="authors">Andrius Kulikauskas PhD, Math4Wisdom &middot; commissioned by Steph Macurdy</div>
+        <p class="abs">Can active inference or thermodynamics say anything rigorous about the relationship between Qi and Quai? A commissioned investigation of the dual-currency system through energy, entropy, and free energy — mapping the control mechanism, analyzing miner incentives, and building a bridge to the <strong>Free Energy Principle</strong>. Qi maps to belief in the system; Quai to belief in belief in it.</p>
+        <div class="chips"><span>Active Inference</span><span>Dual Currency</span><span>Free Energy Principle</span><span>Game Theory</span><span>Gresham's Law</span></div>
+        <a class="go" href="https://thermoeconomics.info/qi_quai_report.pdf" target="_blank" rel="noopener">Read the report &rarr;</a>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="meta"><b>Framework</b>June 2025<br>3 pages</div>
+      <div>
+        <h3>From Ontology to Computation</h3>
+        <div class="authors">Steph Macurdy &middot; American Energy Money</div>
+        <p class="abs">A compact roadmap from physical reality to computational work. Ontology, mathematics, epistemology, and computation are argued to form a <strong>sequential dependency chain</strong> rather than parallel disciplines — bounded above by thermodynamic law and grounded in the insight that information is physical.</p>
+        <div class="chips"><span>Ontology</span><span>Landauer's Principle</span><span>Shannon Entropy</span><span>Computation</span></div>
+        <a class="go" href="https://thermoeconomics.info/ontology_to_computation.pdf" target="_blank" rel="noopener">Read the paper &rarr;</a>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="meta"><b>Thesis</b>&mdash;<br>56 pages</div>
+      <div>
+        <h3>Economic Observer Theory</h3>
+        <div class="authors">Steph Macurdy, Wolfram Blockchain Labs &middot; Wolfram Model sections by Justice Evans-Hunter, Wolfram Institute</div>
+        <p class="abs">The long-form treatment, running from the computational observer through the Principle of Computational Equivalence to the origins of symbolic value. If observers are computationally bounded and equivalent to what they observe, then <strong>price, temperature, and pressure are the same kind of object</strong> — reductions an end-directed observer extracts from an irreducible world in order to spend less work. The second law becomes downstream of computational equivalence, not the other way around.</p>
+        <div class="chips"><span>Observer Theory</span><span>Computational Equivalence</span><span>Second Law</span><span>Symbolic Value</span><span>Ruliology</span></div>
+        <a class="go" href="https://thermoeconomics.info/Economic_Observer_Theory.pdf" target="_blank" rel="noopener">Read the thesis &rarr;</a>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="meta"><b>Thesis</b>&mdash;<br>44 pages</div>
+      <div>
+        <h3>Quantifying Work, Eliminating Time, and Minimizing Entropy</h3>
+        <div class="authors">Steph Macurdy, Wolfram Blockchain Labs &middot; Wolfram Model sections by Justice Evans-Hunter, Wolfram Institute</div>
+        <p class="abs">Consensus has always been a clock problem. Bitcoin bound time to state in the timechain, and every scaling effort since has been an attempt to loosen that coupling. The argument here is to <strong>remove the clock entirely</strong> — ordering events by causal invariance rather than timestamps — paired with a dual-token architecture that separates store of value from unit of account and tokenizes cost of production directly in energy.</p>
+        <div class="chips"><span>Causal Invariance</span><span>Entropy Minimization</span><span>Multiway Hypergraphs</span><span>Dual Token</span><span>Energy-Backed Money</span></div>
+        <a class="go" href="https://thermoeconomics.info/Quantifying_Work_Eliminating_Time_Minimizing_Entropy.pdf" target="_blank" rel="noopener">Read the thesis &rarr;</a>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="meta"><b>Essay</b>&mdash;<br>29 pages</div>
+      <div>
+        <h3>The Wolfram Model</h3>
+        <div class="authors">Steph Macurdy &middot; Wolfram Model sections by Justice Evans-Hunter, Wolfram Institute</div>
+        <p class="abs">A guided walk from <em style="font-style:normal;font-weight:600;">A New Kind of Science</em> to the Ruliad — elementary cellular automata, computational equivalence, irreducibility, hypergraph rewriting — showing how space, time, relativity, and quantum branching emerge as artifacts of how a finite observer samples. Closes with <strong>an even-handed account of the program's reception</strong>, including its shortage of falsifiable predictions.</p>
+        <div class="chips"><span>Cellular Automata</span><span>The Ruliad</span><span>Irreducibility</span><span>Observer Theory</span></div>
+        <a class="go" href="https://thermoeconomics.info/IAM_Wolfram_Essay_V2.pdf" target="_blank" rel="noopener">Read the essay &rarr;</a>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="meta"><b>Thesis</b>&mdash;<br>14 pages</div>
+      <div>
+        <h3>Engineering with Irreducibility</h3>
+        <div class="authors">Steph Macurdy &middot; Wolfram Blockchain Labs</div>
+        <p class="abs">An integrative framework for emergence tracing a path from Wolfram's computation to Deacon's teleodynamics to Nakamoto's proof of work. Computational irreducibility is recast <strong>not only as a limit on what observers can know, but as a tool engineers can deliberately impose</strong> — a boundary condition for cultivating emergent behavior. Proof of work then reads as the first engineering schematic for building symbolic value on a physically enforced constraint.</p>
+        <div class="chips"><span>Emergence</span><span>Teleodynamics</span><span>Via Negativa</span><span>Symbolic Value</span></div>
+        <a class="go" href="https://thermoeconomics.info/Engineering_with_Irreducibility.pdf" target="_blank" rel="noopener">Read the thesis &rarr;</a>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="meta"><b>Handbook</b>Jan 2025<br>30 pages</div>
+      <div>
+        <h3>Core Ingredients of Blockchains: UTXO Handbook</h3>
+        <div class="authors">Ignacio Calderon de la Barca &amp; Steph Macurdy &middot; UTXO Alliance, Wolfram Blockchain Labs</div>
+        <p class="abs">An open-source visual reference to the Unspent Transaction Output model and the design variations built on it. Nine member chains diagrammed side by side — Bitcoin, DigiByte, Cardano, Ergo, Nervos CKB, Quai, Topl, Alephium, Hathor — exposing where each departs from the base design. <strong>Design variety comes from how the ingredients are combined, not from what they are.</strong></p>
+        <div class="chips"><span>UTXO Model</span><span>eUTXO</span><span>Chain Design</span><span>Interoperability</span></div>
+        <a class="go" href="https://thermoeconomics.info/UTXO-Model-Flavors-Menu-v2.2.pdf" target="_blank" rel="noopener">Read the handbook &rarr;</a>
+      </div>
+    </div>
+
+    <span class="section-label" style="margin-top:64px;">Talks &amp; Presentations</span>
+    <div class="decks" style="margin-top:8px;">
+      <a class="deck" href="https://thermoeconomics.info/Active_Inference_Presentation.pdf" target="_blank" rel="noopener">
+        <div class="dk">Active Inference Symposium</div>
+        <h4>Money &amp; The Free Energy Principle</h4>
+        <p>Two roads from one origin — informational through PoW and MaxEnt, physical through gradient dissipation and least action. They meet at active inference.</p>
+      </a>
+      <a class="deck" href="https://thermoeconomics.info/Ergodicity_in_Cryptocurrency_Presentation.pdf" target="_blank" rel="noopener">
+        <div class="dk">Wolfram Blockchain Labs</div>
+        <h4>Crypto Protocols: Ergodicity &amp; Consensus</h4>
+        <p>Multiway hypergraphs supply branching and merging; SHA-256 supplies the maximum-entropy state space; the leading-zero rule turns it into hierarchical sequencing.</p>
+      </a>
+      <a class="deck" href="https://thermoeconomics.info/Math4Wisdom_Presentation.pdf" target="_blank" rel="noopener">
+        <div class="dk">Math4Wisdom &middot; July 2026</div>
+        <h4>What Does a Dollar Cost to Make?</h4>
+        <p>Starts from a question with a public answer — what a note costs to print — and follows it into seigniorage and the case for an auditable production function.</p>
+      </a>
+    </div>
+
+    <span class="section-label" style="margin-top:64px;">Conversations</span>
+    <div class="decks" style="margin-top:8px;grid-template-columns:1fr 1fr;">
+      <a class="deck" href="https://thermoeconomics.info/drk-transcript.pdf" target="_blank" rel="noopener">
+        <div class="dk">From Big Bang to Blockchain &middot; Part 1</div>
+        <h4>with Karl Kreder, PhD</h4>
+        <p>Tracing the thread from cosmological entropy production through biological computation to blockchain consensus.</p>
+      </a>
+      <a class="deck" href="https://thermoeconomics.info/jordan-hall-transcript.pdf" target="_blank" rel="noopener">
+        <div class="dk">From Big Bang to Blockchain &middot; Part 2</div>
+        <h4>with Jordan Hall</h4>
+        <p>How the universe's thermodynamic arrow connects to the emergence of digital economic systems.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ APPLIED ══════════════════════ -->
+<section class="mkt light">
+  <div class="mkt-inner">
+    <span class="section-label">Applied elsewhere on this site</span>
+    <h3>Where the theory turns into<br>something you can trade or meter.</h3>
+    <p>
+      This page is the framework. Two others carry what it produces: the
+      <a class="inline" href="compute-index.html">Watt&middot;Token Index</a>, which turns delivered work per
+      unit of energy into a published benchmark and contract specification, and the
+      <a class="inline" href="infrastructure.html">infrastructure</a> that meters both sides of it — energy
+      systems, mining deployments, and full-node telemetry on Quai. The instruments built on top live on the
+      <a class="inline" href="compute.html">Compute Capital Markets</a> page.
+    </p>
+  </div>
+</section>
+
+
 
 
 <footer>
